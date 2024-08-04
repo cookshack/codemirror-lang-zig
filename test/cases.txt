@@ -1,0 +1,34 @@
+# Empty doc
+
+==>
+Program()
+
+# Line comment
+
+// eg
+
+==>
+Program(LineComment())
+
+# Block comment
+
+/* eg
+line 2
+ */
+
+==>
+Program(BlockComment())
+
+# One fn
+
+fn one()
+
+==>
+Program(FnProto(Identifier,ParamDeclList))
+
+# One fn w arg
+
+fn one(a : u32)
+
+==>
+Program(FnProto(Identifier,ParamDeclList(ParamDecl(Identifier, ParamType(TypeExpr(PrimaryTypeExpr(Identifier)))))))

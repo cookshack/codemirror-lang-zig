@@ -1,0 +1,51 @@
+@top Program { topLevelItem* }
+
+topLevelItem { FnProto }
+
+FnProto { "fn" Identifier? "(" ParamDeclList ")" }
+
+ParamDeclList { (ParamDecl ",")* ParamDecl? }
+
+ParamDecl { //seq(optional($.doc_comment), optional(choice("noalias", "comptime")), optional(seq($.identifier, ":")), $.param_type),
+            (Identifier ":") ParamType
+            | "..." }
+
+ParamType { anytype | TypeExpr }
+
+TypeExpr { //seq(repeat($.prefix_type_op), choice($.error_union_expr, $._suffix_expr)),
+           suffixExpr }
+
+suffixExpr { ( //seq("async", $._primary_type_expr, repeat($._suffix_op), $.fn_call_arguments),
+               //seq($._primary_type_expr, repeat(choice($._suffix_op, $.fn_call_arguments))),
+               PrimaryTypeExpr ) }
+
+PrimaryTypeExpr { Identifier }
+
+Identifier { identifier }
+
+@skip { whitespace | LineComment | BlockComment }
+
+@tokens {
+  whitespace {
+    ($[ \t\r\n] | "\\" "\r"? "\n")+
+  }
+
+  anytype { "anytype" }
+
+  //identifier: ($) => choice(/[A-Za-z_][A-Za-z0-9_]*/, seq("@", $.string_literal)),
+  identifier {
+    $[A-Za-z_] $[A-Za-z0-9_]*
+  }
+
+  @precedence { anytype identifier }
+
+  LineComment[isolate] { "//" ("\\" (![\n] | "\\r"? "\\n") | ![\n])* }
+
+  BlockComment[isolate] { "/*" blockCommentRest }
+
+  blockCommentRest { ![*] blockCommentRest | "*" blockCommentAfterStar }
+
+  blockCommentAfterStar { "/" | "*" blockCommentAfterStar | ![/*] blockCommentRest }
+
+  @precedence { LineComment, BlockComment }
+}
