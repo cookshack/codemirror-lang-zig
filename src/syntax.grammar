@@ -2,6 +2,8 @@
 
 topLevelItem { Decl }
 
+//// Top level.
+
 Decl { ( FnProto (";" | Block) | VarDecl ) }
 
 FnProto { fn Identifier? "(" ParamDeclList ")" }
@@ -27,7 +29,19 @@ VarDecl { ( Const | Var ) Name (":" TypeExpr)?  ";" }
 
 Name { identifier }
 
-Block { "{" "}" }
+//// Block level.
+
+Statement {
+  Expr ";"
+}
+
+//// Expression level.
+
+Expr { PrimaryExpr }
+
+PrimaryExpr { Return }
+
+Block { "{" Statement* "}" }
 
 Identifier { identifier }
 
@@ -39,11 +53,9 @@ Identifier { identifier }
   }
 
   anytype { "anytype" }
-
   Const { "const" }
-
   fn { "fn" }
-
+  Return { "return" }
   Var { "var" }
 
   //identifier: ($) => choice(/[A-Za-z_][A-Za-z0-9_]*/, seq("@", $.string_literal)),
@@ -51,7 +63,7 @@ Identifier { identifier }
     $[A-Za-z_] $[A-Za-z0-9_]*
   }
 
-  @precedence { anytype Const fn Var identifier }
+  @precedence { anytype Const fn Return Var identifier }
 
   LineComment[isolate] { "//" ("\\" (![\n] | "\\r"? "\\n") | ![\n])* }
 
