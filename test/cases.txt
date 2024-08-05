@@ -56,3 +56,19 @@ Program(Decl(FnProto(Identifier,ParamDeclList(ParamDecl(Identifier, ParamType(Ty
         Decl(FnProto(Identifier,ParamDeclList(ParamDecl(Identifier, ParamType(TypeExpr(PrimaryTypeExpr(Identifier)))),
                                               ParamDecl(Identifier, ParamType(TypeExpr(PrimaryTypeExpr(Identifier)))))),
              Block))
+
+# Top level const
+
+const a;
+
+==>
+Program(Decl(VarDecl(Const, Name)))
+
+# Top level vars
+
+const a;
+var b;
+
+==>
+Program(Decl(VarDecl(Const, Name)),
+        Decl(VarDecl(Var, Name)))

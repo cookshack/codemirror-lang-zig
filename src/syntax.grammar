@@ -2,7 +2,7 @@
 
 topLevelItem { Decl }
 
-Decl { FnProto (";" | Block) }
+Decl { ( FnProto (";" | Block) | VarDecl ) }
 
 FnProto { fn Identifier? "(" ParamDeclList ")" }
 
@@ -23,6 +23,10 @@ suffixExpr { ( //seq("async", $._primary_type_expr, repeat($._suffix_op), $.fn_c
 
 PrimaryTypeExpr { Identifier }
 
+VarDecl { ( Const | Var ) Name ";" }
+
+Name { identifier }
+
 Block { "{" "}" }
 
 Identifier { identifier }
@@ -34,16 +38,20 @@ Identifier { identifier }
     ($[ \t\r\n] | "\\" "\r"? "\n")+
   }
 
+  anytype { "anytype" }
+
+  Const { "const" }
+
   fn { "fn" }
 
-  anytype { "anytype" }
+  Var { "var" }
 
   //identifier: ($) => choice(/[A-Za-z_][A-Za-z0-9_]*/, seq("@", $.string_literal)),
   identifier {
     $[A-Za-z_] $[A-Za-z0-9_]*
   }
 
-  @precedence { fn anytype identifier }
+  @precedence { anytype Const fn Var identifier }
 
   LineComment[isolate] { "//" ("\\" (![\n] | "\\r"? "\\n") | ![\n])* }
 
