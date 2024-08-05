@@ -8,23 +8,6 @@ Decl { ( FnProto (";" | Block) | VarDecl ) }
 
 FnProto { fn Identifier? "(" ParamDeclList ")" }
 
-ParamDeclList { (ParamDecl ",")* ParamDecl? }
-
-ParamDecl { //seq(optional($.doc_comment), optional(choice("noalias", "comptime")), optional(seq($.identifier, ":")), $.param_type),
-            (Identifier ":") ParamType
-            | "..." }
-
-ParamType { anytype | TypeExpr }
-
-TypeExpr { //seq(repeat($.prefix_type_op), choice($.error_union_expr, $._suffix_expr)),
-           suffixExpr }
-
-suffixExpr { ( //seq("async", $._primary_type_expr, repeat($._suffix_op), $.fn_call_arguments),
-               //seq($._primary_type_expr, repeat(choice($._suffix_op, $.fn_call_arguments))),
-               PrimaryTypeExpr ) }
-
-PrimaryTypeExpr { Identifier }
-
 VarDecl { ( Const | Var ) Name (":" TypeExpr)?  ";" }
 
 Name { identifier }
@@ -42,6 +25,25 @@ Expr { PrimaryExpr }
 PrimaryExpr { Return }
 
 Block { "{" Statement* "}" }
+
+TypeExpr { //seq(repeat($.prefix_type_op), choice($.error_union_expr, $._suffix_expr)),
+           suffixExpr }
+
+suffixExpr { ( //seq("async", $._primary_type_expr, repeat($._suffix_op), $.fn_call_arguments),
+               //seq($._primary_type_expr, repeat(choice($._suffix_op, $.fn_call_arguments))),
+               PrimaryTypeExpr ) }
+
+PrimaryTypeExpr { Identifier }
+
+//// Fn specific
+
+ParamDeclList { (ParamDecl ",")* ParamDecl? }
+
+ParamDecl { //seq(optional($.doc_comment), optional(choice("noalias", "comptime")), optional(seq($.identifier, ":")), $.param_type),
+            (Identifier ":") ParamType
+            | "..." }
+
+ParamType { anytype | TypeExpr }
 
 Identifier { identifier }
 
