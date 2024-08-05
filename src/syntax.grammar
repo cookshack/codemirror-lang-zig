@@ -1,8 +1,10 @@
 @top Program { topLevelItem* }
 
-topLevelItem { FnProto }
+topLevelItem { decl }
 
-FnProto { "fn" Identifier? "(" ParamDeclList ")" }
+decl { FnProto ";" }
+
+FnProto { fn Identifier? "(" ParamDeclList ")" }
 
 ParamDeclList { (ParamDecl ",")* ParamDecl? }
 
@@ -30,6 +32,8 @@ Identifier { identifier }
     ($[ \t\r\n] | "\\" "\r"? "\n")+
   }
 
+  fn { "fn" }
+
   anytype { "anytype" }
 
   //identifier: ($) => choice(/[A-Za-z_][A-Za-z0-9_]*/, seq("@", $.string_literal)),
@@ -37,7 +41,7 @@ Identifier { identifier }
     $[A-Za-z_] $[A-Za-z0-9_]*
   }
 
-  @precedence { anytype identifier }
+  @precedence { fn anytype identifier }
 
   LineComment[isolate] { "//" ("\\" (![\n] | "\\r"? "\\n") | ![\n])* }
 

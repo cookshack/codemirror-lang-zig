@@ -21,14 +21,33 @@ Program(BlockComment())
 
 # One fn
 
-fn one()
+fn one();
 
 ==>
 Program(FnProto(Identifier,ParamDeclList))
 
 # One fn w arg
 
-fn one(a : u32)
+fn one(a : u32);
 
 ==>
 Program(FnProto(Identifier,ParamDeclList(ParamDecl(Identifier, ParamType(TypeExpr(PrimaryTypeExpr(Identifier)))))))
+
+# One fn 2 args
+
+fn one(a : u32, b: string);
+
+==>
+Program(FnProto(Identifier,ParamDeclList(ParamDecl(Identifier, ParamType(TypeExpr(PrimaryTypeExpr(Identifier)))),
+                                         ParamDecl(Identifier, ParamType(TypeExpr(PrimaryTypeExpr(Identifier)))))))
+
+# Two fns
+
+fn one(a : u32, b: string);
+fn two(a : u32, b: string);
+
+==>
+Program(FnProto(Identifier,ParamDeclList(ParamDecl(Identifier, ParamType(TypeExpr(PrimaryTypeExpr(Identifier)))),
+                                         ParamDecl(Identifier, ParamType(TypeExpr(PrimaryTypeExpr(Identifier)))))),
+        FnProto(Identifier,ParamDeclList(ParamDecl(Identifier, ParamType(TypeExpr(PrimaryTypeExpr(Identifier)))),
+                                         ParamDecl(Identifier, ParamType(TypeExpr(PrimaryTypeExpr(Identifier)))))))
