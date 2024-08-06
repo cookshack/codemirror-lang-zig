@@ -3,3 +3,12 @@
 fn main() {
   return if (1 == 0) 3 else 4;
 }
+
+==>
+Program(Decl(FnProto(Identifier),
+             Block(Statement(Return, Expr(PrimaryExpr(IfPrefix(If, Expr(BinaryExpr(Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(PrimaryTypeExpr(Identifier))))),
+                                                                        CompareOp,
+                                                                        Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(PrimaryTypeExpr(Integer)))))))),
+                                                      Expr(PrimaryExpr(PrimaryExpr(CurlySuffixExpr(TypeExpr(PrimaryTypeExpr(Integer)))))),
+                                                      Else,
+                                                      Expr(PrimaryExpr(PrimaryExpr(CurlySuffixExpr(TypeExpr(PrimaryTypeExpr(Integer))))))))))))
