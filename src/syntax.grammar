@@ -27,9 +27,13 @@ Name { identifier }
 //// Block level.
 
 Statement {
+  IfStatement
+  | exprExclIf ";"
+}
+
+IfStatement {
   IfPrefix ( BlockExpr (!else Else Payload? Statement)?
              | (/*assignExpr |*/ Expr) (";" | !else Else Payload? Statement) )
-  | exprExclIf ";"
 }
 
 BlockExpr { Block }

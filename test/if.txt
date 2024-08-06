@@ -5,10 +5,10 @@ fn main() {
 }
 
 ==>
-Program(Decl(FnProto(Identifier),
-             Block(Statement(Return, Expr(PrimaryExpr(IfPrefix(If, Expr(BinaryExpr(Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(PrimaryTypeExpr(Identifier))))),
-                                                                        CompareOp,
-                                                                        Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(PrimaryTypeExpr(Integer)))))))),
-                                                      Expr(PrimaryExpr(PrimaryExpr(CurlySuffixExpr(TypeExpr(PrimaryTypeExpr(Integer)))))),
+Program(Decl(FnProto(Identifier,ParamDeclList),
+             Block(Statement(Return, Expr(PrimaryExpr(IfPrefix(If, Expr(BinaryExpr(Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(PrimaryTypeExpr(Integer))))),
+                                                                                   CompareOp,
+                                                                                   Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(PrimaryTypeExpr(Integer)))))))),
+                                                      Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(PrimaryTypeExpr(Integer))))),
                                                       Else,
-                                                      Expr(PrimaryExpr(PrimaryExpr(CurlySuffixExpr(TypeExpr(PrimaryTypeExpr(Integer))))))))))))
+                                                      Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(PrimaryTypeExpr(Integer)))))))))))
