@@ -28,6 +28,8 @@ Statement {
   Expr ";"
 }
 
+BlockExpr { Block }
+
 //// Expression level.
 
 Expr { BinaryExpr | PrimaryExpr }
@@ -52,7 +54,10 @@ PrimaryExpr {
 
 CurlySuffixExpr { TypeExpr }
 
-IfExpr { If "(" Expr ")" PtrPayload? Expr Else Payload? Expr }
+IfExpr {
+  (ifPrefix BlockExpr (Else Payload? Statement)?)
+  | (ifPrefix (/*assignExpr |*/ Expr) (";" | Else Payload? Statement))
+}
 
 Block { "{" Statement* "}" }
 
@@ -76,6 +81,10 @@ ParamDecl { //seq(optional($.doc_comment), optional(choice("noalias", "comptime"
             | "..." }
 
 ParamType { anytype | TypeExpr }
+
+//// Control flow prefixes
+
+ifPrefix { If "(" Expr ")" PtrPayload? }
 
 //// Payloads
 
