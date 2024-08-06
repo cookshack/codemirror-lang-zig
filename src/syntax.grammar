@@ -33,12 +33,14 @@ Statement {
 
 IfStatement {
   IfPrefix ( BlockExpr (!else Else Payload? Statement)?
-             | (/*assignExpr |*/ Expr) (";" | !else Else Payload? Statement) )
+             | (AssignExpr | Expr) (";" | !else Else Payload? Statement) )
 }
 
 BlockExpr { Block }
 
 //// Expression level.
+
+AssignExpr { Expr AssignOp Expr }
 
 exprExclIf { binaryExprExclIf | primaryExprExclIf }
 

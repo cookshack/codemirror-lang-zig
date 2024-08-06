@@ -26,3 +26,17 @@ Program(Decl(FnProto(Identifier,ParamDeclList),
                                                              Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(PrimaryTypeExpr(Integer))))),
                                                              Else,
                                                              Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(PrimaryTypeExpr(Integer))))))))))))
+
+# If stmnt with assign in then expr
+
+fn main() {
+  if (1)
+    a = 1;
+}
+
+==>
+Program(Decl(FnProto(Identifier,ParamDeclList),
+             Block(Statement(IfStatement(IfPrefix(If, Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(PrimaryTypeExpr(Integer)))))),
+                                         AssignExpr(Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(PrimaryTypeExpr(Identifier))))),
+                                                    AssignOp,
+                                                    Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(PrimaryTypeExpr(Integer)))))))))))
