@@ -40,6 +40,7 @@ BinaryExpr {
   | Expr !bitShift BitShiftOp Expr
   | Expr !add AdditionOp Expr
   | Expr !multiply MultiplyOp Expr
+  | CurlySuffixExpr
 }
 
 PrimaryExpr {
@@ -49,7 +50,9 @@ PrimaryExpr {
   | Return
 }
 
-IfExpr { "if" "(" Expr ")" PtrPayload? Expr "else" Payload? Expr }
+CurlySuffixExpr { TypeExpr }
+
+IfExpr { If "(" Expr ")" PtrPayload? Expr Else Payload? Expr }
 
 Block { "{" Statement* "}" }
 
@@ -112,7 +115,9 @@ Identifier { identifier }
   Break { "break" }
   Const { "const" }
   Continue { "continue" }
+  Else { "else" }
   fn { "fn" }
+  If { "if" }
   Or { "or" }
   Return { "return" }
   Var { "var" }
@@ -122,7 +127,7 @@ Identifier { identifier }
     $[A-Za-z_] $[A-Za-z0-9_]*
   }
 
-  @precedence { And anytype Break Const Continue fn Or Return Var identifier }
+  @precedence { And anytype Break Const Continue Else fn If Or Return Var identifier }
 
   LineComment[isolate] { "//" ("\\" (![\n] | "\\r"? "\\n") | ![\n])* }
 
