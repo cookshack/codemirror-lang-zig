@@ -22,7 +22,11 @@ Statement {
 
 Expr { PrimaryExpr }
 
-PrimaryExpr { Return }
+PrimaryExpr {
+  Break
+  | Continue
+  | Return
+}
 
 Block { "{" Statement* "}" }
 
@@ -35,7 +39,7 @@ suffixExpr { ( //seq("async", $._primary_type_expr, repeat($._suffix_op), $.fn_c
 
 PrimaryTypeExpr { Identifier }
 
-//// Fn specific
+//// Fn specific.
 
 ParamDeclList { (ParamDecl ",")* ParamDecl? }
 
@@ -55,7 +59,9 @@ Identifier { identifier }
   }
 
   anytype { "anytype" }
+  Break { "break" }
   Const { "const" }
+  Continue { "continue" }
   fn { "fn" }
   Return { "return" }
   Var { "var" }
@@ -65,7 +71,7 @@ Identifier { identifier }
     $[A-Za-z_] $[A-Za-z0-9_]*
   }
 
-  @precedence { anytype Const fn Return Var identifier }
+  @precedence { anytype Break Const Continue fn Return Var identifier }
 
   LineComment[isolate] { "//" ("\\" (![\n] | "\\r"? "\\n") | ![\n])* }
 
