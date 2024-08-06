@@ -2,15 +2,18 @@
 
 fn main() {
   for (s) |ch|
-    return ch;
+    fun(ch);
 }
 
 ==>
-Program(Decl(FnProto(Identifier,ParamDeclList),
-             Block(Statement(ForStatement(ForPrefix(For,
-                                                    ForArgList(ForItem(Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(PrimaryTypeExpr(Identifier))))))),
-                                                    PtrListPayload(Identifier)),
-                                          Expr(PrimaryExpr(Return, Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(PrimaryTypeExpr(Identifier))))))))))))
+Program
+(Decl
+ (FnProto(Identifier,ParamDeclList),
+  Block(Statement(ForStatement(ForPrefix(For,
+                                         ForArgList(ForItem(Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(PrimaryTypeExpr(Identifier))))))),
+                                         PtrListPayload(Identifier)),
+                               Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(PrimaryTypeExpr(Identifier),
+                                                                         FnCallArgs(Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(PrimaryTypeExpr(Identifier)))))))))))))))
 
 # For block
 
