@@ -27,7 +27,7 @@ Name { identifier }
 //// Block level.
 
 Statement {
-  IfPrefix ( ifRestStatement ifRestExpr )
+  IfPrefix ( ifRestStatement | ifRestExpr )
   | ExprExclIf ";"
 }
 
