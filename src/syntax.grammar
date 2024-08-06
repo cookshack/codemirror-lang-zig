@@ -1,3 +1,13 @@
+@precedence {
+  or @left
+  and @left
+  compare @left
+  bitwise @left
+  bitShift @left
+  add @left
+  multiply @left
+}
+
 @top Program { topLevelItem* }
 
 topLevelItem { Decl }
@@ -20,7 +30,17 @@ Statement {
 
 //// Expression level.
 
-Expr { PrimaryExpr }
+Expr { BinaryExpr | PrimaryExpr }
+
+BinaryExpr {
+  Expr !or Or Expr
+  | Expr !and And Expr
+  | Expr !compare CompareOp Expr
+  | Expr !bitwise BitwiseOp Expr
+  | Expr !bitShift BitShiftOp Expr
+  | Expr !add AdditionOp Expr
+  | Expr !multiply MultiplyOp Expr
+}
 
 PrimaryExpr {
   IfExpr
@@ -60,6 +80,22 @@ PtrPayload { "|" Star? Identifier "|" }
 
 Star { "*" }
 
+//// Operators
+
+CompareOp { "==" | "!=" | ">" | "<" | ">=" | "<=" }
+
+AssignOp { "*=" | "*|=" | "/=" | "%=" | "+=" | "+|=" | "-=" | "-|=" | "<<=" | "<<|=" | ">>=" | "&=" | "^=" | "|=" | "*%=" | "+%=" | "-%=" | "=" }
+
+BitwiseOp { "&" | "^" | "|" | "orelse" | "catch" Payload? }
+
+BitShiftOp { "<<" } //| ">>" | "<<| }
+
+AdditionOp { "+" | "-" | "++" }
+
+MultiplyOp { "||" } // | "*" } // | "/" | "%" | "**" | "*%" | "*|" }
+
+PrefixOp { "!" | "-" | "~" | "-%" | "&" | "try" | "await" }
+
 ////
 
 Identifier { identifier }
@@ -71,11 +107,13 @@ Identifier { identifier }
     ($[ \t\r\n] | "\\" "\r"? "\n")+
   }
 
+  And { "and" }
   anytype { "anytype" }
   Break { "break" }
   Const { "const" }
   Continue { "continue" }
   fn { "fn" }
+  Or { "or" }
   Return { "return" }
   Var { "var" }
 
@@ -84,7 +122,7 @@ Identifier { identifier }
     $[A-Za-z_] $[A-Za-z0-9_]*
   }
 
-  @precedence { anytype Break Const Continue fn Return Var identifier }
+  @precedence { And anytype Break Const Continue fn Or Return Var identifier }
 
   LineComment[isolate] { "//" ("\\" (![\n] | "\\r"? "\\n") | ![\n])* }
 

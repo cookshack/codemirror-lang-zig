@@ -90,7 +90,7 @@ Program(Decl(FnProto(Identifier,ParamDeclList()),
 # If
 
 fn one(a : u32) {
-  if (a)
+  if (a == 1)
     return 1;
 }
 
