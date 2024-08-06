@@ -85,7 +85,7 @@ fn one() {
 
 ==>
 Program(Decl(FnProto(Identifier,ParamDeclList()),
-             Block(Statement(Expr(PrimaryExpr(Return))))))
+             Block(Statement(Return))))
 
 # If
 

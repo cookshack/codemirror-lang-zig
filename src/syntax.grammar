@@ -29,25 +29,25 @@ Name { identifier }
 Statement {
   IfPrefix ( BlockExpr (!else Else Payload? Statement)?
              | (/*assignExpr |*/ Expr) (";" | !else Else Payload? Statement) )
-  | ExprExclIf ";"
+  | exprExclIf ";"
 }
 
 BlockExpr { Block }
 
 //// Expression level.
 
-ExprExclIf { BinaryExprExclIf | primaryExprExclIf }
+exprExclIf { binaryExprExclIf | primaryExprExclIf }
 
 Expr { BinaryExpr | PrimaryExpr }
 
-BinaryExprExclIf {
-  ExprExclIf !or Or Expr
-  | ExprExclIf !and And Expr
-  | ExprExclIf !compare CompareOp Expr
-  | ExprExclIf !bitwise BitwiseOp Expr
-  | ExprExclIf !bitShift BitShiftOp Expr
-  | ExprExclIf !add AdditionOp Expr
-  | ExprExclIf !multiply MultiplyOp Expr
+binaryExprExclIf {
+  exprExclIf !or Or Expr
+  | exprExclIf !and And Expr
+  | exprExclIf !compare CompareOp Expr
+  | exprExclIf !bitwise BitwiseOp Expr
+  | exprExclIf !bitShift BitShiftOp Expr
+  | exprExclIf !add AdditionOp Expr
+  | exprExclIf !multiply MultiplyOp Expr
 }
 
 BinaryExpr {
