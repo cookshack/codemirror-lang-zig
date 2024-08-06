@@ -1,0 +1,47 @@
+# For
+
+fn main() {
+  for (s) |ch|
+    return ch;
+}
+
+==>
+Program(Decl(FnProto(Identifier,ParamDeclList),
+             Block(Statement(ForStatement(ForPrefix(For,
+                                                    ForArgList(ForItem(Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(PrimaryTypeExpr(Identifier))))))),
+                                                    PtrListPayload(Identifier)),
+                                          Expr(PrimaryExpr(Return, Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(PrimaryTypeExpr(Identifier))))))))))))
+
+# For block
+
+fn one() {
+  for (s, 0..3) |ch, index| {
+    return 1;
+  }
+}
+
+==>
+Program(Decl(FnProto(Identifier,ParamDeclList),
+             Block(Statement(ForStatement(ForPrefix(For,
+                                                    ForArgList(ForItem(Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(PrimaryTypeExpr(Identifier)))))),
+                                                               ForItem(Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(PrimaryTypeExpr(Integer))))),
+                                                                       Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(PrimaryTypeExpr(Integer))))))),
+                                                    PtrListPayload(Identifier, Identifier)),
+                                          Block(Statement(Return, Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(PrimaryTypeExpr(Integer))))))))))))
+
+# For with assign
+
+fn main() {
+  for (s, 0..) |ch|
+    a = ch;
+}
+
+==>
+Program(Decl(FnProto(Identifier,ParamDeclList),
+             Block(Statement(ForStatement(ForPrefix(For,
+                                                    ForArgList(ForItem(Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(PrimaryTypeExpr(Identifier)))))),
+                                                               ForItem(Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(PrimaryTypeExpr(Integer))))))),
+                                                    PtrListPayload(Identifier)),
+                                          AssignExpr(Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(PrimaryTypeExpr(Identifier))))),
+                                                     AssignOp,
+                                                     Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(PrimaryTypeExpr(Identifier)))))))))))

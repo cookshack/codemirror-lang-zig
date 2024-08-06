@@ -39,7 +39,12 @@ IfStatement {
 
 labeledStatement { Block | loopStatement }
 
-loopStatement { WhileStatement }
+loopStatement { ForStatement | WhileStatement }
+
+ForStatement {
+  ForPrefix ( blockExpr (!else Else Statement)?
+              | (AssignExpr | Expr) (";" | !else Else Statement) )
+}
 
 WhileStatement {
   WhilePrefix ( blockExpr (!else Else Payload? Statement)?
@@ -123,13 +128,23 @@ IfPrefix { If "(" Expr ")" PtrPayload? }
 
 WhilePrefix { While "(" Expr ")" PtrPayload? /* while_continue_expr */}
 
+ForPrefix { For "(" ForArgList ")" PtrListPayload }
+
 //// Payloads
 
 Payload { "|" Identifier "|" }
 
 PtrPayload { "|" Star? Identifier "|" }
 
+PtrListPayload { "|" "*"? Identifier ("," "*"? Identifier)* ","? "|" }
+
 Star { "*" }
+
+//// For specific.
+
+ForArgList { ForItem ("," ForItem)* ","? }
+
+ForItem { Expr (".." Expr?)? }
 
 //// Operators
 
@@ -166,6 +181,7 @@ Identifier { identifier }
   Continue { "continue" }
   Else { "else" }
   fn { "fn" }
+  For { "for" }
   If { "if" }
   Or { "or" }
   Orelse { "orelse" }
@@ -180,7 +196,7 @@ Identifier { identifier }
     $[A-Za-z_] $[A-Za-z0-9_]*
   }
 
-  @precedence { And anytype Break Catch Const Continue Else fn If Integer Or Orelse Return Var While identifier }
+  @precedence { And anytype Break Catch Const Continue Else fn For If Integer Or Orelse Return Var While identifier }
 
   LineComment[isolate] { "//" ("\\" (![\n] | "\\r"? "\\n") | ![\n])* }
 
