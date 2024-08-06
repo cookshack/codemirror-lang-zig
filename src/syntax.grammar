@@ -23,10 +23,13 @@ Statement {
 Expr { PrimaryExpr }
 
 PrimaryExpr {
-  Break
+  IfExpr
+  | Break
   | Continue
   | Return
 }
+
+IfExpr { "if" "(" Expr ")" PtrPayload? Expr "else" Payload? Expr }
 
 Block { "{" Statement* "}" }
 
@@ -48,6 +51,16 @@ ParamDecl { //seq(optional($.doc_comment), optional(choice("noalias", "comptime"
             | "..." }
 
 ParamType { anytype | TypeExpr }
+
+//// Payloads
+
+Payload { "|" Identifier "|" }
+
+PtrPayload { "|" Star? Identifier "|" }
+
+Star { "*" }
+
+////
 
 Identifier { identifier }
 

@@ -86,3 +86,14 @@ fn one() {
 ==>
 Program(Decl(FnProto(Identifier,ParamDeclList()),
              Block(Statement(Expr(PrimaryExpr(Return))))))
+
+# If
+
+fn one(a : u32) {
+  if (a)
+    return 1;
+}
+
+==>
+Program(Decl(FnProto(Identifier,ParamDeclList(ParamDecl(Identifier, ParamType(TypeExpr(PrimaryTypeExpr(Identifier)))))),
+             Block(Statement(Expr(PrimaryExpr(IfExpr))))))
