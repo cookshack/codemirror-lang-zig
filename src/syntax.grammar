@@ -47,7 +47,7 @@ PrimaryExpr {
   IfExpr
   | Break
   | Continue
-  | Return
+  | Return Expr?
 }
 
 CurlySuffixExpr { TypeExpr }
@@ -91,7 +91,7 @@ CompareOp { "==" | "!=" | ">" | "<" | ">=" | "<=" }
 
 AssignOp { "*=" | "*|=" | "/=" | "%=" | "+=" | "+|=" | "-=" | "-|=" | "<<=" | "<<|=" | ">>=" | "&=" | "^=" | "|=" | "*%=" | "+%=" | "-%=" | "=" }
 
-BitwiseOp { "&" | "^" | "|" | "orelse" | "catch" Payload? }
+BitwiseOp { "&" | "^" | "|" | Orelse | Catch Payload? }
 
 BitShiftOp { "<<" } //| ">>" | "<<| }
 
@@ -115,12 +115,14 @@ Identifier { identifier }
   And { "and" }
   anytype { "anytype" }
   Break { "break" }
+  Catch { "catch" }
   Const { "const" }
   Continue { "continue" }
   Else { "else" }
   fn { "fn" }
   If { "if" }
   Or { "or" }
+  Orelse { "orelse" }
   Return { "return" }
   Var { "var" }
 
@@ -131,7 +133,7 @@ Identifier { identifier }
     $[A-Za-z_] $[A-Za-z0-9_]*
   }
 
-  @precedence { And anytype Break Const Continue Else fn If Integer Or Return Var identifier }
+  @precedence { And anytype Break Catch Const Continue Else fn If Integer Or Orelse Return Var identifier }
 
   LineComment[isolate] { "//" ("\\" (![\n] | "\\r"? "\\n") | ![\n])* }
 
