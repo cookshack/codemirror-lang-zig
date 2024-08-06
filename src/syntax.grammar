@@ -33,7 +33,7 @@ Statement {
 }
 
 IfStatement {
-  IfPrefix ( BlockExpr (!else Else Payload? Statement)?
+  IfPrefix ( blockExpr (!else Else Payload? Statement)?
              | (AssignExpr | Expr) (";" | !else Else Payload? Statement) )
 }
 
@@ -42,11 +42,11 @@ labeledStatement { Block | loopStatement }
 loopStatement { WhileStatement }
 
 WhileStatement {
-  WhilePrefix ( BlockExpr (!else Else Payload? Statement)?
+  WhilePrefix ( blockExpr (!else Else Payload? Statement)?
                 | (AssignExpr | Expr) (";" | !else Else Payload? Statement) )
 }
 
-BlockExpr { Block }
+blockExpr { Block }
 
 //// Expression level.
 
