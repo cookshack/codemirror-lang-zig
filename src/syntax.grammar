@@ -6,6 +6,8 @@
   bitShift @left
   add @left
   multiply @left
+
+  else @right
 }
 
 @top Program { topLevelItem* }
@@ -25,21 +27,34 @@ Name { identifier }
 //// Block level.
 
 Statement {
-  IfStatement
-  | Expr ";"
+  IfPrefix ( ifRestStatement ifRestExpr )
+  | ExprExclIf ";"
 }
 
-IfStatement {
-  IfPrefix
-  ( BlockExpr (Else Payload? Statement)?
-    | (/*assignExpr |*/ Expr) (";" | Else Payload? Statement) )
+IfStatement { IfPrefix ifRestStatement }
+
+ifRestStatement {
+  BlockExpr (!else Else Payload? Statement)?
+  | (/*assignExpr |*/ Expr) (";" | !else Else Payload? Statement)
 }
 
 BlockExpr { Block }
 
 //// Expression level.
 
+ExprExclIf { BinaryExprExclIf | primaryExprExclIf }
+
 Expr { BinaryExpr | PrimaryExpr }
+
+BinaryExprExclIf {
+  ExprExclIf !or Or Expr
+  | ExprExclIf !and And Expr
+  | ExprExclIf !compare CompareOp Expr
+  | ExprExclIf !bitwise BitwiseOp Expr
+  | ExprExclIf !bitShift BitShiftOp Expr
+  | ExprExclIf !add AdditionOp Expr
+  | ExprExclIf !multiply MultiplyOp Expr
+}
 
 BinaryExpr {
   Expr !or Or Expr
@@ -52,7 +67,12 @@ BinaryExpr {
 }
 
 PrimaryExpr {
-//  IfExpr // ERR shift reduce with IfStatement
+  //IfExpr // shift reduce with IfStatement
+  IfPrefix ifRestExpr
+  | primaryExprExclIf
+}
+
+primaryExprExclIf {
   Break
   | Continue
   | Return Expr?
@@ -61,9 +81,9 @@ PrimaryExpr {
 
 CurlySuffixExpr { TypeExpr }
 
-IfExpr {
-  IfPrefix Expr (Else Payload? Expr)?
-}
+IfExpr { IfPrefix ifRestExpr }
+
+ifRestExpr { Expr (!else Else Payload? Expr)? }
 
 Block { "{" Statement* "}" }
 
