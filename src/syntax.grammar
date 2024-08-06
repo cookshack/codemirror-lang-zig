@@ -65,8 +65,7 @@ BinaryExpr {
 }
 
 PrimaryExpr {
-  //IfExpr // shift reduce with IfStatement
-  IfPrefix ifRestExpr
+  IfExpr
   | primaryExprExclIf
 }
 
@@ -79,9 +78,7 @@ primaryExprExclIf {
 
 CurlySuffixExpr { TypeExpr }
 
-IfExpr { IfPrefix ifRestExpr }
-
-ifRestExpr { Expr (!else Else Payload? Expr)? }
+IfExpr { IfPrefix Expr (!else Else Payload? Expr)? }
 
 Block { "{" Statement* "}" }
 

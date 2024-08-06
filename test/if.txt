@@ -20,9 +20,9 @@ fn main() {
 
 ==>
 Program(Decl(FnProto(Identifier,ParamDeclList),
-             Block(Statement(Return, Expr(PrimaryExpr(IfPrefix(If, Expr(BinaryExpr(Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(PrimaryTypeExpr(Integer))))),
-                                                                                   CompareOp,
-                                                                                   Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(PrimaryTypeExpr(Integer)))))))),
-                                                      Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(PrimaryTypeExpr(Integer))))),
-                                                      Else,
-                                                      Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(PrimaryTypeExpr(Integer)))))))))))
+             Block(Statement(Return, Expr(PrimaryExpr(IfExpr(IfPrefix(If, Expr(BinaryExpr(Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(PrimaryTypeExpr(Integer))))),
+                                                                                          CompareOp,
+                                                                                          Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(PrimaryTypeExpr(Integer)))))))),
+                                                             Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(PrimaryTypeExpr(Integer))))),
+                                                             Else,
+                                                             Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(PrimaryTypeExpr(Integer))))))))))))
