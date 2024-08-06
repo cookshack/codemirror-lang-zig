@@ -28,12 +28,22 @@ Name { identifier }
 
 Statement {
   IfStatement
+  | labeledStatement
   | (assignExprExclIf | exprExclIf) ";"
 }
 
 IfStatement {
   IfPrefix ( BlockExpr (!else Else Payload? Statement)?
              | (AssignExpr | Expr) (";" | !else Else Payload? Statement) )
+}
+
+labeledStatement { Block | loopStatement }
+
+loopStatement { WhileStatement }
+
+WhileStatement {
+  WhilePrefix ( BlockExpr (!else Else Payload? Statement)?
+                | (AssignExpr | Expr) (";" | !else Else Payload? Statement) )
 }
 
 BlockExpr { Block }
@@ -111,6 +121,8 @@ ParamType { anytype | TypeExpr }
 
 IfPrefix { If "(" Expr ")" PtrPayload? }
 
+WhilePrefix { While "(" Expr ")" PtrPayload? /* while_continue_expr */}
+
 //// Payloads
 
 Payload { "|" Identifier "|" }
@@ -159,6 +171,7 @@ Identifier { identifier }
   Orelse { "orelse" }
   Return { "return" }
   Var { "var" }
+  While { "while" }
 
   Integer { $[0-9]+ }
 
@@ -167,7 +180,7 @@ Identifier { identifier }
     $[A-Za-z_] $[A-Za-z0-9_]*
   }
 
-  @precedence { And anytype Break Catch Const Continue Else fn If Integer Or Orelse Return Var identifier }
+  @precedence { And anytype Break Catch Const Continue Else fn If Integer Or Orelse Return Var While identifier }
 
   LineComment[isolate] { "//" ("\\" (![\n] | "\\r"? "\\n") | ![\n])* }
 
