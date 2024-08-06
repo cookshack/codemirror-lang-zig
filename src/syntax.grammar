@@ -28,7 +28,7 @@ Name { identifier }
 
 Statement {
   IfStatement
-  | exprExclIf ";"
+  | (assignExprExclIf | exprExclIf) ";"
 }
 
 IfStatement {
@@ -39,6 +39,8 @@ IfStatement {
 BlockExpr { Block }
 
 //// Expression level.
+
+assignExprExclIf { exprExclIf AssignOp Expr }
 
 AssignExpr { Expr AssignOp Expr }
 

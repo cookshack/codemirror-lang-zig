@@ -86,3 +86,15 @@ fn one() {
 ==>
 Program(Decl(FnProto(Identifier,ParamDeclList()),
              Block(Statement(Return))))
+
+# Assign in block
+
+fn one() {
+  a = 1;
+}
+
+==>
+Program(Decl(FnProto(Identifier,ParamDeclList()),
+             Block(Statement(CurlySuffixExpr(TypeExpr(PrimaryTypeExpr(Identifier))),
+                             AssignOp,
+                             Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(PrimaryTypeExpr(Integer)))))))))
