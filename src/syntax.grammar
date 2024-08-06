@@ -6,6 +6,8 @@
   bitShift @left
   add @left
   multiply @left
+
+  curly
 }
 
 @top Program { topLevelItem* }
@@ -25,7 +27,14 @@ Name { identifier }
 //// Block level.
 
 Statement {
-  Expr ";"
+  IfStatement
+  | Expr ";"
+}
+
+IfStatement {
+  IfPrefix
+  ( BlockExpr (Else Payload? Statement)?
+    | (/*assignExpr |*/ Expr) (";" | Else Payload? Statement) )
 }
 
 BlockExpr { Block }
@@ -42,21 +51,20 @@ BinaryExpr {
   | Expr !bitShift BitShiftOp Expr
   | Expr !add AdditionOp Expr
   | Expr !multiply MultiplyOp Expr
-  | CurlySuffixExpr
 }
 
 PrimaryExpr {
-  IfExpr
-  | Break
+//  IfExpr // ERR shift reduce with IfStatement
+  Break
   | Continue
   | Return Expr?
+  | CurlySuffixExpr
 }
 
 CurlySuffixExpr { TypeExpr }
 
 IfExpr {
-  (ifPrefix BlockExpr (Else Payload? Statement)?)
-  | (ifPrefix (/*assignExpr |*/ Expr) (";" | Else Payload? Statement))
+  IfPrefix Expr (Else Payload? Expr)?
 }
 
 Block { "{" Statement* "}" }
@@ -84,7 +92,7 @@ ParamType { anytype | TypeExpr }
 
 //// Control flow prefixes
 
-ifPrefix { If "(" Expr ")" PtrPayload? }
+IfPrefix { If "(" Expr ")" PtrPayload? }
 
 //// Payloads
 

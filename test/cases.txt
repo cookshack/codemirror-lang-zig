@@ -96,4 +96,7 @@ fn one(a : u32) {
 
 ==>
 Program(Decl(FnProto(Identifier,ParamDeclList(ParamDecl(Identifier, ParamType(TypeExpr(PrimaryTypeExpr(Identifier)))))),
-             Block(Statement(Expr(PrimaryExpr(IfExpr))))))
+             Block(Statement(IfStatement(IfPrefix(If, Expr(BinaryExpr(Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(PrimaryTypeExpr(Identifier))))),
+                                                                      CompareOp,
+                                                                      Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(PrimaryTypeExpr(Integer)))))))),
+                                         Expr(PrimaryExpr(Return, Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(PrimaryTypeExpr(Integer))))))))))))
