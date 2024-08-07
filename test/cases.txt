@@ -5,22 +5,22 @@ Program()
 
 # Block statement
 
-fn one() {
+fn one() noreturn {
   return;
 }
 
 ==>
-Program(Decl(FnProto(Identifier,ParamDeclList()),
+Program(Decl(FnProto(Identifier,ParamDeclList(),TypeExpr(PrimaryTypeExpr(Identifier))),
              Block(Statement(Return))))
 
 # Assign in block
 
-fn one() {
+fn one() noreturn {
   a = 1;
 }
 
 ==>
-Program(Decl(FnProto(Identifier,ParamDeclList()),
+Program(Decl(FnProto(Identifier,ParamDeclList,TypeExpr(PrimaryTypeExpr(Identifier))),
              Block(Statement(CurlySuffixExpr(TypeExpr(PrimaryTypeExpr(Identifier))),
                              AssignOp,
                              Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(PrimaryTypeExpr(Integer)))))))))

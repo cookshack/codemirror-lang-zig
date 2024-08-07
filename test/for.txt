@@ -1,6 +1,6 @@
 # For
 
-fn main() {
+fn main() noreturn {
   for (s) |ch|
     fun(ch);
 }
@@ -8,7 +8,7 @@ fn main() {
 ==>
 Program
 (Decl
- (FnProto(Identifier,ParamDeclList),
+ (FnProto(Identifier,ParamDeclList,TypeExpr(PrimaryTypeExpr(Identifier))),
   Block(Statement(ForStatement(ForPrefix(For,
                                          ForArgList(ForItem(Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(PrimaryTypeExpr(Identifier))))))),
                                          PtrListPayload(Identifier)),
@@ -17,14 +17,14 @@ Program
 
 # For block
 
-fn one() {
+fn one() u8 {
   for (s, 0..3) |ch, index| {
     return 1;
   }
 }
 
 ==>
-Program(Decl(FnProto(Identifier,ParamDeclList),
+Program(Decl(FnProto(Identifier,ParamDeclList,TypeExpr(PrimaryTypeExpr(Identifier))),
              Block(Statement(ForStatement(ForPrefix(For,
                                                     ForArgList(ForItem(Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(PrimaryTypeExpr(Identifier)))))),
                                                                ForItem(Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(PrimaryTypeExpr(Integer))))),
@@ -34,13 +34,13 @@ Program(Decl(FnProto(Identifier,ParamDeclList),
 
 # For with assign
 
-fn main() {
+fn main() noreturn {
   for (s, 0..) |ch|
     a = ch;
 }
 
 ==>
-Program(Decl(FnProto(Identifier,ParamDeclList),
+Program(Decl(FnProto(Identifier,ParamDeclList,TypeExpr(PrimaryTypeExpr(Identifier))),
              Block(Statement(ForStatement(ForPrefix(For,
                                                     ForArgList(ForItem(Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(PrimaryTypeExpr(Identifier)))))),
                                                                ForItem(Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(PrimaryTypeExpr(Integer))))))),

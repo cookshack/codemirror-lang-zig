@@ -1,12 +1,14 @@
 # If stmnt
 
-fn one(a : u32) {
+fn one(a : u32) u16 {
   if (a == 1)
     return 1;
 }
 
 ==>
-Program(Decl(FnProto(Identifier,ParamDeclList(ParamDecl(Identifier, ParamType(TypeExpr(PrimaryTypeExpr(Identifier)))))),
+Program(Decl(FnProto(Identifier,
+                     ParamDeclList(ParamDecl(Identifier, ParamType(TypeExpr(PrimaryTypeExpr(Identifier))))),
+                     TypeExpr(PrimaryTypeExpr(Identifier))),
              Block(Statement(IfStatement(IfPrefix(If, Expr(BinaryExpr(Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(PrimaryTypeExpr(Identifier))))),
                                                                       CompareOp,
                                                                       Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(PrimaryTypeExpr(Integer)))))))),
@@ -14,12 +16,12 @@ Program(Decl(FnProto(Identifier,ParamDeclList(ParamDecl(Identifier, ParamType(Ty
 
 # If expr
 
-fn main() {
+fn main() u8 {
   return if (1 == 0) 3 else 4;
 }
 
 ==>
-Program(Decl(FnProto(Identifier,ParamDeclList),
+Program(Decl(FnProto(Identifier,ParamDeclList,TypeExpr(PrimaryTypeExpr(Identifier))),
              Block(Statement(Return, Expr(PrimaryExpr(IfExpr(IfPrefix(If, Expr(BinaryExpr(Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(PrimaryTypeExpr(Integer))))),
                                                                                           CompareOp,
                                                                                           Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(PrimaryTypeExpr(Integer)))))))),
@@ -29,13 +31,13 @@ Program(Decl(FnProto(Identifier,ParamDeclList),
 
 # If stmnt with assign in then expr
 
-fn main() {
+fn main() noreturn {
   if (1)
     a = 1;
 }
 
 ==>
-Program(Decl(FnProto(Identifier,ParamDeclList),
+Program(Decl(FnProto(Identifier,ParamDeclList,TypeExpr(PrimaryTypeExpr(Identifier))),
              Block(Statement(IfStatement(IfPrefix(If, Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(PrimaryTypeExpr(Integer)))))),
                                          AssignExpr(Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(PrimaryTypeExpr(Identifier))))),
                                                     AssignOp,

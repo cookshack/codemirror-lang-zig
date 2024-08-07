@@ -1,11 +1,13 @@
 # Field access
 
-fn one() {
+fn one() string {
   return a.b;
 }
 
 ==>
-Program(Decl(FnProto(Identifier,ParamDeclList()),
+Program(Decl(FnProto(Identifier,
+                     ParamDeclList,
+                    TypeExpr(PrimaryTypeExpr(Identifier))),
              Block(Statement(Return,
                              Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(PrimaryTypeExpr(Identifier),
                                                                        SuffixOp(FieldAccess(Identifier))))))))))

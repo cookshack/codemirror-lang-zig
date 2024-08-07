@@ -28,7 +28,7 @@ TestName { stringLiteralSingle | identifier }
 
 Decl { ( FnProto (";" | Block) | VarDecl ) }
 
-FnProto { fn Identifier? "(" ParamDeclList ")" }
+FnProto { fn Identifier? "(" ParamDeclList ")" TypeExpr }
 
 VarDecl { ( Const | Var ) Name (":" TypeExpr)? ("=" Expr)? ";" }
 
