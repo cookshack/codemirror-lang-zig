@@ -1,0 +1,11 @@
+# Field access
+
+fn one() {
+  return a.b;
+}
+
+==>
+Program(Decl(FnProto(Identifier,ParamDeclList()),
+             Block(Statement(Return,
+                             Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(PrimaryTypeExpr(Identifier),
+                                                                       SuffixOp(FieldAccess(Identifier))))))))))

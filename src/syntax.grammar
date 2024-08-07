@@ -118,7 +118,7 @@ TypeExpr { //seq(repeat($.prefix_type_op), choice($.error_union_expr, $._suffix_
 
 suffixExpr { ( //seq("async", $._primary_type_expr, repeat($._suffix_op), $.fn_call_arguments),
                //seq($._primary_type_expr, repeat(choice($._suffix_op, $.fn_call_arguments))),
-               PrimaryTypeExpr (/*SuffixOp |*/ FnCallArgs)* ) }
+               PrimaryTypeExpr (SuffixOp | FnCallArgs)* ) }
 
 PrimaryTypeExpr {
   BuiltinIdentifier FnCallArgs
@@ -175,6 +175,14 @@ AdditionOp { "+" | "-" | "++" }
 MultiplyOp { "||" } // | "*" } // | "/" | "%" | "**" | "*%" | "*|" }
 
 PrefixOp { "!" | "-" | "~" | "-%" | "&" | Try | Await }
+
+ArrayAccess { "[" Expr "]" }
+Slice { "[" Expr ".." (Expr (":" Expr)?)? "]" }
+Deref { ".*" }
+Unwrap { ".?" }
+FieldAccess { "." Identifier }
+
+SuffixOp { Slice | ArrayAccess | FieldAccess | Deref | Unwrap }
 
 FnCallArgs { "(" (Expr ",")* Expr? ")" }
 
