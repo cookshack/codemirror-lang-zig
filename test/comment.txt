@@ -1,0 +1,15 @@
+# Line comment
+
+// eg
+
+==>
+Program(LineComment())
+
+# Block comment
+
+/* eg
+line 2
+ */
+
+==>
+Program(BlockComment())

@@ -3,22 +3,6 @@
 ==>
 Program()
 
-# Line comment
-
-// eg
-
-==>
-Program(LineComment())
-
-# Block comment
-
-/* eg
-line 2
- */
-
-==>
-Program(BlockComment())
-
 # Top level const
 
 const a;
