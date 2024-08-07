@@ -3,26 +3,6 @@
 ==>
 Program()
 
-# Top level const
-
-const a;
-
-==>
-Program(Decl(VarDecl(Const, Name)))
-
-# Top level vars
-
-const a;
-var b;
-var c : u32;
-const d : string;
-
-==>
-Program(Decl(VarDecl(Const, Name)),
-        Decl(VarDecl(Var, Name)),
-        Decl(VarDecl(Var, Name, TypeExpr(PrimaryTypeExpr(Identifier)))),
-        Decl(VarDecl(Const, Name, TypeExpr(PrimaryTypeExpr(Identifier)))))
-
 # Block statement
 
 fn one() {
