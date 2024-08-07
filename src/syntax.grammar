@@ -16,7 +16,7 @@
 
 containerDecls { containerDecl* }
 
-containerDecl { TestDecl | /* comptimeDecl |*/ DocComment? Pub? Decl }
+containerDecl { TestDecl | ComptimeDecl | DocComment? Pub? Decl }
 
 //// Top level.
 
@@ -25,6 +25,8 @@ ContainerDocComment { containerComment+ }
 TestDecl { Test TestName Block }
 
 TestName { stringLiteralSingle | identifier }
+
+ComptimeDecl { Comptime Block }
 
 Decl { ( FnProto (";" | Block) | VarDecl ) }
 
@@ -206,6 +208,7 @@ StringLiteral { stringLiteralSingle /* | multiStringLiteral */ }
   anytype { "anytype" }
   Break { "break" }
   Catch { "catch" }
+  Comptime { "comptime" }
   Const { "const" }
   Continue { "continue" }
   Else { "else" }
@@ -230,7 +233,8 @@ StringLiteral { stringLiteralSingle /* | multiStringLiteral */ }
 
   builtinIdentifier { "@" $[A-Za-z_] $[A-Za-z0-9_]* }
 
-  @precedence { And Await anytype Break Catch Const Continue Else fn For If Integer Or Orelse Pub Return Test Try Var While
+  @precedence { And Await anytype Break Catch Comptime Const Continue Else fn For If Integer Or Orelse
+                Pub Return Test Try Var While
                 identifier }
 
   stringLiteralSingle {

@@ -1,0 +1,11 @@
+# Decl
+
+var a : u8;
+comptime { a = 1; }
+
+==>
+Program(Decl(VarDecl(Var,Name,TypeExpr(PrimaryTypeExpr(Identifier)))),
+        ComptimeDecl(Comptime,
+                     Block(Statement(CurlySuffixExpr(TypeExpr(PrimaryTypeExpr(Identifier))),
+                                     AssignOp,
+                                     Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(PrimaryTypeExpr(Integer)))))))))
