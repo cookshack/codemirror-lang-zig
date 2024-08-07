@@ -1,0 +1,37 @@
+# One fn proto
+
+fn one();
+
+==>
+Program(Decl(FnProto(Identifier,ParamDeclList)))
+
+# One fn proto w arg
+
+fn one(a : u32);
+
+==>
+Program(Decl(FnProto(Identifier,ParamDeclList(ParamDecl(Identifier, ParamType(TypeExpr(PrimaryTypeExpr(Identifier))))))))
+
+# Two fn protos
+
+fn one(a : u32, b: string);
+fn two(a : u32, b: string);
+
+==>
+Program(Decl(FnProto(Identifier,ParamDeclList(ParamDecl(Identifier, ParamType(TypeExpr(PrimaryTypeExpr(Identifier)))),
+                                              ParamDecl(Identifier, ParamType(TypeExpr(PrimaryTypeExpr(Identifier))))))),
+        Decl(FnProto(Identifier,ParamDeclList(ParamDecl(Identifier, ParamType(TypeExpr(PrimaryTypeExpr(Identifier)))),
+                                              ParamDecl(Identifier, ParamType(TypeExpr(PrimaryTypeExpr(Identifier))))))))
+
+# Two fns
+
+fn one(a : u32, b: string) { }
+fn two(a : u32, b: string) { }
+
+==>
+Program(Decl(FnProto(Identifier,ParamDeclList(ParamDecl(Identifier, ParamType(TypeExpr(PrimaryTypeExpr(Identifier)))),
+                                              ParamDecl(Identifier, ParamType(TypeExpr(PrimaryTypeExpr(Identifier)))))),
+             Block),
+        Decl(FnProto(Identifier,ParamDeclList(ParamDecl(Identifier, ParamType(TypeExpr(PrimaryTypeExpr(Identifier)))),
+                                              ParamDecl(Identifier, ParamType(TypeExpr(PrimaryTypeExpr(Identifier)))))),
+             Block))
