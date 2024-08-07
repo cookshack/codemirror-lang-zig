@@ -53,3 +53,12 @@ Program(Pub,
         Decl(FnProto(Identifier,
                      ParamDeclList,
                      TypeExpr(PrimaryTypeExpr(Identifier)))))
+
+# Err union ret
+
+fn fun() !u32;
+
+==>
+Program(Decl(FnProto(Identifier,
+                     ParamDeclList,
+                     TypeExpr(PrimaryTypeExpr(Identifier)))))
