@@ -98,3 +98,16 @@ Program(Decl(FnProto(Identifier,ParamDeclList()),
              Block(Statement(CurlySuffixExpr(TypeExpr(PrimaryTypeExpr(Identifier))),
                              AssignOp,
                              Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(PrimaryTypeExpr(Integer)))))))))
+
+# import
+
+const std = @import("std");
+
+==>
+Program
+(Decl
+ (VarDecl
+  (Const,
+   Name,
+   Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(PrimaryTypeExpr(BuiltinIdentifier,
+                                                             FnCallArgs(Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(PrimaryTypeExpr(StringLiteral))))))))))))))

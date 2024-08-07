@@ -20,7 +20,7 @@ Decl { ( FnProto (";" | Block) | VarDecl ) }
 
 FnProto { fn Identifier? "(" ParamDeclList ")" }
 
-VarDecl { ( Const | Var ) Name (":" TypeExpr)?  ";" }
+VarDecl { ( Const | Var ) Name (":" TypeExpr)? ("=" Expr)? ";" }
 
 Name { identifier }
 
@@ -109,8 +109,10 @@ suffixExpr { ( //seq("async", $._primary_type_expr, repeat($._suffix_op), $.fn_c
                PrimaryTypeExpr (/*SuffixOp |*/ FnCallArgs)* ) }
 
 PrimaryTypeExpr {
-  Identifier
-  | Integer }
+  BuiltinIdentifier FnCallArgs
+  | Identifier
+  | Integer
+  | StringLiteral }
 
 //// Fn specific.
 
@@ -168,6 +170,10 @@ FnCallArgs { "(" (Expr ",")* Expr? ")" }
 
 Identifier { identifier }
 
+BuiltinIdentifier { builtinIdentifier }
+
+StringLiteral { stringLiteralSingle /* | multiStringLiteral */ }
+
 @skip { whitespace | LineComment | BlockComment }
 
 @tokens {
@@ -198,7 +204,19 @@ Identifier { identifier }
     $[A-Za-z_] $[A-Za-z0-9_]*
   }
 
+  builtinIdentifier { "@" $[A-Za-z_] $[A-Za-z0-9_]* }
+
   @precedence { And anytype Break Catch Const Continue Else fn For If Integer Or Orelse Return Var While identifier }
+
+  stringLiteralSingle {
+    "\""
+    ( // stringFragment
+      !["\\]*
+      // stringEscape
+      | ("\\n" | "\\r" | "\\t" | "\\\\" | "\\'" | "\\\"" | "\\x" $[0-9a-fA-F] $[0-9a-fA-F]
+         | "\\u{" $[0-9a-fA-F] ($[0-9a-fA-F] ($[0-9a-fA-F] ($[0-9a-fA-F] ($[0-9a-fA-F] $[0-9a-fA-F]?)?)?)?)? "}")
+    )*
+    "\"" }
 
   LineComment[isolate] { "//" ("\\" (![\n] | "\\r"? "\\n") | ![\n])* }
 
