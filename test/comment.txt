@@ -14,6 +14,13 @@ line 2
 ==>
 Program(BlockComment())
 
+# Single container comment
+
+//! eg
+
+==>
+Program(ContainerDocComment)
+
 # Container comment
 
 //! whut
@@ -21,3 +28,11 @@ Program(BlockComment())
 
 ==>
 Program(ContainerDocComment)
+
+# Doc comment
+
+/// ddd
+var a;
+
+==>
+Program(DocComment,Decl(VarDecl(Var,Name)))

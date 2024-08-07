@@ -14,7 +14,7 @@
 
 containerDecls { containerDecl* }
 
-containerDecl { /*testDecl) |*/ /* comptimeDecl |*/ /*DocComment?*/ Pub? Decl }
+containerDecl { /*testDecl) |*/ /* comptimeDecl |*/ DocComment? Pub? Decl }
 
 //// Top level.
 
@@ -225,10 +225,7 @@ StringLiteral { stringLiteralSingle /* | multiStringLiteral */ }
 
   LineComment[isolate] { "//" ("\\" (![\n] | "\\r"? "\\n") | ![\n])* }
 
-  //DocComment[isolate] { "///" ( ![/\n] ![\n]* "\n" | "\n" | @eof ) }
-  //doc_comment: (_) => token(repeat1(/\/\/\/(([^/\n][^\n]*[ \n]*)|)/))
-  //DocComment[isolate] { ("///" (![/\n] ![\n]* $[ \n]*|()))+ } // fails if at file end and file missing newline
-  //DocComment[isolate] { "///" ("\\" (![\n] | "\\r"? "\\n") | ![\n])* }
+  DocComment[isolate] { ("///" (![/\n] ![\n]* $[ \n]*|()))+ }
 
   BlockComment[isolate] { "/*" blockCommentRest }
 
