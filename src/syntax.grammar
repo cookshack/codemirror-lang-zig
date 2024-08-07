@@ -10,7 +10,11 @@
   else @right
 }
 
-@top Program { ContainerDocComment? Decl* }
+@top Program { ContainerDocComment? containerDecls }
+
+containerDecls { containerDecl* }
+
+containerDecl { /*testDecl) |*/ /* comptimeDecl |*/ /*DocComment?*/ Pub? Decl }
 
 //// Top level.
 
@@ -193,6 +197,7 @@ StringLiteral { stringLiteralSingle /* | multiStringLiteral */ }
   If { "if" }
   Or { "or" }
   Orelse { "orelse" }
+  Pub { "pub" }
   Return { "return" }
   Var { "var" }
   While { "while" }
@@ -206,7 +211,7 @@ StringLiteral { stringLiteralSingle /* | multiStringLiteral */ }
 
   builtinIdentifier { "@" $[A-Za-z_] $[A-Za-z0-9_]* }
 
-  @precedence { And anytype Break Catch Const Continue Else fn For If Integer Or Orelse Return Var While identifier }
+  @precedence { And anytype Break Catch Const Continue Else fn For If Integer Or Orelse Pub Return Var While identifier }
 
   stringLiteralSingle {
     "\""
@@ -220,6 +225,11 @@ StringLiteral { stringLiteralSingle /* | multiStringLiteral */ }
 
   LineComment[isolate] { "//" ("\\" (![\n] | "\\r"? "\\n") | ![\n])* }
 
+  //DocComment[isolate] { "///" ( ![/\n] ![\n]* "\n" | "\n" | @eof ) }
+  //doc_comment: (_) => token(repeat1(/\/\/\/(([^/\n][^\n]*[ \n]*)|)/))
+  //DocComment[isolate] { ("///" (![/\n] ![\n]* $[ \n]*|()))+ } // fails if at file end and file missing newline
+  //DocComment[isolate] { "///" ("\\" (![\n] | "\\r"? "\\n") | ![\n])* }
+
   BlockComment[isolate] { "/*" blockCommentRest }
 
   blockCommentRest { ![*] blockCommentRest | "*" blockCommentAfterStar }
@@ -228,5 +238,5 @@ StringLiteral { stringLiteralSingle /* | multiStringLiteral */ }
 
   containerComment { "//!" ![\n]* $[ \n]* }
 
-  @precedence { containerComment, LineComment, BlockComment }
+  @precedence { containerComment, DocComment, LineComment, BlockComment }
 }

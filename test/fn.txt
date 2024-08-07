@@ -35,3 +35,10 @@ Program(Decl(FnProto(Identifier,ParamDeclList(ParamDecl(Identifier, ParamType(Ty
         Decl(FnProto(Identifier,ParamDeclList(ParamDecl(Identifier, ParamType(TypeExpr(PrimaryTypeExpr(Identifier)))),
                                               ParamDecl(Identifier, ParamType(TypeExpr(PrimaryTypeExpr(Identifier)))))),
              Block))
+
+# Pub
+
+pub fn main();
+
+==>
+Program(Pub, Decl(FnProto(Identifier,ParamDeclList)))
