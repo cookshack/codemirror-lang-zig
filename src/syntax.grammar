@@ -178,7 +178,7 @@ BuiltinIdentifier { builtinIdentifier }
 
 StringLiteral { stringLiteralSingle /* | multiStringLiteral */ }
 
-@skip { whitespace | LineComment | BlockComment }
+@skip { whitespace | LineComment }
 
 @tokens {
   whitespace {
@@ -227,13 +227,7 @@ StringLiteral { stringLiteralSingle /* | multiStringLiteral */ }
 
   DocComment[isolate] { ("///" (![/\n] ![\n]* $[ \n]*|()))+ }
 
-  BlockComment[isolate] { "/*" blockCommentRest }
-
-  blockCommentRest { ![*] blockCommentRest | "*" blockCommentAfterStar }
-
-  blockCommentAfterStar { "/" | "*" blockCommentAfterStar | ![/*] blockCommentRest }
-
   containerComment { "//!" ![\n]* $[ \n]* }
 
-  @precedence { containerComment, DocComment, LineComment, BlockComment }
+  @precedence { containerComment, DocComment, LineComment }
 }
