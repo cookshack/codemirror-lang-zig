@@ -9,3 +9,38 @@ Program(Decl(VarDecl(Var,Name,TypeExpr(PrimaryTypeExpr(Identifier)))),
                      Block(Statement(CurlySuffixExpr(TypeExpr(PrimaryTypeExpr(Identifier))),
                                      AssignOp,
                                      Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(PrimaryTypeExpr(Integer)))))))))
+
+# Valid
+
+test "comptime" {
+  const f3 = comptime blk: {
+    break :blk fib(3);
+  };
+  //try std.testing.expect(f3 > 0);
+}
+
+==>
+Program
+(TestDecl
+ (Test,
+  TestName,
+  Block(Statement(VarDecl(Const,
+                          Name,
+                          Expr
+                          (PrimaryExpr (Comptime,
+                                        Expr
+                                        (PrimaryExpr
+                                         (CurlySuffixExpr
+                                          (TypeExpr
+                                           (PrimaryTypeExpr
+                                            (LabeledTypeExpr(BlockLabel(Identifier),
+                                                             Block(Statement(Break,
+                                                                             BreakLabel(Identifier),
+                                                                             Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(PrimaryTypeExpr(Identifier),
+                                                                                                                       FnCallArgs
+                                                                                                                       (Expr
+                                                                                                                        (PrimaryExpr
+                                                                                                                         (CurlySuffixExpr
+                                                                                                                          (TypeExpr
+                                                                                                                           (PrimaryTypeExpr(Integer)))))))))))))))))))))),
+        LineComment)))
