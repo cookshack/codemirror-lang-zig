@@ -1,0 +1,7 @@
+# Test
+
+test "check" {
+}
+
+==>
+Program(TestDecl(Test,TestName,Block))
