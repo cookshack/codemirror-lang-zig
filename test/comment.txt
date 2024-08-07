@@ -13,3 +13,11 @@ line 2
 
 ==>
 Program(BlockComment())
+
+# Container comment
+
+//! whut
+//! line two //! yeah
+
+==>
+Program(ContainerDocComment)

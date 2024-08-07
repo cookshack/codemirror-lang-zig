@@ -10,11 +10,11 @@
   else @right
 }
 
-@top Program { topLevelItem* }
-
-topLevelItem { Decl }
+@top Program { ContainerDocComment? Decl* }
 
 //// Top level.
+
+ContainerDocComment { containerComment+ }
 
 Decl { ( FnProto (";" | Block) | VarDecl ) }
 
@@ -226,5 +226,7 @@ StringLiteral { stringLiteralSingle /* | multiStringLiteral */ }
 
   blockCommentAfterStar { "/" | "*" blockCommentAfterStar | ![/*] blockCommentRest }
 
-  @precedence { LineComment, BlockComment }
+  containerComment { "//!" ![\n]* $[ \n]* }
+
+  @precedence { containerComment, LineComment, BlockComment }
 }
