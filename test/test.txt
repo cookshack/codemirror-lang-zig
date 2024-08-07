@@ -5,3 +5,15 @@ test "check" {
 
 ==>
 Program(TestDecl(Test,TestName,Block))
+
+# Test with try
+
+test "check" {
+  try check();
+}
+
+==>
+Program(TestDecl(Test,
+                 TestName,
+                 Block(Statement(PrefixExpr(PrefixOp(Try),
+                                            PrimaryExpr(CurlySuffixExpr(TypeExpr(PrimaryTypeExpr(Identifier),FnCallArgs))))))))

@@ -7,6 +7,8 @@
   add @left
   multiply @left
 
+  prefix
+
   else @right
 }
 
@@ -67,9 +69,9 @@ assignExprExclIf { exprExclIf AssignOp Expr }
 
 AssignExpr { Expr AssignOp Expr }
 
-exprExclIf { binaryExprExclIf | primaryExprExclIf }
+exprExclIf { binaryExprExclIf | PrefixExpr | primaryExprExclIf }
 
-Expr { BinaryExpr | PrimaryExpr }
+Expr { BinaryExpr | PrefixExpr | PrimaryExpr }
 
 binaryExprExclIf {
   exprExclIf !or Or Expr
@@ -90,6 +92,8 @@ BinaryExpr {
   | Expr !add AdditionOp Expr
   | Expr !multiply MultiplyOp Expr
 }
+
+PrefixExpr { !prefix PrefixOp+ PrimaryExpr }
 
 PrimaryExpr {
   IfExpr
@@ -170,7 +174,7 @@ AdditionOp { "+" | "-" | "++" }
 
 MultiplyOp { "||" } // | "*" } // | "/" | "%" | "**" | "*%" | "*|" }
 
-PrefixOp { "!" | "-" | "~" | "-%" | "&" | "try" | "await" }
+PrefixOp { "!" | "-" | "~" | "-%" | "&" | Try | Await }
 
 FnCallArgs { "(" (Expr ",")* Expr? ")" }
 
@@ -190,6 +194,7 @@ StringLiteral { stringLiteralSingle /* | multiStringLiteral */ }
   }
 
   And { "and" }
+  Await { "await" }
   anytype { "anytype" }
   Break { "break" }
   Catch { "catch" }
@@ -204,6 +209,7 @@ StringLiteral { stringLiteralSingle /* | multiStringLiteral */ }
   Pub { "pub" }
   Return { "return" }
   Test { "test" }
+  Try { "try" }
   Var { "var" }
   While { "while" }
 
@@ -216,7 +222,7 @@ StringLiteral { stringLiteralSingle /* | multiStringLiteral */ }
 
   builtinIdentifier { "@" $[A-Za-z_] $[A-Za-z0-9_]* }
 
-  @precedence { And anytype Break Catch Const Continue Else fn For If Integer Or Orelse Pub Return Test Var While
+  @precedence { And Await anytype Break Catch Const Continue Else fn For If Integer Or Orelse Pub Return Test Try Var While
                 identifier }
 
   stringLiteralSingle {
