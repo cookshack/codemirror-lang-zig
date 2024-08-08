@@ -12,11 +12,14 @@ data = {} // commentTokens: { line: "//" },
 
 parser = Grammar.parser.configure({ props: props })
 
+/// A language provider for Zig, including highlighting and indentation
+/// information.
 export
 const lr = LRLanguage.define({ name: 'zig',
                                parser: parser,
                                languageData: data })
 
+/// Language support for Zig.
 export
 function language
 () {

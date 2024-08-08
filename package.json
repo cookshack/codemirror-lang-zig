@@ -5,6 +5,7 @@
   "homepage": "https://git.sr.ht/~mattmundell/codemirror-lang-zig-log",
   "scripts": {
     "test": "mocha test/test.js",
+    "test-file": "node test/test-file.js",
     "prepare": "rollup -c"
   },
   "repository": {
