@@ -1,0 +1,11 @@
+# access
+
+fn main () noreturn {
+  return a[0];
+}
+
+==>
+Program(Decl(FnProto(Identifier,ParamDeclList,TypeExpr(PrimaryTypeExpr(Identifier))),
+             Block(Statement(Return,
+                             Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(PrimaryTypeExpr(Identifier),
+                                                                       SuffixOp(ArrayAccess(Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(PrimaryTypeExpr(Integer)))))))))))))))
