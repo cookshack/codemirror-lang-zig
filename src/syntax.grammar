@@ -1,5 +1,7 @@
 @precedence {
+  curlyRight @right
   assign @right
+  primary
   or @left
   and @left
   compare @left
@@ -7,10 +9,13 @@
   bitShift @left
   add @left
   multiply @left
-
   prefix
 
   else @right
+
+  // Prevent SR due to eg: a[0..break label:]
+  colonSlice
+  colonLabel
 }
 
 @top Program { ContainerDocComment? containerDecls }
@@ -73,9 +78,9 @@ assignExprExclIf { exprExclIf !assign AssignOp Expr }
 
 AssignExpr { Expr !assign AssignOp Expr }
 
-exprExclIf { binaryExprExclIf | PrefixExpr | primaryExprExclIf }
+exprExclIf { binaryExprExclIf | PrefixExpr | !primary primaryExprExclIf }
 
-Expr { BinaryExpr | PrefixExpr | PrimaryExpr }
+Expr { BinaryExpr | PrefixExpr | !primary PrimaryExpr }
 
 binaryExprExclIf {
   exprExclIf !or Or Expr
@@ -97,12 +102,9 @@ BinaryExpr {
   | Expr !multiply MultiplyOp Expr
 }
 
-PrefixExpr { !prefix PrefixOp+ PrimaryExpr }
+PrefixExpr { !prefix PrefixOp+ !primary PrimaryExpr }
 
-PrimaryExpr {
-  IfExpr
-  | primaryExprExclIf
-}
+PrimaryExpr { IfExpr | !primary primaryExprExclIf }
 
 primaryExprExclIf {
   Break BreakLabel? Expr?
@@ -112,7 +114,7 @@ primaryExprExclIf {
   | CurlySuffixExpr
 }
 
-CurlySuffixExpr { TypeExpr }
+CurlySuffixExpr { !curlyRight TypeExpr }
 
 IfExpr { IfPrefix Expr (!else Else Payload? Expr)? }
 
@@ -136,9 +138,9 @@ LabeledTypeExpr { BlockLabel Block /*| BlockLabel? LoopTypeExpr*/ }
 
 //// Helper grammar.
 
-BreakLabel { ":" Identifier }
+BreakLabel { !colonLabel ":" Identifier }
 
-BlockLabel { /*left*/ Identifier ":" }
+BlockLabel { /*left*/ Identifier !colonLabel ":" }
 
 WhileContinueExpr { ":" "(" (AssignExpr | Expr) ")" }
 
@@ -193,7 +195,7 @@ MultiplyOp { "||" } // | "*" } // | "/" | "%" | "**" | "*%" | "*|" }
 PrefixOp { "!" | "-" | "~" | "-%" | "&" | Try | Await }
 
 ArrayAccess { "[" Expr "]" }
-Slice { "[" Expr ".." (Expr /*(":" Expr)?*/)? "]" }
+Slice { "[" Expr ".." (Expr? (!colonSlice ":" Expr)?)? "]" }
 Deref { ".*" }
 Unwrap { ".?" }
 FieldAccess { "." Identifier }

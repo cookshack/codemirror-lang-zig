@@ -1,4 +1,4 @@
-# slice
+# slice open end
 
 fn main () noreturn {
   return a[0..];
@@ -9,3 +9,30 @@ Program(Decl(FnProto(Identifier,ParamDeclList,TypeExpr(PrimaryTypeExpr(Identifie
              Block(Statement(Return,
                              Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(PrimaryTypeExpr(Identifier),
                                                                        SuffixOp(Slice(Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(PrimaryTypeExpr(Integer)))))))))))))))
+
+# slice end
+
+fn main () noreturn {
+  return a[0..3];
+}
+
+==>
+Program(Decl(FnProto(Identifier,ParamDeclList,TypeExpr(PrimaryTypeExpr(Identifier))),
+             Block(Statement(Return,
+                             Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(PrimaryTypeExpr(Identifier),
+                                                                       SuffixOp(Slice(Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(PrimaryTypeExpr(Integer))))),
+                                                                                      Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(PrimaryTypeExpr(Integer)))))))))))))))
+
+# slice sentinal
+
+fn fun () noreturn {
+  return a[0..3:0];
+}
+
+==>
+Program(Decl(FnProto(Identifier,ParamDeclList,TypeExpr(PrimaryTypeExpr(Identifier))),
+             Block(Statement(Return,
+                             Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(PrimaryTypeExpr(Identifier),
+                                                                       SuffixOp(Slice(Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(PrimaryTypeExpr(Integer))))),
+                                                                                      Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(PrimaryTypeExpr(Integer))))),
+                                                                                      Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(PrimaryTypeExpr(Integer)))))))))))))))
