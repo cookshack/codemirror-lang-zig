@@ -210,13 +210,13 @@ Identifier { identifier }
 
 BuiltinIdentifier { builtinIdentifier }
 
-StringLiteral { stringLiteralSingle /* | multiStringLiteral */ }
+StringLiteral { stringLiteralSingle | multiStringLiteral }
 
 @skip { whitespace | LineComment }
 
 @tokens {
   whitespace {
-    ($[ \t\r\n] | "\\" "\r"? "\n")+
+    ($[ \t\r\n] | "\r"? "\n")+
   }
 
   And { "and" }
@@ -252,6 +252,8 @@ StringLiteral { stringLiteralSingle /* | multiStringLiteral */ }
   @precedence { And Await anytype Break Catch Comptime Const Continue Else fn For If Integer Or Orelse
                 Pub Return Test Try Var While
                 identifier }
+
+  multiStringLiteral { ("\\\\" ![\n]* $[ \n]*)+ }
 
   stringLiteralSingle {
     "\""

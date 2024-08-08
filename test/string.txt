@@ -33,3 +33,16 @@ const invalid_utf8 = "\xff\xfe";
 Program(Decl(VarDecl(Const,
                      Name,
                      Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(PrimaryTypeExpr(StringLiteral))))))))
+
+# multiline
+
+const utf = \\ this looks
+            \\ so much
+            \\ like a comment.
+; // and this is weird
+
+==>
+Program(Decl(VarDecl(Const,
+                     Name,
+                     Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(PrimaryTypeExpr(StringLiteral))))))),
+        LineComment)
