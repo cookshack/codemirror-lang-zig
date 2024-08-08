@@ -1,0 +1,16 @@
+# block expr
+
+fn main () noreturn {
+  while (1)
+    b: {
+      break :b;
+    }
+}
+
+==>
+Program(Decl(FnProto(Identifier,ParamDeclList,TypeExpr(PrimaryTypeExpr(Identifier))),
+            Block(Statement(WhileStatement(WhilePrefix(While,
+                                                       Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(PrimaryTypeExpr(Integer)))))),
+                                           BlockLabel(Identifier),
+                                           Block(Statement(Break,
+                                                           BreakLabel(Identifier))))))))
