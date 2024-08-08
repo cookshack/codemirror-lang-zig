@@ -1,6 +1,5 @@
 import * as Grammar from './syntax.grammar'
 import { LRLanguage, LanguageSupport, indentNodeProp, foldNodeProp, foldInside } from '@codemirror/language'
-import { styleTags, tags } from '@lezer/highlight'
 
 let props, data, parser
 

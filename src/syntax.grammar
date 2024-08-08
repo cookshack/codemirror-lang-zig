@@ -269,3 +269,5 @@ StringLiteral { stringLiteralSingle /* | multiStringLiteral */ }
 
   @precedence { containerComment, DocComment, LineComment }
 }
+
+@external propSource highlighting from "./highlight"
