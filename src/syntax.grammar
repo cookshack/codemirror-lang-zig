@@ -192,7 +192,7 @@ MultiplyOp { "||" } // | "*" } // | "/" | "%" | "**" | "*%" | "*|" }
 PrefixOp { "!" | "-" | "~" | "-%" | "&" | Try | Await }
 
 ArrayAccess { "[" Expr "]" }
-Slice { "[" Expr ".." (Expr (":" Expr)?)? "]" }
+//Slice { "[" Expr ".." (Expr (":" Expr)?)? "]" }
 Deref { ".*" }
 Unwrap { ".?" }
 FieldAccess { "." Identifier }
