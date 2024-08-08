@@ -139,6 +139,8 @@ BreakLabel { ":" Identifier }
 
 BlockLabel { /*left*/ Identifier ":" }
 
+WhileContinueExpr { ":" "(" /*AssignExpr | */Expr ")" }
+
 //// Fn specific.
 
 ParamDeclList { (ParamDecl ",")* ParamDecl? }
@@ -153,7 +155,7 @@ ParamType { anytype | TypeExpr }
 
 IfPrefix { If "(" Expr ")" PtrPayload? }
 
-WhilePrefix { While "(" Expr ")" PtrPayload? /* while_continue_expr */}
+WhilePrefix { While "(" Expr ")" PtrPayload? WhileContinueExpr? }
 
 ForPrefix { For "(" ForArgList ")" PtrListPayload }
 
