@@ -1,28 +1,24 @@
-import * as Grammar from "./syntax.grammar"
-import {LRLanguage, LanguageSupport, indentNodeProp, foldNodeProp, foldInside, delimitedIndent} from "@codemirror/language"
-import {styleTags, Tag, tags} from "@lezer/highlight"
+import * as Grammar from './syntax.grammar'
+import { LRLanguage, LanguageSupport, indentNodeProp, foldNodeProp, foldInside } from '@codemirror/language'
+import { styleTags, tags } from '@lezer/highlight'
 
-let customTags, parser, props
+let props, data, parser
 
-customTags = { gitHash: Tag.define() }
-
-props = [ indentNodeProp.add({ Rule: context => context.column(context.node.from) + context.unit }),
+props = [ //indentNodeProp.add({ Rule: context => context.column(context.node.from) + context.unit }),
           foldNodeProp.add({ Rule: foldInside }),
-          styleTags({ Commit: tags.meta,
-                      Hash: [ tags.meta, customTags.gitHash ],
-                      Header: tags.meta }) ]
+        ]
+
+data = {} // commentTokens: { line: "//" },
 
 parser = Grammar.parser.configure({ props: props })
 
 export
 const lr = LRLanguage.define({ name: 'zig',
                                parser: parser,
-                               languageData: {} })
+                               languageData: data })
 
 export
 function language
 () {
   return new LanguageSupport(lr)
 }
-
-export { customTags }
