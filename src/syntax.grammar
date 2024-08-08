@@ -1,4 +1,5 @@
 @precedence {
+  assign @right
   or @left
   and @left
   compare @left
@@ -68,9 +69,9 @@ blockExpr { /*BlockLabel?*/ Block }
 
 //// Expression level.
 
-assignExprExclIf { exprExclIf AssignOp Expr }
+assignExprExclIf { exprExclIf !assign AssignOp Expr }
 
-AssignExpr { Expr AssignOp Expr }
+AssignExpr { Expr !assign AssignOp Expr }
 
 exprExclIf { binaryExprExclIf | PrefixExpr | primaryExprExclIf }
 
@@ -139,7 +140,7 @@ BreakLabel { ":" Identifier }
 
 BlockLabel { /*left*/ Identifier ":" }
 
-WhileContinueExpr { ":" "(" /*AssignExpr | */Expr ")" }
+WhileContinueExpr { ":" "(" (AssignExpr | Expr) ")" }
 
 //// Fn specific.
 

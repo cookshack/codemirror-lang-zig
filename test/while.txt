@@ -56,3 +56,22 @@ Program(Decl(FnProto(Identifier,ParamDeclList,TypeExpr(PrimaryTypeExpr(Identifie
                                                                                                                     FnCallArgs)))))),
                                             Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(PrimaryTypeExpr(Identifier),
                                                                                       FnCallArgs)))))))))
+
+# Continue assign
+
+fn main() noreturn {
+  while (a) : (a = a - 1)
+    fun();
+}
+
+==>
+Program(Decl(FnProto(Identifier,ParamDeclList,TypeExpr(PrimaryTypeExpr(Identifier))),
+             Block(Statement(WhileStatement(WhilePrefix(While,
+                                                        Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(PrimaryTypeExpr(Identifier))))),
+                                                        WhileContinueExpr(AssignExpr(Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(PrimaryTypeExpr(Identifier))))),
+                                                                                     AssignOp,
+                                                                                     Expr(BinaryExpr(Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(PrimaryTypeExpr(Identifier))))),
+                                                                                                     AdditionOp,
+                                                                                                     Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(PrimaryTypeExpr(Integer)))))))))),
+                                            Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(PrimaryTypeExpr(Identifier),
+                                                                                      FnCallArgs)))))))))
