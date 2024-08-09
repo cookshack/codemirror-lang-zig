@@ -57,7 +57,7 @@ IfStatement {
              | (AssignExpr | Expr) (";" | !else Else Payload? Statement) )
 }
 
-labeledStatement { Block | loopStatement }
+labeledStatement { !curlyRight (Block | loopStatement) }
 
 loopStatement { ForStatement | WhileStatement }
 
@@ -105,13 +105,14 @@ BinaryExpr {
 
 PrefixExpr { !prefix PrefixOp+ !primary PrimaryExpr }
 
-PrimaryExpr { IfExpr | !primary primaryExprExclIf }
+PrimaryExpr { IfExpr | BlockLabel? LoopExpr | !primary primaryExprExclIf }
 
 primaryExprExclIf {
   Break BreakLabel? Expr?
   | Comptime Expr
   | Continue BreakLabel?
   | Return Expr?
+  | Block
   | curlySuffixExpr
 }
 
@@ -120,6 +121,12 @@ curlySuffixExpr { !curlyRight TypeExpr }
 IfExpr { IfPrefix Expr (!else Else Payload? Expr)? }
 
 Block { "{" Statement* "}" }
+
+LoopExpr { /*Inline?*/ ( ForExpr | WhileExpr) }
+
+ForExpr { ForPrefix Expr (!else Else Expr)? }
+
+WhileExpr { WhilePrefix Expr (!else Else Payload? Expr)? }
 
 TypeExpr { //seq(repeat($.prefix_type_op), choice($.error_union_expr, $._suffix_expr)),
            suffixExpr }

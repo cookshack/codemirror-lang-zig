@@ -71,6 +71,7 @@ Program(Decl(FnProto(Identifier,
                                           Statement(Return,
                                                     Expr(PrimaryExpr(TypeExpr(Integer)))))))))
 
+
 # expr
 
 fn fun() i32 {
@@ -82,11 +83,15 @@ fn fun() i32 {
 }
 
 ==>
-Program(Decl(FnProto(Identifier,ParamDeclList,TypeExpr(Identifier)),
-             zig-Block(Statement(ForStatement(ForPrefix(For,
-                                                    ForArgList(ForItem(Expr(PrimaryExpr(TypeExpr(Identifier)))),
-                                                               ForItem(Expr(PrimaryExpr(TypeExpr(Integer))))),
-                                                    PtrListPayload(Identifier)),
-                                          AssignExpr(Expr(PrimaryExpr(TypeExpr(Identifier))),
-                                          ssignOp,
-                                                     Expr(PrimaryExpr(TypeExpr(Identifier)))))))))
+Program(Decl(FnProto(Identifier,
+                     ParamDeclList,
+                     TypeExpr(Identifier)),
+             Block(Statement(Return,
+                             Expr(PrimaryExpr(LoopExpr(ForExpr(ForPrefix(For,
+                                                                         ForArgList(ForItem(Expr(PrimaryExpr(TypeExpr(Identifier))))),
+                                                                         PtrListPayload(Identifier)),
+                                                               Expr(PrimaryExpr(Block(Statement(TypeExpr(Identifier),
+                                                                                                AssignOp,
+                                                                                                Expr(PrimaryExpr(TypeExpr(Identifier))))))),
+                                                               Else,
+                                                               Expr(PrimaryExpr(TypeExpr(Identifier)))))))))))
