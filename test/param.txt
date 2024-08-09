@@ -9,5 +9,5 @@ Program(Decl(FnProto(Identifier,
                      ParamDeclList(ParamDecl(Identifier,
                                    ParamType(Anytype))),
                      TypeExpr(Identifier)),
-             Block(Statement(CurlySuffixExpr(TypeExpr(Identifier,
-                                                      FnCallArgs(Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(Identifier)))))))))))
+             Block(Statement(TypeExpr(Identifier,
+                                      FnCallArgs(Expr(PrimaryExpr(TypeExpr(Identifier)))))))))

@@ -10,10 +10,10 @@ Program
 (Decl
  (FnProto(Identifier,ParamDeclList,TypeExpr(Identifier)),
   Block(Statement(ForStatement(ForPrefix(For,
-                                         ForArgList(ForItem(Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(Identifier)))))),
+                                         ForArgList(ForItem(Expr(PrimaryExpr(TypeExpr(Identifier))))),
                                          PtrListPayload(Identifier)),
-                               Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(Identifier,
-                                                                         FnCallArgs(Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(Identifier))))))))))))))
+                               Expr(PrimaryExpr(TypeExpr(Identifier,
+                                                         FnCallArgs(Expr(PrimaryExpr(TypeExpr(Identifier))))))))))))
 
 # For block
 
@@ -26,11 +26,11 @@ fn one() u8 {
 ==>
 Program(Decl(FnProto(Identifier,ParamDeclList,TypeExpr(Identifier)),
              Block(Statement(ForStatement(ForPrefix(For,
-                                                    ForArgList(ForItem(Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(Identifier))))),
-                                                               ForItem(Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(Integer)))),
-                                                                       Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(Integer)))))),
+                                                    ForArgList(ForItem(Expr(PrimaryExpr(TypeExpr(Identifier)))),
+                                                               ForItem(Expr(PrimaryExpr(TypeExpr(Integer))),
+                                                                       Expr(PrimaryExpr(TypeExpr(Integer))))),
                                                     PtrListPayload(Identifier, Identifier)),
-                                          Block(Statement(Return, Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(Integer)))))))))))
+                                          Block(Statement(Return, Expr(PrimaryExpr(TypeExpr(Integer))))))))))
 
 # For with assign
 
@@ -42,9 +42,9 @@ fn main() noreturn {
 ==>
 Program(Decl(FnProto(Identifier,ParamDeclList,TypeExpr(Identifier)),
              Block(Statement(ForStatement(ForPrefix(For,
-                                                    ForArgList(ForItem(Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(Identifier))))),
-                                                               ForItem(Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(Integer)))))),
+                                                    ForArgList(ForItem(Expr(PrimaryExpr(TypeExpr(Identifier)))),
+                                                               ForItem(Expr(PrimaryExpr(TypeExpr(Integer))))),
                                                     PtrListPayload(Identifier)),
-                                          AssignExpr(Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(Identifier)))),
+                                          AssignExpr(Expr(PrimaryExpr(TypeExpr(Identifier))),
                                                      AssignOp,
-                                                     Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(Identifier))))))))))
+                                                     Expr(PrimaryExpr(TypeExpr(Identifier)))))))))

@@ -35,4 +35,4 @@ const a : u32 = 0;
 Program(Decl(VarDecl(Const,
                      Name,
                      TypeExpr(Identifier),
-                     Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(Integer)))))))
+                     Expr(PrimaryExpr(TypeExpr(Integer))))))

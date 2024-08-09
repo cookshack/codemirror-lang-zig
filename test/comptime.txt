@@ -6,9 +6,9 @@ comptime { a = 1; }
 ==>
 Program(Decl(VarDecl(Var,Name,TypeExpr(Identifier))),
         ComptimeDecl(Comptime,
-                     Block(Statement(CurlySuffixExpr(TypeExpr(Identifier)),
+                     Block(Statement(TypeExpr(Identifier),
                                      AssignOp,
-                                     Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(Integer))))))))
+                                     Expr(PrimaryExpr(TypeExpr(Integer)))))))
 
 # Valid
 
@@ -30,16 +30,14 @@ Program
                           (PrimaryExpr (Comptime,
                                         Expr
                                         (PrimaryExpr
-                                         (CurlySuffixExpr
-                                          (TypeExpr
-                                           (LabeledTypeExpr(BlockLabel(Identifier),
-                                                            Block(Statement(Break,
-                                                                            BreakLabel(Identifier),
-                                                                            Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(Identifier,
-                                                                                                                      FnCallArgs
-                                                                                                                      (Expr
-                                                                                                                       (PrimaryExpr
-                                                                                                                        (CurlySuffixExpr
-                                                                                                                         (TypeExpr
-                                                                                                                          (Integer)))))))))))))))))))),
+                                         (TypeExpr
+                                          (LabeledTypeExpr(BlockLabel(Identifier),
+                                                           Block(Statement(Break,
+                                                                           BreakLabel(Identifier),
+                                                                           Expr(PrimaryExpr(TypeExpr(Identifier,
+                                                                                                     FnCallArgs
+                                                                                                     (Expr
+                                                                                                      (PrimaryExpr
+                                                                                                       (TypeExpr
+                                                                                                        (Integer))))))))))))))))),
         LineComment)))

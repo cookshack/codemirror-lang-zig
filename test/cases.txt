@@ -21,9 +21,9 @@ fn one() noreturn {
 
 ==>
 Program(Decl(FnProto(Identifier,ParamDeclList,TypeExpr(Identifier)),
-             Block(Statement(CurlySuffixExpr(TypeExpr(Identifier)),
+             Block(Statement(TypeExpr(Identifier),
                              AssignOp,
-                             Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(Integer))))))))
+                             Expr(PrimaryExpr(TypeExpr(Integer)))))))
 
 # import
 
@@ -35,5 +35,5 @@ Program
  (VarDecl
   (Const,
    Name,
-   Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(BuiltinIdentifier,
-                                             FnCallArgs(Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(StringLiteral))))))))))))
+   Expr(PrimaryExpr(TypeExpr(BuiltinIdentifier,
+                             FnCallArgs(Expr(PrimaryExpr(TypeExpr(StringLiteral))))))))))

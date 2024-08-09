@@ -5,7 +5,7 @@ const utf = "abc";
 ==>
 Program(Decl(VarDecl(Const,
                      Name,
-                     Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(StringLiteral)))))))
+                     Expr(PrimaryExpr(TypeExpr(StringLiteral))))))
 
 # escape
 
@@ -14,7 +14,7 @@ const utf = "\tabc\n";
 ==>
 Program(Decl(VarDecl(Const,
                      Name,
-                     Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(StringLiteral)))))))
+                     Expr(PrimaryExpr(TypeExpr(StringLiteral))))))
 
 # utf
 
@@ -23,7 +23,7 @@ const utf = "\u{1EC7}";
 ==>
 Program(Decl(VarDecl(Const,
                      Name,
-                     Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(StringLiteral)))))))
+                     Expr(PrimaryExpr(TypeExpr(StringLiteral))))))
 
 # hex
 
@@ -32,7 +32,7 @@ const invalid_utf8 = "\xff\xfe";
 ==>
 Program(Decl(VarDecl(Const,
                      Name,
-                     Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(StringLiteral)))))))
+                     Expr(PrimaryExpr(TypeExpr(StringLiteral))))))
 
 # multiline
 
@@ -44,5 +44,5 @@ const utf = \\ this looks
 ==>
 Program(Decl(VarDecl(Const,
                      Name,
-                     Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(StringLiteral)))))),
+                     Expr(PrimaryExpr(TypeExpr(StringLiteral))))),
         LineComment)

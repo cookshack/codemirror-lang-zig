@@ -111,10 +111,10 @@ primaryExprExclIf {
   | Comptime Expr
   | Continue BreakLabel?
   | Return Expr?
-  | CurlySuffixExpr
+  | curlySuffixExpr
 }
 
-CurlySuffixExpr { !curlyRight TypeExpr }
+curlySuffixExpr { !curlyRight TypeExpr }
 
 IfExpr { IfPrefix Expr (!else Else Payload? Expr)? }
 
