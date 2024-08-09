@@ -139,6 +139,7 @@ suffixExpr { ( //seq("async", $._primary_type_expr, repeat($._suffix_op), $.fn_c
 primaryTypeExpr {
   BuiltinIdentifier FnCallArgs
   | CharLiteral
+  | "." Identifier
   | LabeledTypeExpr
   | Identifier
   | Integer
