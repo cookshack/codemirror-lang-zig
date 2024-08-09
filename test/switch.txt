@@ -1,7 +1,7 @@
-# switch
+# empty
 
 fn fun() noreturn {
-  switch (a)
+  switch (a) { }
 }
 
 ==>
@@ -10,3 +10,39 @@ Program(Decl(FnProto(Identifier,
                      TypeExpr(Identifier)),
              Block(Statement(SwitchExpr(Switch,
                                         Expr(PrimaryExpr(TypeExpr(Identifier))))))))
+
+# prong
+
+fn fun() noreturn {
+  switch (a) {
+  1 => one()
+  }
+}
+
+==>
+Program(Decl(FnProto(Identifier,
+                     ParamDeclList,
+                     TypeExpr(Identifier)),
+             Block(Statement(SwitchExpr(Switch,
+                                        Expr(PrimaryExpr(TypeExpr(Identifier)))
+                                        SwitchProng(SwitchCase(SwitchItem(Expr(PrimaryExpr(TypeExpr(Integer))))),
+                                                    Expr(PrimaryExpr(TypeExpr(Identifier,
+                                                                              FnCallArgs)))))))))
+
+# prong
+
+fn fun() noreturn {
+  switch (a) {
+  else => one()
+  }
+}
+
+==>
+Program(Decl(FnProto(Identifier,
+                     ParamDeclList,
+                     TypeExpr(Identifier)),
+             Block(Statement(SwitchExpr(Switch,
+                                        Expr(PrimaryExpr(TypeExpr(Identifier)))
+                                        SwitchProng(SwitchCase(Else),
+                                                    Expr(PrimaryExpr(TypeExpr(Identifier,
+                                                                              FnCallArgs)))))))))

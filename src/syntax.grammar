@@ -151,7 +151,7 @@ ForTypeExpr { ForPrefix TypeExpr (!else Else TypeExpr)? }
 
 WhileTypeExpr { WhilePrefix TypeExpr (!else Else Payload? TypeExpr)? }
 
-SwitchExpr { Switch "(" Expr ")" /* "{" switch_prong_list($), "}" */ }
+SwitchExpr { Switch "(" Expr ")" "{" (SwitchProng ",")* SwitchProng? "}" }
 
 //// Helper grammar.
 
@@ -185,9 +185,19 @@ Payload { "|" Identifier "|" }
 
 PtrPayload { "|" Star? Identifier "|" }
 
+PtrIndexPayload { "|" "*"? Identifier ("," Identifier) "|" }
+
 PtrListPayload { "|" "*"? Identifier ("," "*"? Identifier)* ","? "|" }
 
 Star { "*" }
+
+//// Switch specific.
+
+SwitchProng { /*Inline?*/ SwitchCase "=>" PtrIndexPayload? (AssignExpr | Expr) }
+
+SwitchCase { SwitchItem ("," SwitchItem)* ","? | Else }
+
+SwitchItem { Expr ("..." Expr)? }
 
 //// For specific.
 
