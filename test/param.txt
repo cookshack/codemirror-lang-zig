@@ -1,0 +1,13 @@
+# anytype
+
+fn fun(a : anytype) noreturn {
+  print(a);
+}
+
+==>
+Program(Decl(FnProto(Identifier,
+                     ParamDeclList(ParamDecl(Identifier,
+                                   ParamType(Anytype))),
+                     TypeExpr(PrimaryTypeExpr(Identifier))),
+             Block(Statement(CurlySuffixExpr(TypeExpr(PrimaryTypeExpr(Identifier),
+                                                      FnCallArgs(Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(PrimaryTypeExpr(Identifier))))))))))))

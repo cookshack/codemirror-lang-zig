@@ -152,7 +152,7 @@ ParamDecl { //seq(optional($.doc_comment), optional(choice("noalias", "comptime"
             (Identifier ":") ParamType
             | "..." }
 
-ParamType { anytype | TypeExpr }
+ParamType { Anytype | TypeExpr }
 
 //// Control flow prefixes
 
@@ -221,7 +221,7 @@ StringLiteral { stringLiteralSingle | multiStringLiteral }
 
   And { "and" }
   Await { "await" }
-  anytype { "anytype" }
+  Anytype { "anytype" }
   Break { "break" }
   Catch { "catch" }
   Comptime { "comptime" }
@@ -249,7 +249,7 @@ StringLiteral { stringLiteralSingle | multiStringLiteral }
 
   builtinIdentifier { "@" $[A-Za-z_] $[A-Za-z0-9_]* }
 
-  @precedence { And Await anytype Break Catch Comptime Const Continue Else fn For If Integer Or Orelse
+  @precedence { And Await Anytype Break Catch Comptime Const Continue Else fn For If Integer Or Orelse
                 Pub Return Test Try Var While
                 identifier }
 
