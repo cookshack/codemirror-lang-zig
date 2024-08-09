@@ -49,6 +49,7 @@ Statement {
   (Comptime? VarDecl)
   | IfStatement
   | !curlyRight labeledStatement
+  | SwitchExpr
   | (assignExprExclIf | exprExclIf) ";"
 }
 
@@ -150,6 +151,8 @@ ForTypeExpr { ForPrefix TypeExpr (!else Else TypeExpr)? }
 
 WhileTypeExpr { WhilePrefix TypeExpr (!else Else Payload? TypeExpr)? }
 
+SwitchExpr { Switch "(" Expr ")" /* "{" switch_prong_list($), "}" */ }
+
 //// Helper grammar.
 
 BreakLabel { !colonLabel ":" Identifier }
@@ -249,6 +252,7 @@ StringLiteral { stringLiteralSingle | multiStringLiteral }
   Orelse { "orelse" }
   Pub { "pub" }
   Return { "return" }
+  Switch { "switch" }
   Test { "test" }
   Try { "try" }
   Var { "var" }
@@ -264,7 +268,7 @@ StringLiteral { stringLiteralSingle | multiStringLiteral }
   builtinIdentifier { "@" $[A-Za-z_] $[A-Za-z0-9_]* }
 
   @precedence { And Await Anytype Break Catch Comptime Const Continue Else fn For If Integer Or Orelse
-                Pub Return Test Try Var While
+                Pub Return Switch Test Try Var While
                 identifier }
 
   multiStringLiteral { ("\\\\" ![\n]* $[ \n]*)+ }

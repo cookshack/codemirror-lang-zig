@@ -1,0 +1,12 @@
+# switch
+
+fn fun() noreturn {
+  switch (a)
+}
+
+==>
+Program(Decl(FnProto(Identifier,
+                     ParamDeclList,
+                     TypeExpr(Identifier)),
+             Block(Statement(SwitchExpr(Switch,
+                                        Expr(PrimaryExpr(TypeExpr(Identifier))))))))
