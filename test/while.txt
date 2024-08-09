@@ -6,11 +6,11 @@ fn one() u8 {
 }
 
 ==>
-Program(Decl(FnProto(Identifier,ParamDeclList,TypeExpr(PrimaryTypeExpr(Identifier))),
-             Block(Statement(WhileStatement(WhilePrefix(While, Expr(BinaryExpr(Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(PrimaryTypeExpr(Identifier))))),
+Program(Decl(FnProto(Identifier,ParamDeclList,TypeExpr(Identifier)),
+             Block(Statement(WhileStatement(WhilePrefix(While, Expr(BinaryExpr(Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(Identifier)))),
                                                                                CompareOp,
-                                                                               Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(PrimaryTypeExpr(Integer)))))))),
-                                            Expr(PrimaryExpr(Return, Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(PrimaryTypeExpr(Integer))))))))))))
+                                                                               Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(Integer))))))),
+                                            Expr(PrimaryExpr(Return, Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(Integer)))))))))))
 
 # While block
 
@@ -21,11 +21,11 @@ fn one() u8 {
 }
 
 ==>
-Program(Decl(FnProto(Identifier,ParamDeclList,TypeExpr(PrimaryTypeExpr(Identifier))),
-             Block(Statement(WhileStatement(WhilePrefix(While, Expr(BinaryExpr(Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(PrimaryTypeExpr(Identifier))))),
+Program(Decl(FnProto(Identifier,ParamDeclList,TypeExpr(Identifier)),
+             Block(Statement(WhileStatement(WhilePrefix(While, Expr(BinaryExpr(Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(Identifier)))),
                                                                                CompareOp,
-                                                                               Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(PrimaryTypeExpr(Integer)))))))),
-                                            Block(Statement(Return, Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(PrimaryTypeExpr(Integer))))))))))))
+                                                                               Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(Integer))))))),
+                                            Block(Statement(Return, Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(Integer)))))))))))
 
 # While with assign
 
@@ -35,11 +35,11 @@ fn main() noreturn {
 }
 
 ==>
-Program(Decl(FnProto(Identifier,ParamDeclList,TypeExpr(PrimaryTypeExpr(Identifier))),
-             Block(Statement(WhileStatement(WhilePrefix(While, Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(PrimaryTypeExpr(Identifier)))))),
-                                                        AssignExpr(Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(PrimaryTypeExpr(Identifier))))),
+Program(Decl(FnProto(Identifier,ParamDeclList,TypeExpr(Identifier)),
+             Block(Statement(WhileStatement(WhilePrefix(While, Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(Identifier))))),
+                                                        AssignExpr(Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(Identifier)))),
                                                                    AssignOp,
-                                                                   Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(PrimaryTypeExpr(Integer)))))))))))
+                                                                   Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(Integer))))))))))
 
 # Continue
 
@@ -49,12 +49,12 @@ fn main() noreturn {
 }
 
 ==>
-Program(Decl(FnProto(Identifier,ParamDeclList,TypeExpr(PrimaryTypeExpr(Identifier))),
+Program(Decl(FnProto(Identifier,ParamDeclList,TypeExpr(Identifier)),
              Block(Statement(WhileStatement(WhilePrefix(While,
-                                                        Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(PrimaryTypeExpr(Identifier))))),
-                                                        WhileContinueExpr(Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(PrimaryTypeExpr(Identifier),
+                                                        Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(Identifier)))),
+                                                        WhileContinueExpr(Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(Identifier,
                                                                                                                     FnCallArgs)))))),
-                                            Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(PrimaryTypeExpr(Identifier),
+                                            Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(Identifier,
                                                                                       FnCallArgs)))))))))
 
 # Continue assign
@@ -65,13 +65,13 @@ fn main() noreturn {
 }
 
 ==>
-Program(Decl(FnProto(Identifier,ParamDeclList,TypeExpr(PrimaryTypeExpr(Identifier))),
+Program(Decl(FnProto(Identifier,ParamDeclList,TypeExpr(Identifier)),
              Block(Statement(WhileStatement(WhilePrefix(While,
-                                                        Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(PrimaryTypeExpr(Identifier))))),
-                                                        WhileContinueExpr(AssignExpr(Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(PrimaryTypeExpr(Identifier))))),
+                                                        Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(Identifier)))),
+                                                        WhileContinueExpr(AssignExpr(Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(Identifier)))),
                                                                                      AssignOp,
-                                                                                     Expr(BinaryExpr(Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(PrimaryTypeExpr(Identifier))))),
+                                                                                     Expr(BinaryExpr(Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(Identifier)))),
                                                                                                      AdditionOp,
-                                                                                                     Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(PrimaryTypeExpr(Integer)))))))))),
-                                            Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(PrimaryTypeExpr(Identifier),
+                                                                                                     Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(Integer))))))))),
+                                            Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(Identifier,
                                                                                       FnCallArgs)))))))))

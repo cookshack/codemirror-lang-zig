@@ -7,12 +7,12 @@ fn one(a : u32) u16 {
 
 ==>
 Program(Decl(FnProto(Identifier,
-                     ParamDeclList(ParamDecl(Identifier, ParamType(TypeExpr(PrimaryTypeExpr(Identifier))))),
-                     TypeExpr(PrimaryTypeExpr(Identifier))),
-             Block(Statement(IfStatement(IfPrefix(If, Expr(BinaryExpr(Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(PrimaryTypeExpr(Identifier))))),
+                     ParamDeclList(ParamDecl(Identifier, ParamType(TypeExpr(Identifier)))),
+                     TypeExpr(Identifier)),
+             Block(Statement(IfStatement(IfPrefix(If, Expr(BinaryExpr(Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(Identifier)))),
                                                                       CompareOp,
-                                                                      Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(PrimaryTypeExpr(Integer)))))))),
-                                         Expr(PrimaryExpr(Return, Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(PrimaryTypeExpr(Integer))))))))))))
+                                                                      Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(Integer))))))),
+                                         Expr(PrimaryExpr(Return, Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(Integer)))))))))))
 
 # If expr
 
@@ -21,13 +21,13 @@ fn main() u8 {
 }
 
 ==>
-Program(Decl(FnProto(Identifier,ParamDeclList,TypeExpr(PrimaryTypeExpr(Identifier))),
-             Block(Statement(Return, Expr(PrimaryExpr(IfExpr(IfPrefix(If, Expr(BinaryExpr(Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(PrimaryTypeExpr(Integer))))),
+Program(Decl(FnProto(Identifier,ParamDeclList,TypeExpr(Identifier)),
+             Block(Statement(Return, Expr(PrimaryExpr(IfExpr(IfPrefix(If, Expr(BinaryExpr(Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(Integer)))),
                                                                                           CompareOp,
-                                                                                          Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(PrimaryTypeExpr(Integer)))))))),
-                                                             Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(PrimaryTypeExpr(Integer))))),
+                                                                                          Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(Integer))))))),
+                                                             Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(Integer)))),
                                                              Else,
-                                                             Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(PrimaryTypeExpr(Integer))))))))))))
+                                                             Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(Integer)))))))))))
 
 # If stmnt with assign in then expr
 
@@ -37,8 +37,8 @@ fn main() noreturn {
 }
 
 ==>
-Program(Decl(FnProto(Identifier,ParamDeclList,TypeExpr(PrimaryTypeExpr(Identifier))),
-             Block(Statement(IfStatement(IfPrefix(If, Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(PrimaryTypeExpr(Integer)))))),
-                                         AssignExpr(Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(PrimaryTypeExpr(Identifier))))),
+Program(Decl(FnProto(Identifier,ParamDeclList,TypeExpr(Identifier)),
+             Block(Statement(IfStatement(IfPrefix(If, Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(Integer))))),
+                                         AssignExpr(Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(Identifier)))),
                                                     AssignOp,
-                                                    Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(PrimaryTypeExpr(Integer)))))))))))
+                                                    Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(Integer))))))))))

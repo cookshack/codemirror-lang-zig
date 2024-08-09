@@ -10,7 +10,7 @@ fn one() noreturn {
 }
 
 ==>
-Program(Decl(FnProto(Identifier,ParamDeclList(),TypeExpr(PrimaryTypeExpr(Identifier))),
+Program(Decl(FnProto(Identifier,ParamDeclList(),TypeExpr(Identifier)),
              Block(Statement(Return))))
 
 # Assign in block
@@ -20,10 +20,10 @@ fn one() noreturn {
 }
 
 ==>
-Program(Decl(FnProto(Identifier,ParamDeclList,TypeExpr(PrimaryTypeExpr(Identifier))),
-             Block(Statement(CurlySuffixExpr(TypeExpr(PrimaryTypeExpr(Identifier))),
+Program(Decl(FnProto(Identifier,ParamDeclList,TypeExpr(Identifier)),
+             Block(Statement(CurlySuffixExpr(TypeExpr(Identifier)),
                              AssignOp,
-                             Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(PrimaryTypeExpr(Integer)))))))))
+                             Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(Integer))))))))
 
 # import
 
@@ -35,5 +35,5 @@ Program
  (VarDecl
   (Const,
    Name,
-   Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(PrimaryTypeExpr(BuiltinIdentifier,
-                                                             FnCallArgs(Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(PrimaryTypeExpr(StringLiteral))))))))))))))
+   Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(BuiltinIdentifier,
+                                             FnCallArgs(Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(StringLiteral))))))))))))

@@ -8,6 +8,6 @@ fn fun(a : anytype) noreturn {
 Program(Decl(FnProto(Identifier,
                      ParamDeclList(ParamDecl(Identifier,
                                    ParamType(Anytype))),
-                     TypeExpr(PrimaryTypeExpr(Identifier))),
-             Block(Statement(CurlySuffixExpr(TypeExpr(PrimaryTypeExpr(Identifier),
-                                                      FnCallArgs(Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(PrimaryTypeExpr(Identifier))))))))))))
+                     TypeExpr(Identifier)),
+             Block(Statement(CurlySuffixExpr(TypeExpr(Identifier,
+                                                      FnCallArgs(Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(Identifier)))))))))))

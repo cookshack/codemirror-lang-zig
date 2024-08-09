@@ -125,9 +125,9 @@ TypeExpr { //seq(repeat($.prefix_type_op), choice($.error_union_expr, $._suffix_
 
 suffixExpr { ( //seq("async", $._primary_type_expr, repeat($._suffix_op), $.fn_call_arguments),
                //seq($._primary_type_expr, repeat(choice($._suffix_op, $.fn_call_arguments))),
-               !assign PrimaryTypeExpr (SuffixOp | FnCallArgs)* ) }
+               !assign primaryTypeExpr (SuffixOp | FnCallArgs)* ) }
 
-PrimaryTypeExpr {
+primaryTypeExpr {
   BuiltinIdentifier FnCallArgs
   | LabeledTypeExpr
   | Identifier

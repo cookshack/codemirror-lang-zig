@@ -5,10 +5,10 @@ fn main () noreturn {
 }
 
 ==>
-Program(Decl(FnProto(Identifier,ParamDeclList,TypeExpr(PrimaryTypeExpr(Identifier))),
+Program(Decl(FnProto(Identifier,ParamDeclList,TypeExpr(Identifier)),
              Block(Statement(Return,
-                             Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(PrimaryTypeExpr(Identifier),
-                                                                       SuffixOp(Slice(Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(PrimaryTypeExpr(Integer)))))))))))))))
+                             Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(Identifier,
+                                                                       SuffixOp(Slice(Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(Integer))))))))))))))
 
 # slice end
 
@@ -17,11 +17,11 @@ fn main () noreturn {
 }
 
 ==>
-Program(Decl(FnProto(Identifier,ParamDeclList,TypeExpr(PrimaryTypeExpr(Identifier))),
+Program(Decl(FnProto(Identifier,ParamDeclList,TypeExpr(Identifier)),
              Block(Statement(Return,
-                             Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(PrimaryTypeExpr(Identifier),
-                                                                       SuffixOp(Slice(Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(PrimaryTypeExpr(Integer))))),
-                                                                                      Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(PrimaryTypeExpr(Integer)))))))))))))))
+                             Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(Identifier,
+                                                                       SuffixOp(Slice(Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(Integer)))),
+                                                                                      Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(Integer))))))))))))))
 
 # slice sentinal
 
@@ -30,9 +30,9 @@ fn fun () noreturn {
 }
 
 ==>
-Program(Decl(FnProto(Identifier,ParamDeclList,TypeExpr(PrimaryTypeExpr(Identifier))),
+Program(Decl(FnProto(Identifier,ParamDeclList,TypeExpr(Identifier)),
              Block(Statement(Return,
-                             Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(PrimaryTypeExpr(Identifier),
-                                                                       SuffixOp(Slice(Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(PrimaryTypeExpr(Integer))))),
-                                                                                      Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(PrimaryTypeExpr(Integer))))),
-                                                                                      Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(PrimaryTypeExpr(Integer)))))))))))))))
+                             Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(Identifier,
+                                                                       SuffixOp(Slice(Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(Integer)))),
+                                                                                      Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(Integer)))),
+                                                                                      Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(Integer))))))))))))))

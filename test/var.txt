@@ -15,8 +15,8 @@ const d : string;
 ==>
 Program(Decl(VarDecl(Const, Name)),
         Decl(VarDecl(Var, Name)),
-        Decl(VarDecl(Var, Name, TypeExpr(PrimaryTypeExpr(Identifier)))),
-        Decl(VarDecl(Const, Name, TypeExpr(PrimaryTypeExpr(Identifier)))))
+        Decl(VarDecl(Var, Name, TypeExpr(Identifier))),
+        Decl(VarDecl(Const, Name, TypeExpr(Identifier))))
 
 # Type
 
@@ -25,7 +25,7 @@ const a : u32;
 ==>
 Program(Decl(VarDecl(Const,
                      Name,
-                     TypeExpr(PrimaryTypeExpr(Identifier)))))
+                     TypeExpr(Identifier))))
 
 # Type and val
 
@@ -34,5 +34,5 @@ const a : u32 = 0;
 ==>
 Program(Decl(VarDecl(Const,
                      Name,
-                     TypeExpr(PrimaryTypeExpr(Identifier)),
-                     Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(PrimaryTypeExpr(Integer))))))))
+                     TypeExpr(Identifier),
+                     Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(Integer)))))))

@@ -4,11 +4,11 @@ var a : u8;
 comptime { a = 1; }
 
 ==>
-Program(Decl(VarDecl(Var,Name,TypeExpr(PrimaryTypeExpr(Identifier)))),
+Program(Decl(VarDecl(Var,Name,TypeExpr(Identifier))),
         ComptimeDecl(Comptime,
-                     Block(Statement(CurlySuffixExpr(TypeExpr(PrimaryTypeExpr(Identifier))),
+                     Block(Statement(CurlySuffixExpr(TypeExpr(Identifier)),
                                      AssignOp,
-                                     Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(PrimaryTypeExpr(Integer)))))))))
+                                     Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(Integer))))))))
 
 # Valid
 
@@ -32,15 +32,14 @@ Program
                                         (PrimaryExpr
                                          (CurlySuffixExpr
                                           (TypeExpr
-                                           (PrimaryTypeExpr
-                                            (LabeledTypeExpr(BlockLabel(Identifier),
-                                                             Block(Statement(Break,
-                                                                             BreakLabel(Identifier),
-                                                                             Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(PrimaryTypeExpr(Identifier),
-                                                                                                                       FnCallArgs
-                                                                                                                       (Expr
-                                                                                                                        (PrimaryExpr
-                                                                                                                         (CurlySuffixExpr
-                                                                                                                          (TypeExpr
-                                                                                                                           (PrimaryTypeExpr(Integer)))))))))))))))))))))),
+                                           (LabeledTypeExpr(BlockLabel(Identifier),
+                                                            Block(Statement(Break,
+                                                                            BreakLabel(Identifier),
+                                                                            Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(Identifier,
+                                                                                                                      FnCallArgs
+                                                                                                                      (Expr
+                                                                                                                       (PrimaryExpr
+                                                                                                                        (CurlySuffixExpr
+                                                                                                                         (TypeExpr
+                                                                                                                          (Integer)))))))))))))))))))),
         LineComment)))

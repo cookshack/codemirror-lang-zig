@@ -3,14 +3,14 @@
 fn one() u32;
 
 ==>
-Program(Decl(FnProto(Identifier,ParamDeclList,TypeExpr(PrimaryTypeExpr(Identifier)))))
+Program(Decl(FnProto(Identifier,ParamDeclList,TypeExpr(Identifier))))
 
 # One fn proto w arg
 
 fn one(a : u32) u32;
 
 ==>
-Program(Decl(FnProto(Identifier,ParamDeclList(ParamDecl(Identifier, ParamType(TypeExpr(PrimaryTypeExpr(Identifier))))), TypeExpr(PrimaryTypeExpr(Identifier)))))
+Program(Decl(FnProto(Identifier,ParamDeclList(ParamDecl(Identifier, ParamType(TypeExpr(Identifier)))), TypeExpr(Identifier))))
 
 # Two fn protos
 
@@ -19,13 +19,13 @@ fn two(a : u32, b: string) u32;
 
 ==>
 Program(Decl(FnProto(Identifier,
-                     ParamDeclList(ParamDecl(Identifier, ParamType(TypeExpr(PrimaryTypeExpr(Identifier)))),
-                                   ParamDecl(Identifier, ParamType(TypeExpr(PrimaryTypeExpr(Identifier))))),
-                     TypeExpr(PrimaryTypeExpr(Identifier)))),
+                     ParamDeclList(ParamDecl(Identifier, ParamType(TypeExpr(Identifier))),
+                                   ParamDecl(Identifier, ParamType(TypeExpr(Identifier)))),
+                     TypeExpr(Identifier))),
         Decl(FnProto(Identifier,
-                     ParamDeclList(ParamDecl(Identifier, ParamType(TypeExpr(PrimaryTypeExpr(Identifier)))),
-                                   ParamDecl(Identifier, ParamType(TypeExpr(PrimaryTypeExpr(Identifier))))),
-                     TypeExpr(PrimaryTypeExpr(Identifier)))))
+                     ParamDeclList(ParamDecl(Identifier, ParamType(TypeExpr(Identifier))),
+                                   ParamDecl(Identifier, ParamType(TypeExpr(Identifier)))),
+                     TypeExpr(Identifier))))
 
 # Two fns
 
@@ -34,14 +34,14 @@ fn two(a : u32, b: string) noreturn { }
 
 ==>
 Program(Decl(FnProto(Identifier,
-                     ParamDeclList(ParamDecl(Identifier, ParamType(TypeExpr(PrimaryTypeExpr(Identifier)))),
-                                   ParamDecl(Identifier, ParamType(TypeExpr(PrimaryTypeExpr(Identifier))))),
-                     TypeExpr(PrimaryTypeExpr(Identifier))),
+                     ParamDeclList(ParamDecl(Identifier, ParamType(TypeExpr(Identifier))),
+                                   ParamDecl(Identifier, ParamType(TypeExpr(Identifier)))),
+                     TypeExpr(Identifier)),
              Block),
         Decl(FnProto(Identifier,
-                     ParamDeclList(ParamDecl(Identifier, ParamType(TypeExpr(PrimaryTypeExpr(Identifier)))),
-                                   ParamDecl(Identifier, ParamType(TypeExpr(PrimaryTypeExpr(Identifier))))),
-                     TypeExpr(PrimaryTypeExpr(Identifier))),
+                     ParamDeclList(ParamDecl(Identifier, ParamType(TypeExpr(Identifier))),
+                                   ParamDecl(Identifier, ParamType(TypeExpr(Identifier)))),
+                     TypeExpr(Identifier)),
              Block))
 
 # Pub
@@ -52,7 +52,7 @@ pub fn main() u32;
 Program(Pub,
         Decl(FnProto(Identifier,
                      ParamDeclList,
-                     TypeExpr(PrimaryTypeExpr(Identifier)))))
+                     TypeExpr(Identifier))))
 
 # Err union ret
 
@@ -61,4 +61,4 @@ fn fun() !u32;
 ==>
 Program(Decl(FnProto(Identifier,
                      ParamDeclList,
-                     TypeExpr(PrimaryTypeExpr(Identifier)))))
+                     TypeExpr(Identifier))))

@@ -7,7 +7,7 @@ fn one() string {
 ==>
 Program(Decl(FnProto(Identifier,
                      ParamDeclList,
-                    TypeExpr(PrimaryTypeExpr(Identifier))),
+                    TypeExpr(Identifier)),
              Block(Statement(Return,
-                             Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(PrimaryTypeExpr(Identifier),
+                             Expr(PrimaryExpr(CurlySuffixExpr(TypeExpr(Identifier,
                                                                        SuffixOp(FieldAccess(Identifier))))))))))

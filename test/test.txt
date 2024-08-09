@@ -16,4 +16,5 @@ test "check" {
 Program(TestDecl(Test,
                  TestName,
                  Block(Statement(PrefixExpr(PrefixOp(Try),
-                                            PrimaryExpr(CurlySuffixExpr(TypeExpr(PrimaryTypeExpr(Identifier),FnCallArgs))))))))
+                                            PrimaryExpr(CurlySuffixExpr(TypeExpr(Identifier,
+                                                                                 FnCallArgs))))))))
