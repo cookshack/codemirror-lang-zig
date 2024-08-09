@@ -49,7 +49,7 @@ Statement {
   (Comptime? VarDecl)
   | IfStatement
   | !curlyRight labeledStatement
-  | SwitchExpr
+  | !curlyRight SwitchExpr
   | (assignExprExclIf | exprExclIf) ";"
 }
 
@@ -141,7 +141,8 @@ primaryTypeExpr {
   | LabeledTypeExpr
   | Identifier
   | Integer
-  | StringLiteral }
+  | StringLiteral
+  | SwitchExpr }
 
 LabeledTypeExpr { BlockLabel Block | BlockLabel? LoopTypeExpr }
 

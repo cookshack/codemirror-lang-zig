@@ -29,7 +29,7 @@ Program(Decl(FnProto(Identifier,
                                                     Expr(PrimaryExpr(TypeExpr(Identifier,
                                                                               FnCallArgs)))))))))
 
-# prong
+# else
 
 fn fun() noreturn {
   switch (a) {
@@ -46,3 +46,20 @@ Program(Decl(FnProto(Identifier,
                                         SwitchProng(SwitchCase(Else),
                                                     Expr(PrimaryExpr(TypeExpr(Identifier,
                                                                               FnCallArgs)))))))))
+
+# expr
+
+const a = switch (tag) {
+  "linux" => 1,
+  else => 2
+};
+
+==>
+Program(Decl(VarDecl(Const,
+                     Name,
+                     Expr(PrimaryExpr(TypeExpr(SwitchExpr(Switch,
+                                                          Expr(PrimaryExpr(TypeExpr(Identifier))),
+                                                          SwitchProng(SwitchCase(SwitchItem(Expr(PrimaryExpr(TypeExpr(StringLiteral))))),
+                                                                      Expr(PrimaryExpr(TypeExpr(Integer)))),
+                                                          SwitchProng(SwitchCase(Else),
+                                                                      Expr(PrimaryExpr(TypeExpr(Integer)))))))))))
