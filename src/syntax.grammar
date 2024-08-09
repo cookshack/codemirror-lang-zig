@@ -1,4 +1,5 @@
 @precedence {
+  fncallargs @right
   curlyRight @right
   assign @right
   primary
@@ -47,7 +48,7 @@ Name { identifier }
 Statement {
   (Comptime? VarDecl)
   | IfStatement
-  | labeledStatement
+  | !curlyRight labeledStatement
   | (assignExprExclIf | exprExclIf) ";"
 }
 
@@ -134,7 +135,13 @@ primaryTypeExpr {
   | Integer
   | StringLiteral }
 
-LabeledTypeExpr { BlockLabel Block /*| BlockLabel? LoopTypeExpr*/ }
+LabeledTypeExpr { BlockLabel Block | BlockLabel? LoopTypeExpr }
+
+LoopTypeExpr { /*Inline?*/ ( ForTypeExpr | WhileTypeExpr) }
+
+ForTypeExpr { ForPrefix TypeExpr (!else Else TypeExpr)? }
+
+WhileTypeExpr { WhilePrefix TypeExpr (!else Else Payload? TypeExpr)? }
 
 //// Helper grammar.
 
@@ -202,7 +209,7 @@ FieldAccess { "." Identifier }
 
 SuffixOp { Slice | ArrayAccess | FieldAccess | Deref | Unwrap }
 
-FnCallArgs { "(" (Expr ",")* Expr? ")" }
+FnCallArgs { !fncallargs "(" (Expr ",")* Expr? ")" }
 
 ////
 

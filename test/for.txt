@@ -15,7 +15,7 @@ Program
                                Expr(PrimaryExpr(TypeExpr(Identifier,
                                                          FnCallArgs(Expr(PrimaryExpr(TypeExpr(Identifier))))))))))))
 
-# For block
+# block
 
 fn one() u8 {
   for (s, 0..3) |ch, index| {
@@ -32,7 +32,7 @@ Program(Decl(FnProto(Identifier,ParamDeclList,TypeExpr(Identifier)),
                                                     PtrListPayload(Identifier, Identifier)),
                                           Block(Statement(Return, Expr(PrimaryExpr(TypeExpr(Integer))))))))))
 
-# For with assign
+# assign
 
 fn main() noreturn {
   for (s, 0..) |ch|
@@ -47,4 +47,46 @@ Program(Decl(FnProto(Identifier,ParamDeclList,TypeExpr(Identifier)),
                                                     PtrListPayload(Identifier)),
                                           AssignExpr(Expr(PrimaryExpr(TypeExpr(Identifier))),
                                                      AssignOp,
+                                                     Expr(PrimaryExpr(TypeExpr(Identifier)))))))))
+
+# else
+
+fn main() i32 {
+  for (s, 0..) |ch| {
+  }
+  else
+    return 0;
+}
+
+==>
+Program(Decl(FnProto(Identifier,
+                     ParamDeclList,
+                     TypeExpr(Identifier)),
+             Block(Statement(ForStatement(ForPrefix(For,
+                                                    ForArgList(ForItem(Expr(PrimaryExpr(TypeExpr(Identifier)))),
+                                                               ForItem(Expr(PrimaryExpr(TypeExpr(Integer))))),
+                                                    PtrListPayload(Identifier)),
+                                          Block,
+                                          Else,
+                                          Statement(Return,
+                                                    Expr(PrimaryExpr(TypeExpr(Integer)))))))))
+
+# expr
+
+fn fun() i32 {
+  return for (a) |val| {
+    sum += val;
+  }
+  else
+    sum;
+}
+
+==>
+Program(Decl(FnProto(Identifier,ParamDeclList,TypeExpr(Identifier)),
+             zig-Block(Statement(ForStatement(ForPrefix(For,
+                                                    ForArgList(ForItem(Expr(PrimaryExpr(TypeExpr(Identifier)))),
+                                                               ForItem(Expr(PrimaryExpr(TypeExpr(Integer))))),
+                                                    PtrListPayload(Identifier)),
+                                          AssignExpr(Expr(PrimaryExpr(TypeExpr(Identifier))),
+                                          ssignOp,
                                                      Expr(PrimaryExpr(TypeExpr(Identifier)))))))))
