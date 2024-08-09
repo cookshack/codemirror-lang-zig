@@ -138,6 +138,7 @@ suffixExpr { ( //seq("async", $._primary_type_expr, repeat($._suffix_op), $.fn_c
 
 primaryTypeExpr {
   BuiltinIdentifier FnCallArgs
+  | CharLiteral
   | LabeledTypeExpr
   | Identifier
   | Integer
@@ -284,13 +285,22 @@ StringLiteral { stringLiteralSingle | multiStringLiteral }
 
   multiStringLiteral { ("\\\\" ![\n]* $[ \n]*)+ }
 
+  stringEscape { ("\\n" | "\\r" | "\\t" | "\\\\" | "\\'" | "\\\"" | "\\x" $[0-9a-fA-F] $[0-9a-fA-F]
+                  | "\\u{" $[0-9a-fA-F] ($[0-9a-fA-F] ($[0-9a-fA-F] ($[0-9a-fA-F] ($[0-9a-fA-F] $[0-9a-fA-F]?)?)?)?)? "}") }
+
+  CharLiteral {
+    "'"
+    ( // charFragment
+      !['\\]
+      | stringEscape
+    )*
+    "'" }
+
   stringLiteralSingle {
     "\""
     ( // stringFragment
       !["\\]*
-      // stringEscape
-      | ("\\n" | "\\r" | "\\t" | "\\\\" | "\\'" | "\\\"" | "\\x" $[0-9a-fA-F] $[0-9a-fA-F]
-         | "\\u{" $[0-9a-fA-F] ($[0-9a-fA-F] ($[0-9a-fA-F] ($[0-9a-fA-F] ($[0-9a-fA-F] $[0-9a-fA-F]?)?)?)?)? "}")
+      | stringEscape
     )*
     "\"" }
 

@@ -1,0 +1,8 @@
+# literal
+
+const ch = 'a';
+
+==>
+Program(Decl(VarDecl(Const,
+                     Name,
+                     Expr(PrimaryExpr(TypeExpr(CharLiteral))))))
