@@ -119,7 +119,12 @@ BinaryExpr {
 
 PrefixExpr { !prefix PrefixOp+ !primary PrimaryExpr }
 
-PrimaryExpr { AsmExpr | IfExpr | BlockLabel? LoopExpr | !primary primaryExprExclIf }
+PrimaryExpr {
+  AsmExpr
+  | IfExpr
+  | BlockLabel? LoopExpr
+  | !primary primaryExprExclIf
+}
 
 primaryExprExclIf {
   Break BreakLabel? Expr?
