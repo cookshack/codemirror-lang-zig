@@ -164,9 +164,9 @@ primaryTypeExpr {
   | LabeledTypeExpr
   | Identifier
   | IfTypeExpr
+  | Integer
   //| Comptime TypeExpr
   | Error "." Identifier
-  | Integer
   | Anyframe
   | Unreachable
   | StringLiteral
