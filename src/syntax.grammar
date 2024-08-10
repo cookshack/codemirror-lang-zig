@@ -220,7 +220,7 @@ AssignOp { "*=" | "*|=" | "/=" | "%=" | "+=" | "+|=" | "-=" | "-|=" | "<<=" | "<
 
 BitwiseOp { "&" | "^" | "|" | Orelse | Catch Payload? }
 
-BitShiftOp { "<<" } //| ">>" | "<<| }
+BitShiftOp { "<<" | ">>" | "<<|" }
 
 AdditionOp { "+" | "-" | "++" }
 
