@@ -22,6 +22,12 @@
   colonLabel
 }
 
+//// Templates.
+
+list<x> { (x ",")* x? }
+
+//// Root.
+
 @top Program { ContainerDocComment? containerMembers }
 
 containerMembers { !containerDecl (ContainerField ",")* (ContainerField | containerDecl*) }
@@ -113,7 +119,7 @@ BinaryExpr {
 
 PrefixExpr { !prefix PrefixOp+ !primary PrimaryExpr }
 
-PrimaryExpr { IfExpr | BlockLabel? LoopExpr | !primary primaryExprExclIf }
+PrimaryExpr { /*AsmExpr |*/ IfExpr | BlockLabel? LoopExpr | !primary primaryExprExclIf }
 
 primaryExprExclIf {
   Break BreakLabel? Expr?
@@ -174,9 +180,7 @@ primaryTypeExpr {
 
 ContainerDecl { ( Extern | Packed )? ContainerDeclAuto }
 
-identifierList { (DocComment? Identifier ",")* DocComment? Identifier }
-
-ErrorSetDecl { Error "{" identifierList "}" }
+ErrorSetDecl { Error "{" list<DocComment? Identifier> "}" }
 
 GroupedExpr { "(" Expr ")" }
 
@@ -190,7 +194,21 @@ ForTypeExpr { ForPrefix TypeExpr (!else Else TypeExpr)? }
 
 WhileTypeExpr { WhilePrefix TypeExpr (!else Else Payload? TypeExpr)? }
 
-SwitchExpr { Switch "(" Expr ")" "{" (SwitchProng ",")* SwitchProng? "}" }
+SwitchExpr { Switch "(" Expr ")" "{" list<SwitchProng> "}" }
+
+//// Assembly.
+
+AsmExpr { Asm Volatile? "(" Expr AsmOutput? ")" }
+
+AsmOutput { ":" list<AsmOutput> AsmInput? }
+
+AsmOutputItem { "[" Identifier "]" StringLiteral "(" (("->" TypeExpr) | Identifier) ")" }
+
+AsmInput { ":" list<AsmInput> AsmClobbers? }
+
+AsmInputItem { "[" Identifier "]" StringLiteral "(" Expr ")" }
+
+AsmClobbers { ":" list<StringLiteral> }
 
 //// Helper grammar.
 
@@ -204,7 +222,7 @@ WhileContinueExpr { ":" "(" (AssignExpr | Expr) ")" }
 
 //// Fn specific.
 
-ParamDeclList { (ParamDecl ",")* ParamDecl? }
+ParamDeclList { list<ParamDecl> }
 
 ParamDecl { //seq(optional($.doc_comment), optional(choice("noalias", "comptime")), optional(seq($.identifier, ":")), $.param_type),
             (Identifier ":") ParamType
@@ -270,7 +288,7 @@ FieldAccess { "." Identifier }
 
 SuffixOp { Slice | ArrayAccess | FieldAccess | Deref | Unwrap }
 
-FnCallArgs { !fncallargs "(" (Expr ",")* Expr? ")" }
+FnCallArgs { !fncallargs "(" list<Expr> ")" }
 
 //// ContainerDecl specific
 
@@ -305,6 +323,7 @@ StringLiteral { stringLiteralSingle | multiStringLiteral }
   And { "and" }
   Anyframe { "anyframe" }
   Anytype { "anytype" }
+  Asm { "asm" }
   Async { "async" }
   Await { "await" }
   Break { "break" }
@@ -334,6 +353,7 @@ StringLiteral { stringLiteralSingle | multiStringLiteral }
   Union { "union" }
   Unreachable { "unreachable" }
   Var { "var" }
+  Volatile { "volatile" }
   While { "while" }
 
   //identifier: ($) => choice(/[A-Za-z_][A-Za-z0-9_]*/, seq("@", $.string_literal)),
@@ -343,9 +363,9 @@ StringLiteral { stringLiteralSingle | multiStringLiteral }
 
   builtinIdentifier { "@" $[A-Za-z_] $[A-Za-z0-9_]* }
 
-  @precedence { align And Anyframe Anytype Async Await Break Catch Comptime Const Continue Else Enum Error Extern
+  @precedence { align And Anyframe Anytype Asm Async Await Break Catch Comptime Const Continue Else Enum Error Extern
                 fn For If Nosuspend Opaque Or Orelse Packed Pub Resume Return Struct Switch Test Try Union
-                Unreachable Var While
+                Unreachable Var Volatile While
                 identifier }
 
   Integer {
