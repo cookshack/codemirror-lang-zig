@@ -15,6 +15,8 @@
 
   else @right
 
+  containerDecl @left
+
   // Prevent SR due to eg: a[0..break label:]
   colonSlice
   colonLabel
@@ -22,9 +24,7 @@
 
 @top Program { ContainerDocComment? containerMembers }
 
-containerMembers { containerDecls }
-
-containerDecls { containerDecl* }
+containerMembers { !containerDecl (ContainerField ",")* (ContainerField | containerDecl*) }
 
 containerDecl { TestDecl | ComptimeDecl | DocComment? Pub? Decl }
 
@@ -43,6 +43,10 @@ Decl { ( FnProto (";" | Block) | VarDecl ) }
 FnProto { fn Identifier? "(" ParamDeclList ")" "!"? TypeExpr }
 
 VarDecl { ( Const | Var ) Name (":" TypeExpr)? ("=" Expr)? ";" }
+
+ContainerField {
+  DocComment? Comptime? /*!KEYWORD_fn*/ (Identifier ":")? TypeExpr ByteAlign? ("=" Expr)?
+}
 
 Name { identifier }
 
@@ -266,6 +270,10 @@ ContainerDeclType {
   | Enum ("(" Expr ")")?
   | Union ("(" (Enum ("(" Expr ")")? | Expr) ")")? }
 
+//// Alignment
+
+ByteAlign { align "(" Expr ")" }
+
 ////
 
 Identifier { identifier }
@@ -281,6 +289,7 @@ StringLiteral { stringLiteralSingle | multiStringLiteral }
     ($[ \t\r\n] | "\r"? "\n")+
   }
 
+  align { "align" }
   And { "and" }
   Anyframe { "anyframe" }
   Anytype { "anytype" }
@@ -318,7 +327,7 @@ StringLiteral { stringLiteralSingle | multiStringLiteral }
 
   builtinIdentifier { "@" $[A-Za-z_] $[A-Za-z0-9_]* }
 
-  @precedence { And Anyframe Anytype Await Break Catch Comptime Const Continue Else Enum Extern
+  @precedence { align And Anyframe Anytype Await Break Catch Comptime Const Continue Else Enum Extern
                 fn For If Opaque Or Orelse Packed Pub Return Struct Switch Test Try Union Unreachable Var While
                 identifier }
 

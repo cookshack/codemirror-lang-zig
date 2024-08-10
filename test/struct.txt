@@ -43,6 +43,11 @@ Program(LineComment,
 
 const Point = packed struct (u32) {
   //! container doc comment
+
+  // comment
+  x: u16,
+  /// y doc comment
+  y: u16 align(16) = 3
 };
 
 ==>
@@ -51,4 +56,12 @@ Program(Decl(VarDecl(Const,
                      Expr(PrimaryExpr(TypeExpr(ContainerDecl(Packed,
                                                              ContainerDeclAuto(ContainerDeclType(Struct,
                                                                                                  Expr(PrimaryExpr(TypeExpr(Identifier)))),
-                                                                               ContainerDocComment))))))))
+                                                                               ContainerDocComment,
+                                                                               LineComment,
+                                                                               ContainerField(Identifier,
+                                                                                              TypeExpr(Identifier)),
+                                                                               ContainerField(DocComment,
+                                                                                              Identifier,
+                                                                                              TypeExpr(Identifier),
+                                                                                              ByteAlign(Expr(PrimaryExpr(TypeExpr(Integer)))),
+                                                                                              Expr(PrimaryExpr(TypeExpr(Integer))))))))))))
