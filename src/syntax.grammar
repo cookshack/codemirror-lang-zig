@@ -160,6 +160,7 @@ primaryTypeExpr {
   | GroupedExpr
   | LabeledTypeExpr
   | Identifier
+  | IfTypeExpr
   //| Comptime TypeExpr
   | Error "." Identifier
   | Integer
@@ -171,6 +172,8 @@ primaryTypeExpr {
 ContainerDecl { ( Extern | Packed )? ContainerDeclAuto }
 
 GroupedExpr { "(" Expr ")" }
+
+IfTypeExpr { IfPrefix TypeExpr (!else Else Payload? TypeExpr)? }
 
 LabeledTypeExpr { BlockLabel Block | BlockLabel? LoopTypeExpr }
 

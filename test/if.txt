@@ -1,4 +1,4 @@
-# If stmnt
+# stmnt
 
 fn one(a : u32) u16 {
   if (a == 1)
@@ -14,7 +14,7 @@ Program(Decl(FnProto(Identifier,
                                                                       Expr(PrimaryExpr(TypeExpr(Integer)))))),
                                          Expr(PrimaryExpr(Return, Expr(PrimaryExpr(TypeExpr(Integer))))))))))
 
-# If expr
+# expr
 
 fn main() u8 {
   return if (1 == 0) 3 else 4;
@@ -29,7 +29,7 @@ Program(Decl(FnProto(Identifier,ParamDeclList,TypeExpr(Identifier)),
                                                              Else,
                                                              Expr(PrimaryExpr(TypeExpr(Integer))))))))))
 
-# If stmnt with assign in then expr
+# stmnt with assign in then expr
 
 fn main() noreturn {
   if (1)
@@ -42,3 +42,16 @@ Program(Decl(FnProto(Identifier,ParamDeclList,TypeExpr(Identifier)),
                                          AssignExpr(Expr(PrimaryExpr(TypeExpr(Identifier))),
                                                     AssignOp,
                                                     Expr(PrimaryExpr(TypeExpr(Integer)))))))))
+
+# type expr
+
+const a : if (b) u32 else u16;
+
+==>
+Program(Decl(VarDecl(Const,
+                     Name,
+                     TypeExpr(IfTypeExpr(IfPrefix(If,
+                                                  Expr(PrimaryExpr(TypeExpr(Identifier)))),
+                                         TypeExpr(Identifier),
+                                         Else,
+                                         TypeExpr(Identifier))))))
