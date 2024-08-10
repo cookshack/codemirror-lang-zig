@@ -144,8 +144,9 @@ ForExpr { ForPrefix Expr (!else Else Expr)? }
 
 WhileExpr { WhilePrefix Expr (!else Else Payload? Expr)? }
 
-TypeExpr { //seq(repeat($.prefix_type_op), choice($.error_union_expr, $._suffix_expr)),
-           suffixExpr }
+TypeExpr { /* PrefixTypeOp* */ (ErrorUnionExpr | suffixExpr) }
+
+ErrorUnionExpr { suffixExpr !curlyRight "!" TypeExpr }
 
 suffixExpr { Async primaryTypeExpr SuffixOp* FnCallArgs
              | !assign primaryTypeExpr (SuffixOp | FnCallArgs)* }

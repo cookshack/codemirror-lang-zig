@@ -18,3 +18,15 @@ Program(Decl(VarDecl(Const,
                      TypeExpr(ErrorSetDecl(Error,
                                            Identifier,
                                            Identifier)))))
+
+# union type
+
+const pies : anyerror!u32 = error.OutOfPie;
+
+==>
+Program(Decl(VarDecl(Const,
+                     Name,
+                     TypeExpr(ErrorUnionExpr(Identifier,
+                                             TypeExpr(Identifier))),
+                     Expr(PrimaryExpr(TypeExpr(Error,
+                                               Identifier))))))
