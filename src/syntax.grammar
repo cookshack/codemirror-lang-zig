@@ -120,14 +120,14 @@ BinaryExpr {
 PrefixExpr { !prefix PrefixOp+ !primary PrimaryExpr }
 
 PrimaryExpr {
-  AsmExpr
-  | IfExpr
+  IfExpr
   | BlockLabel? LoopExpr
   | !primary primaryExprExclIf
 }
 
 primaryExprExclIf {
-  Break BreakLabel? Expr?
+  AsmExpr
+  | Break BreakLabel? Expr?
   | Comptime Expr
   | Nosuspend Expr
   | Continue BreakLabel?
