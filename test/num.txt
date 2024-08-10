@@ -22,3 +22,51 @@ Program(Decl(VarDecl(Const,
                      Name,
                      TypeExpr(Identifier),
                      Expr(PrimaryExpr(TypeExpr(Integer))))))
+
+# float
+
+const h1 : f128 = 0x4d.4dp-5;
+const h2 : f128 = 0x4d_000.4d_111p-5;
+
+const f1 : f128 = 999.0000001E3;
+const f2 : f128 = 999_777.000_000_1e+3;
+
+const h3 : f128 = 0xa01P-9;
+const h4 : f128 = 0xa01_000p-3_0;
+
+const f3 : f128 = 232e-99;
+const f3 : f128 = 232_000E-9_000;
+
+==>
+Program(Decl(VarDecl(Const,
+                     Name,
+                     TypeExpr(Identifier),
+                     Expr(PrimaryExpr(TypeExpr(Float))))),
+        Decl(VarDecl(Const,
+                     Name,
+                     TypeExpr(Identifier),
+                     Expr(PrimaryExpr(TypeExpr(Float))))),
+        Decl(VarDecl(Const,
+                     Name,
+                     TypeExpr(Identifier),
+                     Expr(PrimaryExpr(TypeExpr(Float))))),
+        Decl(VarDecl(Const,
+                     Name,
+                     TypeExpr(Identifier),
+                     Expr(PrimaryExpr(TypeExpr(Float))))),
+        Decl(VarDecl(Const,
+                     Name,
+                     TypeExpr(Identifier),
+                     Expr(PrimaryExpr(TypeExpr(Float))))),
+        Decl(VarDecl(Const,
+                     Name,
+                     TypeExpr(Identifier),
+                     Expr(PrimaryExpr(TypeExpr(Float))))),
+        Decl(VarDecl(Const,
+                     Name,
+                     TypeExpr(Identifier),
+                     Expr(PrimaryExpr(TypeExpr(Float))))),
+        Decl(VarDecl(Const,
+                     Name,
+                     TypeExpr(Identifier),
+                     Expr(PrimaryExpr(TypeExpr(Float))))))
