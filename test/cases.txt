@@ -52,3 +52,12 @@ Program(Decl(FnProto(Identifier,
              Block(Statement(IfStatement(IfPrefix(If,
                                                   Expr(PrimaryExpr(TypeExpr(Integer)))),
                                          Expr(PrimaryExpr(TypeExpr(Unreachable))))))))
+
+# anyframe
+
+const a : anyframe;
+
+==>
+Program(Decl(VarDecl(Const,
+                     Name,
+                     TypeExpr(Anyframe))))

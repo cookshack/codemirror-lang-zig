@@ -145,6 +145,7 @@ primaryTypeExpr {
   | LabeledTypeExpr
   | Identifier
   | Integer
+  | Anyframe
   | Unreachable
   | StringLiteral
   | SwitchExpr }
@@ -255,6 +256,7 @@ StringLiteral { stringLiteralSingle | multiStringLiteral }
   }
 
   And { "and" }
+  Anyframe { "anyframe" }
   Await { "await" }
   Anytype { "anytype" }
   Break { "break" }
@@ -284,7 +286,7 @@ StringLiteral { stringLiteralSingle | multiStringLiteral }
 
   builtinIdentifier { "@" $[A-Za-z_] $[A-Za-z0-9_]* }
 
-  @precedence { And Await Anytype Break Catch Comptime Const Continue Else fn For If Or Orelse
+  @precedence { And Anyframe Await Anytype Break Catch Comptime Const Continue Else fn For If Or Orelse
                 Pub Return Switch Test Try Unreachable Var While
                 identifier }
 
