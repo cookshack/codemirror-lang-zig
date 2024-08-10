@@ -118,7 +118,9 @@ PrimaryExpr { IfExpr | BlockLabel? LoopExpr | !primary primaryExprExclIf }
 primaryExprExclIf {
   Break BreakLabel? Expr?
   | Comptime Expr
+  | Nosuspend Expr
   | Continue BreakLabel?
+  | Resume Expr
   | Return Expr?
   | Block
   | curlySuffixExpr
@@ -311,11 +313,13 @@ StringLiteral { stringLiteralSingle | multiStringLiteral }
   fn { "fn" }
   For { "for" }
   If { "if" }
+  Nosuspend { "nosuspend" }
   Opaque { "opaque" }
   Or { "or" }
   Orelse { "orelse" }
   Packed { "packed" }
   Pub { "pub" }
+  Resume { "resume" }
   Return { "return" }
   Switch { "switch" }
   Struct { "struct" }
@@ -334,7 +338,8 @@ StringLiteral { stringLiteralSingle | multiStringLiteral }
   builtinIdentifier { "@" $[A-Za-z_] $[A-Za-z0-9_]* }
 
   @precedence { align And Anyframe Anytype Await Break Catch Comptime Const Continue Else Enum Error Extern
-                fn For If Opaque Or Orelse Packed Pub Return Struct Switch Test Try Union Unreachable Var While
+                fn For If Nosuspend Opaque Or Orelse Packed Pub Resume Return Struct Switch Test Try Union
+                Unreachable Var While
                 identifier }
 
   Integer {

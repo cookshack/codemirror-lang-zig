@@ -1,0 +1,10 @@
+# nosuspend expr
+
+const a : u32 = nosuspend 0;
+
+==>
+Program(Decl(VarDecl(Const,
+                     Name,
+                     TypeExpr(Identifier),
+                     Expr(PrimaryExpr(Nosuspend,
+                                      Expr(PrimaryExpr(TypeExpr(Integer))))))))
