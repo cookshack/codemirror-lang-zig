@@ -157,6 +157,7 @@ primaryTypeExpr {
   | ContainerDecl
   | "." Identifier
   | "." InitList
+  | ErrorSetDecl
   | Float
   | FnProto
   | GroupedExpr
@@ -172,6 +173,10 @@ primaryTypeExpr {
   | SwitchExpr }
 
 ContainerDecl { ( Extern | Packed )? ContainerDeclAuto }
+
+identifierList { (DocComment? Identifier ",")* DocComment? Identifier }
+
+ErrorSetDecl { Error "{" identifierList "}" }
 
 GroupedExpr { "(" Expr ")" }
 

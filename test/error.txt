@@ -7,3 +7,14 @@ Program(Decl(VarDecl(Const,
                      Name,
                      Expr(PrimaryExpr(TypeExpr(Error,
                                                Identifier))))))
+
+# set decl
+
+const e : error{ OutOfPie, OutOfJuice };
+
+==>
+Program(Decl(VarDecl(Const,
+                     Name,
+                     TypeExpr(ErrorSetDecl(Error,
+                                           Identifier,
+                                           Identifier)))))
