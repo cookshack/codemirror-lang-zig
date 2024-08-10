@@ -1,0 +1,24 @@
+# int
+
+const b : u32 = 0b1001101;
+const o : u32 = 0o115;
+const h : u32 = 0x4d;
+const i : u32 = 77;
+
+==>
+Program(Decl(VarDecl(Const,
+                     Name,
+                     TypeExpr(Identifier),
+                     Expr(PrimaryExpr(TypeExpr(Integer))))),
+        Decl(VarDecl(Const,
+                     Name,
+                     TypeExpr(Identifier),
+                     Expr(PrimaryExpr(TypeExpr(Integer))))),
+        Decl(VarDecl(Const,
+                     Name,
+                     TypeExpr(Identifier),
+                     Expr(PrimaryExpr(TypeExpr(Integer))))),
+        Decl(VarDecl(Const,
+                     Name,
+                     TypeExpr(Identifier),
+                     Expr(PrimaryExpr(TypeExpr(Integer))))))
