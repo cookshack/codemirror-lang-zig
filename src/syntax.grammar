@@ -117,7 +117,13 @@ primaryExprExclIf {
   | curlySuffixExpr
 }
 
-curlySuffixExpr { !curlyRight TypeExpr }
+curlySuffixExpr { !curlyRight TypeExpr /*InitList*/ }
+
+InitList {
+  "{" FieldInit ("," FieldInit)* ","? "}"
+  | "{" Expr ("," Expr)* ","? "}"
+  | "{" "}"
+}
 
 IfExpr { IfPrefix Expr (!else Else Payload? Expr)? }
 
@@ -140,6 +146,7 @@ primaryTypeExpr {
   BuiltinIdentifier FnCallArgs
   | CharLiteral
   | "." Identifier
+  | "." InitList
   | Float
   | FnProto
   | GroupedExpr
@@ -168,6 +175,8 @@ SwitchExpr { Switch "(" Expr ")" "{" (SwitchProng ",")* SwitchProng? "}" }
 BreakLabel { !colonLabel ":" Identifier }
 
 BlockLabel { /*left*/ Identifier !colonLabel ":" }
+
+FieldInit { "." Identifier "=" Expr }
 
 WhileContinueExpr { ":" "(" (AssignExpr | Expr) ")" }
 

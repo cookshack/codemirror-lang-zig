@@ -1,0 +1,21 @@
+# init
+
+const p = Point{
+    .x = 0.1,
+};
+
+==>
+Program
+
+# dot
+
+const a: Point = .{
+  .x = 5,
+};
+
+==>
+Program(Decl(VarDecl(Const,
+                     Name,
+                     TypeExpr(Identifier),
+                     Expr(PrimaryExpr(TypeExpr(InitList(FieldInit(Identifier,
+                                                                  Expr(PrimaryExpr(TypeExpr(Integer)))))))))))
