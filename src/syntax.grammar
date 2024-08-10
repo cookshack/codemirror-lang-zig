@@ -160,6 +160,8 @@ primaryTypeExpr {
   | GroupedExpr
   | LabeledTypeExpr
   | Identifier
+  //| Comptime TypeExpr
+  | Error "." Identifier
   | Integer
   | Anyframe
   | Unreachable
@@ -301,6 +303,7 @@ StringLiteral { stringLiteralSingle | multiStringLiteral }
   Continue { "continue" }
   Else { "else" }
   Enum { "enum" }
+  Error { "error" }
   Extern { "extern" }
   fn { "fn" }
   For { "for" }
@@ -327,7 +330,7 @@ StringLiteral { stringLiteralSingle | multiStringLiteral }
 
   builtinIdentifier { "@" $[A-Za-z_] $[A-Za-z0-9_]* }
 
-  @precedence { align And Anyframe Anytype Await Break Catch Comptime Const Continue Else Enum Extern
+  @precedence { align And Anyframe Anytype Await Break Catch Comptime Const Continue Else Enum Error Extern
                 fn For If Opaque Or Orelse Packed Pub Return Struct Switch Test Try Union Unreachable Var While
                 identifier }
 

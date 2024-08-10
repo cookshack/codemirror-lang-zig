@@ -1,0 +1,9 @@
+# shortcut
+
+const e = error.OutOfPie;
+
+==>
+Program(Decl(VarDecl(Const,
+                     Name,
+                     Expr(PrimaryExpr(TypeExpr(Error,
+                                               Identifier))))))
