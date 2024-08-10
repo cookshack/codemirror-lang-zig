@@ -224,7 +224,7 @@ BitShiftOp { "<<" | ">>" | "<<|" }
 
 AdditionOp { "+" | "-" | "++" }
 
-MultiplyOp { "||" | "*" } // | "/" | "%" | "**" | "*%" | "*|" }
+MultiplyOp { "||" | "*" | arithOp<"/"> | "%" | "**" | "*%" | "*|" }
 
 PrefixOp { "!" | "-" | "~" | "-%" | "&" | Try | Await }
 
@@ -331,7 +331,9 @@ StringLiteral { stringLiteralSingle | multiStringLiteral }
 
   containerComment { "//!" ![\n]* $[ \n]* }
 
-  @precedence { containerComment, DocComment, LineComment }
+  arithOp<expr> { expr }
+
+  @precedence { containerComment, DocComment, LineComment, arithOp }
 }
 
 @external propSource highlighting from "./highlight"
