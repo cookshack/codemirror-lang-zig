@@ -119,7 +119,7 @@ BinaryExpr {
 
 PrefixExpr { !prefix PrefixOp+ !primary PrimaryExpr }
 
-PrimaryExpr { /*AsmExpr |*/ IfExpr | BlockLabel? LoopExpr | !primary primaryExprExclIf }
+PrimaryExpr { AsmExpr | IfExpr | BlockLabel? LoopExpr | !primary primaryExprExclIf }
 
 primaryExprExclIf {
   Break BreakLabel? Expr?
@@ -200,11 +200,11 @@ SwitchExpr { Switch "(" Expr ")" "{" list<SwitchProng> "}" }
 
 AsmExpr { Asm Volatile? "(" Expr AsmOutput? ")" }
 
-AsmOutput { ":" list<AsmOutput> AsmInput? }
+AsmOutput { ":" list<AsmOutputItem> AsmInput? }
 
 AsmOutputItem { "[" Identifier "]" StringLiteral "(" (("->" TypeExpr) | Identifier) ")" }
 
-AsmInput { ":" list<AsmInput> AsmClobbers? }
+AsmInput { ":" list<AsmInputItem> AsmClobbers? }
 
 AsmInputItem { "[" Identifier "]" StringLiteral "(" Expr ")" }
 

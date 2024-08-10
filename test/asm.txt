@@ -1,0 +1,35 @@
+# asm
+
+fn exit() usize {
+  return asm volatile ("syscall"
+                       // output
+                       : [ret] "={rax}" (-> usize),
+                       // input
+                       : [number] "{rax}" (number),
+                         [arg1] "{rdi}" (arg1),
+                       // clobbers
+                       : "rcx", "r11");
+}
+
+==>
+Program(Decl(FnProto(Identifier,
+                     ParamDeclList,
+                     TypeExpr(Identifier)),
+             Block(Statement(Return,
+                             Expr(PrimaryExpr(AsmExpr(Asm,
+                                                      Volatile,
+                                                      Expr(PrimaryExpr(TypeExpr(StringLiteral,
+                                                                                LineComment))),
+                                                      AsmOutput(AsmOutputItem(Identifier,
+                                                                              StringLiteral,
+                                                                              TypeExpr(Identifier)),
+                                                                LineComment,
+                                                                AsmInput(AsmInputItem(Identifier,
+                                                                                      StringLiteral,
+                                                                                      Expr(PrimaryExpr(TypeExpr(Identifier)))),
+                                                                         AsmInputItem(Identifier,
+                                                                                      StringLiteral,
+                                                                                      Expr(PrimaryExpr(TypeExpr(Identifier)))),
+                                                                         LineComment,
+                                                                         AsmClobbers(StringLiteral,
+                                                                                     StringLiteral))))))))))
