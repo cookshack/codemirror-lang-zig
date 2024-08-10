@@ -38,3 +38,17 @@ Program(LineComment,
                                                                  PtrListPayload(Identifier)),
                                                        Expr(PrimaryExpr(TypeExpr(Identifier),
                                                                         InitList)))))))))
+
+# decl
+
+const Point = packed struct (u32) {
+  //! container doc comment
+};
+
+==>
+Program(Decl(VarDecl(Const,
+                     Name,
+                     Expr(PrimaryExpr(TypeExpr(ContainerDecl(Packed,
+                                                             ContainerDeclAuto(ContainerDeclType(Struct,
+                                                                                                 Expr(PrimaryExpr(TypeExpr(Identifier)))),
+                                                                               ContainerDocComment))))))))

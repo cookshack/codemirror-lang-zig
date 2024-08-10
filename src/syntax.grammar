@@ -20,7 +20,9 @@
   colonLabel
 }
 
-@top Program { ContainerDocComment? containerDecls }
+@top Program { ContainerDocComment? containerMembers }
+
+containerMembers { containerDecls }
 
 containerDecls { containerDecl* }
 
@@ -146,6 +148,7 @@ suffixExpr { ( //seq("async", $._primary_type_expr, repeat($._suffix_op), $.fn_c
 primaryTypeExpr {
   BuiltinIdentifier FnCallArgs
   | CharLiteral
+  | ContainerDecl
   | "." Identifier
   | "." InitList
   | Float
@@ -158,6 +161,8 @@ primaryTypeExpr {
   | Unreachable
   | StringLiteral
   | SwitchExpr }
+
+ContainerDecl { ( Extern | Packed )? ContainerDeclAuto }
 
 GroupedExpr { "(" Expr ")" }
 
@@ -251,6 +256,16 @@ SuffixOp { Slice | ArrayAccess | FieldAccess | Deref | Unwrap }
 
 FnCallArgs { !fncallargs "(" (Expr ",")* Expr? ")" }
 
+//// ContainerDecl specific
+
+ContainerDeclAuto { ContainerDeclType "{" ContainerDocComment? containerMembers "}" }
+
+ContainerDeclType {
+  Struct ("(" Expr ")")?
+  | Opaque
+  | Enum ("(" Expr ")")?
+  | Union ("(" (Enum ("(" Expr ")")? | Expr) ")")? }
+
 ////
 
 Identifier { identifier }
@@ -268,24 +283,30 @@ StringLiteral { stringLiteralSingle | multiStringLiteral }
 
   And { "and" }
   Anyframe { "anyframe" }
-  Await { "await" }
   Anytype { "anytype" }
+  Await { "await" }
   Break { "break" }
   Catch { "catch" }
   Comptime { "comptime" }
   Const { "const" }
   Continue { "continue" }
   Else { "else" }
+  Enum { "enum" }
+  Extern { "extern" }
   fn { "fn" }
   For { "for" }
   If { "if" }
+  Opaque { "opaque" }
   Or { "or" }
   Orelse { "orelse" }
+  Packed { "packed" }
   Pub { "pub" }
   Return { "return" }
   Switch { "switch" }
+  Struct { "struct" }
   Test { "test" }
   Try { "try" }
+  Union { "union" }
   Unreachable { "unreachable" }
   Var { "var" }
   While { "while" }
@@ -297,8 +318,8 @@ StringLiteral { stringLiteralSingle | multiStringLiteral }
 
   builtinIdentifier { "@" $[A-Za-z_] $[A-Za-z0-9_]* }
 
-  @precedence { And Anyframe Await Anytype Break Catch Comptime Const Continue Else fn For If Or Orelse
-                Pub Return Switch Test Try Unreachable Var While
+  @precedence { And Anyframe Anytype Await Break Catch Comptime Const Continue Else Enum Extern
+                fn For If Opaque Or Orelse Packed Pub Return Struct Switch Test Try Union Unreachable Var While
                 identifier }
 
   Integer {
