@@ -5,7 +5,11 @@ const p = Point{
 };
 
 ==>
-Program
+Program(Decl(VarDecl(Const,
+                     Name,
+                     Expr(PrimaryExpr(TypeExpr(Identifier),
+                                      InitList(FieldInit(Identifier,
+                                                         Expr(PrimaryExpr(TypeExpr(Float))))))))))
 
 # dot
 
@@ -19,3 +23,18 @@ Program(Decl(VarDecl(Const,
                      TypeExpr(Identifier),
                      Expr(PrimaryExpr(TypeExpr(InitList(FieldInit(Identifier,
                                                                   Expr(PrimaryExpr(TypeExpr(Integer)))))))))))
+
+# dangle
+
+// both for...| and Point are curlySuffixExpr which ends in an optional InitList
+const p = for (a) |x| Point {};
+
+==>
+Program(LineComment,
+        Decl(VarDecl(Const,
+                     Name,
+                     Expr(PrimaryExpr(LoopExpr(ForExpr(ForPrefix(For,
+                                                                 ForArgList(ForItem(Expr(PrimaryExpr(TypeExpr(Identifier))))),
+                                                                 PtrListPayload(Identifier)),
+                                                       Expr(PrimaryExpr(TypeExpr(Identifier),
+                                                                        InitList)))))))))

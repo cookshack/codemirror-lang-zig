@@ -1,6 +1,7 @@
 @precedence {
   fncallargs @right
   curlyRight @right
+  curlyLeft @left
   assign @right
   primary
   or @left
@@ -117,7 +118,7 @@ primaryExprExclIf {
   | curlySuffixExpr
 }
 
-curlySuffixExpr { !curlyRight TypeExpr /*InitList*/ }
+curlySuffixExpr { !curlyRight TypeExpr (!curlyRight InitList)? }
 
 InitList {
   "{" FieldInit ("," FieldInit)* ","? "}"
