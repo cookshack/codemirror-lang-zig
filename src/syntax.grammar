@@ -141,11 +141,14 @@ primaryTypeExpr {
   | CharLiteral
   | "." Identifier
   | Float
+  | GroupedExpr
   | LabeledTypeExpr
   | Identifier
   | Integer
   | StringLiteral
   | SwitchExpr }
+
+GroupedExpr { "(" Expr ")" }
 
 LabeledTypeExpr { BlockLabel Block | BlockLabel? LoopTypeExpr }
 
@@ -221,7 +224,7 @@ BitShiftOp { "<<" } //| ">>" | "<<| }
 
 AdditionOp { "+" | "-" | "++" }
 
-MultiplyOp { "||" } // | "*" } // | "/" | "%" | "**" | "*%" | "*|" }
+MultiplyOp { "||" | "*" } // | "/" | "%" | "**" | "*%" | "*|" }
 
 PrefixOp { "!" | "-" | "~" | "-%" | "&" | Try | Await }
 

@@ -1,0 +1,13 @@
+# grouped
+
+const a : u32 = (1 + 3) * 4;
+
+==>
+Program(Decl(VarDecl(Const,
+                     Name,
+                     TypeExpr(Identifier),
+                     Expr(BinaryExpr(Expr(PrimaryExpr(TypeExpr(GroupedExpr(Expr(BinaryExpr(Expr(PrimaryExpr(TypeExpr(Integer))),
+                                                                                           AdditionOp,
+                                                                                           Expr(PrimaryExpr(TypeExpr(Integer))))))))),
+                                     MultiplyOp,
+                                     Expr(PrimaryExpr(TypeExpr(Integer))))))))
