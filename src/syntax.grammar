@@ -145,6 +145,7 @@ primaryTypeExpr {
   | LabeledTypeExpr
   | Identifier
   | Integer
+  | Unreachable
   | StringLiteral
   | SwitchExpr }
 
@@ -272,6 +273,7 @@ StringLiteral { stringLiteralSingle | multiStringLiteral }
   Switch { "switch" }
   Test { "test" }
   Try { "try" }
+  Unreachable { "unreachable" }
   Var { "var" }
   While { "while" }
 
@@ -283,7 +285,7 @@ StringLiteral { stringLiteralSingle | multiStringLiteral }
   builtinIdentifier { "@" $[A-Za-z_] $[A-Za-z0-9_]* }
 
   @precedence { And Await Anytype Break Catch Comptime Const Continue Else fn For If Or Orelse
-                Pub Return Switch Test Try Var While
+                Pub Return Switch Test Try Unreachable Var While
                 identifier }
 
   Integer {

@@ -37,3 +37,18 @@ Program
    Name,
    Expr(PrimaryExpr(TypeExpr(BuiltinIdentifier,
                              FnCallArgs(Expr(PrimaryExpr(TypeExpr(StringLiteral))))))))))
+
+# unreachable
+
+fn fun() noreturn {
+  if (0)
+    unreachable;
+}
+
+==>
+Program(Decl(FnProto(Identifier,
+                     ParamDeclList,
+                     TypeExpr(Identifier)),
+             Block(Statement(IfStatement(IfPrefix(If,
+                                                  Expr(PrimaryExpr(TypeExpr(Integer)))),
+                                         Expr(PrimaryExpr(TypeExpr(Unreachable))))))))
