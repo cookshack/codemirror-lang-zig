@@ -147,9 +147,8 @@ WhileExpr { WhilePrefix Expr (!else Else Payload? Expr)? }
 TypeExpr { //seq(repeat($.prefix_type_op), choice($.error_union_expr, $._suffix_expr)),
            suffixExpr }
 
-suffixExpr { ( //seq("async", $._primary_type_expr, repeat($._suffix_op), $.fn_call_arguments),
-               //seq($._primary_type_expr, repeat(choice($._suffix_op, $.fn_call_arguments))),
-               !assign primaryTypeExpr (SuffixOp | FnCallArgs)* ) }
+suffixExpr { Async primaryTypeExpr SuffixOp* FnCallArgs
+             | !assign primaryTypeExpr (SuffixOp | FnCallArgs)* }
 
 primaryTypeExpr {
   BuiltinIdentifier FnCallArgs
@@ -305,6 +304,7 @@ StringLiteral { stringLiteralSingle | multiStringLiteral }
   And { "and" }
   Anyframe { "anyframe" }
   Anytype { "anytype" }
+  Async { "async" }
   Await { "await" }
   Break { "break" }
   Catch { "catch" }
@@ -342,7 +342,7 @@ StringLiteral { stringLiteralSingle | multiStringLiteral }
 
   builtinIdentifier { "@" $[A-Za-z_] $[A-Za-z0-9_]* }
 
-  @precedence { align And Anyframe Anytype Await Break Catch Comptime Const Continue Else Enum Error Extern
+  @precedence { align And Anyframe Anytype Async Await Break Catch Comptime Const Continue Else Enum Error Extern
                 fn For If Nosuspend Opaque Or Orelse Packed Pub Resume Return Struct Switch Test Try Union
                 Unreachable Var While
                 identifier }
