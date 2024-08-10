@@ -62,3 +62,14 @@ fn fun() !u32;
 Program(Decl(FnProto(Identifier,
                      ParamDeclList,
                      TypeExpr(Identifier))))
+
+# Type proto
+
+const a : fn () u32 = f;
+
+==>
+Program(Decl(VarDecl(Const,
+                     Name,
+                     TypeExpr(FnProto(ParamDeclList,
+                                      TypeExpr(Identifier))),
+                     Expr(PrimaryExpr(TypeExpr(Identifier))))))

@@ -141,6 +141,7 @@ primaryTypeExpr {
   | CharLiteral
   | "." Identifier
   | Float
+  | FnProto
   | GroupedExpr
   | LabeledTypeExpr
   | Identifier
