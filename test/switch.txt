@@ -63,3 +63,24 @@ Program(Decl(VarDecl(Const,
                                                                       Expr(PrimaryExpr(TypeExpr(Integer)))),
                                                           SwitchProng(SwitchCase(Else),
                                                                       Expr(PrimaryExpr(TypeExpr(Integer)))))))))))
+
+# inline
+
+fn f1() noreturn {
+  switch (a) {
+  inline 0, 1 => |i| f2(i)
+  }
+}
+
+==>
+Program(Decl(FnProto(Identifier,
+                     ParamDeclList,
+                     TypeExpr(Identifier)),
+             Block(Statement(SwitchExpr(Switch,
+                                        Expr(PrimaryExpr(TypeExpr(Identifier))),
+                                        SwitchProng(Inline,
+                                                    SwitchCase(SwitchItem(Expr(PrimaryExpr(TypeExpr(Integer)))),
+                                                               SwitchItem(Expr(PrimaryExpr(TypeExpr(Integer))))),
+                                                    PtrIndexPayload(Identifier),
+                                                    Expr(PrimaryExpr(TypeExpr(Identifier,
+                                                                              FnCallArgs(Expr(PrimaryExpr(TypeExpr(Identifier)))))))))))))

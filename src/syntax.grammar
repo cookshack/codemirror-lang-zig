@@ -157,7 +157,10 @@ IfExpr { IfPrefix Expr (!else Else Payload? Expr)? }
 
 Block { "{" Statement* "}" }
 
-LoopExpr { Inline? ( ForExpr | WhileExpr) }
+LoopExpr {
+  // this is for the Inline in SwitchProng
+  !curlyRight (Inline (ForExpr | WhileExpr))
+  | Inline? (ForExpr | WhileExpr) }
 
 ForExpr { ForPrefix Expr (!else Else Expr)? }
 
@@ -201,7 +204,10 @@ IfTypeExpr { IfPrefix TypeExpr (!else Else Payload? TypeExpr)? }
 
 LabeledTypeExpr { BlockLabel Block | BlockLabel? LoopTypeExpr }
 
-LoopTypeExpr { Inline? ( ForTypeExpr | WhileTypeExpr) }
+LoopTypeExpr {
+  // this is for the Inline in SwitchProng
+  !curlyRight (Inline (ForTypeExpr | WhileTypeExpr))
+  | Inline? (ForTypeExpr | WhileTypeExpr) }
 
 ForTypeExpr { ForPrefix TypeExpr (!else Else TypeExpr)? }
 
@@ -259,7 +265,7 @@ Payload { "|" Identifier "|" }
 
 PtrPayload { "|" Star? Identifier "|" }
 
-PtrIndexPayload { "|" "*"? Identifier ("," Identifier) "|" }
+PtrIndexPayload { "|" "*"? Identifier ("," Identifier)* "|" }
 
 PtrListPayload { "|" "*"? Identifier ("," "*"? Identifier)* ","? "|" }
 
@@ -267,7 +273,7 @@ Star { "*" }
 
 //// Switch specific.
 
-SwitchProng { /*Inline?*/ SwitchCase "=>" PtrIndexPayload? (AssignExpr | Expr) }
+SwitchProng { Inline? SwitchCase "=>" PtrIndexPayload? (AssignExpr | Expr) }
 
 SwitchCase { SwitchItem ("," SwitchItem)* ","? | Else }
 
