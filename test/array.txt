@@ -9,3 +9,26 @@ Program(Decl(FnProto(Identifier,ParamDeclList,TypeExpr(Identifier)),
              Block(Statement(Return,
                              Expr(PrimaryExpr(TypeExpr(Identifier,
                                                        SuffixOp(ArrayAccess(Expr(PrimaryExpr(TypeExpr(Integer))))))))))))
+
+# type
+
+var a : [10]u8 = undefined;
+
+==>
+Program(Decl(VarDecl(Var,
+                     Name,
+                     TypeExpr(PrefixTypeOp(ArrayTypeStart(Expr(PrimaryExpr(TypeExpr(Integer))))),
+                              Identifier),
+                     Expr(PrimaryExpr(TypeExpr(Identifier))))))
+
+# sentinel type
+
+var a : [10:0]u8 = undefined;
+
+==>
+Program(Decl(VarDecl(Var,
+                     Name,
+                     TypeExpr(PrefixTypeOp(ArrayTypeStart(Expr(PrimaryExpr(TypeExpr(Integer))),
+                                                          Expr(PrimaryExpr(TypeExpr(Integer))))),
+                              Identifier),
+                     Expr(PrimaryExpr(TypeExpr(Identifier))))))

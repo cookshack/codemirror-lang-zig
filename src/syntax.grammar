@@ -300,7 +300,7 @@ PrefixTypeOp {
   | Anyframe "->"
 //  | SliceTypeStart (ByteAlign | AddrSpace | Const | Volatile | Allowzero)*
 //  | PtrTypeStart (AddrSpace | Align | "(" Expr (":" Expr ":" Expr)? ")" | Const | Volatile | Allowzero)*
-//  | ArrayTypeStart
+  | ArrayTypeStart
 }
 
 ArrayAccess { "[" Expr "]" }
