@@ -247,7 +247,7 @@ FieldInit { "." Identifier "=" Expr }
 
 WhileContinueExpr { ":" "(" (AssignExpr | Expr) ")" }
 
-AddrSpace { TokAddrSpace "(" Expr ")" }
+AddrSpace { _kw<"addrspace"> "(" Expr ")" }
 
 //// Fn specific.
 
@@ -372,9 +372,9 @@ StringLiteralSingle { stringLiteralSingle }
 @skip { whitespace | LineComment }
 
 kw<term> { @specialize<identifier, term> }
+_kw<term> { @specialize<identifier, term> }
 kw2<term> { @specialize[@name={term}]<identifier, term> }
 
-TokAddrSpace { kw<"addrspace"> }
 align { kw<"align"> }
 Allowzero { kw<"allowzero"> }
 And { kw<"and"> }
