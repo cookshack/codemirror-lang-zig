@@ -163,7 +163,7 @@ ForExpr { ForPrefix Expr (!else Else Expr)? }
 
 WhileExpr { WhilePrefix Expr (!else Else Payload? Expr)? }
 
-TypeExpr { /* PrefixTypeOp* */ (ErrorUnionExpr | suffixExpr) }
+TypeExpr { PrefixTypeOp* (ErrorUnionExpr | suffixExpr) }
 
 ErrorUnionExpr { suffixExpr !curlyRight "!" TypeExpr }
 
@@ -233,6 +233,8 @@ FieldInit { "." Identifier "=" Expr }
 
 WhileContinueExpr { ":" "(" (AssignExpr | Expr) ")" }
 
+AddrSpace { TokAddrSpace "(" Expr ")" }
+
 //// Fn specific.
 
 ParamDeclList { list<ParamDecl> }
@@ -293,6 +295,14 @@ MultiplyOp { "||" | "*" | arithOp<"/"> | "%" | "**" | "*%" | "*|" }
 
 PrefixOp { "!" | "-" | "~" | "-%" | "&" | Try | Await }
 
+PrefixTypeOp {
+  "?"
+  | Anyframe "->"
+//  | SliceTypeStart (ByteAlign | AddrSpace | Const | Volatile | Allowzero)*
+//  | PtrTypeStart (AddrSpace | Align | "(" Expr (":" Expr ":" Expr)? ")" | Const | Volatile | Allowzero)*
+//  | ArrayTypeStart
+}
+
 ArrayAccess { "[" Expr "]" }
 Slice { "[" Expr ".." (Expr? (!colonSlice ":" Expr)?)? "]" }
 Deref { ".*" }
@@ -303,7 +313,19 @@ SuffixOp { Slice | ArrayAccess | FieldAccess | Deref | Unwrap }
 
 FnCallArgs { !fncallargs "(" list<Expr> ")" }
 
-//// ContainerDecl specific
+//// Ptr specific.
+
+SliceTypeStart { "[" (":" Expr)? "]" }
+
+PtrTypeStart {
+  "*"
+  | "**"
+  | "[" "*" (C | ":" Expr)? "]"
+}
+
+ArrayTypeStart { "[" Expr (":" Expr)? "]" }
+
+//// ContainerDecl specific.
 
 ContainerDeclAuto { ContainerDeclType "{" ContainerDocComment? containerMembers "}" }
 
@@ -314,6 +336,8 @@ ContainerDeclType {
   | Union ("(" (Enum ("(" Expr ")")? | Expr) ")")? }
 
 //// Alignment
+
+Align { align }
 
 ByteAlign { align "(" Expr ")" }
 
@@ -332,7 +356,9 @@ StringLiteral { stringLiteralSingle | multiStringLiteral }
     ($[ \t\r\n] | "\r"? "\n")+
   }
 
+  TokAddrSpace { "addrspace" }
   align { "align" }
+  Allowzero { "allowzero" }
   And { "and" }
   Anyframe { "anyframe" }
   Anytype { "anytype" }
@@ -340,6 +366,7 @@ StringLiteral { stringLiteralSingle | multiStringLiteral }
   Async { "async" }
   Await { "await" }
   Break { "break" }
+  C { "c" }
   Catch { "catch" }
   Comptime { "comptime" }
   Const { "const" }
@@ -379,7 +406,7 @@ StringLiteral { stringLiteralSingle | multiStringLiteral }
 
   builtinIdentifier { "@" $[A-Za-z_] $[A-Za-z0-9_]* }
 
-  @precedence { align And Anyframe Anytype Asm Async Await Break Catch Comptime Const Continue Defer Else Enum Errdefer Error Extern
+  @precedence { align Allowzero And Anyframe Anytype Asm Async Await Break C Catch Comptime Const Continue Defer Else Enum Errdefer Error Extern
                 fn For If Nosuspend Opaque Or Orelse Packed Pub Resume Return Struct Suspend Switch Test Try Union
                 Unreachable Var Volatile While
                 identifier }

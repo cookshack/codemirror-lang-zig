@@ -1,0 +1,10 @@
+# type
+
+const o : ?u32 = 11;
+
+==>
+Program(Decl(VarDecl(Const,
+                     Name,
+                     TypeExpr(PrefixTypeOp,
+                              Identifier),
+                     Expr(PrimaryExpr(TypeExpr(Integer))))))
