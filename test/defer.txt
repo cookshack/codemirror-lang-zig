@@ -1,0 +1,51 @@
+# defer
+
+fn fun() noreturn {
+  var a = alloc();
+  defer free();
+}
+
+==>
+Program(Decl(FnProto(Identifier,
+                     ParamDeclList,
+                     TypeExpr(Identifier)),
+             Block(Statement(VarDecl(Var,
+                                     Name,
+                                     Expr(PrimaryExpr(TypeExpr(Identifier,
+                                                               FnCallArgs))))),
+                   Statement(Defer,
+                             BlockExprStatement(Expr(PrimaryExpr(TypeExpr(Identifier,
+                                                                          FnCallArgs))))))))
+
+# errdefer
+
+fn fun() u32 {
+  var a = alloc();
+  defer free();
+  errdefer exit();
+  if (a)
+    return 0;
+  return error.OutOfPie;
+}
+
+==>
+Program(Decl(FnProto(Identifier,
+                     ParamDeclList,
+                     TypeExpr(Identifier)),
+             Block(Statement(VarDecl(Var,
+                                     Name,
+                                     Expr(PrimaryExpr(TypeExpr(Identifier,
+                                                               FnCallArgs))))),
+                   Statement(Defer,
+                             BlockExprStatement(Expr(PrimaryExpr(TypeExpr(Identifier,
+                                                                          FnCallArgs))))),
+                   Statement(Errdefer,
+                             BlockExprStatement(Expr(PrimaryExpr(TypeExpr(Identifier,
+                                                                          FnCallArgs))))),
+                   Statement(IfStatement(IfPrefix(If,
+                                                  Expr(PrimaryExpr(TypeExpr(Identifier)))),
+                                         Expr(PrimaryExpr(Return,
+                                                          Expr(PrimaryExpr(TypeExpr(Integer))))))),
+                   Statement(Return,
+                             Expr(PrimaryExpr(TypeExpr(Error,
+                                                       Identifier)))))))

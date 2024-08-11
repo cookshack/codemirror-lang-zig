@@ -64,10 +64,8 @@ Statement {
   //| Comptime BlockExprStatement
   | !statement Nosuspend BlockExprStatement
   | Suspend BlockExprStatement
-  /*
   | Defer BlockExprStatement
   | Errdefer Payload? BlockExprStatement
-  */
   | IfStatement
   | !curlyRight labeledStatement
   | !curlyRight SwitchExpr
