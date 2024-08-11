@@ -23,3 +23,16 @@ Program(Decl(FnProto(Identifier,
                              BlockExprStatement(AssignExpr(Expr(PrimaryExpr(TypeExpr(Identifier))),
                                                            AssignOp,
                                                            Expr(PrimaryExpr(TypeExpr(Integer)))))))))
+
+# suspend stmnt
+
+fn fun() noreturn {
+  suspend a;
+}
+
+==>
+Program(Decl(FnProto(Identifier,
+                     ParamDeclList,
+                     TypeExpr(Identifier)),
+             Block(Statement(Suspend,
+                             BlockExprStatement(Expr(PrimaryExpr(TypeExpr(Identifier))))))))

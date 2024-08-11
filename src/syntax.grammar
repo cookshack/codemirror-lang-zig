@@ -63,8 +63,8 @@ Statement {
   (Comptime? VarDecl)
   //| Comptime BlockExprStatement
   | !statement Nosuspend BlockExprStatement
-  /*
   | Suspend BlockExprStatement
+  /*
   | Defer BlockExprStatement
   | Errdefer Payload? BlockExprStatement
   */
