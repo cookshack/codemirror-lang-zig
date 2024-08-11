@@ -45,7 +45,10 @@ TestName { stringLiteralSingle | identifier }
 
 ComptimeDecl { Comptime Block }
 
-Decl { ( FnProto (";" | Block) | VarDecl ) }
+Decl {
+  (FnProto (";" | Block) | VarDecl)
+  | kw<"usingnamespace"> Expr ";"
+}
 
 FnProto { fn Identifier? "(" ParamDeclList ")" "!"? TypeExpr }
 
