@@ -299,7 +299,7 @@ PrefixTypeOp {
   "?"
   | Anyframe "->"
 //  | SliceTypeStart (ByteAlign | AddrSpace | Const | Volatile | Allowzero)*
-//  | PtrTypeStart (AddrSpace | Align | "(" Expr (":" Expr ":" Expr)? ")" | Const | Volatile | Allowzero)*
+  | PtrTypeStart (AddrSpace | Align "(" Expr (":" Expr ":" Expr)? ")" | Const | Volatile | Allowzero)*
   | ArrayTypeStart
 }
 
@@ -406,9 +406,22 @@ StringLiteral { stringLiteralSingle | multiStringLiteral }
 
   builtinIdentifier { "@" $[A-Za-z_] $[A-Za-z0-9_]* }
 
-  @precedence { align Allowzero And Anyframe Anytype Asm Async Await Break C Catch Comptime Const Continue Defer Else Enum Errdefer Error Extern
-                fn For If Nosuspend Opaque Or Orelse Packed Pub Resume Return Struct Suspend Switch Test Try Union
-                Unreachable Var Volatile While
+  @precedence { TokAddrSpace align Allowzero And Anyframe Anytype Asm Async Await
+                Break
+                Catch Comptime Const Continue C // NB last
+                Defer
+                Else Enum Errdefer Error Extern
+                fn For
+                If
+                Nosuspend
+                Opaque Orelse Or // NB after Orelse
+                Packed Pub
+                Resume Return
+                Struct Suspend Switch
+                Test Try
+                Union Unreachable
+                Var Volatile
+                While
                 identifier }
 
   Integer {
