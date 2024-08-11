@@ -9,8 +9,8 @@ fn main () noreturn {
 
 ==>
 Program(Decl(FnProto(Identifier,ParamDeclList,TypeExpr(Identifier)),
-            Block(Statement(WhileStatement(WhilePrefix(While,
-                                                       Expr(PrimaryExpr(TypeExpr(Integer)))),
-                                           BlockLabel(Identifier),
-                                           Block(Statement(Break,
-                                                           BreakLabel(Identifier))))))))
+            Block(Statement(LoopStatement(WhileStatement(WhilePrefix(While,
+                                                                     Expr(PrimaryExpr(TypeExpr(Integer)))),
+                                                         BlockLabel(Identifier),
+                                                         Block(Statement(Break,
+                                                                         BreakLabel(Identifier)))))))))

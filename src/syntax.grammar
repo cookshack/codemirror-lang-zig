@@ -77,9 +77,9 @@ IfStatement {
              | (AssignExpr | Expr) (";" | !else Else Payload? Statement) )
 }
 
-labeledStatement { !curlyRight (Block | loopStatement) }
+labeledStatement { !curlyRight (Block | LoopStatement) }
 
-loopStatement { ForStatement | WhileStatement }
+LoopStatement { Inline? (ForStatement | WhileStatement) }
 
 ForStatement {
   ForPrefix ( blockExpr (!else Else Statement)?
@@ -157,7 +157,7 @@ IfExpr { IfPrefix Expr (!else Else Payload? Expr)? }
 
 Block { "{" Statement* "}" }
 
-LoopExpr { /*Inline?*/ ( ForExpr | WhileExpr) }
+LoopExpr { Inline? ( ForExpr | WhileExpr) }
 
 ForExpr { ForPrefix Expr (!else Else Expr)? }
 
@@ -201,7 +201,7 @@ IfTypeExpr { IfPrefix TypeExpr (!else Else Payload? TypeExpr)? }
 
 LabeledTypeExpr { BlockLabel Block | BlockLabel? LoopTypeExpr }
 
-LoopTypeExpr { /*Inline?*/ ( ForTypeExpr | WhileTypeExpr) }
+LoopTypeExpr { Inline? ( ForTypeExpr | WhileTypeExpr) }
 
 ForTypeExpr { ForPrefix TypeExpr (!else Else TypeExpr)? }
 
@@ -378,6 +378,7 @@ Extern { kw<"extern"> }
 fn { kw<"fn"> }
 For { kw<"for"> }
 If { kw<"if"> }
+Inline { kw<"inline"> }
 Nosuspend { kw<"nosuspend"> }
 Opaque { kw<"opaque"> }
 Or { kw<"or"> }
