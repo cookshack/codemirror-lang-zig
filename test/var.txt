@@ -9,13 +9,13 @@ Program(Decl(VarDecl(Const, Name)))
 
 const a;
 var b;
-var c : u32;
+threadlocal var c : u32;
 const d : string;
 
 ==>
 Program(Decl(VarDecl(Const, Name)),
         Decl(VarDecl(Var, Name)),
-        Decl(VarDecl(Var, Name, TypeExpr(Identifier))),
+        Decl(threadlocal, VarDecl(Var, Name, TypeExpr(Identifier))),
         Decl(VarDecl(Const, Name, TypeExpr(Identifier))))
 
 # Type
@@ -36,3 +36,25 @@ Program(Decl(VarDecl(Const,
                      Name,
                      TypeExpr(Identifier),
                      Expr(PrimaryExpr(TypeExpr(Integer))))))
+
+# export
+
+export var a : u32 = 0;
+
+==>
+Program(Decl(export,
+             VarDecl(Var,
+                     Name,
+                     TypeExpr(Identifier),
+                     Expr(PrimaryExpr(TypeExpr(Integer))))))
+
+# extern
+
+extern "c" var x : u32;
+
+==>
+Program(Decl(Extern,
+             StringLiteralSingle,
+             VarDecl(Var,
+                     Name,
+                     TypeExpr(Identifier))))

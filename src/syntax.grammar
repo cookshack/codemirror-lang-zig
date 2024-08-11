@@ -47,7 +47,7 @@ ComptimeDecl { Comptime Block }
 
 Decl {
   (kw2<"export"> | (Extern StringLiteralSingle?) | Inline | kw2<"noinline">)? FnProto (";" | Block)
-  | VarDecl
+  | (kw2<"export"> | (Extern StringLiteralSingle?))? kw2<"threadlocal">? VarDecl
   | kw2<"usingnamespace"> Expr ";"
 }
 
