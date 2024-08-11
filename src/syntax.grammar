@@ -170,8 +170,10 @@ TypeExpr { PrefixTypeOp* (ErrorUnionExpr | suffixExpr) }
 
 ErrorUnionExpr { suffixExpr !curlyRight "!" TypeExpr }
 
-suffixExpr { Async primaryTypeExpr SuffixOp* FnCallArgs
-             | !assign primaryTypeExpr (SuffixOp | FnCallArgs)* }
+suffixExpr {
+  Async primaryTypeExpr SuffixOp* FnCallArgs
+  | !assign primaryTypeExpr (SuffixOp | FnCallArgs)*
+}
 
 primaryTypeExpr {
   BuiltinIdentifier FnCallArgs
@@ -192,7 +194,8 @@ primaryTypeExpr {
   | Anyframe
   | Unreachable
   | StringLiteral
-  | SwitchExpr }
+  | SwitchExpr
+}
 
 ContainerDecl { ( Extern | Packed )? ContainerDeclAuto }
 
@@ -207,7 +210,8 @@ LabeledTypeExpr { BlockLabel Block | BlockLabel? LoopTypeExpr }
 LoopTypeExpr {
   // this is for the Inline in SwitchProng
   !curlyRight (Inline (ForTypeExpr | WhileTypeExpr))
-  | Inline? (ForTypeExpr | WhileTypeExpr) }
+  | Inline? (ForTypeExpr | WhileTypeExpr)
+}
 
 ForTypeExpr { ForPrefix TypeExpr (!else Else TypeExpr)? }
 
@@ -341,7 +345,8 @@ ContainerDeclType {
   Struct ("(" Expr ")")?
   | Opaque
   | Enum ("(" Expr ")")?
-  | Union ("(" (Enum ("(" Expr ")")? | Expr) ")")? }
+  | Union ("(" (Enum ("(" Expr ")")? | Expr) ")")?
+}
 
 //// Alignment
 
@@ -436,8 +441,10 @@ While { kw<"while"> }
 
   multiStringLiteral { ("\\\\" ![\n]* $[ \n]*)+ }
 
-  stringEscape { ("\\n" | "\\r" | "\\t" | "\\\\" | "\\'" | "\\\"" | "\\x" $[0-9a-fA-F] $[0-9a-fA-F]
-                  | "\\u{" $[0-9a-fA-F] ($[0-9a-fA-F] ($[0-9a-fA-F] ($[0-9a-fA-F] ($[0-9a-fA-F] $[0-9a-fA-F]?)?)?)?)? "}") }
+  stringEscape {
+    "\\n" | "\\r" | "\\t" | "\\\\" | "\\'" | "\\\"" | "\\x" $[0-9a-fA-F] $[0-9a-fA-F]
+    | "\\u{" $[0-9a-fA-F] ($[0-9a-fA-F] ($[0-9a-fA-F] ($[0-9a-fA-F] ($[0-9a-fA-F] $[0-9a-fA-F]?)?)?)?)? "}"
+  }
 
   CharLiteral {
     "'"
@@ -445,7 +452,8 @@ While { kw<"while"> }
       !['\\]
       | stringEscape
     )*
-    "'" }
+    "'"
+  }
 
   stringLiteralSingle {
     "\""
@@ -453,7 +461,8 @@ While { kw<"while"> }
       !["\\]*
       | stringEscape
     )*
-    "\"" }
+    "\""
+  }
 
   LineComment[isolate] { "//" ("\\" (![\n] | "\\r"? "\\n") | ![\n])* }
 
