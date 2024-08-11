@@ -1,0 +1,25 @@
+# anyframe
+
+const a : anyframe;
+
+==>
+Program(Decl(VarDecl(Const,
+                     Name,
+                     TypeExpr(Anyframe))))
+
+# frame return type
+
+fn w(fr: anyframe->u32) u32 {
+    return nosuspend await fr;
+}
+
+==>
+Program(Decl(FnProto(Identifier,
+                     ParamDeclList(ParamDecl(Identifier,
+                                             ParamType(TypeExpr(PrefixTypeOp(Anyframe),
+                                                                Identifier)))),
+                     TypeExpr(Identifier)),
+             Block(Statement(Return,
+                             Expr(PrimaryExpr(Nosuspend,
+                                              Expr(PrefixExpr(PrefixOp(Await),
+                                                              PrimaryExpr(TypeExpr(Identifier))))))))))
