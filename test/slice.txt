@@ -1,4 +1,4 @@
-# slice open end
+# open end
 
 fn main () noreturn {
   return a[0..];
@@ -10,7 +10,7 @@ Program(Decl(FnProto(Identifier,ParamDeclList,TypeExpr(Identifier)),
                              Expr(PrimaryExpr(TypeExpr(Identifier,
                                                        SuffixOp(Slice(Expr(PrimaryExpr(TypeExpr(Integer))))))))))))
 
-# slice end
+# end
 
 fn main () noreturn {
   return a[0..3];
@@ -23,7 +23,7 @@ Program(Decl(FnProto(Identifier,ParamDeclList,TypeExpr(Identifier)),
                                                        SuffixOp(Slice(Expr(PrimaryExpr(TypeExpr(Integer))),
                                                                       Expr(PrimaryExpr(TypeExpr(Integer))))))))))))
 
-# slice sentinal
+# sentinel
 
 fn fun () noreturn {
   return a[0..3:0];
@@ -36,3 +36,31 @@ Program(Decl(FnProto(Identifier,ParamDeclList,TypeExpr(Identifier)),
                                                        SuffixOp(Slice(Expr(PrimaryExpr(TypeExpr(Integer))),
                                                                       Expr(PrimaryExpr(TypeExpr(Integer))),
                                                                       Expr(PrimaryExpr(TypeExpr(Integer))))))))))))
+
+# type
+
+var sl: [] align(8) addrspace(something) const volatile allowzero u32;
+
+==>
+Program(Decl(VarDecl(Var,
+                     Name,
+                     TypeExpr(PrefixTypeOp(SliceTypeStart,
+                                           ByteAlign(Expr(PrimaryExpr(TypeExpr(Integer)))),
+                                           AddrSpace(TokAddrSpace,
+                                                     Expr(PrimaryExpr(TypeExpr(Identifier)))),
+                                           Const,
+                                           Volatile,
+                                           Allowzero),
+                              Identifier))))
+
+# type sentinel
+
+const sl: [:0]const u8 = "hi";
+
+==>
+Program(Decl(VarDecl(Const,
+                     Name,
+                     TypeExpr(PrefixTypeOp(SliceTypeStart(Expr(PrimaryExpr(TypeExpr(Integer)))),
+                                           Const),
+                              Identifier),
+                     Expr(PrimaryExpr(TypeExpr(StringLiteral))))))

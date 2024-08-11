@@ -298,7 +298,7 @@ PrefixOp { "!" | "-" | "~" | "-%" | "&" | Try | Await }
 PrefixTypeOp {
   "?"
   | Anyframe "->"
-//  | SliceTypeStart (ByteAlign | AddrSpace | Const | Volatile | Allowzero)*
+  | SliceTypeStart (ByteAlign | AddrSpace | Const | Volatile | Allowzero)*
   | PtrTypeStart (AddrSpace | Align "(" Expr (":" Expr ":" Expr)? ")" | Const | Volatile | Allowzero)*
   | ArrayTypeStart
 }
