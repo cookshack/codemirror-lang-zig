@@ -320,7 +320,9 @@ SliceTypeStart { "[" (":" Expr)? "]" }
 PtrTypeStart {
   "*"
   | "**"
-  | "[" "*" (C | ":" Expr)? "]"
+  // "...extended tokens allow both meanings to take effect, implicitly enabling GLR when both apply."
+  // vs kw<"c">, which turns any c into a keyword (when they may instead be identifiers)
+  | "[" "*" (@extend<identifier, "c"> | ":" Expr)? "]"
 }
 
 ArrayTypeStart { "[" Expr (":" Expr)? "]" }
@@ -365,7 +367,6 @@ Await { kw<"await"> }
 Break { kw<"break"> }
 Catch { kw<"catch"> }
 Comptime { kw<"comptime"> }
-C { kw<"c"> }
 Const { kw<"const"> }
 Continue { kw<"continue"> }
 Defer { kw<"defer"> }
