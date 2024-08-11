@@ -1,8 +1,16 @@
 # literal
 
 const ch = 'a';
+const constx = 'a';
+const xconst = 'a';
 
 ==>
 Program(Decl(VarDecl(Const,
+                     Name,
+                     Expr(PrimaryExpr(TypeExpr(CharLiteral))))),
+        Decl(VarDecl(Const,
+                     Name,
+                     Expr(PrimaryExpr(TypeExpr(CharLiteral))))),
+        Decl(VarDecl(Const,
                      Name,
                      Expr(PrimaryExpr(TypeExpr(CharLiteral))))))

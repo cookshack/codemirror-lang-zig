@@ -351,53 +351,55 @@ StringLiteral { stringLiteralSingle | multiStringLiteral }
 
 @skip { whitespace | LineComment }
 
+kw<term> { @specialize<identifier, term> }
+
+TokAddrSpace { kw<"addrspace"> }
+align { kw<"align"> }
+Allowzero { kw<"allowzero"> }
+And { kw<"and"> }
+Anyframe { kw<"anyframe"> }
+Anytype { kw<"anytype"> }
+Asm { kw<"asm"> }
+Async { kw<"async"> }
+Await { kw<"await"> }
+Break { kw<"break"> }
+Catch { kw<"catch"> }
+Comptime { kw<"comptime"> }
+C { kw<"c"> }
+Const { kw<"const"> }
+Continue { kw<"continue"> }
+Defer { kw<"defer"> }
+Else { kw<"else"> }
+Enum { kw<"enum"> }
+Errdefer { kw<"errdefer"> }
+Error { kw<"error"> }
+Extern { kw<"extern"> }
+fn { kw<"fn"> }
+For { kw<"for"> }
+If { kw<"if"> }
+Nosuspend { kw<"nosuspend"> }
+Opaque { kw<"opaque"> }
+Or { kw<"or"> }
+Orelse { kw<"orelse"> }
+Packed { kw<"packed"> }
+Pub { kw<"pub"> }
+Resume { kw<"resume"> }
+Return { kw<"return"> }
+Struct { kw<"struct"> }
+Suspend { kw<"suspend"> }
+Switch { kw<"switch"> }
+Test { kw<"test"> }
+Try { kw<"try"> }
+Union { kw<"union"> }
+Unreachable { kw<"unreachable"> }
+Var { kw<"var"> }
+Volatile { kw<"volatile"> }
+While { kw<"while"> }
+
 @tokens {
   whitespace {
     ($[ \t\r\n] | "\r"? "\n")+
   }
-
-  TokAddrSpace { "addrspace" }
-  align { "align" }
-  Allowzero { "allowzero" }
-  And { "and" }
-  Anyframe { "anyframe" }
-  Anytype { "anytype" }
-  Asm { "asm" }
-  Async { "async" }
-  Await { "await" }
-  Break { "break" }
-  C { "c" }
-  Catch { "catch" }
-  Comptime { "comptime" }
-  Const { "const" }
-  Continue { "continue" }
-  Defer { "defer" }
-  Else { "else" }
-  Enum { "enum" }
-  Errdefer { "errdefer" }
-  Error { "error" }
-  Extern { "extern" }
-  fn { "fn" }
-  For { "for" }
-  If { "if" }
-  Nosuspend { "nosuspend" }
-  Opaque { "opaque" }
-  Or { "or" }
-  Orelse { "orelse" }
-  Packed { "packed" }
-  Pub { "pub" }
-  Resume { "resume" }
-  Return { "return" }
-  Struct { "struct" }
-  Suspend { "suspend" }
-  Switch { "switch" }
-  Test { "test" }
-  Try { "try" }
-  Union { "union" }
-  Unreachable { "unreachable" }
-  Var { "var" }
-  Volatile { "volatile" }
-  While { "while" }
 
   //identifier: ($) => choice(/[A-Za-z_][A-Za-z0-9_]*/, seq("@", $.string_literal)),
   identifier {
@@ -405,24 +407,6 @@ StringLiteral { stringLiteralSingle | multiStringLiteral }
   }
 
   builtinIdentifier { "@" $[A-Za-z_] $[A-Za-z0-9_]* }
-
-  @precedence { TokAddrSpace align Allowzero And Anyframe Anytype Asm Async Await
-                Break
-                Catch Comptime Const Continue C // NB last
-                Defer
-                Else Enum Errdefer Error Extern
-                fn For
-                If
-                Nosuspend
-                Opaque Orelse Or // NB after Orelse
-                Packed Pub
-                Resume Return
-                Struct Suspend Switch
-                Test Try
-                Union Unreachable
-                Var Volatile
-                While
-                identifier }
 
   Integer {
     "0b" $[01] ("_"? $[01])*
