@@ -249,9 +249,10 @@ AddrSpace { TokAddrSpace "(" Expr ")" }
 
 ParamDeclList { list<ParamDecl> }
 
-ParamDecl { //seq(optional($.doc_comment), optional(choice("noalias", "comptime")), optional(seq($.identifier, ":")), $.param_type),
-            (Identifier ":") ParamType
-            | "..." }
+ParamDecl {
+  DocComment? (Noalias | Comptime)? (Identifier ":")? ParamType
+  | "..."
+}
 
 ParamType { Anytype | TypeExpr }
 
@@ -390,6 +391,7 @@ fn { kw<"fn"> }
 For { kw<"for"> }
 If { kw<"if"> }
 Inline { kw<"inline"> }
+Noalias { kw<"noalias"> }
 Nosuspend { kw<"nosuspend"> }
 Opaque { kw<"opaque"> }
 Or { kw<"or"> }

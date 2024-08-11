@@ -11,3 +11,21 @@ Program(Decl(FnProto(Identifier,
                      TypeExpr(Identifier)),
              Block(Statement(TypeExpr(Identifier,
                                       FnCallArgs(Expr(PrimaryExpr(TypeExpr(Identifier)))))))))
+
+# doc comment
+
+fn fun(
+  /// the doc comment for param a
+  noalias a : u32) noreturn {
+  print(a);
+}
+
+==>
+Program(Decl(FnProto(Identifier,
+                     ParamDeclList(ParamDecl(DocComment,
+                                             Noalias,
+                                             Identifier,
+                                             ParamType(TypeExpr(Identifier)))),
+                     TypeExpr(Identifier)),
+             Block(Statement(TypeExpr(Identifier,
+                                      FnCallArgs(Expr(PrimaryExpr(TypeExpr(Identifier)))))))))
