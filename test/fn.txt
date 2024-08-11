@@ -73,3 +73,47 @@ Program(Decl(VarDecl(Const,
                      TypeExpr(FnProto(ParamDeclList,
                                       TypeExpr(Identifier))),
                      Expr(PrimaryExpr(TypeExpr(Identifier))))))
+
+# export
+
+export fn cfun() u32;
+
+==>
+Program(Decl(export,
+             FnProto(Identifier,
+                     ParamDeclList,
+                     TypeExpr(Identifier))))
+
+# extern
+
+extern "c" fn atan2(a: f64, b: f64) f64;
+
+==>
+Program(Decl(Extern,
+             StringLiteralSingle,
+             FnProto(Identifier,
+                     ParamDeclList(ParamDecl(Identifier,
+                                             ParamType(TypeExpr(Identifier))),
+                                   ParamDecl(Identifier,
+                                             ParamType(TypeExpr(Identifier)))),
+                     TypeExpr(Identifier))))
+
+# inline
+
+inline fn f1() noreturn;
+
+==>
+Program(Decl(Inline,
+             FnProto(Identifier,
+                     ParamDeclList,
+                     TypeExpr(Identifier))))
+
+# noinline
+
+noinline fn f1() noreturn;
+
+==>
+Program(Decl(noinline,
+             FnProto(Identifier,
+                     ParamDeclList,
+                     TypeExpr(Identifier))))

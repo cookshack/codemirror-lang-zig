@@ -46,8 +46,9 @@ TestName { stringLiteralSingle | identifier }
 ComptimeDecl { Comptime Block }
 
 Decl {
-  (FnProto (";" | Block) | VarDecl)
-  | kw<"usingnamespace"> Expr ";"
+  (kw2<"export"> | (Extern StringLiteralSingle?) | Inline | kw2<"noinline">)? FnProto (";" | Block)
+  | VarDecl
+  | kw2<"usingnamespace"> Expr ";"
 }
 
 FnProto { fn Identifier? "(" ParamDeclList ")" "!"? TypeExpr }
@@ -366,9 +367,12 @@ BuiltinIdentifier { builtinIdentifier }
 
 StringLiteral { stringLiteralSingle | multiStringLiteral }
 
+StringLiteralSingle { stringLiteralSingle }
+
 @skip { whitespace | LineComment }
 
 kw<term> { @specialize<identifier, term> }
+kw2<term> { @specialize[@name={term}]<identifier, term> }
 
 TokAddrSpace { kw<"addrspace"> }
 align { kw<"align"> }

@@ -3,5 +3,6 @@
 usingnamespace @import("std");
 
 ==>
-Program(Decl(Expr(PrimaryExpr(TypeExpr(BuiltinIdentifier,
+Program(Decl(usingnamespace,
+             Expr(PrimaryExpr(TypeExpr(BuiltinIdentifier,
                                        FnCallArgs(Expr(PrimaryExpr(TypeExpr(StringLiteral)))))))))
