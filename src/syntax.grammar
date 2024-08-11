@@ -1,5 +1,6 @@
 @precedence {
   fncallargs @right
+  statement @right
   curlyRight @right
   curlyLeft @left
   assign @right
@@ -60,6 +61,13 @@ Name { identifier }
 
 Statement {
   (Comptime? VarDecl)
+  //| Comptime BlockExprStatement
+  | !statement Nosuspend BlockExprStatement
+  /*
+  | Suspend BlockExprStatement
+  | Defer BlockExprStatement
+  | Errdefer Payload? BlockExprStatement
+  */
   | IfStatement
   | !curlyRight labeledStatement
   | !curlyRight SwitchExpr
@@ -85,7 +93,9 @@ WhileStatement {
                 | (AssignExpr | Expr) (";" | !else Else Payload? Statement) )
 }
 
-blockExpr { !curlyRight BlockLabel? Block }
+BlockExprStatement { blockExpr | (AssignExpr | Expr) ";" }
+
+blockExpr { !curlyRight BlockLabel? !curlyRight Block }
 
 //// Expression level.
 
@@ -129,7 +139,7 @@ primaryExprExclIf {
   AsmExpr
   | Break BreakLabel? Expr?
   | Comptime Expr
-  | Nosuspend Expr
+  | !primary Nosuspend Expr
   | Continue BreakLabel?
   | Resume Expr
   | Return Expr?
@@ -336,8 +346,10 @@ StringLiteral { stringLiteralSingle | multiStringLiteral }
   Comptime { "comptime" }
   Const { "const" }
   Continue { "continue" }
+  Defer { "defer" }
   Else { "else" }
   Enum { "enum" }
+  Errdefer { "errdefer" }
   Error { "error" }
   Extern { "extern" }
   fn { "fn" }
@@ -351,8 +363,9 @@ StringLiteral { stringLiteralSingle | multiStringLiteral }
   Pub { "pub" }
   Resume { "resume" }
   Return { "return" }
-  Switch { "switch" }
   Struct { "struct" }
+  Suspend { "suspend" }
+  Switch { "switch" }
   Test { "test" }
   Try { "try" }
   Union { "union" }
@@ -368,8 +381,8 @@ StringLiteral { stringLiteralSingle | multiStringLiteral }
 
   builtinIdentifier { "@" $[A-Za-z_] $[A-Za-z0-9_]* }
 
-  @precedence { align And Anyframe Anytype Asm Async Await Break Catch Comptime Const Continue Else Enum Error Extern
-                fn For If Nosuspend Opaque Or Orelse Packed Pub Resume Return Struct Switch Test Try Union
+  @precedence { align And Anyframe Anytype Asm Async Await Break Catch Comptime Const Continue Defer Else Enum Errdefer Error Extern
+                fn For If Nosuspend Opaque Or Orelse Packed Pub Resume Return Struct Suspend Switch Test Try Union
                 Unreachable Var Volatile While
                 identifier }
 

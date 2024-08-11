@@ -8,3 +8,18 @@ Program(Decl(VarDecl(Const,
                      TypeExpr(Identifier),
                      Expr(PrimaryExpr(Nosuspend,
                                       Expr(PrimaryExpr(TypeExpr(Integer))))))))
+
+# nosuspend stmnt
+
+fn fun() noreturn {
+  nosuspend a = 0;
+}
+
+==>
+Program(Decl(FnProto(Identifier,
+                     ParamDeclList,
+                     TypeExpr(Identifier)),
+             Block(Statement(Nosuspend,
+                             BlockExprStatement(AssignExpr(Expr(PrimaryExpr(TypeExpr(Identifier))),
+                                                           AssignOp,
+                                                           Expr(PrimaryExpr(TypeExpr(Integer)))))))))
