@@ -3,7 +3,7 @@
 const a : anyframe;
 
 ==>
-Program(Decl(VarDecl(Const,
+Program(Decl(VarDecl(const,
                      Name,
                      TypeExpr(anyframe))))
 

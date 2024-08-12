@@ -3,7 +3,7 @@
 const a;
 
 ==>
-Program(Decl(VarDecl(Const, Name)))
+Program(Decl(VarDecl(const, Name)))
 
 # Top level vars
 
@@ -13,17 +13,17 @@ threadlocal var c : u32;
 const d : string;
 
 ==>
-Program(Decl(VarDecl(Const, Name)),
+Program(Decl(VarDecl(const, Name)),
         Decl(VarDecl(Var, Name)),
         Decl(threadlocal, VarDecl(Var, Name, TypeExpr(Identifier))),
-        Decl(VarDecl(Const, Name, TypeExpr(Identifier))))
+        Decl(VarDecl(const, Name, TypeExpr(Identifier))))
 
 # Type
 
 const a : u32;
 
 ==>
-Program(Decl(VarDecl(Const,
+Program(Decl(VarDecl(const,
                      Name,
                      TypeExpr(Identifier))))
 
@@ -32,7 +32,7 @@ Program(Decl(VarDecl(Const,
 const a : u32 = 0;
 
 ==>
-Program(Decl(VarDecl(Const,
+Program(Decl(VarDecl(const,
                      Name,
                      TypeExpr(Identifier),
                      Expr(PrimaryExpr(TypeExpr(Integer))))))
@@ -53,7 +53,7 @@ Program(Decl(export,
 extern "c" var x : u32;
 
 ==>
-Program(Decl(Extern,
+Program(Decl(extern,
              StringLiteralSingle,
              VarDecl(Var,
                      Name,

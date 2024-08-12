@@ -3,7 +3,7 @@
 const utf = "abc";
 
 ==>
-Program(Decl(VarDecl(Const,
+Program(Decl(VarDecl(const,
                      Name,
                      Expr(PrimaryExpr(TypeExpr(StringLiteral))))))
 
@@ -12,7 +12,7 @@ Program(Decl(VarDecl(Const,
 const utf = "\tabc\n";
 
 ==>
-Program(Decl(VarDecl(Const,
+Program(Decl(VarDecl(const,
                      Name,
                      Expr(PrimaryExpr(TypeExpr(StringLiteral))))))
 
@@ -21,7 +21,7 @@ Program(Decl(VarDecl(Const,
 const utf = "\u{1EC7}";
 
 ==>
-Program(Decl(VarDecl(Const,
+Program(Decl(VarDecl(const,
                      Name,
                      Expr(PrimaryExpr(TypeExpr(StringLiteral))))))
 
@@ -30,7 +30,7 @@ Program(Decl(VarDecl(Const,
 const invalid_utf8 = "\xff\xfe";
 
 ==>
-Program(Decl(VarDecl(Const,
+Program(Decl(VarDecl(const,
                      Name,
                      Expr(PrimaryExpr(TypeExpr(StringLiteral))))))
 
@@ -42,7 +42,7 @@ const utf = \\ this looks
 ; // and this is weird
 
 ==>
-Program(Decl(VarDecl(Const,
+Program(Decl(VarDecl(const,
                      Name,
                      Expr(PrimaryExpr(TypeExpr(StringLiteral))))),
         LineComment)

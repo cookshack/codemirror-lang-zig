@@ -68,7 +68,7 @@ Program(Decl(FnProto(Identifier,
 const a : fn () u32 = f;
 
 ==>
-Program(Decl(VarDecl(Const,
+Program(Decl(VarDecl(const,
                      Name,
                      TypeExpr(FnProto(ParamDeclList,
                                       TypeExpr(Identifier))),
@@ -89,7 +89,7 @@ Program(Decl(export,
 extern "c" fn atan2(a: f64, b: f64) f64;
 
 ==>
-Program(Decl(Extern,
+Program(Decl(extern,
              StringLiteralSingle,
              FnProto(Identifier,
                      ParamDeclList(ParamDecl(Identifier,

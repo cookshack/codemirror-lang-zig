@@ -5,7 +5,7 @@ const p = Point{
 };
 
 ==>
-Program(Decl(VarDecl(Const,
+Program(Decl(VarDecl(const,
                      Name,
                      Expr(PrimaryExpr(TypeExpr(Identifier),
                                       InitList(FieldInit(Identifier,
@@ -18,7 +18,7 @@ const a: Point = .{
 };
 
 ==>
-Program(Decl(VarDecl(Const,
+Program(Decl(VarDecl(const,
                      Name,
                      TypeExpr(Identifier),
                      Expr(PrimaryExpr(TypeExpr(InitList(FieldInit(Identifier,
@@ -31,7 +31,7 @@ const p = for (a) |x| Point {};
 
 ==>
 Program(LineComment,
-        Decl(VarDecl(Const,
+        Decl(VarDecl(const,
                      Name,
                      Expr(PrimaryExpr(LoopExpr(ForExpr(ForPrefix(For,
                                                                  ForArgList(ForItem(Expr(PrimaryExpr(TypeExpr(Identifier))))),
@@ -51,7 +51,7 @@ const Point = packed struct (u32) {
 };
 
 ==>
-Program(Decl(VarDecl(Const,
+Program(Decl(VarDecl(const,
                      Name,
                      Expr(PrimaryExpr(TypeExpr(ContainerDecl(Packed,
                                                              ContainerDeclAuto(ContainerDeclType(Struct,

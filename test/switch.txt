@@ -43,7 +43,7 @@ Program(Decl(FnProto(Identifier,
                      TypeExpr(Identifier)),
              Block(Statement(SwitchExpr(Switch,
                                         Expr(PrimaryExpr(TypeExpr(Identifier)))
-                                        SwitchProng(SwitchCase(Else),
+                                        SwitchProng(SwitchCase(else),
                                                     Expr(PrimaryExpr(TypeExpr(Identifier,
                                                                               FnCallArgs)))))))))
 
@@ -55,13 +55,13 @@ const a = switch (tag) {
 };
 
 ==>
-Program(Decl(VarDecl(Const,
+Program(Decl(VarDecl(const,
                      Name,
                      Expr(PrimaryExpr(TypeExpr(SwitchExpr(Switch,
                                                           Expr(PrimaryExpr(TypeExpr(Identifier))),
                                                           SwitchProng(SwitchCase(SwitchItem(Expr(PrimaryExpr(TypeExpr(Identifier))))),
                                                                       Expr(PrimaryExpr(TypeExpr(Integer)))),
-                                                          SwitchProng(SwitchCase(Else),
+                                                          SwitchProng(SwitchCase(else),
                                                                       Expr(PrimaryExpr(TypeExpr(Integer)))))))))))
 
 # inline

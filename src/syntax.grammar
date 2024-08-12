@@ -43,20 +43,20 @@ TestDecl { Test TestName Block }
 
 TestName { stringLiteralSingle | identifier }
 
-ComptimeDecl { Comptime Block }
+ComptimeDecl { kw<"comptime"> Block }
 
 Decl {
-  (kw<"export"> | (Extern StringLiteralSingle?) | Inline | kw<"noinline">)? FnProto (";" | Block)
-  | (kw<"export"> | (Extern StringLiteralSingle?))? kw<"threadlocal">? VarDecl
+  (kw<"export"> | (kw<"extern"> StringLiteralSingle?) | Inline | kw<"noinline">)? FnProto (";" | Block)
+  | (kw<"export"> | (kw<"extern"> StringLiteralSingle?))? kw<"threadlocal">? VarDecl
   | kw<"usingnamespace"> Expr ";"
 }
 
 FnProto { fn Identifier? "(" ParamDeclList ")" "!"? TypeExpr }
 
-VarDecl { ( Const | Var ) Name (":" TypeExpr)? ("=" Expr)? ";" }
+VarDecl { ( kw<"const"> | Var ) Name (":" TypeExpr)? ("=" Expr)? ";" }
 
 ContainerField {
-  DocComment? (!curlyRight Comptime)? /*!KEYWORD_fn*/ (Identifier ":")? TypeExpr ByteAlign? ("=" Expr)?
+  DocComment? (!curlyRight kw<"comptime">)? /*!KEYWORD_fn*/ (Identifier ":")? TypeExpr ByteAlign? ("=" Expr)?
 }
 
 Name { identifier }
@@ -64,12 +64,12 @@ Name { identifier }
 //// Block level.
 
 Statement {
-  (Comptime? VarDecl)
-  //| Comptime BlockExprStatement
+  (kw<"comptime">? VarDecl)
+  //| kw<"comptime"> BlockExprStatement
   | !statement Nosuspend BlockExprStatement
   | Suspend BlockExprStatement
-  | Defer BlockExprStatement
-  | Errdefer Payload? BlockExprStatement
+  | kw<"defer"> BlockExprStatement
+  | kw<"errdefer"> Payload? BlockExprStatement
   | IfStatement
   | !curlyRight labeledStatement
   | !curlyRight SwitchExpr
@@ -77,8 +77,8 @@ Statement {
 }
 
 IfStatement {
-  IfPrefix ( blockExpr (!else Else Payload? Statement)?
-             | (AssignExpr | Expr) (";" | !else Else Payload? Statement) )
+  IfPrefix ( blockExpr (!else kw<"else"> Payload? Statement)?
+             | (AssignExpr | Expr) (";" | !else kw<"else"> Payload? Statement) )
 }
 
 labeledStatement { !curlyRight (Block | LoopStatement) }
@@ -86,13 +86,13 @@ labeledStatement { !curlyRight (Block | LoopStatement) }
 LoopStatement { Inline? (ForStatement | WhileStatement) }
 
 ForStatement {
-  ForPrefix ( blockExpr (!else Else Statement)?
-              | (AssignExpr | Expr) (";" | !else Else Statement) )
+  ForPrefix ( blockExpr (!else kw<"else"> Statement)?
+              | (AssignExpr | Expr) (";" | !else kw<"else"> Statement) )
 }
 
 WhileStatement {
-  WhilePrefix ( blockExpr (!else Else Payload? Statement)?
-                | (AssignExpr | Expr) (";" | !else Else Payload? Statement) )
+  WhilePrefix ( blockExpr (!else kw<"else"> Payload? Statement)?
+                | (AssignExpr | Expr) (";" | !else kw<"else"> Payload? Statement) )
 }
 
 BlockExprStatement { blockExpr | (AssignExpr | Expr) ";" }
@@ -140,9 +140,9 @@ PrimaryExpr {
 primaryExprExclIf {
   AsmExpr
   | kw<"break"> BreakLabel? Expr?
-  | Comptime Expr
+  | kw<"comptime"> Expr
   | !primary Nosuspend Expr
-  | Continue BreakLabel?
+  | kw<"continue"> BreakLabel?
   | Resume Expr
   | Return Expr?
   | Block
@@ -157,7 +157,7 @@ InitList {
   | "{" "}"
 }
 
-IfExpr { IfPrefix Expr (!else Else Payload? Expr)? }
+IfExpr { IfPrefix Expr (!else kw<"else"> Payload? Expr)? }
 
 Block { "{" Statement* "}" }
 
@@ -166,9 +166,9 @@ LoopExpr {
   !curlyRight (Inline (ForExpr | WhileExpr))
   | Inline? (ForExpr | WhileExpr) }
 
-ForExpr { ForPrefix Expr (!else Else Expr)? }
+ForExpr { ForPrefix Expr (!else kw<"else"> Expr)? }
 
-WhileExpr { WhilePrefix Expr (!else Else Payload? Expr)? }
+WhileExpr { WhilePrefix Expr (!else kw<"else"> Payload? Expr)? }
 
 TypeExpr { PrefixTypeOp* (ErrorUnionExpr | suffixExpr) }
 
@@ -193,21 +193,21 @@ primaryTypeExpr {
   | Identifier
   | IfTypeExpr
   | Integer
-  | !primary Comptime TypeExpr
-  | Error "." Identifier
+  | !primary kw<"comptime"> TypeExpr
+  | kw<"error"> "." Identifier
   | kw<"anyframe">
   | Unreachable
   | StringLiteral
   | SwitchExpr
 }
 
-ContainerDecl { ( Extern | Packed )? ContainerDeclAuto }
+ContainerDecl { ( kw<"extern"> | Packed )? ContainerDeclAuto }
 
-ErrorSetDecl { Error "{" list<DocComment? Identifier> "}" }
+ErrorSetDecl { kw<"error"> "{" list<DocComment? Identifier> "}" }
 
 GroupedExpr { "(" Expr ")" }
 
-IfTypeExpr { IfPrefix TypeExpr (!else Else Payload? TypeExpr)? }
+IfTypeExpr { IfPrefix TypeExpr (!else kw<"else"> Payload? TypeExpr)? }
 
 LabeledTypeExpr { BlockLabel Block | BlockLabel? LoopTypeExpr }
 
@@ -217,9 +217,9 @@ LoopTypeExpr {
   | Inline? (ForTypeExpr | WhileTypeExpr)
 }
 
-ForTypeExpr { ForPrefix TypeExpr (!else Else TypeExpr)? }
+ForTypeExpr { ForPrefix TypeExpr (!else kw<"else"> TypeExpr)? }
 
-WhileTypeExpr { WhilePrefix TypeExpr (!else Else Payload? TypeExpr)? }
+WhileTypeExpr { WhilePrefix TypeExpr (!else kw<"else"> Payload? TypeExpr)? }
 
 SwitchExpr { Switch "(" Expr ")" "{" list<SwitchProng> "}" }
 
@@ -254,7 +254,7 @@ AddrSpace { kw<"addrspace"> "(" Expr ")" }
 ParamDeclList { list<ParamDecl> }
 
 ParamDecl {
-  DocComment? (Noalias | Comptime)? (Identifier ":")? ParamType
+  DocComment? (Noalias | kw<"comptime">)? (Identifier ":")? ParamType
   | "..."
 }
 
@@ -284,7 +284,7 @@ Star { "*" }
 
 SwitchProng { Inline? SwitchCase "=>" PtrIndexPayload? (AssignExpr | Expr) }
 
-SwitchCase { SwitchItem ("," SwitchItem)* ","? | Else }
+SwitchCase { SwitchItem ("," SwitchItem)* ","? | kw<"else"> }
 
 SwitchItem { Expr ("..." Expr)? }
 
@@ -313,8 +313,8 @@ PrefixOp { "!" | "-" | "~" | "-%" | "&" | Try | kw<"await"> }
 PrefixTypeOp {
   "?"
   | kw<"anyframe"> "->"
-  | SliceTypeStart (ByteAlign | AddrSpace | Const | Volatile | kw<"allowzero">)*
-  | PtrTypeStart (AddrSpace | kw<"align"> "(" Expr (":" Expr ":" Expr)? ")" | Const | Volatile | kw<"allowzero">)*
+  | SliceTypeStart (ByteAlign | AddrSpace | kw<"const"> | Volatile | kw<"allowzero">)*
+  | PtrTypeStart (AddrSpace | kw<"align"> "(" Expr (":" Expr ":" Expr)? ")" | kw<"const"> | Volatile | kw<"allowzero">)*
   | ArrayTypeStart
 }
 
@@ -349,8 +349,8 @@ ContainerDeclAuto { ContainerDeclType "{" ContainerDocComment? containerMembers 
 ContainerDeclType {
   Struct ("(" Expr ")")?
   | Opaque
-  | Enum ("(" Expr ")")?
-  | Union ("(" (Enum ("(" Expr ")")? | Expr) ")")?
+  | kw<"enum"> ("(" Expr ")")?
+  | Union ("(" (kw<"enum"> ("(" Expr ")")? | Expr) ")")?
 }
 
 //// Alignment
@@ -372,15 +372,6 @@ StringLiteralSingle { stringLiteralSingle }
 kw<term> { @specialize[@name={term}]<identifier, term> }
 _kw<term> { @specialize<identifier, term> }
 
-Comptime { _kw<"comptime"> }
-Const { _kw<"const"> }
-Continue { _kw<"continue"> }
-Defer { _kw<"defer"> }
-Else { _kw<"else"> }
-Enum { _kw<"enum"> }
-Errdefer { _kw<"errdefer"> }
-Error { _kw<"error"> }
-Extern { _kw<"extern"> }
 fn { _kw<"fn"> }
 For { _kw<"for"> }
 If { _kw<"if"> }

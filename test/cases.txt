@@ -33,7 +33,7 @@ const std = @import("std");
 Program
 (Decl
  (VarDecl
-  (Const,
+  (const,
    Name,
    Expr(PrimaryExpr(TypeExpr(BuiltinIdentifier,
                              FnCallArgs(Expr(PrimaryExpr(TypeExpr(StringLiteral))))))))))

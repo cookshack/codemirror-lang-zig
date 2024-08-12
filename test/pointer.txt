@@ -6,7 +6,7 @@ var p : * const volatile allowzero u32;
 Program(Decl(VarDecl(Var,
                      Name,
                      TypeExpr(PrefixTypeOp(PtrTypeStart,
-                                           Const,
+                                           const,
                                            Volatile,
                                            allowzero),
                               Identifier))))

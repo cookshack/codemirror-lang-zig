@@ -68,7 +68,7 @@ Program(Decl(FnProto(Identifier,
                                                                              ForItem(Expr(PrimaryExpr(TypeExpr(Integer))))),
                                                                   PtrListPayload(Identifier)),
                                                         Block,
-                                                        Else,
+                                                        else,
                                                         Statement(Return,
                                                                   Expr(PrimaryExpr(TypeExpr(Integer))))))))))
 
@@ -94,5 +94,5 @@ Program(Decl(FnProto(Identifier,
                                                                Expr(PrimaryExpr(Block(Statement(TypeExpr(Identifier),
                                                                                                 AssignOp,
                                                                                                 Expr(PrimaryExpr(TypeExpr(Identifier))))))),
-                                                               Else,
+                                                               else,
                                                                Expr(PrimaryExpr(TypeExpr(Identifier)))))))))))

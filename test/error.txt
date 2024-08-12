@@ -3,9 +3,9 @@
 const e = error.OutOfPie;
 
 ==>
-Program(Decl(VarDecl(Const,
+Program(Decl(VarDecl(const,
                      Name,
-                     Expr(PrimaryExpr(TypeExpr(Error,
+                     Expr(PrimaryExpr(TypeExpr(error,
                                                Identifier))))))
 
 # set decl
@@ -13,9 +13,9 @@ Program(Decl(VarDecl(Const,
 const e : error{ OutOfPie, OutOfJuice };
 
 ==>
-Program(Decl(VarDecl(Const,
+Program(Decl(VarDecl(const,
                      Name,
-                     TypeExpr(ErrorSetDecl(Error,
+                     TypeExpr(ErrorSetDecl(error,
                                            Identifier,
                                            Identifier)))))
 
@@ -24,9 +24,9 @@ Program(Decl(VarDecl(Const,
 const pies : anyerror!u32 = error.OutOfPie;
 
 ==>
-Program(Decl(VarDecl(Const,
+Program(Decl(VarDecl(const,
                      Name,
                      TypeExpr(ErrorUnionExpr(Identifier,
                                              TypeExpr(Identifier))),
-                     Expr(PrimaryExpr(TypeExpr(Error,
+                     Expr(PrimaryExpr(TypeExpr(error,
                                                Identifier))))))

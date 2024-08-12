@@ -49,7 +49,7 @@ Program(Decl(VarDecl(Var,
                                                      Expr(PrimaryExpr(TypeExpr(Integer)))),
                                            AddrSpace(addrspace,
                                                      Expr(PrimaryExpr(TypeExpr(Identifier)))),
-                                           Const,
+                                           const,
                                            Volatile,
                                            allowzero),
                               Identifier))))
@@ -59,9 +59,9 @@ Program(Decl(VarDecl(Var,
 const sl: [:0]const u8 = "hi";
 
 ==>
-Program(Decl(VarDecl(Const,
+Program(Decl(VarDecl(const,
                      Name,
                      TypeExpr(PrefixTypeOp(SliceTypeStart(Expr(PrimaryExpr(TypeExpr(Integer)))),
-                                           Const),
+                                           const),
                               Identifier),
                      Expr(PrimaryExpr(TypeExpr(StringLiteral))))))

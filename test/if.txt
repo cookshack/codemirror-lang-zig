@@ -26,7 +26,7 @@ Program(Decl(FnProto(Identifier,ParamDeclList,TypeExpr(Identifier)),
                                                                                           CompareOp,
                                                                                           Expr(PrimaryExpr(TypeExpr(Integer)))))),
                                                              Expr(PrimaryExpr(TypeExpr(Integer))),
-                                                             Else,
+                                                             else,
                                                              Expr(PrimaryExpr(TypeExpr(Integer))))))))))
 
 # stmnt with assign in then expr
@@ -48,10 +48,10 @@ Program(Decl(FnProto(Identifier,ParamDeclList,TypeExpr(Identifier)),
 const a : if (b) u32 else u16;
 
 ==>
-Program(Decl(VarDecl(Const,
+Program(Decl(VarDecl(const,
                      Name,
                      TypeExpr(IfTypeExpr(IfPrefix(If,
                                                   Expr(PrimaryExpr(TypeExpr(Identifier)))),
                                          TypeExpr(Identifier),
-                                         Else,
+                                         else,
                                          TypeExpr(Identifier))))))

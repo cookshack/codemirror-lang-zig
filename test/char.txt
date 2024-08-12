@@ -5,12 +5,12 @@ const constx = 'a';
 const xconst = 'a';
 
 ==>
-Program(Decl(VarDecl(Const,
+Program(Decl(VarDecl(const,
                      Name,
                      Expr(PrimaryExpr(TypeExpr(CharLiteral))))),
-        Decl(VarDecl(Const,
+        Decl(VarDecl(const,
                      Name,
                      Expr(PrimaryExpr(TypeExpr(CharLiteral))))),
-        Decl(VarDecl(Const,
+        Decl(VarDecl(const,
                      Name,
                      Expr(PrimaryExpr(TypeExpr(CharLiteral))))))
