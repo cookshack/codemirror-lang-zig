@@ -5,13 +5,15 @@
   curlyLeft @left
   assign @right
   primary
-  or @left
-  and @left
-  compare @left
-  bitwise @left
-  bitShift @left
-  add @left
+
   multiply @left
+  add @left
+  bitShift @left
+  bitwise @left
+  compare @left
+  and @left
+  or @left
+
   prefix
 
   else @right
