@@ -7,7 +7,7 @@ fn fun(a : anytype) noreturn {
 ==>
 Program(Decl(FnProto(Identifier,
                      ParamDeclList(ParamDecl(Identifier,
-                                   ParamType(Anytype))),
+                                   ParamType(anytype))),
                      TypeExpr(Identifier)),
              Block(Statement(TypeExpr(Identifier,
                                       FnCallArgs(Expr(PrimaryExpr(TypeExpr(Identifier)))))))))

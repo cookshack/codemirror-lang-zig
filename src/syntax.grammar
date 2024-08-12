@@ -175,7 +175,7 @@ TypeExpr { PrefixTypeOp* (ErrorUnionExpr | suffixExpr) }
 ErrorUnionExpr { suffixExpr !curlyRight "!" TypeExpr }
 
 suffixExpr {
-  Async primaryTypeExpr SuffixOp* FnCallArgs
+  kw<"async"> primaryTypeExpr SuffixOp* FnCallArgs
   | !assign primaryTypeExpr (SuffixOp | FnCallArgs)*
 }
 
@@ -225,7 +225,7 @@ SwitchExpr { Switch "(" Expr ")" "{" list<SwitchProng> "}" }
 
 //// Assembly.
 
-AsmExpr { Asm Volatile? "(" Expr AsmOutput? ")" }
+AsmExpr { kw<"asm"> Volatile? "(" Expr AsmOutput? ")" }
 
 AsmOutput { ":" list<AsmOutputItem> AsmInput? }
 
@@ -258,7 +258,7 @@ ParamDecl {
   | "..."
 }
 
-ParamType { Anytype | TypeExpr }
+ParamType { kw<"anytype"> | TypeExpr }
 
 //// Control flow prefixes
 
@@ -372,9 +372,6 @@ StringLiteralSingle { stringLiteralSingle }
 kw<term> { @specialize[@name={term}]<identifier, term> }
 _kw<term> { @specialize<identifier, term> }
 
-Anytype { _kw<"anytype"> }
-Asm { _kw<"asm"> }
-Async { _kw<"async"> }
 Await { _kw<"await"> }
 Break { _kw<"break"> }
 Catch { _kw<"catch"> }
