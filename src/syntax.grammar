@@ -56,7 +56,7 @@ FnProto { fn Identifier? "(" ParamDeclList ")" "!"? TypeExpr }
 VarDecl { ( Const | Var ) Name (":" TypeExpr)? ("=" Expr)? ";" }
 
 ContainerField {
-  DocComment? Comptime? /*!KEYWORD_fn*/ (Identifier ":")? TypeExpr ByteAlign? ("=" Expr)?
+  DocComment? (!curlyRight Comptime)? /*!KEYWORD_fn*/ (Identifier ":")? TypeExpr ByteAlign? ("=" Expr)?
 }
 
 Name { identifier }
@@ -193,7 +193,7 @@ primaryTypeExpr {
   | Identifier
   | IfTypeExpr
   | Integer
-  //| Comptime TypeExpr
+  | !primary Comptime TypeExpr
   | Error "." Identifier
   | kw<"anyframe">
   | Unreachable

@@ -41,3 +41,19 @@ Program
                                                                                                        (TypeExpr
                                                                                                         (Integer))))))))))))))))),
         LineComment)))
+
+# type expr
+
+comptime comptime a = 0,
+
+var a : comptime u32;
+
+==>
+Program(ContainerField(TypeExpr(Comptime,
+                                TypeExpr(Comptime,
+                                         TypeExpr(Identifier))),
+                       Expr(PrimaryExpr(TypeExpr(Integer)))),
+        Decl(VarDecl(Var,
+                     Name,
+                     TypeExpr(Comptime,
+                              TypeExpr(Identifier)))))
