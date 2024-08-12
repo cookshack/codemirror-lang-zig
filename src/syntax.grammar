@@ -247,7 +247,7 @@ FieldInit { "." Identifier "=" Expr }
 
 WhileContinueExpr { ":" "(" (AssignExpr | Expr) ")" }
 
-AddrSpace { _kw<"addrspace"> "(" Expr ")" }
+AddrSpace { kw<"addrspace"> "(" Expr ")" }
 
 //// Fn specific.
 
