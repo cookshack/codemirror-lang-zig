@@ -5,10 +5,11 @@ fn fun() noreturn {
 }
 
 ==>
-Program(Decl(FnProto(Identifier,
+Program(Decl(FnProto(fn,
+                     Identifier,
                      ParamDeclList,
                      TypeExpr(Identifier)),
-             Block(Statement(SwitchExpr(Switch,
+             Block(Statement(SwitchExpr(switch,
                                         Expr(PrimaryExpr(TypeExpr(Identifier))))))))
 
 # prong
@@ -20,10 +21,11 @@ fn fun() noreturn {
 }
 
 ==>
-Program(Decl(FnProto(Identifier,
+Program(Decl(FnProto(fn,
+                     Identifier,
                      ParamDeclList,
                      TypeExpr(Identifier)),
-             Block(Statement(SwitchExpr(Switch,
+             Block(Statement(SwitchExpr(switch,
                                         Expr(PrimaryExpr(TypeExpr(Identifier)))
                                         SwitchProng(SwitchCase(SwitchItem(Expr(PrimaryExpr(TypeExpr(Integer))))),
                                                     Expr(PrimaryExpr(TypeExpr(Identifier,
@@ -38,10 +40,11 @@ fn fun() noreturn {
 }
 
 ==>
-Program(Decl(FnProto(Identifier,
+Program(Decl(FnProto(fn,
+                     Identifier,
                      ParamDeclList,
                      TypeExpr(Identifier)),
-             Block(Statement(SwitchExpr(Switch,
+             Block(Statement(SwitchExpr(switch,
                                         Expr(PrimaryExpr(TypeExpr(Identifier)))
                                         SwitchProng(SwitchCase(else),
                                                     Expr(PrimaryExpr(TypeExpr(Identifier,
@@ -57,7 +60,7 @@ const a = switch (tag) {
 ==>
 Program(Decl(VarDecl(const,
                      Name,
-                     Expr(PrimaryExpr(TypeExpr(SwitchExpr(Switch,
+                     Expr(PrimaryExpr(TypeExpr(SwitchExpr(switch,
                                                           Expr(PrimaryExpr(TypeExpr(Identifier))),
                                                           SwitchProng(SwitchCase(SwitchItem(Expr(PrimaryExpr(TypeExpr(Identifier))))),
                                                                       Expr(PrimaryExpr(TypeExpr(Integer)))),
@@ -73,12 +76,13 @@ fn f1() noreturn {
 }
 
 ==>
-Program(Decl(FnProto(Identifier,
+Program(Decl(FnProto(fn,
+                     Identifier,
                      ParamDeclList,
                      TypeExpr(Identifier)),
-             Block(Statement(SwitchExpr(Switch,
+             Block(Statement(SwitchExpr(switch,
                                         Expr(PrimaryExpr(TypeExpr(Identifier))),
-                                        SwitchProng(Inline,
+                                        SwitchProng(inline,
                                                     SwitchCase(SwitchItem(Expr(PrimaryExpr(TypeExpr(Integer)))),
                                                                SwitchItem(Expr(PrimaryExpr(TypeExpr(Integer))))),
                                                     PtrIndexPayload(Identifier),

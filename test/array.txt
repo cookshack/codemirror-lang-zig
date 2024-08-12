@@ -5,8 +5,8 @@ fn main () noreturn {
 }
 
 ==>
-Program(Decl(FnProto(Identifier,ParamDeclList,TypeExpr(Identifier)),
-             Block(Statement(Return,
+Program(Decl(FnProto(fn, Identifier,ParamDeclList,TypeExpr(Identifier)),
+             Block(Statement(return,
                              Expr(PrimaryExpr(TypeExpr(Identifier,
                                                        SuffixOp(ArrayAccess(Expr(PrimaryExpr(TypeExpr(Integer))))))))))))
 
@@ -15,7 +15,7 @@ Program(Decl(FnProto(Identifier,ParamDeclList,TypeExpr(Identifier)),
 var a : [10]u8 = undefined;
 
 ==>
-Program(Decl(VarDecl(Var,
+Program(Decl(VarDecl(var,
                      Name,
                      TypeExpr(PrefixTypeOp(ArrayTypeStart(Expr(PrimaryExpr(TypeExpr(Integer))))),
                               Identifier),
@@ -26,7 +26,7 @@ Program(Decl(VarDecl(Var,
 var a : [10:0]u8 = undefined;
 
 ==>
-Program(Decl(VarDecl(Var,
+Program(Decl(VarDecl(var,
                      Name,
                      TypeExpr(PrefixTypeOp(ArrayTypeStart(Expr(PrimaryExpr(TypeExpr(Integer))),
                                                           Expr(PrimaryExpr(TypeExpr(Integer))))),

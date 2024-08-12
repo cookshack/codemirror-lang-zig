@@ -14,12 +14,13 @@ fn w(fr: anyframe->u32) u32 {
 }
 
 ==>
-Program(Decl(FnProto(Identifier,
+Program(Decl(FnProto(fn,
+                     Identifier,
                      ParamDeclList(ParamDecl(Identifier,
                                              ParamType(TypeExpr(PrefixTypeOp(anyframe),
                                                                 Identifier)))),
                      TypeExpr(Identifier)),
-             Block(Statement(Return,
-                             Expr(PrimaryExpr(Nosuspend,
+             Block(Statement(return,
+                             Expr(PrimaryExpr(nosuspend,
                                               Expr(PrefixExpr(PrefixOp(await),
                                                               PrimaryExpr(TypeExpr(Identifier))))))))))

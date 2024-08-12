@@ -33,27 +33,27 @@ list<x> { (x ",")* x? }
 
 containerMembers { !containerDecl (ContainerField ",")* (ContainerField | containerDecl*) }
 
-containerDecl { TestDecl | ComptimeDecl | DocComment? Pub? Decl }
+containerDecl { TestDecl | ComptimeDecl | DocComment? kw<"pub">? Decl }
 
 //// Top level.
 
 ContainerDocComment { containerComment+ }
 
-TestDecl { Test TestName Block }
+TestDecl { kw<"test"> TestName Block }
 
 TestName { stringLiteralSingle | identifier }
 
 ComptimeDecl { kw<"comptime"> Block }
 
 Decl {
-  (kw<"export"> | (kw<"extern"> StringLiteralSingle?) | Inline | kw<"noinline">)? FnProto (";" | Block)
+  (kw<"export"> | (kw<"extern"> StringLiteralSingle?) | kw<"inline"> | kw<"noinline">)? FnProto (";" | Block)
   | (kw<"export"> | (kw<"extern"> StringLiteralSingle?))? kw<"threadlocal">? VarDecl
   | kw<"usingnamespace"> Expr ";"
 }
 
-FnProto { fn Identifier? "(" ParamDeclList ")" "!"? TypeExpr }
+FnProto { kw<"fn"> Identifier? "(" ParamDeclList ")" "!"? TypeExpr }
 
-VarDecl { ( kw<"const"> | Var ) Name (":" TypeExpr)? ("=" Expr)? ";" }
+VarDecl { ( kw<"const"> | kw<"var"> ) Name (":" TypeExpr)? ("=" Expr)? ";" }
 
 ContainerField {
   DocComment? (!curlyRight kw<"comptime">)? /*!KEYWORD_fn*/ (Identifier ":")? TypeExpr ByteAlign? ("=" Expr)?
@@ -66,8 +66,8 @@ Name { identifier }
 Statement {
   (kw<"comptime">? VarDecl)
   //| kw<"comptime"> BlockExprStatement
-  | !statement Nosuspend BlockExprStatement
-  | Suspend BlockExprStatement
+  | !statement kw<"nosuspend"> BlockExprStatement
+  | kw<"suspend"> BlockExprStatement
   | kw<"defer"> BlockExprStatement
   | kw<"errdefer"> Payload? BlockExprStatement
   | IfStatement
@@ -83,7 +83,7 @@ IfStatement {
 
 labeledStatement { !curlyRight (Block | LoopStatement) }
 
-LoopStatement { Inline? (ForStatement | WhileStatement) }
+LoopStatement { kw<"inline">? (ForStatement | WhileStatement) }
 
 ForStatement {
   ForPrefix ( blockExpr (!else kw<"else"> Statement)?
@@ -110,7 +110,7 @@ exprExclIf { binaryExprExclIf | PrefixExpr | !primary primaryExprExclIf }
 Expr { BinaryExpr | PrefixExpr | !primary PrimaryExpr }
 
 binaryExprExclIf {
-  exprExclIf !or Or Expr
+  exprExclIf !or kw<"or"> Expr
   | exprExclIf !and kw<"and"> Expr
   | exprExclIf !compare CompareOp Expr
   | exprExclIf !bitwise BitwiseOp Expr
@@ -120,7 +120,7 @@ binaryExprExclIf {
 }
 
 BinaryExpr {
-  Expr !or Or Expr
+  Expr !or kw<"or"> Expr
   | Expr !and kw<"and"> Expr
   | Expr !compare CompareOp Expr
   | Expr !bitwise BitwiseOp Expr
@@ -141,10 +141,10 @@ primaryExprExclIf {
   AsmExpr
   | kw<"break"> BreakLabel? Expr?
   | kw<"comptime"> Expr
-  | !primary Nosuspend Expr
+  | !primary kw<"nosuspend"> Expr
   | kw<"continue"> BreakLabel?
-  | Resume Expr
-  | Return Expr?
+  | kw<"resume"> Expr
+  | kw<"return"> Expr?
   | Block
   | curlySuffixExpr
 }
@@ -162,9 +162,9 @@ IfExpr { IfPrefix Expr (!else kw<"else"> Payload? Expr)? }
 Block { "{" Statement* "}" }
 
 LoopExpr {
-  // this is for the Inline in SwitchProng
-  !curlyRight (Inline (ForExpr | WhileExpr))
-  | Inline? (ForExpr | WhileExpr) }
+  // this is for the inline in SwitchProng
+  !curlyRight (kw<"inline"> (ForExpr | WhileExpr))
+  | kw<"inline">? (ForExpr | WhileExpr) }
 
 ForExpr { ForPrefix Expr (!else kw<"else"> Expr)? }
 
@@ -196,12 +196,12 @@ primaryTypeExpr {
   | !primary kw<"comptime"> TypeExpr
   | kw<"error"> "." Identifier
   | kw<"anyframe">
-  | Unreachable
+  | kw<"unreachable">
   | StringLiteral
   | SwitchExpr
 }
 
-ContainerDecl { ( kw<"extern"> | Packed )? ContainerDeclAuto }
+ContainerDecl { ( kw<"extern"> | kw<"packed"> )? ContainerDeclAuto }
 
 ErrorSetDecl { kw<"error"> "{" list<DocComment? Identifier> "}" }
 
@@ -212,20 +212,20 @@ IfTypeExpr { IfPrefix TypeExpr (!else kw<"else"> Payload? TypeExpr)? }
 LabeledTypeExpr { BlockLabel Block | BlockLabel? LoopTypeExpr }
 
 LoopTypeExpr {
-  // this is for the Inline in SwitchProng
-  !curlyRight (Inline (ForTypeExpr | WhileTypeExpr))
-  | Inline? (ForTypeExpr | WhileTypeExpr)
+  // this is for the inline in SwitchProng
+  !curlyRight (kw<"inline"> (ForTypeExpr | WhileTypeExpr))
+  | kw<"inline">? (ForTypeExpr | WhileTypeExpr)
 }
 
 ForTypeExpr { ForPrefix TypeExpr (!else kw<"else"> TypeExpr)? }
 
 WhileTypeExpr { WhilePrefix TypeExpr (!else kw<"else"> Payload? TypeExpr)? }
 
-SwitchExpr { Switch "(" Expr ")" "{" list<SwitchProng> "}" }
+SwitchExpr { kw<"switch"> "(" Expr ")" "{" list<SwitchProng> "}" }
 
 //// Assembly.
 
-AsmExpr { kw<"asm"> Volatile? "(" Expr AsmOutput? ")" }
+AsmExpr { kw<"asm"> kw<"volatile">? "(" Expr AsmOutput? ")" }
 
 AsmOutput { ":" list<AsmOutputItem> AsmInput? }
 
@@ -254,7 +254,7 @@ AddrSpace { kw<"addrspace"> "(" Expr ")" }
 ParamDeclList { list<ParamDecl> }
 
 ParamDecl {
-  DocComment? (Noalias | kw<"comptime">)? (Identifier ":")? ParamType
+  DocComment? (kw<"noalias"> | kw<"comptime">)? (Identifier ":")? ParamType
   | "..."
 }
 
@@ -262,11 +262,11 @@ ParamType { kw<"anytype"> | TypeExpr }
 
 //// Control flow prefixes
 
-IfPrefix { If "(" Expr ")" PtrPayload? }
+IfPrefix { kw<"if"> "(" Expr ")" PtrPayload? }
 
-WhilePrefix { While "(" Expr ")" PtrPayload? WhileContinueExpr? }
+WhilePrefix { kw<"while"> "(" Expr ")" PtrPayload? WhileContinueExpr? }
 
-ForPrefix { For "(" ForArgList ")" PtrListPayload }
+ForPrefix { kw<"for"> "(" ForArgList ")" PtrListPayload }
 
 //// Payloads
 
@@ -282,7 +282,7 @@ Star { "*" }
 
 //// Switch specific.
 
-SwitchProng { Inline? SwitchCase "=>" PtrIndexPayload? (AssignExpr | Expr) }
+SwitchProng { kw<"inline">? SwitchCase "=>" PtrIndexPayload? (AssignExpr | Expr) }
 
 SwitchCase { SwitchItem ("," SwitchItem)* ","? | kw<"else"> }
 
@@ -300,7 +300,7 @@ CompareOp { "==" | "!=" | ">" | "<" | ">=" | "<=" }
 
 AssignOp { "*=" | "*|=" | "/=" | "%=" | "+=" | "+|=" | "-=" | "-|=" | "<<=" | "<<|=" | ">>=" | "&=" | "^=" | "|=" | "*%=" | "+%=" | "-%=" | "=" }
 
-BitwiseOp { "&" | "^" | "|" | Orelse | kw<"catch"> Payload? }
+BitwiseOp { "&" | "^" | "|" | kw<"orelse"> | kw<"catch"> Payload? }
 
 BitShiftOp { "<<" | ">>" | "<<|" }
 
@@ -308,13 +308,13 @@ AdditionOp { "+" | "-" | "++" }
 
 MultiplyOp { "||" | "*" | arithOp<"/"> | "%" | "**" | "*%" | "*|" }
 
-PrefixOp { "!" | "-" | "~" | "-%" | "&" | Try | kw<"await"> }
+PrefixOp { "!" | "-" | "~" | "-%" | "&" | kw<"try"> | kw<"await"> }
 
 PrefixTypeOp {
   "?"
   | kw<"anyframe"> "->"
-  | SliceTypeStart (ByteAlign | AddrSpace | kw<"const"> | Volatile | kw<"allowzero">)*
-  | PtrTypeStart (AddrSpace | kw<"align"> "(" Expr (":" Expr ":" Expr)? ")" | kw<"const"> | Volatile | kw<"allowzero">)*
+  | SliceTypeStart (ByteAlign | AddrSpace | kw<"const"> | kw<"volatile"> | kw<"allowzero">)*
+  | PtrTypeStart (AddrSpace | kw<"align"> "(" Expr (":" Expr ":" Expr)? ")" | kw<"const"> | kw<"volatile"> | kw<"allowzero">)*
   | ArrayTypeStart
 }
 
@@ -347,10 +347,10 @@ ArrayTypeStart { "[" Expr (":" Expr)? "]" }
 ContainerDeclAuto { ContainerDeclType "{" ContainerDocComment? containerMembers "}" }
 
 ContainerDeclType {
-  Struct ("(" Expr ")")?
-  | Opaque
+  kw<"struct"> ("(" Expr ")")?
+  | kw<"opaque">
   | kw<"enum"> ("(" Expr ")")?
-  | Union ("(" (kw<"enum"> ("(" Expr ")")? | Expr) ")")?
+  | kw<"union"> ("(" (kw<"enum"> ("(" Expr ")")? | Expr) ")")?
 }
 
 //// Alignment
@@ -371,30 +371,6 @@ StringLiteralSingle { stringLiteralSingle }
 
 kw<term> { @specialize[@name={term}]<identifier, term> }
 _kw<term> { @specialize<identifier, term> }
-
-fn { _kw<"fn"> }
-For { _kw<"for"> }
-If { _kw<"if"> }
-Inline { _kw<"inline"> }
-Noalias { _kw<"noalias"> }
-Nosuspend { _kw<"nosuspend"> }
-Opaque { _kw<"opaque"> }
-Or { _kw<"or"> }
-Orelse { _kw<"orelse"> }
-Packed { _kw<"packed"> }
-Pub { _kw<"pub"> }
-Resume { _kw<"resume"> }
-Return { _kw<"return"> }
-Struct { _kw<"struct"> }
-Suspend { _kw<"suspend"> }
-Switch { _kw<"switch"> }
-Test { _kw<"test"> }
-Try { _kw<"try"> }
-Union { _kw<"union"> }
-Unreachable { _kw<"unreachable"> }
-Var { _kw<"var"> }
-Volatile { _kw<"volatile"> }
-While { _kw<"while"> }
 
 @tokens {
   whitespace {

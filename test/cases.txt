@@ -10,8 +10,8 @@ fn one() noreturn {
 }
 
 ==>
-Program(Decl(FnProto(Identifier,ParamDeclList(),TypeExpr(Identifier)),
-             Block(Statement(Return))))
+Program(Decl(FnProto(fn,Identifier,ParamDeclList(),TypeExpr(Identifier)),
+             Block(Statement(return))))
 
 # Assign in block
 
@@ -20,7 +20,7 @@ fn one() noreturn {
 }
 
 ==>
-Program(Decl(FnProto(Identifier,ParamDeclList,TypeExpr(Identifier)),
+Program(Decl(FnProto(fn,Identifier,ParamDeclList,TypeExpr(Identifier)),
              Block(Statement(TypeExpr(Identifier),
                              AssignOp,
                              Expr(PrimaryExpr(TypeExpr(Integer)))))))
@@ -46,9 +46,10 @@ fn fun() noreturn {
 }
 
 ==>
-Program(Decl(FnProto(Identifier,
+Program(Decl(FnProto(fn,
+                     Identifier,
                      ParamDeclList,
                      TypeExpr(Identifier)),
-             Block(Statement(IfStatement(IfPrefix(If,
+             Block(Statement(IfStatement(IfPrefix(if,
                                                   Expr(PrimaryExpr(TypeExpr(Integer)))),
-                                         Expr(PrimaryExpr(TypeExpr(Unreachable))))))))
+                                         Expr(PrimaryExpr(TypeExpr(unreachable))))))))

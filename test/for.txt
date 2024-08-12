@@ -8,8 +8,8 @@ fn main() noreturn {
 ==>
 Program
 (Decl
- (FnProto(Identifier,ParamDeclList,TypeExpr(Identifier)),
-  Block(Statement(LoopStatement(ForStatement(ForPrefix(For,
+ (FnProto(fn,Identifier,ParamDeclList,TypeExpr(Identifier)),
+  Block(Statement(LoopStatement(ForStatement(ForPrefix(for,
                                                        ForArgList(ForItem(Expr(PrimaryExpr(TypeExpr(Identifier))))),
                                                        PtrListPayload(Identifier)),
                                              Expr(PrimaryExpr(TypeExpr(Identifier,
@@ -24,14 +24,14 @@ fn one() u8 {
 }
 
 ==>
-Program(Decl(FnProto(Identifier,ParamDeclList,TypeExpr(Identifier)),
-             Block(Statement(LoopStatement(Inline,
-                                           ForStatement(ForPrefix(For,
+Program(Decl(FnProto(fn,Identifier,ParamDeclList,TypeExpr(Identifier)),
+             Block(Statement(LoopStatement(inline,
+                                           ForStatement(ForPrefix(for,
                                                                   ForArgList(ForItem(Expr(PrimaryExpr(TypeExpr(Identifier)))),
                                                                              ForItem(Expr(PrimaryExpr(TypeExpr(Integer))),
                                                                                      Expr(PrimaryExpr(TypeExpr(Integer))))),
                                                                   PtrListPayload(Identifier, Identifier)),
-                                                        Block(Statement(Return, Expr(PrimaryExpr(TypeExpr(Integer)))))))))))
+                                                        Block(Statement(return, Expr(PrimaryExpr(TypeExpr(Integer)))))))))))
 
 # assign
 
@@ -41,8 +41,8 @@ fn main() noreturn {
 }
 
 ==>
-Program(Decl(FnProto(Identifier,ParamDeclList,TypeExpr(Identifier)),
-             Block(Statement(LoopStatement(ForStatement(ForPrefix(For,
+Program(Decl(FnProto(fn,Identifier,ParamDeclList,TypeExpr(Identifier)),
+             Block(Statement(LoopStatement(ForStatement(ForPrefix(for,
                                                                   ForArgList(ForItem(Expr(PrimaryExpr(TypeExpr(Identifier)))),
                                                                              ForItem(Expr(PrimaryExpr(TypeExpr(Integer))))),
                                                                   PtrListPayload(Identifier)),
@@ -60,16 +60,17 @@ fn main() i32 {
 }
 
 ==>
-Program(Decl(FnProto(Identifier,
+Program(Decl(FnProto(fn,
+                     Identifier,
                      ParamDeclList,
                      TypeExpr(Identifier)),
-             Block(Statement(LoopStatement(ForStatement(ForPrefix(For,
+             Block(Statement(LoopStatement(ForStatement(ForPrefix(for,
                                                                   ForArgList(ForItem(Expr(PrimaryExpr(TypeExpr(Identifier)))),
                                                                              ForItem(Expr(PrimaryExpr(TypeExpr(Integer))))),
                                                                   PtrListPayload(Identifier)),
                                                         Block,
                                                         else,
-                                                        Statement(Return,
+                                                        Statement(return,
                                                                   Expr(PrimaryExpr(TypeExpr(Integer))))))))))
 
 # expr
@@ -83,12 +84,13 @@ fn fun() i32 {
 }
 
 ==>
-Program(Decl(FnProto(Identifier,
+Program(Decl(FnProto(fn
+                     Identifier,
                      ParamDeclList,
                      TypeExpr(Identifier)),
-             Block(Statement(Return,
-                             Expr(PrimaryExpr(LoopExpr(Inline,
-                                                       ForExpr(ForPrefix(For,
+             Block(Statement(return,
+                             Expr(PrimaryExpr(LoopExpr(inline,
+                                                       ForExpr(ForPrefix(for,
                                                                          ForArgList(ForItem(Expr(PrimaryExpr(TypeExpr(Identifier))))),
                                                                          PtrListPayload(Identifier)),
                                                                Expr(PrimaryExpr(Block(Statement(TypeExpr(Identifier),

@@ -6,13 +6,14 @@ fn one(a : u32) u16 {
 }
 
 ==>
-Program(Decl(FnProto(Identifier,
+Program(Decl(FnProto(fn,
+                     Identifier,
                      ParamDeclList(ParamDecl(Identifier, ParamType(TypeExpr(Identifier)))),
                      TypeExpr(Identifier)),
-             Block(Statement(IfStatement(IfPrefix(If, Expr(BinaryExpr(Expr(PrimaryExpr(TypeExpr(Identifier))),
+             Block(Statement(IfStatement(IfPrefix(if, Expr(BinaryExpr(Expr(PrimaryExpr(TypeExpr(Identifier))),
                                                                       CompareOp,
                                                                       Expr(PrimaryExpr(TypeExpr(Integer)))))),
-                                         Expr(PrimaryExpr(Return, Expr(PrimaryExpr(TypeExpr(Integer))))))))))
+                                         Expr(PrimaryExpr(return, Expr(PrimaryExpr(TypeExpr(Integer))))))))))
 
 # expr
 
@@ -21,8 +22,8 @@ fn main() u8 {
 }
 
 ==>
-Program(Decl(FnProto(Identifier,ParamDeclList,TypeExpr(Identifier)),
-             Block(Statement(Return, Expr(PrimaryExpr(IfExpr(IfPrefix(If, Expr(BinaryExpr(Expr(PrimaryExpr(TypeExpr(Integer))),
+Program(Decl(FnProto(fn,Identifier,ParamDeclList,TypeExpr(Identifier)),
+             Block(Statement(return, Expr(PrimaryExpr(IfExpr(IfPrefix(if, Expr(BinaryExpr(Expr(PrimaryExpr(TypeExpr(Integer))),
                                                                                           CompareOp,
                                                                                           Expr(PrimaryExpr(TypeExpr(Integer)))))),
                                                              Expr(PrimaryExpr(TypeExpr(Integer))),
@@ -37,8 +38,8 @@ fn main() noreturn {
 }
 
 ==>
-Program(Decl(FnProto(Identifier,ParamDeclList,TypeExpr(Identifier)),
-             Block(Statement(IfStatement(IfPrefix(If, Expr(PrimaryExpr(TypeExpr(Integer)))),
+Program(Decl(FnProto(fn,Identifier,ParamDeclList,TypeExpr(Identifier)),
+             Block(Statement(IfStatement(IfPrefix(if, Expr(PrimaryExpr(TypeExpr(Integer)))),
                                          AssignExpr(Expr(PrimaryExpr(TypeExpr(Identifier))),
                                                     AssignOp,
                                                     Expr(PrimaryExpr(TypeExpr(Integer)))))))))
@@ -50,7 +51,7 @@ const a : if (b) u32 else u16;
 ==>
 Program(Decl(VarDecl(const,
                      Name,
-                     TypeExpr(IfTypeExpr(IfPrefix(If,
+                     TypeExpr(IfTypeExpr(IfPrefix(if,
                                                   Expr(PrimaryExpr(TypeExpr(Identifier)))),
                                          TypeExpr(Identifier),
                                          else,

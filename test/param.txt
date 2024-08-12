@@ -5,7 +5,8 @@ fn fun(a : anytype) noreturn {
 }
 
 ==>
-Program(Decl(FnProto(Identifier,
+Program(Decl(FnProto(fn,
+                     Identifier,
                      ParamDeclList(ParamDecl(Identifier,
                                    ParamType(anytype))),
                      TypeExpr(Identifier)),
@@ -21,9 +22,10 @@ fn fun(
 }
 
 ==>
-Program(Decl(FnProto(Identifier,
+Program(Decl(FnProto(fn,
+                     Identifier,
                      ParamDeclList(ParamDecl(DocComment,
-                                             Noalias,
+                                             noalias,
                                              Identifier,
                                              ParamType(TypeExpr(Identifier)))),
                      TypeExpr(Identifier)),

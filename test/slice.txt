@@ -5,8 +5,8 @@ fn main () noreturn {
 }
 
 ==>
-Program(Decl(FnProto(Identifier,ParamDeclList,TypeExpr(Identifier)),
-             Block(Statement(Return,
+Program(Decl(FnProto(fn,Identifier,ParamDeclList,TypeExpr(Identifier)),
+             Block(Statement(return,
                              Expr(PrimaryExpr(TypeExpr(Identifier,
                                                        SuffixOp(Slice(Expr(PrimaryExpr(TypeExpr(Integer))))))))))))
 
@@ -17,8 +17,8 @@ fn main () noreturn {
 }
 
 ==>
-Program(Decl(FnProto(Identifier,ParamDeclList,TypeExpr(Identifier)),
-             Block(Statement(Return,
+Program(Decl(FnProto(fn,Identifier,ParamDeclList,TypeExpr(Identifier)),
+             Block(Statement(return,
                              Expr(PrimaryExpr(TypeExpr(Identifier,
                                                        SuffixOp(Slice(Expr(PrimaryExpr(TypeExpr(Integer))),
                                                                       Expr(PrimaryExpr(TypeExpr(Integer))))))))))))
@@ -30,8 +30,8 @@ fn fun () noreturn {
 }
 
 ==>
-Program(Decl(FnProto(Identifier,ParamDeclList,TypeExpr(Identifier)),
-             Block(Statement(Return,
+Program(Decl(FnProto(fn,Identifier,ParamDeclList,TypeExpr(Identifier)),
+             Block(Statement(return,
                              Expr(PrimaryExpr(TypeExpr(Identifier,
                                                        SuffixOp(Slice(Expr(PrimaryExpr(TypeExpr(Integer))),
                                                                       Expr(PrimaryExpr(TypeExpr(Integer))),
@@ -42,7 +42,7 @@ Program(Decl(FnProto(Identifier,ParamDeclList,TypeExpr(Identifier)),
 var sl: [] align(8) addrspace(something) const volatile allowzero u32;
 
 ==>
-Program(Decl(VarDecl(Var,
+Program(Decl(VarDecl(var,
                      Name,
                      TypeExpr(PrefixTypeOp(SliceTypeStart,
                                            ByteAlign(align,
@@ -50,7 +50,7 @@ Program(Decl(VarDecl(Var,
                                            AddrSpace(addrspace,
                                                      Expr(PrimaryExpr(TypeExpr(Identifier)))),
                                            const,
-                                           Volatile,
+                                           volatile,
                                            allowzero),
                               Identifier))))
 

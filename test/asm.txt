@@ -12,12 +12,13 @@ fn exit() usize {
 }
 
 ==>
-Program(Decl(FnProto(Identifier,
+Program(Decl(FnProto(fn,
+                     Identifier,
                      ParamDeclList,
                      TypeExpr(Identifier)),
-             Block(Statement(Return,
+             Block(Statement(return,
                              Expr(PrimaryExpr(AsmExpr(asm,
-                                                      Volatile,
+                                                      volatile,
                                                       Expr(PrimaryExpr(TypeExpr(StringLiteral,
                                                                                 LineComment))),
                                                       AsmOutput(AsmOutputItem(Identifier,

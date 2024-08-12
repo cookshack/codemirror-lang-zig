@@ -3,14 +3,14 @@
 fn one() u32;
 
 ==>
-Program(Decl(FnProto(Identifier,ParamDeclList,TypeExpr(Identifier))))
+Program(Decl(FnProto(fn,Identifier,ParamDeclList,TypeExpr(Identifier))))
 
 # One fn proto w arg
 
 fn one(a : u32) u32;
 
 ==>
-Program(Decl(FnProto(Identifier,ParamDeclList(ParamDecl(Identifier, ParamType(TypeExpr(Identifier)))), TypeExpr(Identifier))))
+Program(Decl(FnProto(fn,Identifier,ParamDeclList(ParamDecl(Identifier, ParamType(TypeExpr(Identifier)))), TypeExpr(Identifier))))
 
 # Two fn protos
 
@@ -18,11 +18,13 @@ fn one(a : u32, b: string) noreturn;
 fn two(a : u32, b: string) u32;
 
 ==>
-Program(Decl(FnProto(Identifier,
+Program(Decl(FnProto(fn,
+                     Identifier,
                      ParamDeclList(ParamDecl(Identifier, ParamType(TypeExpr(Identifier))),
                                    ParamDecl(Identifier, ParamType(TypeExpr(Identifier)))),
                      TypeExpr(Identifier))),
-        Decl(FnProto(Identifier,
+        Decl(FnProto(fn,
+                     Identifier,
                      ParamDeclList(ParamDecl(Identifier, ParamType(TypeExpr(Identifier))),
                                    ParamDecl(Identifier, ParamType(TypeExpr(Identifier)))),
                      TypeExpr(Identifier))))
@@ -33,24 +35,27 @@ fn one(a : u32, b: string) noreturn { }
 fn two(a : u32, b: string) noreturn { }
 
 ==>
-Program(Decl(FnProto(Identifier,
+Program(Decl(FnProto(fn,
+                     Identifier,
                      ParamDeclList(ParamDecl(Identifier, ParamType(TypeExpr(Identifier))),
                                    ParamDecl(Identifier, ParamType(TypeExpr(Identifier)))),
                      TypeExpr(Identifier)),
              Block),
-        Decl(FnProto(Identifier,
+        Decl(FnProto(fn,
+                     Identifier,
                      ParamDeclList(ParamDecl(Identifier, ParamType(TypeExpr(Identifier))),
                                    ParamDecl(Identifier, ParamType(TypeExpr(Identifier)))),
                      TypeExpr(Identifier)),
              Block))
 
-# Pub
+# pub
 
 pub fn main() u32;
 
 ==>
-Program(Pub,
-        Decl(FnProto(Identifier,
+Program(pub,
+        Decl(FnProto(fn,
+                     Identifier,
                      ParamDeclList,
                      TypeExpr(Identifier))))
 
@@ -59,7 +64,8 @@ Program(Pub,
 fn fun() !u32;
 
 ==>
-Program(Decl(FnProto(Identifier,
+Program(Decl(FnProto(fn,
+                     Identifier,
                      ParamDeclList,
                      TypeExpr(Identifier))))
 
@@ -70,7 +76,8 @@ const a : fn () u32 = f;
 ==>
 Program(Decl(VarDecl(const,
                      Name,
-                     TypeExpr(FnProto(ParamDeclList,
+                     TypeExpr(FnProto(fn,
+                                      ParamDeclList,
                                       TypeExpr(Identifier))),
                      Expr(PrimaryExpr(TypeExpr(Identifier))))))
 
@@ -80,7 +87,8 @@ export fn cfun() u32;
 
 ==>
 Program(Decl(export,
-             FnProto(Identifier,
+             FnProto(fn,
+                     Identifier,
                      ParamDeclList,
                      TypeExpr(Identifier))))
 
@@ -91,7 +99,8 @@ extern "c" fn atan2(a: f64, b: f64) f64;
 ==>
 Program(Decl(extern,
              StringLiteralSingle,
-             FnProto(Identifier,
+             FnProto(fn,
+                     Identifier,
                      ParamDeclList(ParamDecl(Identifier,
                                              ParamType(TypeExpr(Identifier))),
                                    ParamDecl(Identifier,
@@ -103,8 +112,9 @@ Program(Decl(extern,
 inline fn f1() noreturn;
 
 ==>
-Program(Decl(Inline,
-             FnProto(Identifier,
+Program(Decl(inline,
+             FnProto(fn,
+                     Identifier,
                      ParamDeclList,
                      TypeExpr(Identifier))))
 
@@ -114,6 +124,7 @@ noinline fn f1() noreturn;
 
 ==>
 Program(Decl(noinline,
-             FnProto(Identifier,
+             FnProto(fn,
+                     Identifier,
                      ParamDeclList,
                      TypeExpr(Identifier))))

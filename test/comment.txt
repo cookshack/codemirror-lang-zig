@@ -26,4 +26,4 @@ Program(ContainerDocComment)
 var a;
 
 ==>
-Program(DocComment,Decl(VarDecl(Var,Name)))
+Program(DocComment,Decl(VarDecl(var,Name)))

@@ -6,7 +6,7 @@ const a : u32 = nosuspend 0;
 Program(Decl(VarDecl(const,
                      Name,
                      TypeExpr(Identifier),
-                     Expr(PrimaryExpr(Nosuspend,
+                     Expr(PrimaryExpr(nosuspend,
                                       Expr(PrimaryExpr(TypeExpr(Integer))))))))
 
 # nosuspend stmnt
@@ -16,10 +16,11 @@ fn fun() noreturn {
 }
 
 ==>
-Program(Decl(FnProto(Identifier,
+Program(Decl(FnProto(fn,
+                     Identifier,
                      ParamDeclList,
                      TypeExpr(Identifier)),
-             Block(Statement(Nosuspend,
+             Block(Statement(nosuspend,
                              BlockExprStatement(AssignExpr(Expr(PrimaryExpr(TypeExpr(Identifier))),
                                                            AssignOp,
                                                            Expr(PrimaryExpr(TypeExpr(Integer)))))))))
@@ -31,8 +32,9 @@ fn fun() noreturn {
 }
 
 ==>
-Program(Decl(FnProto(Identifier,
+Program(Decl(FnProto(fn,
+                     Identifier,
                      ParamDeclList,
                      TypeExpr(Identifier)),
-             Block(Statement(Suspend,
+             Block(Statement(suspend,
                              BlockExprStatement(Expr(PrimaryExpr(TypeExpr(Identifier))))))))

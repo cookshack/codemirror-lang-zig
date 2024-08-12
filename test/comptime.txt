@@ -4,7 +4,7 @@ var a : u8;
 comptime { a = 1; }
 
 ==>
-Program(Decl(VarDecl(Var,Name,TypeExpr(Identifier))),
+Program(Decl(VarDecl(var,Name,TypeExpr(Identifier))),
         ComptimeDecl(comptime,
                      Block(Statement(TypeExpr(Identifier),
                                      AssignOp,
@@ -22,7 +22,7 @@ test "comptime" {
 ==>
 Program
 (TestDecl
- (Test,
+ (test,
   TestName,
   Block(Statement(VarDecl(const,
                           Name,
@@ -53,7 +53,7 @@ Program(ContainerField(TypeExpr(comptime,
                                 TypeExpr(comptime,
                                          TypeExpr(Identifier))),
                        Expr(PrimaryExpr(TypeExpr(Integer)))),
-        Decl(VarDecl(Var,
+        Decl(VarDecl(var,
                      Name,
                      TypeExpr(comptime,
                               TypeExpr(Identifier)))))

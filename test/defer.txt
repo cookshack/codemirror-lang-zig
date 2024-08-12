@@ -6,10 +6,11 @@ fn fun() noreturn {
 }
 
 ==>
-Program(Decl(FnProto(Identifier,
+Program(Decl(FnProto(fn,
+                     Identifier,
                      ParamDeclList,
                      TypeExpr(Identifier)),
-             Block(Statement(VarDecl(Var,
+             Block(Statement(VarDecl(var,
                                      Name,
                                      Expr(PrimaryExpr(TypeExpr(Identifier,
                                                                FnCallArgs))))),
@@ -29,10 +30,11 @@ fn fun() u32 {
 }
 
 ==>
-Program(Decl(FnProto(Identifier,
+Program(Decl(FnProto(fn,
+                     Identifier,
                      ParamDeclList,
                      TypeExpr(Identifier)),
-             Block(Statement(VarDecl(Var,
+             Block(Statement(VarDecl(var,
                                      Name,
                                      Expr(PrimaryExpr(TypeExpr(Identifier,
                                                                FnCallArgs))))),
@@ -42,10 +44,10 @@ Program(Decl(FnProto(Identifier,
                    Statement(errdefer,
                              BlockExprStatement(Expr(PrimaryExpr(TypeExpr(Identifier,
                                                                           FnCallArgs))))),
-                   Statement(IfStatement(IfPrefix(If,
+                   Statement(IfStatement(IfPrefix(if,
                                                   Expr(PrimaryExpr(TypeExpr(Identifier)))),
-                                         Expr(PrimaryExpr(Return,
+                                         Expr(PrimaryExpr(return,
                                                           Expr(PrimaryExpr(TypeExpr(Integer))))))),
-                   Statement(Return,
+                   Statement(return,
                              Expr(PrimaryExpr(TypeExpr(error,
                                                        Identifier)))))))

@@ -6,11 +6,11 @@ fn one() u8 {
 }
 
 ==>
-Program(Decl(FnProto(Identifier,ParamDeclList,TypeExpr(Identifier)),
-             Block(Statement(LoopStatement(WhileStatement(WhilePrefix(While, Expr(BinaryExpr(Expr(PrimaryExpr(TypeExpr(Identifier))),
+Program(Decl(FnProto(fn,Identifier,ParamDeclList,TypeExpr(Identifier)),
+             Block(Statement(LoopStatement(WhileStatement(WhilePrefix(while, Expr(BinaryExpr(Expr(PrimaryExpr(TypeExpr(Identifier))),
                                                                                              CompareOp,
                                                                                              Expr(PrimaryExpr(TypeExpr(Integer)))))),
-                                                          Expr(PrimaryExpr(Return, Expr(PrimaryExpr(TypeExpr(Integer)))))))))))
+                                                          Expr(PrimaryExpr(return, Expr(PrimaryExpr(TypeExpr(Integer)))))))))))
 
 # While block
 
@@ -21,11 +21,11 @@ fn one() u8 {
 }
 
 ==>
-Program(Decl(FnProto(Identifier,ParamDeclList,TypeExpr(Identifier)),
-             Block(Statement(LoopStatement(WhileStatement(WhilePrefix(While, Expr(BinaryExpr(Expr(PrimaryExpr(TypeExpr(Identifier))),
+Program(Decl(FnProto(fn,Identifier,ParamDeclList,TypeExpr(Identifier)),
+             Block(Statement(LoopStatement(WhileStatement(WhilePrefix(while, Expr(BinaryExpr(Expr(PrimaryExpr(TypeExpr(Identifier))),
                                                                                              CompareOp,
                                                                                              Expr(PrimaryExpr(TypeExpr(Integer)))))),
-                                                          Block(Statement(Return, Expr(PrimaryExpr(TypeExpr(Integer)))))))))))
+                                                          Block(Statement(return, Expr(PrimaryExpr(TypeExpr(Integer)))))))))))
 
 # While with assign
 
@@ -35,8 +35,8 @@ fn main() noreturn {
 }
 
 ==>
-Program(Decl(FnProto(Identifier,ParamDeclList,TypeExpr(Identifier)),
-             Block(Statement(LoopStatement(WhileStatement(WhilePrefix(While, Expr(PrimaryExpr(TypeExpr(Identifier)))),
+Program(Decl(FnProto(fn,Identifier,ParamDeclList,TypeExpr(Identifier)),
+             Block(Statement(LoopStatement(WhileStatement(WhilePrefix(while, Expr(PrimaryExpr(TypeExpr(Identifier)))),
                                                                       AssignExpr(Expr(PrimaryExpr(TypeExpr(Identifier))),
                                                                                  AssignOp,
                                                                                  Expr(PrimaryExpr(TypeExpr(Integer))))))))))
@@ -49,8 +49,8 @@ fn main() noreturn {
 }
 
 ==>
-Program(Decl(FnProto(Identifier,ParamDeclList,TypeExpr(Identifier)),
-             Block(Statement(LoopStatement(WhileStatement(WhilePrefix(While,
+Program(Decl(FnProto(fn,Identifier,ParamDeclList,TypeExpr(Identifier)),
+             Block(Statement(LoopStatement(WhileStatement(WhilePrefix(while,
                                                                       Expr(PrimaryExpr(TypeExpr(Identifier))),
                                                                       WhileContinueExpr(Expr(PrimaryExpr(TypeExpr(Identifier,
                                                                                                                   FnCallArgs))))),
@@ -65,8 +65,8 @@ fn main() noreturn {
 }
 
 ==>
-Program(Decl(FnProto(Identifier,ParamDeclList,TypeExpr(Identifier)),
-             Block(Statement(LoopStatement(WhileStatement(WhilePrefix(While,
+Program(Decl(FnProto(fn,Identifier,ParamDeclList,TypeExpr(Identifier)),
+             Block(Statement(LoopStatement(WhileStatement(WhilePrefix(while,
                                                                       Expr(PrimaryExpr(TypeExpr(Identifier))),
                                                                       WhileContinueExpr(AssignExpr(Expr(PrimaryExpr(TypeExpr(Identifier))),
                                                                                                    AssignOp,

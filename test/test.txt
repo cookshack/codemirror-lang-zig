@@ -4,7 +4,7 @@ test "check" {
 }
 
 ==>
-Program(TestDecl(Test,TestName,Block))
+Program(TestDecl(test,TestName,Block))
 
 # Test with try
 
@@ -13,8 +13,8 @@ test "check" {
 }
 
 ==>
-Program(TestDecl(Test,
+Program(TestDecl(test,
                  TestName,
-                 Block(Statement(PrefixExpr(PrefixOp(Try),
+                 Block(Statement(PrefixExpr(PrefixOp(try),
                                             PrimaryExpr(TypeExpr(Identifier,
                                                                  FnCallArgs)))))))

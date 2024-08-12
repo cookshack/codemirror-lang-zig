@@ -5,9 +5,10 @@ fn one() string {
 }
 
 ==>
-Program(Decl(FnProto(Identifier,
+Program(Decl(FnProto(fn,
+                     Identifier,
                      ParamDeclList,
-                    TypeExpr(Identifier)),
-             Block(Statement(Return,
+                     TypeExpr(Identifier)),
+             Block(Statement(return,
                              Expr(PrimaryExpr(TypeExpr(Identifier,
                                                        SuffixOp(FieldAccess(Identifier)))))))))
