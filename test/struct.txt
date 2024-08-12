@@ -63,5 +63,6 @@ Program(Decl(VarDecl(Const,
                                                                                ContainerField(DocComment,
                                                                                               Identifier,
                                                                                               TypeExpr(Identifier),
-                                                                                              ByteAlign(Expr(PrimaryExpr(TypeExpr(Integer)))),
+                                                                                              ByteAlign(align,
+                                                                                                        Expr(PrimaryExpr(TypeExpr(Integer)))),
                                                                                               Expr(PrimaryExpr(TypeExpr(Integer))))))))))))

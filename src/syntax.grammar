@@ -314,7 +314,7 @@ PrefixTypeOp {
   "?"
   | Anyframe "->"
   | SliceTypeStart (ByteAlign | AddrSpace | Const | Volatile | Allowzero)*
-  | PtrTypeStart (AddrSpace | Align "(" Expr (":" Expr ":" Expr)? ")" | Const | Volatile | Allowzero)*
+  | PtrTypeStart (AddrSpace | kw2<"align"> "(" Expr (":" Expr ":" Expr)? ")" | Const | Volatile | Allowzero)*
   | ArrayTypeStart
 }
 
@@ -355,9 +355,7 @@ ContainerDeclType {
 
 //// Alignment
 
-Align { align }
-
-ByteAlign { align "(" Expr ")" }
+ByteAlign { kw2<"align"> "(" Expr ")" }
 
 ////
 
@@ -375,7 +373,6 @@ kw<term> { @specialize<identifier, term> }
 _kw<term> { @specialize<identifier, term> }
 kw2<term> { @specialize[@name={term}]<identifier, term> }
 
-align { kw<"align"> }
 Allowzero { kw<"allowzero"> }
 And { kw<"and"> }
 Anyframe { kw<"anyframe"> }
