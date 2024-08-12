@@ -5,7 +5,7 @@ const a : anyframe;
 ==>
 Program(Decl(VarDecl(Const,
                      Name,
-                     TypeExpr(Anyframe))))
+                     TypeExpr(anyframe))))
 
 # frame return type
 
@@ -16,7 +16,7 @@ fn w(fr: anyframe->u32) u32 {
 ==>
 Program(Decl(FnProto(Identifier,
                      ParamDeclList(ParamDecl(Identifier,
-                                             ParamType(TypeExpr(PrefixTypeOp(Anyframe),
+                                             ParamType(TypeExpr(PrefixTypeOp(anyframe),
                                                                 Identifier)))),
                      TypeExpr(Identifier)),
              Block(Statement(Return,

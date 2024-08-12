@@ -111,7 +111,7 @@ Expr { BinaryExpr | PrefixExpr | !primary PrimaryExpr }
 
 binaryExprExclIf {
   exprExclIf !or Or Expr
-  | exprExclIf !and And Expr
+  | exprExclIf !and kw<"and"> Expr
   | exprExclIf !compare CompareOp Expr
   | exprExclIf !bitwise BitwiseOp Expr
   | exprExclIf !bitShift BitShiftOp Expr
@@ -121,7 +121,7 @@ binaryExprExclIf {
 
 BinaryExpr {
   Expr !or Or Expr
-  | Expr !and And Expr
+  | Expr !and kw<"and"> Expr
   | Expr !compare CompareOp Expr
   | Expr !bitwise BitwiseOp Expr
   | Expr !bitShift BitShiftOp Expr
@@ -195,7 +195,7 @@ primaryTypeExpr {
   | Integer
   //| Comptime TypeExpr
   | Error "." Identifier
-  | Anyframe
+  | kw<"anyframe">
   | Unreachable
   | StringLiteral
   | SwitchExpr
@@ -312,9 +312,9 @@ PrefixOp { "!" | "-" | "~" | "-%" | "&" | Try | Await }
 
 PrefixTypeOp {
   "?"
-  | Anyframe "->"
-  | SliceTypeStart (ByteAlign | AddrSpace | Const | Volatile | Allowzero)*
-  | PtrTypeStart (AddrSpace | kw<"align"> "(" Expr (":" Expr ":" Expr)? ")" | Const | Volatile | Allowzero)*
+  | kw<"anyframe"> "->"
+  | SliceTypeStart (ByteAlign | AddrSpace | Const | Volatile | kw<"allowzero">)*
+  | PtrTypeStart (AddrSpace | kw<"align"> "(" Expr (":" Expr ":" Expr)? ")" | Const | Volatile | kw<"allowzero">)*
   | ArrayTypeStart
 }
 
@@ -372,9 +372,6 @@ StringLiteralSingle { stringLiteralSingle }
 kw<term> { @specialize[@name={term}]<identifier, term> }
 _kw<term> { @specialize<identifier, term> }
 
-Allowzero { _kw<"allowzero"> }
-And { _kw<"and"> }
-Anyframe { _kw<"anyframe"> }
 Anytype { _kw<"anytype"> }
 Asm { _kw<"asm"> }
 Async { _kw<"async"> }

@@ -51,7 +51,7 @@ Program(Decl(VarDecl(Var,
                                                      Expr(PrimaryExpr(TypeExpr(Identifier)))),
                                            Const,
                                            Volatile,
-                                           Allowzero),
+                                           allowzero),
                               Identifier))))
 
 # type sentinel

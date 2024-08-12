@@ -8,7 +8,7 @@ Program(Decl(VarDecl(Var,
                      TypeExpr(PrefixTypeOp(PtrTypeStart,
                                            Const,
                                            Volatile,
-                                           Allowzero),
+                                           allowzero),
                               Identifier))))
 
 # type align
