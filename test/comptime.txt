@@ -32,7 +32,7 @@ Program
                                         (PrimaryExpr
                                          (TypeExpr
                                           (LabeledTypeExpr(BlockLabel(Identifier),
-                                                           Block(Statement(Break,
+                                                           Block(Statement(break,
                                                                            BreakLabel(Identifier),
                                                                            Expr(PrimaryExpr(TypeExpr(Identifier,
                                                                                                      FnCallArgs

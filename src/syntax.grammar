@@ -139,7 +139,7 @@ PrimaryExpr {
 
 primaryExprExclIf {
   AsmExpr
-  | Break BreakLabel? Expr?
+  | kw<"break"> BreakLabel? Expr?
   | Comptime Expr
   | !primary Nosuspend Expr
   | Continue BreakLabel?
@@ -300,7 +300,7 @@ CompareOp { "==" | "!=" | ">" | "<" | ">=" | "<=" }
 
 AssignOp { "*=" | "*|=" | "/=" | "%=" | "+=" | "+|=" | "-=" | "-|=" | "<<=" | "<<|=" | ">>=" | "&=" | "^=" | "|=" | "*%=" | "+%=" | "-%=" | "=" }
 
-BitwiseOp { "&" | "^" | "|" | Orelse | Catch Payload? }
+BitwiseOp { "&" | "^" | "|" | Orelse | kw<"catch"> Payload? }
 
 BitShiftOp { "<<" | ">>" | "<<|" }
 
@@ -308,7 +308,7 @@ AdditionOp { "+" | "-" | "++" }
 
 MultiplyOp { "||" | "*" | arithOp<"/"> | "%" | "**" | "*%" | "*|" }
 
-PrefixOp { "!" | "-" | "~" | "-%" | "&" | Try | Await }
+PrefixOp { "!" | "-" | "~" | "-%" | "&" | Try | kw<"await"> }
 
 PrefixTypeOp {
   "?"
@@ -372,9 +372,6 @@ StringLiteralSingle { stringLiteralSingle }
 kw<term> { @specialize[@name={term}]<identifier, term> }
 _kw<term> { @specialize<identifier, term> }
 
-Await { _kw<"await"> }
-Break { _kw<"break"> }
-Catch { _kw<"catch"> }
 Comptime { _kw<"comptime"> }
 Const { _kw<"const"> }
 Continue { _kw<"continue"> }
