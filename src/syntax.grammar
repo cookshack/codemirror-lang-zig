@@ -46,9 +46,9 @@ TestName { stringLiteralSingle | identifier }
 ComptimeDecl { Comptime Block }
 
 Decl {
-  (kw2<"export"> | (Extern StringLiteralSingle?) | Inline | kw2<"noinline">)? FnProto (";" | Block)
-  | (kw2<"export"> | (Extern StringLiteralSingle?))? kw2<"threadlocal">? VarDecl
-  | kw2<"usingnamespace"> Expr ";"
+  (kw<"export"> | (Extern StringLiteralSingle?) | Inline | kw<"noinline">)? FnProto (";" | Block)
+  | (kw<"export"> | (Extern StringLiteralSingle?))? kw<"threadlocal">? VarDecl
+  | kw<"usingnamespace"> Expr ";"
 }
 
 FnProto { fn Identifier? "(" ParamDeclList ")" "!"? TypeExpr }
@@ -314,7 +314,7 @@ PrefixTypeOp {
   "?"
   | Anyframe "->"
   | SliceTypeStart (ByteAlign | AddrSpace | Const | Volatile | Allowzero)*
-  | PtrTypeStart (AddrSpace | kw2<"align"> "(" Expr (":" Expr ":" Expr)? ")" | Const | Volatile | Allowzero)*
+  | PtrTypeStart (AddrSpace | kw<"align"> "(" Expr (":" Expr ":" Expr)? ")" | Const | Volatile | Allowzero)*
   | ArrayTypeStart
 }
 
@@ -355,7 +355,7 @@ ContainerDeclType {
 
 //// Alignment
 
-ByteAlign { kw2<"align"> "(" Expr ")" }
+ByteAlign { kw<"align"> "(" Expr ")" }
 
 ////
 
@@ -369,51 +369,50 @@ StringLiteralSingle { stringLiteralSingle }
 
 @skip { whitespace | LineComment }
 
-kw<term> { @specialize<identifier, term> }
+kw<term> { @specialize[@name={term}]<identifier, term> }
 _kw<term> { @specialize<identifier, term> }
-kw2<term> { @specialize[@name={term}]<identifier, term> }
 
-Allowzero { kw<"allowzero"> }
-And { kw<"and"> }
-Anyframe { kw<"anyframe"> }
-Anytype { kw<"anytype"> }
-Asm { kw<"asm"> }
-Async { kw<"async"> }
-Await { kw<"await"> }
-Break { kw<"break"> }
-Catch { kw<"catch"> }
-Comptime { kw<"comptime"> }
-Const { kw<"const"> }
-Continue { kw<"continue"> }
-Defer { kw<"defer"> }
-Else { kw<"else"> }
-Enum { kw<"enum"> }
-Errdefer { kw<"errdefer"> }
-Error { kw<"error"> }
-Extern { kw<"extern"> }
-fn { kw<"fn"> }
-For { kw<"for"> }
-If { kw<"if"> }
-Inline { kw<"inline"> }
-Noalias { kw<"noalias"> }
-Nosuspend { kw<"nosuspend"> }
-Opaque { kw<"opaque"> }
-Or { kw<"or"> }
-Orelse { kw<"orelse"> }
-Packed { kw<"packed"> }
-Pub { kw<"pub"> }
-Resume { kw<"resume"> }
-Return { kw<"return"> }
-Struct { kw<"struct"> }
-Suspend { kw<"suspend"> }
-Switch { kw<"switch"> }
-Test { kw<"test"> }
-Try { kw<"try"> }
-Union { kw<"union"> }
-Unreachable { kw<"unreachable"> }
-Var { kw<"var"> }
-Volatile { kw<"volatile"> }
-While { kw<"while"> }
+Allowzero { _kw<"allowzero"> }
+And { _kw<"and"> }
+Anyframe { _kw<"anyframe"> }
+Anytype { _kw<"anytype"> }
+Asm { _kw<"asm"> }
+Async { _kw<"async"> }
+Await { _kw<"await"> }
+Break { _kw<"break"> }
+Catch { _kw<"catch"> }
+Comptime { _kw<"comptime"> }
+Const { _kw<"const"> }
+Continue { _kw<"continue"> }
+Defer { _kw<"defer"> }
+Else { _kw<"else"> }
+Enum { _kw<"enum"> }
+Errdefer { _kw<"errdefer"> }
+Error { _kw<"error"> }
+Extern { _kw<"extern"> }
+fn { _kw<"fn"> }
+For { _kw<"for"> }
+If { _kw<"if"> }
+Inline { _kw<"inline"> }
+Noalias { _kw<"noalias"> }
+Nosuspend { _kw<"nosuspend"> }
+Opaque { _kw<"opaque"> }
+Or { _kw<"or"> }
+Orelse { _kw<"orelse"> }
+Packed { _kw<"packed"> }
+Pub { _kw<"pub"> }
+Resume { _kw<"resume"> }
+Return { _kw<"return"> }
+Struct { _kw<"struct"> }
+Suspend { _kw<"suspend"> }
+Switch { _kw<"switch"> }
+Test { _kw<"test"> }
+Try { _kw<"try"> }
+Union { _kw<"union"> }
+Unreachable { _kw<"unreachable"> }
+Var { _kw<"var"> }
+Volatile { _kw<"volatile"> }
+While { _kw<"while"> }
 
 @tokens {
   whitespace {
