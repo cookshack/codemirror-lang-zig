@@ -35,7 +35,7 @@ const a : u32 = 0;
 Program(Decl(VarDecl(const,
                      Name,
                      TypeExpr(Identifier),
-                     Expr(PrimaryExpr(TypeExpr(Integer))))))
+                     Expr(TypeExpr(Integer)))))
 
 # export
 
@@ -46,7 +46,7 @@ Program(Decl(export,
              VarDecl(var,
                      Name,
                      TypeExpr(Identifier),
-                     Expr(PrimaryExpr(TypeExpr(Integer))))))
+                     Expr(TypeExpr(Integer)))))
 
 # extern
 

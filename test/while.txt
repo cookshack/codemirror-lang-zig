@@ -7,10 +7,10 @@ fn one() u8 {
 
 ==>
 Program(Decl(FnProto(fn,Identifier,ParamDeclList,TypeExpr(Identifier)),
-             Block(Statement(LoopStatement(WhileStatement(WhilePrefix(while, Expr(BinaryExpr(Expr(PrimaryExpr(TypeExpr(Identifier))),
+             Block(Statement(LoopStatement(WhileStatement(WhilePrefix(while, Expr(BinaryExpr(Expr(TypeExpr(Identifier)),
                                                                                              CompareOp,
-                                                                                             Expr(PrimaryExpr(TypeExpr(Integer)))))),
-                                                          Expr(PrimaryExpr(return, Expr(PrimaryExpr(TypeExpr(Integer)))))))))))
+                                                                                             Expr(TypeExpr(Integer))))),
+                                                          Expr(return, Expr(TypeExpr(Integer)))))))))
 
 # While block
 
@@ -22,10 +22,10 @@ fn one() u8 {
 
 ==>
 Program(Decl(FnProto(fn,Identifier,ParamDeclList,TypeExpr(Identifier)),
-             Block(Statement(LoopStatement(WhileStatement(WhilePrefix(while, Expr(BinaryExpr(Expr(PrimaryExpr(TypeExpr(Identifier))),
+             Block(Statement(LoopStatement(WhileStatement(WhilePrefix(while, Expr(BinaryExpr(Expr(TypeExpr(Identifier)),
                                                                                              CompareOp,
-                                                                                             Expr(PrimaryExpr(TypeExpr(Integer)))))),
-                                                          Block(Statement(return, Expr(PrimaryExpr(TypeExpr(Integer)))))))))))
+                                                                                             Expr(TypeExpr(Integer))))),
+                                                          Block(Statement(return, Expr(TypeExpr(Integer))))))))))
 
 # While with assign
 
@@ -36,10 +36,10 @@ fn main() noreturn {
 
 ==>
 Program(Decl(FnProto(fn,Identifier,ParamDeclList,TypeExpr(Identifier)),
-             Block(Statement(LoopStatement(WhileStatement(WhilePrefix(while, Expr(PrimaryExpr(TypeExpr(Identifier)))),
-                                                                      AssignExpr(Expr(PrimaryExpr(TypeExpr(Identifier))),
+             Block(Statement(LoopStatement(WhileStatement(WhilePrefix(while, Expr(TypeExpr(Identifier))),
+                                                                      AssignExpr(Expr(TypeExpr(Identifier)),
                                                                                  AssignOp,
-                                                                                 Expr(PrimaryExpr(TypeExpr(Integer))))))))))
+                                                                                 Expr(TypeExpr(Integer)))))))))
 
 # Continue
 
@@ -51,11 +51,11 @@ fn main() noreturn {
 ==>
 Program(Decl(FnProto(fn,Identifier,ParamDeclList,TypeExpr(Identifier)),
              Block(Statement(LoopStatement(WhileStatement(WhilePrefix(while,
-                                                                      Expr(PrimaryExpr(TypeExpr(Identifier))),
-                                                                      WhileContinueExpr(Expr(PrimaryExpr(TypeExpr(Identifier,
-                                                                                                                  FnCallArgs))))),
-                                                          Expr(PrimaryExpr(TypeExpr(Identifier,
-                                                                                    FnCallArgs)))))))))
+                                                                      Expr(TypeExpr(Identifier)),
+                                                                      WhileContinueExpr(Expr(TypeExpr(Identifier,
+                                                                                                      FnCallArgs)))),
+                                                          Expr(TypeExpr(Identifier,
+                                                                        FnCallArgs))))))))
 
 # Continue assign
 
@@ -67,11 +67,11 @@ fn main() noreturn {
 ==>
 Program(Decl(FnProto(fn,Identifier,ParamDeclList,TypeExpr(Identifier)),
              Block(Statement(LoopStatement(WhileStatement(WhilePrefix(while,
-                                                                      Expr(PrimaryExpr(TypeExpr(Identifier))),
-                                                                      WhileContinueExpr(AssignExpr(Expr(PrimaryExpr(TypeExpr(Identifier))),
+                                                                      Expr(TypeExpr(Identifier)),
+                                                                      WhileContinueExpr(AssignExpr(Expr(TypeExpr(Identifier)),
                                                                                                    AssignOp,
-                                                                                                   Expr(BinaryExpr(Expr(PrimaryExpr(TypeExpr(Identifier))),
+                                                                                                   Expr(BinaryExpr(Expr(TypeExpr(Identifier)),
                                                                                                                    AdditionOp,
-                                                                                                                   Expr(PrimaryExpr(TypeExpr(Integer)))))))),
-                                                          Expr(PrimaryExpr(TypeExpr(Identifier,
-                                                                                    FnCallArgs)))))))))
+                                                                                                                   Expr(TypeExpr(Integer))))))),
+                                                          Expr(TypeExpr(Identifier,
+                                                                        FnCallArgs))))))))

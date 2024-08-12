@@ -7,10 +7,10 @@ const xconst = 'a';
 ==>
 Program(Decl(VarDecl(const,
                      Name,
-                     Expr(PrimaryExpr(TypeExpr(CharLiteral))))),
+                     Expr(TypeExpr(CharLiteral)))),
         Decl(VarDecl(const,
                      Name,
-                     Expr(PrimaryExpr(TypeExpr(CharLiteral))))),
+                     Expr(TypeExpr(CharLiteral)))),
         Decl(VarDecl(const,
                      Name,
-                     Expr(PrimaryExpr(TypeExpr(CharLiteral))))))
+                     Expr(TypeExpr(CharLiteral)))))

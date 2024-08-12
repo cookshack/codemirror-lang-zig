@@ -8,7 +8,7 @@ Program(Decl(VarDecl(var,Name,TypeExpr(Identifier))),
         ComptimeDecl(comptime,
                      Block(Statement(TypeExpr(Identifier),
                                      AssignOp,
-                                     Expr(PrimaryExpr(TypeExpr(Integer)))))))
+                                     Expr(TypeExpr(Integer))))))
 
 # Valid
 
@@ -26,20 +26,16 @@ Program
   TestName,
   Block(Statement(VarDecl(const,
                           Name,
-                          Expr
-                          (PrimaryExpr (comptime,
-                                        Expr
-                                        (PrimaryExpr
-                                         (TypeExpr
-                                          (LabeledTypeExpr(BlockLabel(Identifier),
-                                                           Block(Statement(break,
-                                                                           BreakLabel(Identifier),
-                                                                           Expr(PrimaryExpr(TypeExpr(Identifier,
-                                                                                                     FnCallArgs
-                                                                                                     (Expr
-                                                                                                      (PrimaryExpr
-                                                                                                       (TypeExpr
-                                                                                                        (Integer))))))))))))))))),
+                          Expr(comptime,
+                               Expr(TypeExpr
+                                    (LabeledTypeExpr(BlockLabel(Identifier),
+                                                     Block(Statement(break,
+                                                                     BreakLabel(Identifier),
+                                                                     Expr(TypeExpr(Identifier,
+                                                                                   FnCallArgs
+                                                                                   (Expr
+                                                                                    (TypeExpr
+                                                                                     (Integer))))))))))))),
         LineComment)))
 
 # type expr
@@ -52,7 +48,7 @@ var a : comptime u32;
 Program(ContainerField(TypeExpr(comptime,
                                 TypeExpr(comptime,
                                          TypeExpr(Identifier))),
-                       Expr(PrimaryExpr(TypeExpr(Integer)))),
+                       Expr(TypeExpr(Integer))),
         Decl(VarDecl(var,
                      Name,
                      TypeExpr(comptime,
@@ -70,8 +66,8 @@ Program(Decl(FnProto(fn,
                      ParamDeclList,
                      TypeExpr(Identifier)),
              Block(Statement(comptime,
-                             BlockExprStatement(AssignExpr(Expr(PrimaryExpr(TypeExpr(Identifier))),
+                             BlockExprStatement(AssignExpr(Expr(TypeExpr(Identifier)),
                                                            AssignOp,
-                                                           Expr(BinaryExpr(Expr(PrimaryExpr(TypeExpr(Identifier))),
+                                                           Expr(BinaryExpr(Expr(TypeExpr(Identifier)),
                                                                            AdditionOp,
-                                                                           Expr(PrimaryExpr(TypeExpr(Integer)))))))))))
+                                                                           Expr(TypeExpr(Integer))))))))))

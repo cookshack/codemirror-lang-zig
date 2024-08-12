@@ -79,7 +79,7 @@ Program(Decl(VarDecl(const,
                      TypeExpr(FnProto(fn,
                                       ParamDeclList,
                                       TypeExpr(Identifier))),
-                     Expr(PrimaryExpr(TypeExpr(Identifier))))))
+                     Expr(TypeExpr(Identifier)))))
 
 # export
 

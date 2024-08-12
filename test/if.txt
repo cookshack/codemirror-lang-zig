@@ -10,10 +10,10 @@ Program(Decl(FnProto(fn,
                      Identifier,
                      ParamDeclList(ParamDecl(Identifier, ParamType(TypeExpr(Identifier)))),
                      TypeExpr(Identifier)),
-             Block(Statement(IfStatement(IfPrefix(if, Expr(BinaryExpr(Expr(PrimaryExpr(TypeExpr(Identifier))),
+             Block(Statement(IfStatement(IfPrefix(if, Expr(BinaryExpr(Expr(TypeExpr(Identifier)),
                                                                       CompareOp,
-                                                                      Expr(PrimaryExpr(TypeExpr(Integer)))))),
-                                         Expr(PrimaryExpr(return, Expr(PrimaryExpr(TypeExpr(Integer))))))))))
+                                                                      Expr(TypeExpr(Integer))))),
+                                         Expr(return, Expr(TypeExpr(Integer))))))))
 
 # expr
 
@@ -23,12 +23,12 @@ fn main() u8 {
 
 ==>
 Program(Decl(FnProto(fn,Identifier,ParamDeclList,TypeExpr(Identifier)),
-             Block(Statement(return, Expr(PrimaryExpr(IfExpr(IfPrefix(if, Expr(BinaryExpr(Expr(PrimaryExpr(TypeExpr(Integer))),
-                                                                                          CompareOp,
-                                                                                          Expr(PrimaryExpr(TypeExpr(Integer)))))),
-                                                             Expr(PrimaryExpr(TypeExpr(Integer))),
-                                                             else,
-                                                             Expr(PrimaryExpr(TypeExpr(Integer))))))))))
+             Block(Statement(return, Expr(IfExpr(IfPrefix(if, Expr(BinaryExpr(Expr(TypeExpr(Integer)),
+                                                                              CompareOp,
+                                                                              Expr(TypeExpr(Integer))))),
+                                                 Expr(TypeExpr(Integer)),
+                                                 else,
+                                                 Expr(TypeExpr(Integer))))))))
 
 # stmnt with assign in then expr
 
@@ -39,10 +39,10 @@ fn main() noreturn {
 
 ==>
 Program(Decl(FnProto(fn,Identifier,ParamDeclList,TypeExpr(Identifier)),
-             Block(Statement(IfStatement(IfPrefix(if, Expr(PrimaryExpr(TypeExpr(Integer)))),
-                                         AssignExpr(Expr(PrimaryExpr(TypeExpr(Identifier))),
+             Block(Statement(IfStatement(IfPrefix(if, Expr(TypeExpr(Integer))),
+                                         AssignExpr(Expr(TypeExpr(Identifier)),
                                                     AssignOp,
-                                                    Expr(PrimaryExpr(TypeExpr(Integer)))))))))
+                                                    Expr(TypeExpr(Integer))))))))
 
 # type expr
 
@@ -52,7 +52,7 @@ const a : if (b) u32 else u16;
 Program(Decl(VarDecl(const,
                      Name,
                      TypeExpr(IfTypeExpr(IfPrefix(if,
-                                                  Expr(PrimaryExpr(TypeExpr(Identifier)))),
+                                                  Expr(TypeExpr(Identifier))),
                                          TypeExpr(Identifier),
                                          else,
                                          TypeExpr(Identifier))))))

@@ -7,8 +7,8 @@ fn main () noreturn {
 ==>
 Program(Decl(FnProto(fn,Identifier,ParamDeclList,TypeExpr(Identifier)),
              Block(Statement(return,
-                             Expr(PrimaryExpr(TypeExpr(Identifier,
-                                                       SuffixOp(Slice(Expr(PrimaryExpr(TypeExpr(Integer))))))))))))
+                             Expr(TypeExpr(Identifier,
+                                           SuffixOp(Slice(Expr(TypeExpr(Integer))))))))))
 
 # end
 
@@ -19,9 +19,9 @@ fn main () noreturn {
 ==>
 Program(Decl(FnProto(fn,Identifier,ParamDeclList,TypeExpr(Identifier)),
              Block(Statement(return,
-                             Expr(PrimaryExpr(TypeExpr(Identifier,
-                                                       SuffixOp(Slice(Expr(PrimaryExpr(TypeExpr(Integer))),
-                                                                      Expr(PrimaryExpr(TypeExpr(Integer))))))))))))
+                             Expr(TypeExpr(Identifier,
+                                           SuffixOp(Slice(Expr(TypeExpr(Integer)),
+                                                          Expr(TypeExpr(Integer))))))))))
 
 # sentinel
 
@@ -32,10 +32,10 @@ fn fun () noreturn {
 ==>
 Program(Decl(FnProto(fn,Identifier,ParamDeclList,TypeExpr(Identifier)),
              Block(Statement(return,
-                             Expr(PrimaryExpr(TypeExpr(Identifier,
-                                                       SuffixOp(Slice(Expr(PrimaryExpr(TypeExpr(Integer))),
-                                                                      Expr(PrimaryExpr(TypeExpr(Integer))),
-                                                                      Expr(PrimaryExpr(TypeExpr(Integer))))))))))))
+                             Expr(TypeExpr(Identifier,
+                                           SuffixOp(Slice(Expr(TypeExpr(Integer)),
+                                                          Expr(TypeExpr(Integer)),
+                                                          Expr(TypeExpr(Integer))))))))))
 
 # type
 
@@ -46,9 +46,9 @@ Program(Decl(VarDecl(var,
                      Name,
                      TypeExpr(PrefixTypeOp(SliceTypeStart,
                                            ByteAlign(align,
-                                                     Expr(PrimaryExpr(TypeExpr(Integer)))),
+                                                     Expr(TypeExpr(Integer))),
                                            AddrSpace(addrspace,
-                                                     Expr(PrimaryExpr(TypeExpr(Identifier)))),
+                                                     Expr(TypeExpr(Identifier))),
                                            const,
                                            volatile,
                                            allowzero),
@@ -61,7 +61,7 @@ const sl: [:0]const u8 = "hi";
 ==>
 Program(Decl(VarDecl(const,
                      Name,
-                     TypeExpr(PrefixTypeOp(SliceTypeStart(Expr(PrimaryExpr(TypeExpr(Integer)))),
+                     TypeExpr(PrefixTypeOp(SliceTypeStart(Expr(TypeExpr(Integer))),
                                            const),
                               Identifier),
-                     Expr(PrimaryExpr(TypeExpr(StringLiteral))))))
+                     Expr(TypeExpr(StringLiteral)))))

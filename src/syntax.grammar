@@ -107,7 +107,7 @@ AssignExpr { Expr !assign AssignOp Expr }
 
 exprExclIf { binaryExprExclIf | PrefixExpr | !primary primaryExprExclIf }
 
-Expr { BinaryExpr | PrefixExpr | !primary PrimaryExpr }
+Expr { BinaryExpr | PrefixExpr | !primary primaryExpr }
 
 binaryExprExclIf {
   exprExclIf !or kw<"or"> Expr
@@ -129,9 +129,9 @@ BinaryExpr {
   | Expr !multiply MultiplyOp Expr
 }
 
-PrefixExpr { !prefix PrefixOp+ !primary PrimaryExpr }
+PrefixExpr { !prefix PrefixOp+ !primary primaryExpr }
 
-PrimaryExpr {
+primaryExpr {
   IfExpr
   | BlockLabel? LoopExpr
   | !primary primaryExprExclIf

@@ -23,7 +23,7 @@ fn one() noreturn {
 Program(Decl(FnProto(fn,Identifier,ParamDeclList,TypeExpr(Identifier)),
              Block(Statement(TypeExpr(Identifier),
                              AssignOp,
-                             Expr(PrimaryExpr(TypeExpr(Integer)))))))
+                             Expr(TypeExpr(Integer))))))
 
 # import
 
@@ -35,8 +35,7 @@ Program
  (VarDecl
   (const,
    Name,
-   Expr(PrimaryExpr(TypeExpr(BuiltinIdentifier,
-                             FnCallArgs(Expr(PrimaryExpr(TypeExpr(StringLiteral))))))))))
+   Expr(TypeExpr(BuiltinIdentifier, FnCallArgs(Expr(TypeExpr(StringLiteral))))))))
 
 # unreachable
 
@@ -51,5 +50,5 @@ Program(Decl(FnProto(fn,
                      ParamDeclList,
                      TypeExpr(Identifier)),
              Block(Statement(IfStatement(IfPrefix(if,
-                                                  Expr(PrimaryExpr(TypeExpr(Integer)))),
-                                         Expr(PrimaryExpr(TypeExpr(unreachable))))))))
+                                                  Expr(TypeExpr(Integer))),
+                                         Expr(TypeExpr(unreachable)))))))

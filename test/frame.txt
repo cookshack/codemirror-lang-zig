@@ -21,6 +21,6 @@ Program(Decl(FnProto(fn,
                                                                 Identifier)))),
                      TypeExpr(Identifier)),
              Block(Statement(return,
-                             Expr(PrimaryExpr(nosuspend,
-                                              Expr(PrefixExpr(PrefixOp(await),
-                                                              PrimaryExpr(TypeExpr(Identifier))))))))))
+                             Expr(nosuspend,
+                                  Expr(PrefixExpr(PrefixOp(await),
+                                                  TypeExpr(Identifier))))))))

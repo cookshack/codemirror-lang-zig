@@ -11,7 +11,7 @@ Program(Decl(FnProto(fn,
                                    ParamType(anytype))),
                      TypeExpr(Identifier)),
              Block(Statement(TypeExpr(Identifier,
-                                      FnCallArgs(Expr(PrimaryExpr(TypeExpr(Identifier)))))))))
+                                      FnCallArgs(Expr(TypeExpr(Identifier))))))))
 
 # doc comment
 
@@ -30,4 +30,4 @@ Program(Decl(FnProto(fn,
                                              ParamType(TypeExpr(Identifier)))),
                      TypeExpr(Identifier)),
              Block(Statement(TypeExpr(Identifier,
-                                      FnCallArgs(Expr(PrimaryExpr(TypeExpr(Identifier)))))))))
+                                      FnCallArgs(Expr(TypeExpr(Identifier))))))))

@@ -4,5 +4,5 @@ usingnamespace @import("std");
 
 ==>
 Program(Decl(usingnamespace,
-             Expr(PrimaryExpr(TypeExpr(BuiltinIdentifier,
-                                       FnCallArgs(Expr(PrimaryExpr(TypeExpr(StringLiteral)))))))))
+             Expr(TypeExpr(BuiltinIdentifier,
+                           FnCallArgs(Expr(TypeExpr(StringLiteral)))))))

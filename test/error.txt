@@ -5,8 +5,8 @@ const e = error.OutOfPie;
 ==>
 Program(Decl(VarDecl(const,
                      Name,
-                     Expr(PrimaryExpr(TypeExpr(error,
-                                               Identifier))))))
+                     Expr(TypeExpr(error,
+                                   Identifier)))))
 
 # set decl
 
@@ -28,5 +28,5 @@ Program(Decl(VarDecl(const,
                      Name,
                      TypeExpr(ErrorUnionExpr(Identifier,
                                              TypeExpr(Identifier))),
-                     Expr(PrimaryExpr(TypeExpr(error,
-                                               Identifier))))))
+                     Expr(TypeExpr(error,
+                                   Identifier)))))

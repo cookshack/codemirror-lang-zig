@@ -7,9 +7,9 @@ const p = Point{
 ==>
 Program(Decl(VarDecl(const,
                      Name,
-                     Expr(PrimaryExpr(TypeExpr(Identifier),
-                                      InitList(FieldInit(Identifier,
-                                                         Expr(PrimaryExpr(TypeExpr(Float))))))))))
+                     Expr(TypeExpr(Identifier),
+                          InitList(FieldInit(Identifier,
+                                             Expr(TypeExpr(Float))))))))
 
 # dot
 
@@ -21,8 +21,8 @@ const a: Point = .{
 Program(Decl(VarDecl(const,
                      Name,
                      TypeExpr(Identifier),
-                     Expr(PrimaryExpr(TypeExpr(InitList(FieldInit(Identifier,
-                                                                  Expr(PrimaryExpr(TypeExpr(Integer)))))))))))
+                     Expr(TypeExpr(InitList(FieldInit(Identifier,
+                                                      Expr(TypeExpr(Integer)))))))))
 
 # dangle
 
@@ -33,11 +33,11 @@ const p = for (a) |x| Point {};
 Program(LineComment,
         Decl(VarDecl(const,
                      Name,
-                     Expr(PrimaryExpr(LoopExpr(ForExpr(ForPrefix(for,
-                                                                 ForArgList(ForItem(Expr(PrimaryExpr(TypeExpr(Identifier))))),
-                                                                 PtrListPayload(Identifier)),
-                                                       Expr(PrimaryExpr(TypeExpr(Identifier),
-                                                                        InitList)))))))))
+                     Expr(LoopExpr(ForExpr(ForPrefix(for,
+                                                     ForArgList(ForItem(Expr(TypeExpr(Identifier)))),
+                                                     PtrListPayload(Identifier)),
+                                           Expr(TypeExpr(Identifier),
+                                                InitList)))))))
 
 # decl
 
@@ -53,16 +53,16 @@ const Point = packed struct (u32) {
 ==>
 Program(Decl(VarDecl(const,
                      Name,
-                     Expr(PrimaryExpr(TypeExpr(ContainerDecl(packed,
-                                                             ContainerDeclAuto(ContainerDeclType(struct,
-                                                                                                 Expr(PrimaryExpr(TypeExpr(Identifier)))),
-                                                                               ContainerDocComment,
-                                                                               LineComment,
-                                                                               ContainerField(Identifier,
-                                                                                              TypeExpr(Identifier)),
-                                                                               ContainerField(DocComment,
-                                                                                              Identifier,
-                                                                                              TypeExpr(Identifier),
-                                                                                              ByteAlign(align,
-                                                                                                        Expr(PrimaryExpr(TypeExpr(Integer)))),
-                                                                                              Expr(PrimaryExpr(TypeExpr(Integer))))))))))))
+                     Expr(TypeExpr(ContainerDecl(packed,
+                                                 ContainerDeclAuto(ContainerDeclType(struct,
+                                                                                     Expr(TypeExpr(Identifier))),
+                                                                   ContainerDocComment,
+                                                                   LineComment,
+                                                                   ContainerField(Identifier,
+                                                                                  TypeExpr(Identifier)),
+                                                                   ContainerField(DocComment,
+                                                                                  Identifier,
+                                                                                  TypeExpr(Identifier),
+                                                                                  ByteAlign(align,
+                                                                                            Expr(TypeExpr(Integer))),
+                                                                                  Expr(TypeExpr(Integer))))))))))

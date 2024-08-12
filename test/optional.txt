@@ -7,4 +7,4 @@ Program(Decl(VarDecl(const,
                      Name,
                      TypeExpr(PrefixTypeOp,
                               Identifier),
-                     Expr(PrimaryExpr(TypeExpr(Integer))))))
+                     Expr(TypeExpr(Integer)))))

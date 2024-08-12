@@ -10,5 +10,5 @@ Program(Decl(FnProto(fn,
                      ParamDeclList,
                      TypeExpr(Identifier)),
              Block(Statement(return,
-                             Expr(PrimaryExpr(TypeExpr(Identifier,
-                                                       SuffixOp(FieldAccess(Identifier)))))))))
+                             Expr(TypeExpr(Identifier,
+                                           SuffixOp(FieldAccess(Identifier))))))))
