@@ -57,3 +57,21 @@ Program(ContainerField(TypeExpr(comptime,
                      Name,
                      TypeExpr(comptime,
                               TypeExpr(Identifier)))))
+
+# statement
+
+fn f() noreturn {
+ comptime a = a + 1;
+}
+
+==>
+Program(Decl(FnProto(fn,
+                     Identifier,
+                     ParamDeclList,
+                     TypeExpr(Identifier)),
+             Block(Statement(comptime,
+                             BlockExprStatement(AssignExpr(Expr(PrimaryExpr(TypeExpr(Identifier))),
+                                                           AssignOp,
+                                                           Expr(BinaryExpr(Expr(PrimaryExpr(TypeExpr(Identifier))),
+                                                                           AdditionOp,
+                                                                           Expr(PrimaryExpr(TypeExpr(Integer)))))))))))

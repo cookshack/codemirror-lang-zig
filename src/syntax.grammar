@@ -65,7 +65,7 @@ Name { identifier }
 
 Statement {
   (kw<"comptime">? VarDecl)
-  //| kw<"comptime"> BlockExprStatement
+  | !statement kw<"comptime"> BlockExprStatement
   | !statement kw<"nosuspend"> BlockExprStatement
   | kw<"suspend"> BlockExprStatement
   | kw<"defer"> BlockExprStatement
@@ -140,7 +140,7 @@ PrimaryExpr {
 primaryExprExclIf {
   AsmExpr
   | kw<"break"> BreakLabel? Expr?
-  | kw<"comptime"> Expr
+  | !primary kw<"comptime"> Expr
   | !primary kw<"nosuspend"> Expr
   | kw<"continue"> BreakLabel?
   | kw<"resume"> Expr
