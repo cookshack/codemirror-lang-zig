@@ -372,7 +372,6 @@ StringLiteralSingle { stringLiteralSingle }
 @skip { whitespace | LineComment }
 
 kw<term> { @specialize[@name={term}]<identifier, term> }
-_kw<term> { @specialize<identifier, term> }
 
 @tokens {
   whitespace {
