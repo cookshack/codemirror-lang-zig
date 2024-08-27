@@ -306,7 +306,7 @@ BitwiseOp { "&" | "^" | "|" | kw<"orelse"> | kw<"catch"> Payload? }
 
 BitShiftOp { "<<" | ">>" | "<<|" }
 
-AdditionOp { "+" | "-" | "++" }
+AdditionOp { "+" | "-" | "++" | "+%" | "-%" | "+|" | "-|" }
 
 MultiplyOp { "||" | "*" | arithOp<"/"> | "%" | "**" | "*%" | "*|" }
 

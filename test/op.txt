@@ -98,3 +98,34 @@ Program(Decl(FnProto(fn,
                                                                                                                                                                                                                                                                        Expr(TypeExpr(GroupedExpr(Expr(BinaryExpr(Expr(TypeExpr(Integer)),
                                                                                                                                                                                                                                                                                                                  MultiplyOp,
                                                                                                                                                                                                                                                                                                                  Expr(TypeExpr(Integer)))))))))))))))))))))))))))))))))))))))
+
+
+# prec assign bitshift prefix
+
+fn f() noreturn {
+  var a = 1;
+
+  a *=  1 <<  -a;
+  a *= (1 << (-a));
+}
+
+==>
+Program(Decl(FnProto(fn,
+                     Identifier,
+                     ParamDeclList,
+                     TypeExpr(Identifier)),
+             Block(Statement(VarDecl(var,
+                                     Name,
+                                     Expr(TypeExpr(Integer)))),
+                   Statement(TypeExpr(Identifier),
+                             AssignOp,
+                             Expr(BinaryExpr(Expr(TypeExpr(Integer)),
+                                             BitShiftOp,
+                                             Expr(PrefixExpr(PrefixOp,
+                                                             TypeExpr(Identifier)))))),
+                   Statement(TypeExpr(Identifier),
+                             AssignOp,
+                             Expr(TypeExpr(GroupedExpr(Expr(BinaryExpr(Expr(TypeExpr(Integer)),
+                                                                       BitShiftOp,
+                                                                       Expr(TypeExpr(GroupedExpr(Expr(PrefixExpr(PrefixOp,
+                                                                                                                 TypeExpr(Identifier)))))))))))))))

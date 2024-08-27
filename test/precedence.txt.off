@@ -1,18 +1,18 @@
 # SEE op.txt
 
 // happens first
-// x() x[] x.y x.* x.?
-// a!b
-// x{}
-// !x -x -%x ~x &x ?x
-// * / % ** *% *| ||
-// + - ++ +% -% +| -|
-// << >> <<|
-// & ^ | orelse catch
-// == != < > <= >=
-// and
-// or
-// = *= *%= *|= /= %= += +%= +|= -= -%= -|= <<= <<|= >>= &= ^= |=
+//               x() x[] x.y x.* x.?
+//               a!b
+//               x{}
+// prefix        !x -x -%x ~x &x ?x
+// multiply      * / % ** *% *| ||
+// addition      + - ++ +% -% +| -|
+// bitshift      << >> <<|
+// bitwise       & ^ | orelse catch
+// compare       == != < > <= >=
+//               and
+//               or
+// assign        = *= *%= *|= /= %= += +%= +|= -= -%= -|= <<= <<|= >>= &= ^= |=
 // happens last
 
 fn f() noreturn {
