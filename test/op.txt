@@ -51,3 +51,50 @@ Program(Decl(FnProto(fn,
                                                      Expr(TypeExpr(GroupedExpr(Expr(BinaryExpr(Expr(TypeExpr(Integer)),
                                                                                                MultiplyOp,
                                                                                                Expr(TypeExpr(Integer))))))))))))))
+
+# prec * ...
+
+fn f() noreturn {
+  var a = 1 ||  2 *|  3 *%  4 **  5 %  6 /  7 * 8;
+  var a = 1 || (2 *| (3 *% (4 ** (5 % (6 / (7 * 8))))));
+}
+
+==>
+Program(Decl(FnProto(fn,
+                     Identifier,
+                     ParamDeclList,
+                     TypeExpr(Identifier)),
+             Block(Statement(VarDecl(var,
+                                     Name,
+                                     Expr(BinaryExpr(Expr(BinaryExpr(Expr(BinaryExpr(Expr(BinaryExpr(Expr(BinaryExpr(Expr(BinaryExpr(Expr(BinaryExpr(Expr(TypeExpr(Integer)),
+                                                                                                                                                     MultiplyOp,
+                                                                                                                                                     Expr(TypeExpr(Integer)))),
+                                                                                                                                     MultiplyOp,
+                                                                                                                                     Expr(TypeExpr(Integer)))),
+                                                                                                                     MultiplyOp,
+                                                                                                                     Expr(TypeExpr(Integer)))),
+                                                                                                     MultiplyOp,
+                                                                                                     Expr(TypeExpr(Integer)))),
+                                                                                     MultiplyOp,
+                                                                                     Expr(TypeExpr(Integer)))),
+                                                                     MultiplyOp,
+                                                                     Expr(TypeExpr(Integer)))),
+                                                     MultiplyOp,
+                                                     Expr(TypeExpr(Integer)))))),
+                   Statement(VarDecl(var,
+                                     Name,
+                                     Expr(BinaryExpr(Expr(TypeExpr(Integer)),
+                                                     MultiplyOp,
+                                                     Expr(TypeExpr(GroupedExpr(Expr(BinaryExpr(Expr(TypeExpr(Integer)),
+                                                                                               MultiplyOp,
+                                                                                               Expr(TypeExpr(GroupedExpr(Expr(BinaryExpr(Expr(TypeExpr(Integer)),
+                                                                                                                                         MultiplyOp,
+                                                                                                                                         Expr(TypeExpr(GroupedExpr(Expr(BinaryExpr(Expr(TypeExpr(Integer)),
+                                                                                                                                                                                   MultiplyOp,
+                                                                                                                                                                                   Expr(TypeExpr(GroupedExpr(Expr(BinaryExpr(Expr(TypeExpr(Integer)),
+                                                                                                                                                                                                                             MultiplyOp,
+                                                                                                                                                                                                                             Expr(TypeExpr(GroupedExpr(Expr(BinaryExpr(Expr(TypeExpr(Integer)),
+                                                                                                                                                                                                                                                                       MultiplyOp,
+                                                                                                                                                                                                                                                                       Expr(TypeExpr(GroupedExpr(Expr(BinaryExpr(Expr(TypeExpr(Integer)),
+                                                                                                                                                                                                                                                                                                                 MultiplyOp,
+                                                                                                                                                                                                                                                                                                                 Expr(TypeExpr(Integer)))))))))))))))))))))))))))))))))))))))
