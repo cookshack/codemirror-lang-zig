@@ -1,88 +1,53 @@
-# prec
-
-// happens first
-// x() x[] x.y x.* x.?
-// a!b
-// x{}
-// !x -x -%x ~x &x ?x
-// * / % ** *% *| ||
-// + - ++ +% -% +| -|
-// << >> <<|
-// & ^ | orelse catch
-// == != < > <= >=
-// and
-// or
-// = *= *%= *|= /= %= += +%= +|= -= -%= -|= <<= <<|= >>= &= ^= |=
-// happens last
+# prec mult add
 
 fn f() noreturn {
-  var a =   1 * 2  + 9  -   3 * 4  + 5;
-  var b = ((1 * 2) + 9) - ((3 * 4) + 5);
-
-  var c =  1 or   2 == 3  and 4;
-  var d = (1 or ((2 == 3) and 4));
+  var a =  1 * 2  + 9;
+  var b = (1 * 2) + 9;
 }
 
 ==>
-Program(LineComment,
-        LineComment,
-        LineComment,
-        LineComment,
-        LineComment,
-        LineComment,
-        LineComment,
-        LineComment,
-        LineComment,
-        LineComment,
-        LineComment,
-        LineComment,
-        LineComment,
-        LineComment,
-        Decl(FnProto(fn,
+Program(Decl(FnProto(fn,
                      Identifier,
                      ParamDeclList,
                      TypeExpr(Identifier)),
              Block(Statement(VarDecl(var,
                                      Name,
-                                     Expr(BinaryExpr(Expr(BinaryExpr(Expr(BinaryExpr(Expr(BinaryExpr(Expr(TypeExpr(Integer)),
-                                                                                                     MultiplyOp,
-                                                                                                     Expr(TypeExpr(Integer)))),
-                                                                                     AdditionOp,
-                                                                                     Expr(TypeExpr(Integer)))),
-                                                                     AdditionOp,
-                                                                     Expr(BinaryExpr(Expr(TypeExpr(Integer)),
-                                                                                     MultiplyOp,
-                                                                                     Expr(TypeExpr(Integer)))))),
+                                     Expr(BinaryExpr(Expr(BinaryExpr(Expr(TypeExpr(Integer)),
+                                                                     MultiplyOp,
+                                                                     Expr(TypeExpr(Integer)))),
                                                      AdditionOp,
                                                      Expr(TypeExpr(Integer)))))),
                    Statement(VarDecl(var,
                                      Name,
-                                     Expr(BinaryExpr(Expr(TypeExpr(GroupedExpr(Expr(BinaryExpr(Expr(TypeExpr(GroupedExpr(Expr(BinaryExpr(Expr(TypeExpr(Integer)),
-                                                                                                                                         MultiplyOp,
-                                                                                                                                         Expr(TypeExpr(Integer))))))),
-                                                                                               AdditionOp,
+                                     Expr(BinaryExpr(Expr(TypeExpr(GroupedExpr(Expr(BinaryExpr(Expr(TypeExpr(Integer)),
+                                                                                               MultiplyOp,
                                                                                                Expr(TypeExpr(Integer))))))),
                                                      AdditionOp,
-                                                     Expr(TypeExpr(GroupedExpr(Expr(BinaryExpr(Expr(TypeExpr(GroupedExpr(Expr(BinaryExpr(Expr(TypeExpr(Integer)),
-                                                                                                                                         MultiplyOp,
-                                                                                                                                         Expr(TypeExpr(Integer))))))),
-                                                                                               AdditionOp,
-                                                                                               Expr(TypeExpr(Integer))))))))))),
-                   Statement(VarDecl(var,
+                                                     Expr(TypeExpr(Integer)))))))))
+
+# prec add mult
+
+fn f() noreturn {
+  var a = 1 +  2 * 9;
+  var b = 1 + (2 * 9);
+}
+
+==>
+Program(Decl(FnProto(fn,
+                     Identifier,
+                     ParamDeclList,
+                     TypeExpr(Identifier)),
+             Block(Statement(VarDecl(var,
                                      Name,
                                      Expr(BinaryExpr(Expr(TypeExpr(Integer)),
-                                                     or,
-                                                     Expr(BinaryExpr(Expr(BinaryExpr(Expr(TypeExpr(Integer)),
-                                                                                     CompareOp,
-                                                                                     Expr(TypeExpr(Integer)))),
-                                                                     and,
+                                                     AdditionOp,
+                                                     Expr(BinaryExpr(Expr(TypeExpr(Integer)),
+                                                                     MultiplyOp,
                                                                      Expr(TypeExpr(Integer)))))))),
                    Statement(VarDecl(var,
                                      Name,
-                                     Expr(TypeExpr(GroupedExpr(Expr(BinaryExpr(Expr(TypeExpr(Integer)),
-                                                                               or,
-                                                                               Expr(TypeExpr(GroupedExpr(Expr(BinaryExpr(Expr(TypeExpr(GroupedExpr(Expr(BinaryExpr(Expr(TypeExpr(Integer)),
-                                                                                                                                                                   CompareOp,
-                                                                                                                                                                   Expr(TypeExpr(Integer))))))),
-                                                                                                                         and,
-                                                                                                                         Expr(TypeExpr(Integer)))))))))))))))))
+                                     Expr(BinaryExpr(Expr(TypeExpr(Integer)),
+                                                     AdditionOp,
+                                                     Expr(TypeExpr(GroupedExpr(Expr(BinaryExpr(Expr(TypeExpr(Integer)),
+                                                                                               MultiplyOp,
+                                                                                               Expr(TypeExpr(Integer))))))))))))))
