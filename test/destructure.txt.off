@@ -1,0 +1,24 @@
+# destructure
+
+test {
+    var x: u32 = undefined;
+    x, var y: u32, const z = .{ 1, 2, 3 };
+    _ = y;
+    _ = z;
+}
+
+==>
+Program
+
+# destructure to lvalues as conditional body
+
+test {
+    var x: u32 = undefined;
+    var y: u32 = undefined;
+
+    if (true) x, y = .{ 1, 2 };
+    while (false) y, x = undefined;
+}
+
+==>
+Program

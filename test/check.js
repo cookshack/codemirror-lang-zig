@@ -9,7 +9,7 @@ function parse
   content = fs.readFileSync(file, 'utf8')
   //console.log(content)
   tree = lr.parser.parse(content)
-  return tree
+  return { tree: tree, content: content }
 }
 
 export

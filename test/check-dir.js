@@ -20,12 +20,12 @@ Fs.readdir(process.argv[2], {}, (err, data) => {
   count = 0
   data.forEach(name => {
     if (name.endsWith('.zig')) {
-      let tree, path
+      let res, path
 
       path = Path.join(process.argv[2], name)
-      tree = parse(path)
-      console.log(path)
-      if (check(tree)) {
+      res = parse(path)
+      console.log(path + ' ' + res.content.length)
+      if (check(res.tree)) {
         count++
         console.log('  ^==== parse failed')
         //console.log('tree.length: ' + tree.length)
