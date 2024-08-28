@@ -11,7 +11,7 @@ fn one() noreturn {
 
 ==>
 Program(Decl(FnProto(fn,Identifier,ParamDeclList(),TypeExpr(Identifier)),
-             Block(Statement(return))))
+             Block(Statement(Expr(return)))))
 
 # Assign in block
 
@@ -21,9 +21,9 @@ fn one() noreturn {
 
 ==>
 Program(Decl(FnProto(fn,Identifier,ParamDeclList,TypeExpr(Identifier)),
-             Block(Statement(TypeExpr(Identifier),
-                             AssignOp,
-                             Expr(TypeExpr(Integer))))))
+             Block(Statement(AssignExpr(Expr(TypeExpr(Identifier)),
+                                        AssignOp,
+                                        Expr(TypeExpr(Integer)))))))
 
 # import
 
@@ -37,7 +37,24 @@ Program
    Name,
    Expr(TypeExpr(BuiltinIdentifier, FnCallArgs(Expr(TypeExpr(StringLiteral))))))))
 
-# unreachable
+# unreachable statement
+
+fn fun() noreturn {
+  if (0) {
+    unreachable;
+  }
+}
+
+==>
+Program(Decl(FnProto(fn,
+                     Identifier,
+                     ParamDeclList,
+                     TypeExpr(Identifier)),
+             Block(Statement(IfStatement(IfPrefix(if,
+                                                  Expr(TypeExpr(Integer))),
+                                         Block(Statement(Expr(TypeExpr(unreachable)))))))))
+
+# unreachable expr
 
 fn fun() noreturn {
   if (0)
@@ -49,6 +66,6 @@ Program(Decl(FnProto(fn,
                      Identifier,
                      ParamDeclList,
                      TypeExpr(Identifier)),
-             Block(Statement(IfStatement(IfPrefix(if,
+             Block(Statement(Expr(IfExpr(IfPrefix(if,
                                                   Expr(TypeExpr(Integer))),
-                                         Expr(TypeExpr(unreachable)))))))
+                                         Expr(TypeExpr(unreachable))))))))

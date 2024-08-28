@@ -72,15 +72,15 @@ Statement {
   | kw<"suspend"> BlockExprStatement
   | kw<"defer"> BlockExprStatement
   | kw<"errdefer"> Payload? BlockExprStatement
-  | IfStatement
+  | !statement IfStatement
   | !curlyRight labeledStatement
   | !curlyRight SwitchExpr
-  | (assignExprExclIf | exprExclIf) ";"
+  | (AssignExpr | Expr) ";"
 }
 
 IfStatement {
-  IfPrefix ( blockExpr (!else kw<"else"> Payload? Statement)?
-             | (AssignExpr | Expr) (";" | !else kw<"else"> Payload? Statement) )
+  !statement IfPrefix ( blockExpr (!else kw<"else"> Payload? Statement)?
+                        | (AssignExpr | Expr) (";" | !else kw<"else"> Payload? Statement) )
 }
 
 labeledStatement { !curlyRight (Block | LoopStatement) }
@@ -103,23 +103,9 @@ blockExpr { !curlyRight BlockLabel? !curlyRight Block }
 
 //// Expression level.
 
-assignExprExclIf { exprExclIf !assign AssignOp Expr }
-
 AssignExpr { Expr !assign AssignOp Expr }
 
-exprExclIf { binaryExprExclIf | PrefixExpr | !primary primaryExprExclIf }
-
 Expr { BinaryExpr | PrefixExpr | !primary primaryExpr }
-
-binaryExprExclIf {
-  exprExclIf !or kw<"or"> Expr
-  | exprExclIf !and kw<"and"> Expr
-  | exprExclIf !compare CompareOp Expr
-  | exprExclIf !bitwise BitwiseOp Expr
-  | exprExclIf !bitShift BitShiftOp Expr
-  | exprExclIf !add AdditionOp Expr
-  | exprExclIf !multiply MultiplyOp Expr
-}
 
 BinaryExpr {
   Expr !or kw<"or"> Expr
@@ -159,7 +145,7 @@ InitList {
   | "{" "}"
 }
 
-IfExpr { IfPrefix Expr (!else kw<"else"> Payload? Expr)? }
+IfExpr { !primary IfPrefix Expr (!else kw<"else"> Payload? Expr)? }
 
 Block { "{" Statement* "}" }
 
@@ -168,9 +154,9 @@ LoopExpr {
   !curlyRight (kw<"inline"> (ForExpr | WhileExpr))
   | kw<"inline">? (ForExpr | WhileExpr) }
 
-ForExpr { ForPrefix Expr (!else kw<"else"> Expr)? }
+ForExpr { !primary ForPrefix Expr (!else kw<"else"> Expr)? }
 
-WhileExpr { WhilePrefix Expr (!else kw<"else"> Payload? Expr)? }
+WhileExpr { !primary WhilePrefix Expr (!else kw<"else"> Payload? Expr)? }
 
 TypeExpr { PrefixTypeOp* (ErrorUnionExpr | suffixExpr) }
 

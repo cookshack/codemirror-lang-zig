@@ -6,9 +6,9 @@ comptime { a = 1; }
 ==>
 Program(Decl(VarDecl(var,Name,TypeExpr(Identifier))),
         ComptimeDecl(comptime,
-                     Block(Statement(TypeExpr(Identifier),
-                                     AssignOp,
-                                     Expr(TypeExpr(Integer))))))
+                     Block(Statement(AssignExpr(Expr(TypeExpr(Identifier)),
+                                                AssignOp,
+                                                Expr(TypeExpr(Integer)))))))
 
 # Valid
 
@@ -29,13 +29,13 @@ Program
                           Expr(comptime,
                                Expr(TypeExpr
                                     (LabeledTypeExpr(BlockLabel(Identifier),
-                                                     Block(Statement(break,
-                                                                     BreakLabel(Identifier),
-                                                                     Expr(TypeExpr(Identifier,
-                                                                                   FnCallArgs
-                                                                                   (Expr
-                                                                                    (TypeExpr
-                                                                                     (Integer))))))))))))),
+                                                     Block(Statement(Expr(break,
+                                                                          BreakLabel(Identifier),
+                                                                          Expr(TypeExpr(Identifier,
+                                                                                        FnCallArgs
+                                                                                        (Expr
+                                                                                         (TypeExpr
+                                                                                          (Integer)))))))))))))),
         LineComment)))
 
 # type expr

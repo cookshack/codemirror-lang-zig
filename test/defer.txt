@@ -44,9 +44,9 @@ Program(Decl(FnProto(fn,
                    Statement(errdefer,
                              BlockExprStatement(Expr(TypeExpr(Identifier,
                                                               FnCallArgs)))),
-                   Statement(IfStatement(IfPrefix(if,
+                   Statement(Expr(IfExpr(IfPrefix(if,
                                                   Expr(TypeExpr(Identifier))),
                                          Expr(return,
-                                              Expr(TypeExpr(Integer))))),
-                   Statement(return,
-                             Expr(TypeExpr(error, Identifier))))))
+                                              Expr(TypeExpr(Integer)))))),
+                   Statement(Expr(return,
+                                  Expr(TypeExpr(error, Identifier)))))))

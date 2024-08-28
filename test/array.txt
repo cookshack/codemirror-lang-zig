@@ -6,9 +6,9 @@ fn main () noreturn {
 
 ==>
 Program(Decl(FnProto(fn, Identifier,ParamDeclList,TypeExpr(Identifier)),
-             Block(Statement(return,
-                             Expr(TypeExpr(Identifier,
-                                           SuffixOp(ArrayAccess(Expr(TypeExpr(Integer))))))))))
+             Block(Statement(Expr(return,
+                                  Expr(TypeExpr(Identifier,
+                                                SuffixOp(ArrayAccess(Expr(TypeExpr(Integer)))))))))))
 
 # type
 
