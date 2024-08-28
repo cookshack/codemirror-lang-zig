@@ -12,5 +12,5 @@ Program(Decl(FnProto(fn,Identifier,ParamDeclList,TypeExpr(Identifier)),
              Block(Statement(LoopStatement(WhileStatement(WhilePrefix(while,
                                                                       Expr(TypeExpr(Integer))),
                                                           BlockLabel(Identifier),
-                                                          Block(Statement(break,
-                                                                          BreakLabel(Identifier)))))))))
+                                                          Block(Statement(Expr(break,
+                                                                               BreakLabel(Identifier))))))))))

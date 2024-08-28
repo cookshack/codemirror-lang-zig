@@ -1,4 +1,4 @@
-# stmnt
+# then expr
 
 fn one(a : u32) u16 {
   if (a == 1)
@@ -10,12 +10,32 @@ Program(Decl(FnProto(fn,
                      Identifier,
                      ParamDeclList(ParamDecl(Identifier, ParamType(TypeExpr(Identifier)))),
                      TypeExpr(Identifier)),
+             Block(Statement(Expr(IfExpr(IfPrefix(if,
+                                                  Expr(BinaryExpr(Expr(TypeExpr(Identifier)),
+                                                                  CompareOp,
+                                                                  Expr(TypeExpr(Integer))))),
+                                         Expr(return, Expr(TypeExpr(Integer)))))))))
+
+# then statement
+
+fn one(a : u32) u16 {
+  if (a == 1) {
+    return 1;
+  }
+}
+
+==>
+Program(Decl(FnProto(fn,
+                     Identifier,
+                     ParamDeclList(ParamDecl(Identifier, ParamType(TypeExpr(Identifier)))),
+                     TypeExpr(Identifier)),
              Block(Statement(IfStatement(IfPrefix(if, Expr(BinaryExpr(Expr(TypeExpr(Identifier)),
                                                                       CompareOp,
                                                                       Expr(TypeExpr(Integer))))),
-                                         Expr(return, Expr(TypeExpr(Integer))))))))
+                                         Block(Statement(Expr(return,
+                                                              Expr(TypeExpr(Integer))))))))))
 
-# expr
+# in expr
 
 fn main() u8 {
   return if (1 == 0) 3 else 4;
@@ -23,12 +43,14 @@ fn main() u8 {
 
 ==>
 Program(Decl(FnProto(fn,Identifier,ParamDeclList,TypeExpr(Identifier)),
-             Block(Statement(return, Expr(IfExpr(IfPrefix(if, Expr(BinaryExpr(Expr(TypeExpr(Integer)),
-                                                                              CompareOp,
-                                                                              Expr(TypeExpr(Integer))))),
-                                                 Expr(TypeExpr(Integer)),
-                                                 else,
-                                                 Expr(TypeExpr(Integer))))))))
+             Block(Statement(Expr(return,
+                                  Expr(IfExpr(IfPrefix(if,
+                                                       Expr(BinaryExpr(Expr(TypeExpr(Integer)),
+                                                                       CompareOp,
+                                                                       Expr(TypeExpr(Integer))))),
+                                              Expr(TypeExpr(Integer)),
+                                              else,
+                                              Expr(TypeExpr(Integer)))))))))
 
 # stmnt with assign in then expr
 

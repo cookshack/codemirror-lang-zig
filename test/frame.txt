@@ -20,7 +20,7 @@ Program(Decl(FnProto(fn,
                                              ParamType(TypeExpr(PrefixTypeOp(anyframe),
                                                                 Identifier)))),
                      TypeExpr(Identifier)),
-             Block(Statement(return,
-                             Expr(nosuspend,
-                                  Expr(PrefixExpr(PrefixOp(await),
-                                                  TypeExpr(Identifier))))))))
+             Block(Statement(Expr(return,
+                                  Expr(nosuspend,
+                                       Expr(PrefixExpr(PrefixOp(await),
+                                                       TypeExpr(Identifier)))))))))

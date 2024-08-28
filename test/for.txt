@@ -1,4 +1,4 @@
-# For
+# exp
 
 fn main() noreturn {
   for (s) |ch|
@@ -9,11 +9,11 @@ fn main() noreturn {
 Program
 (Decl
  (FnProto(fn,Identifier,ParamDeclList,TypeExpr(Identifier)),
-  Block(Statement(LoopStatement(ForStatement(ForPrefix(for,
-                                                       ForArgList(ForItem(Expr(TypeExpr(Identifier)))),
-                                                       PtrListPayload(Identifier)),
-                                             Expr(TypeExpr(Identifier,
-                                                           FnCallArgs(Expr(TypeExpr(Identifier)))))))))))
+  Block(Statement(Expr(LoopExpr(ForExpr(ForPrefix(for,
+                                                  ForArgList(ForItem(Expr(TypeExpr(Identifier)))),
+                                                  PtrListPayload(Identifier)),
+                                        Expr(TypeExpr(Identifier,
+                                                      FnCallArgs(Expr(TypeExpr(Identifier))))))))))))
 
 # block
 
@@ -31,7 +31,7 @@ Program(Decl(FnProto(fn,Identifier,ParamDeclList,TypeExpr(Identifier)),
                                                                              ForItem(Expr(TypeExpr(Integer)),
                                                                                      Expr(TypeExpr(Integer)))),
                                                                   PtrListPayload(Identifier, Identifier)),
-                                                        Block(Statement(return, Expr(TypeExpr(Integer))))))))))
+                                                        Block(Statement(Expr(return, Expr(TypeExpr(Integer)))))))))))
 
 # assign
 
@@ -70,8 +70,8 @@ Program(Decl(FnProto(fn,
                                                                   PtrListPayload(Identifier)),
                                                         Block,
                                                         else,
-                                                        Statement(return,
-                                                                  Expr(TypeExpr(Integer)))))))))
+                                                        Statement(Expr(return,
+                                                                       Expr(TypeExpr(Integer))))))))))
 
 # expr
 
@@ -88,13 +88,13 @@ Program(Decl(FnProto(fn
                      Identifier,
                      ParamDeclList,
                      TypeExpr(Identifier)),
-             Block(Statement(return,
-                             Expr(LoopExpr(inline,
-                                           ForExpr(ForPrefix(for,
-                                                             ForArgList(ForItem(Expr(TypeExpr(Identifier)))),
-                                                             PtrListPayload(Identifier)),
-                                                   Expr(Block(Statement(TypeExpr(Identifier),
-                                                                        AssignOp,
-                                                                        Expr(TypeExpr(Identifier))))),
-                                                   else,
-                                                   Expr(TypeExpr(Identifier)))))))))
+             Block(Statement(Expr(return,
+                                  Expr(LoopExpr(inline,
+                                                ForExpr(ForPrefix(for,
+                                                                  ForArgList(ForItem(Expr(TypeExpr(Identifier)))),
+                                                                  PtrListPayload(Identifier)),
+                                                        Expr(Block(Statement(AssignExpr(Expr(TypeExpr(Identifier)),
+                                                                                        AssignOp,
+                                                                                        Expr(TypeExpr(Identifier)))))),
+                                                        else,
+                                                        Expr(TypeExpr(Identifier))))))))))
