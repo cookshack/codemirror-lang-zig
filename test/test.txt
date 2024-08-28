@@ -23,6 +23,6 @@ test "check" {
 ==>
 Program(TestDecl(test,
                  TestName,
-                 Block(Statement(PrefixExpr(PrefixOp(try),
-                                            TypeExpr(Identifier,
-                                                     FnCallArgs))))))
+                 Block(Statement(Expr(PrefixExpr(PrefixOp(try),
+                                                 TypeExpr(Identifier,
+                                                          FnCallArgs)))))))

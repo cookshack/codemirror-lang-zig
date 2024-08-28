@@ -1,4 +1,4 @@
-# While
+# expr
 
 fn one() u8 {
   while (a < 1)
@@ -7,12 +7,12 @@ fn one() u8 {
 
 ==>
 Program(Decl(FnProto(fn,Identifier,ParamDeclList,TypeExpr(Identifier)),
-             Block(Statement(LoopStatement(WhileStatement(WhilePrefix(while, Expr(BinaryExpr(Expr(TypeExpr(Identifier)),
-                                                                                             CompareOp,
-                                                                                             Expr(TypeExpr(Integer))))),
-                                                          Expr(return, Expr(TypeExpr(Integer)))))))))
+             Block(Statement(Expr(LoopExpr(WhileExpr(WhilePrefix(while, Expr(BinaryExpr(Expr(TypeExpr(Identifier)),
+                                                                                        CompareOp,
+                                                                                        Expr(TypeExpr(Integer))))),
+                                                     Expr(return, Expr(TypeExpr(Integer))))))))))
 
-# While block
+# block
 
 fn one() u8 {
   while (a < 1) {
@@ -25,9 +25,9 @@ Program(Decl(FnProto(fn,Identifier,ParamDeclList,TypeExpr(Identifier)),
              Block(Statement(LoopStatement(WhileStatement(WhilePrefix(while, Expr(BinaryExpr(Expr(TypeExpr(Identifier)),
                                                                                              CompareOp,
                                                                                              Expr(TypeExpr(Integer))))),
-                                                          Block(Statement(return, Expr(TypeExpr(Integer))))))))))
+                                                          Block(Statement(Expr(return, Expr(TypeExpr(Integer)))))))))))
 
-# While with assign
+# with assign
 
 fn main() noreturn {
   while (a)
@@ -41,7 +41,7 @@ Program(Decl(FnProto(fn,Identifier,ParamDeclList,TypeExpr(Identifier)),
                                                                                  AssignOp,
                                                                                  Expr(TypeExpr(Integer)))))))))
 
-# Continue
+# continue
 
 fn main() noreturn {
   while (a) : (incr())
@@ -50,14 +50,14 @@ fn main() noreturn {
 
 ==>
 Program(Decl(FnProto(fn,Identifier,ParamDeclList,TypeExpr(Identifier)),
-             Block(Statement(LoopStatement(WhileStatement(WhilePrefix(while,
-                                                                      Expr(TypeExpr(Identifier)),
-                                                                      WhileContinueExpr(Expr(TypeExpr(Identifier,
-                                                                                                      FnCallArgs)))),
-                                                          Expr(TypeExpr(Identifier,
-                                                                        FnCallArgs))))))))
+             Block(Statement(Expr(LoopExpr(WhileExpr(WhilePrefix(while,
+                                                                 Expr(TypeExpr(Identifier)),
+                                                                 WhileContinueExpr(Expr(TypeExpr(Identifier,
+                                                                                                 FnCallArgs)))),
+                                                     Expr(TypeExpr(Identifier,
+                                                                   FnCallArgs)))))))))
 
-# Continue assign
+# continue assign
 
 fn main() noreturn {
   while (a) : (a = a - 1)
@@ -66,12 +66,12 @@ fn main() noreturn {
 
 ==>
 Program(Decl(FnProto(fn,Identifier,ParamDeclList,TypeExpr(Identifier)),
-             Block(Statement(LoopStatement(WhileStatement(WhilePrefix(while,
-                                                                      Expr(TypeExpr(Identifier)),
-                                                                      WhileContinueExpr(AssignExpr(Expr(TypeExpr(Identifier)),
-                                                                                                   AssignOp,
-                                                                                                   Expr(BinaryExpr(Expr(TypeExpr(Identifier)),
-                                                                                                                   AdditionOp,
-                                                                                                                   Expr(TypeExpr(Integer))))))),
-                                                          Expr(TypeExpr(Identifier,
-                                                                        FnCallArgs))))))))
+             Block(Statement(Expr(LoopExpr(WhileExpr(WhilePrefix(while,
+                                                                 Expr(TypeExpr(Identifier)),
+                                                                 WhileContinueExpr(AssignExpr(Expr(TypeExpr(Identifier)),
+                                                                                              AssignOp,
+                                                                                              Expr(BinaryExpr(Expr(TypeExpr(Identifier)),
+                                                                                                              AdditionOp,
+                                                                                                              Expr(TypeExpr(Integer))))))),
+                                                     Expr(TypeExpr(Identifier,
+                                                                   FnCallArgs)))))))))

@@ -6,9 +6,9 @@ fn main () noreturn {
 
 ==>
 Program(Decl(FnProto(fn,Identifier,ParamDeclList,TypeExpr(Identifier)),
-             Block(Statement(return,
-                             Expr(TypeExpr(Identifier,
-                                           SuffixOp(Slice(Expr(TypeExpr(Integer))))))))))
+             Block(Statement(Expr(return,
+                                  Expr(TypeExpr(Identifier,
+                                                SuffixOp(Slice(Expr(TypeExpr(Integer)))))))))))
 
 # end
 
@@ -18,10 +18,10 @@ fn main () noreturn {
 
 ==>
 Program(Decl(FnProto(fn,Identifier,ParamDeclList,TypeExpr(Identifier)),
-             Block(Statement(return,
-                             Expr(TypeExpr(Identifier,
-                                           SuffixOp(Slice(Expr(TypeExpr(Integer)),
-                                                          Expr(TypeExpr(Integer))))))))))
+             Block(Statement(Expr(return,
+                                  Expr(TypeExpr(Identifier,
+                                                SuffixOp(Slice(Expr(TypeExpr(Integer)),
+                                                               Expr(TypeExpr(Integer)))))))))))
 
 # sentinel
 
@@ -31,11 +31,11 @@ fn fun () noreturn {
 
 ==>
 Program(Decl(FnProto(fn,Identifier,ParamDeclList,TypeExpr(Identifier)),
-             Block(Statement(return,
-                             Expr(TypeExpr(Identifier,
-                                           SuffixOp(Slice(Expr(TypeExpr(Integer)),
-                                                          Expr(TypeExpr(Integer)),
-                                                          Expr(TypeExpr(Integer))))))))))
+             Block(Statement(Expr(return,
+                                  Expr(TypeExpr(Identifier,
+                                                SuffixOp(Slice(Expr(TypeExpr(Integer)),
+                                                               Expr(TypeExpr(Integer)),
+                                                               Expr(TypeExpr(Integer)))))))))))
 
 # type
 
