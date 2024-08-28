@@ -1,4 +1,12 @@
-# Test
+# plain
+
+test  {
+}
+
+==>
+Program(TestDecl(test,Block))
+
+# named
 
 test "check" {
 }
@@ -6,7 +14,7 @@ test "check" {
 ==>
 Program(TestDecl(test,TestName,Block))
 
-# Test with try
+# named with try
 
 test "check" {
   try check();

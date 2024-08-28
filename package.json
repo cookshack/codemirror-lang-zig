@@ -5,8 +5,10 @@
   "homepage": "https://git.sr.ht/~mattmundell/codemirror-lang-zig",
   "scripts": {
     "all": "npm run prepare && npm test",
+    "show-file": "node test/show-file.js",
     "test": "mocha test/test.js",
-    "test-file": "node test/test-file.js",
+    "check-dir": "node test/check-dir.js",
+    "check-file": "node test/check-file.js",
     "prepare": "rollup -c"
   },
   "repository": {
