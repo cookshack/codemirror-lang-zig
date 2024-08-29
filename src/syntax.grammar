@@ -49,13 +49,15 @@ ComptimeDecl { kw<"comptime"> Block }
 
 Decl {
   (kw<"export"> | (kw<"extern"> StringLiteralSingle?) | kw<"inline"> | kw<"noinline">)? FnProto (";" | Block)
-  | (kw<"export"> | (kw<"extern"> StringLiteralSingle?))? kw<"threadlocal">? VarDecl
+  | (kw<"export"> | (kw<"extern"> StringLiteralSingle?))? kw<"threadlocal">? GlobalVarDecl
   | kw<"usingnamespace"> Expr ";"
 }
 
 FnProto { kw<"fn"> Identifier? "(" ParamDeclList ")" "!"? TypeExpr }
 
-VarDecl { ( kw<"const"> | kw<"var"> ) Name (":" TypeExpr)? ("=" Expr)? ";" }
+VarDeclProto { ( kw<"const"> | kw<"var"> ) Name (":" TypeExpr)? }
+
+GlobalVarDecl { VarDeclProto ("=" Expr)? ";" }
 
 ContainerField {
   DocComment? (!curlyRight kw<"comptime">)? /*!KEYWORD_fn*/ (Identifier ":")? TypeExpr ByteAlign? ("=" Expr)?
@@ -66,8 +68,7 @@ Name { identifier }
 //// Block level.
 
 Statement {
-  (kw<"comptime">? VarDecl)
-  | !statement kw<"comptime"> BlockExprStatement
+  !statement kw<"comptime"> ComptimeStatement
   | !statement kw<"nosuspend"> BlockExprStatement
   | kw<"suspend"> BlockExprStatement
   | kw<"defer"> BlockExprStatement
@@ -75,8 +76,11 @@ Statement {
   | !statement IfStatement
   | !curlyRight labeledStatement
   | !curlyRight SwitchExpr
-  | (AssignExpr | Expr) ";"
+  //| (AssignExpr | Expr) ";"
+  | VarDeclExprStatement
 }
+
+ComptimeStatement { blockExpr | VarDeclExprStatement }
 
 IfStatement {
   !statement IfPrefix ( blockExpr (!else kw<"else"> Payload? Statement)?
@@ -94,16 +98,27 @@ ForStatement {
 
 WhileStatement {
   WhilePrefix ( blockExpr (!else kw<"else"> Payload? Statement)?
-                | (AssignExpr | Expr) (";" | !else kw<"else"> Payload? Statement) )
+                | Expr (";" | !else kw<"else"> Payload? Statement) )
+  // tree-sitter-zig:
+  //            | (AssignExpr | Expr) (";" | !else kw<"else"> Payload? Statement) )
 }
 
 BlockExprStatement { blockExpr | (AssignExpr | Expr) ";" }
 
 blockExpr { !curlyRight BlockLabel? !curlyRight Block }
 
+// An expression, assignment, or any destructure, as a statement.
+VarDeclExprStatement {
+  VarDeclProto ("," (VarDeclProto | Expr))* "=" Expr ";"
+  | Expr (AssignOp Expr | ("," (VarDeclProto | Expr))+ "=" Expr)? ";"
+}
+
 //// Expression level.
 
-AssignExpr { Expr !assign AssignOp Expr }
+// An assignment or a destructure whose LHS are all lvalue expressions.
+AssignExpr { !assign Expr (!assign AssignOp Expr | ("," Expr)+ "=" Expr)? }
+
+SingleAssignExpr { Expr (!assign AssignOp Expr)? }
 
 Expr { BinaryExpr | PrefixExpr | !primary primaryExpr }
 
@@ -270,7 +285,7 @@ Star { "*" }
 
 //// Switch specific.
 
-SwitchProng { kw<"inline">? SwitchCase "=>" PtrIndexPayload? (AssignExpr | Expr) }
+SwitchProng { kw<"inline">? SwitchCase "=>" PtrIndexPayload? SingleAssignExpr }
 
 SwitchCase { SwitchItem ("," SwitchItem)* ","? | kw<"else"> }
 
