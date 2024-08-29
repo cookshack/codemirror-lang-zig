@@ -4,7 +4,7 @@ var a : u8;
 comptime { a = 1; }
 
 ==>
-Program(Decl(VarDecl(var,Name,TypeExpr(Identifier))),
+Program(Decl(GlobalVarDecl(VarDeclProto(var,Name,TypeExpr(Identifier)))),
         ComptimeDecl(comptime,
                      Block(Statement(AssignExpr(Expr(TypeExpr(Identifier)),
                                                 AssignOp,
@@ -24,18 +24,18 @@ Program
 (TestDecl
  (test,
   TestName,
-  Block(Statement(VarDecl(const,
-                          Name,
-                          Expr(comptime,
-                               Expr(TypeExpr
-                                    (LabeledTypeExpr(BlockLabel(Identifier),
-                                                     Block(Statement(Expr(break,
-                                                                          BreakLabel(Identifier),
-                                                                          Expr(TypeExpr(Identifier,
-                                                                                        FnCallArgs
-                                                                                        (Expr
-                                                                                         (TypeExpr
-                                                                                          (Integer)))))))))))))),
+  Block(Statement(VarDeclProto(const,
+                               Name),
+                  Expr(comptime,
+                       Expr(TypeExpr
+                            (LabeledTypeExpr(BlockLabel(Identifier),
+                                             Block(Statement(Expr(break,
+                                                                  BreakLabel(Identifier),
+                                                                  Expr(TypeExpr(Identifier,
+                                                                                FnCallArgs
+                                                                                (Expr
+                                                                                 (TypeExpr
+                                                                                  (Integer))))))))))))),
         LineComment)))
 
 # type expr
@@ -49,10 +49,10 @@ Program(ContainerField(TypeExpr(comptime,
                                 TypeExpr(comptime,
                                          TypeExpr(Identifier))),
                        Expr(TypeExpr(Integer))),
-        Decl(VarDecl(var,
-                     Name,
-                     TypeExpr(comptime,
-                              TypeExpr(Identifier)))))
+        Decl(GlobalVarDecl(VarDeclProto(var,
+                                        Name,
+                                        TypeExpr(comptime,
+                                                 TypeExpr(Identifier))))))
 
 # statement
 

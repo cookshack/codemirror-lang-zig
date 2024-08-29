@@ -74,12 +74,12 @@ Program(Decl(FnProto(fn,
 const a : fn () u32 = f;
 
 ==>
-Program(Decl(VarDecl(const,
-                     Name,
-                     TypeExpr(FnProto(fn,
-                                      ParamDeclList,
-                                      TypeExpr(Identifier))),
-                     Expr(TypeExpr(Identifier)))))
+Program(Decl(GlobalVarDecl(VarDeclProto(const,
+                                        Name,
+                                        TypeExpr(FnProto(fn,
+                                                         ParamDeclList,
+                                                         TypeExpr(Identifier)))),
+                           Expr(TypeExpr(Identifier)))))
 
 # export
 

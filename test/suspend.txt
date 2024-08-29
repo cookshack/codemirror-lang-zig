@@ -3,11 +3,11 @@
 const a : u32 = nosuspend 0;
 
 ==>
-Program(Decl(VarDecl(const,
-                     Name,
-                     TypeExpr(Identifier),
-                     Expr(nosuspend,
-                          Expr(TypeExpr(Integer))))))
+Program(Decl(GlobalVarDecl(VarDeclProto(const,
+                                        Name,
+                                        TypeExpr(Identifier)),
+                           Expr(nosuspend,
+                                Expr(TypeExpr(Integer))))))
 
 # nosuspend stmnt
 

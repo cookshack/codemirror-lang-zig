@@ -3,9 +3,9 @@
 const a : anyframe;
 
 ==>
-Program(Decl(VarDecl(const,
-                     Name,
-                     TypeExpr(anyframe))))
+Program(Decl(GlobalVarDecl(VarDeclProto(const,
+                                        Name,
+                                        TypeExpr(anyframe)))))
 
 # frame return type
 

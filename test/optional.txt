@@ -3,8 +3,8 @@
 const o : ?u32 = 11;
 
 ==>
-Program(Decl(VarDecl(const,
-                     Name,
-                     TypeExpr(PrefixTypeOp,
-                              Identifier),
-                     Expr(TypeExpr(Integer)))))
+Program(Decl(GlobalVarDecl(VarDeclProto(const,
+                                        Name,
+                                        TypeExpr(PrefixTypeOp,
+                                                 Identifier)),
+                           Expr(TypeExpr(Integer)))))

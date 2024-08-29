@@ -3,7 +3,7 @@
 const a;
 
 ==>
-Program(Decl(VarDecl(const, Name)))
+Program(Decl(GlobalVarDecl(VarDeclProto(const, Name))))
 
 # Top level vars
 
@@ -13,29 +13,29 @@ threadlocal var c : u32;
 const d : string;
 
 ==>
-Program(Decl(VarDecl(const, Name)),
-        Decl(VarDecl(var, Name)),
-        Decl(threadlocal, VarDecl(var, Name, TypeExpr(Identifier))),
-        Decl(VarDecl(const, Name, TypeExpr(Identifier))))
+Program(Decl(GlobalVarDecl(VarDeclProto(const, Name))),
+        Decl(GlobalVarDecl(VarDeclProto(var, Name))),
+        Decl(threadlocal, GlobalVarDecl(VarDeclProto(var, Name, TypeExpr(Identifier)))),
+        Decl(GlobalVarDecl(VarDeclProto(const, Name, TypeExpr(Identifier)))))
 
 # Type
 
 const a : u32;
 
 ==>
-Program(Decl(VarDecl(const,
-                     Name,
-                     TypeExpr(Identifier))))
+Program(Decl(GlobalVarDecl(VarDeclProto(const,
+                                        Name,
+                                        TypeExpr(Identifier)))))
 
 # Type and val
 
 const a : u32 = 0;
 
 ==>
-Program(Decl(VarDecl(const,
-                     Name,
-                     TypeExpr(Identifier),
-                     Expr(TypeExpr(Integer)))))
+Program(Decl(GlobalVarDecl(VarDeclProto(const,
+                                        Name,
+                                        TypeExpr(Identifier)),
+                           Expr(TypeExpr(Integer)))))
 
 # export
 
@@ -43,10 +43,10 @@ export var a : u32 = 0;
 
 ==>
 Program(Decl(export,
-             VarDecl(var,
-                     Name,
-                     TypeExpr(Identifier),
-                     Expr(TypeExpr(Integer)))))
+             GlobalVarDecl(VarDeclProto(var,
+                                        Name,
+                                        TypeExpr(Identifier)),
+                           Expr(TypeExpr(Integer)))))
 
 # extern
 
@@ -55,6 +55,6 @@ extern "c" var x : u32;
 ==>
 Program(Decl(extern,
              StringLiteralSingle,
-             VarDecl(var,
-                     Name,
-                     TypeExpr(Identifier))))
+             GlobalVarDecl(VarDeclProto(var,
+                                        Name,
+                                        TypeExpr(Identifier)))))

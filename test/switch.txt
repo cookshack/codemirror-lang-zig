@@ -58,14 +58,14 @@ const a = switch (tag) {
 };
 
 ==>
-Program(Decl(VarDecl(const,
-                     Name,
-                     Expr(TypeExpr(SwitchExpr(switch,
-                                              Expr(TypeExpr(Identifier)),
-                                              SwitchProng(SwitchCase(SwitchItem(Expr(TypeExpr(Identifier)))),
-                                                          Expr(TypeExpr(Integer))),
-                                              SwitchProng(SwitchCase(else),
-                                                          Expr(TypeExpr(Integer)))))))))
+Program(Decl(GlobalVarDecl(VarDeclProto(const,
+                                        Name),
+                           Expr(TypeExpr(SwitchExpr(switch,
+                                                    Expr(TypeExpr(Identifier)),
+                                                    SwitchProng(SwitchCase(SwitchItem(Expr(TypeExpr(Identifier)))),
+                                                                Expr(TypeExpr(Integer))),
+                                                    SwitchProng(SwitchCase(else),
+                                                                Expr(TypeExpr(Integer)))))))))
 
 # inline
 

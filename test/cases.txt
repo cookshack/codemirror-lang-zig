@@ -30,12 +30,10 @@ Program(Decl(FnProto(fn,Identifier,ParamDeclList,TypeExpr(Identifier)),
 const std = @import("std");
 
 ==>
-Program
-(Decl
- (VarDecl
-  (const,
-   Name,
-   Expr(TypeExpr(BuiltinIdentifier, FnCallArgs(Expr(TypeExpr(StringLiteral))))))))
+Program(Decl(GlobalVarDecl(VarDeclProto(const,
+                                        Name),
+                           Expr(TypeExpr(BuiltinIdentifier,
+                                         FnCallArgs(Expr(TypeExpr(StringLiteral))))))))
 
 # unreachable statement
 

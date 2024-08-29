@@ -71,10 +71,10 @@ Program(Decl(FnProto(fn,Identifier,ParamDeclList,TypeExpr(Identifier)),
 const a : if (b) u32 else u16;
 
 ==>
-Program(Decl(VarDecl(const,
-                     Name,
-                     TypeExpr(IfTypeExpr(IfPrefix(if,
-                                                  Expr(TypeExpr(Identifier))),
-                                         TypeExpr(Identifier),
-                                         else,
-                                         TypeExpr(Identifier))))))
+Program(Decl(GlobalVarDecl(VarDeclProto(const,
+                                        Name,
+                                        TypeExpr(IfTypeExpr(IfPrefix(if,
+                                                                     Expr(TypeExpr(Identifier))),
+                                                            TypeExpr(Identifier),
+                                                            else,
+                                                            TypeExpr(Identifier))))))

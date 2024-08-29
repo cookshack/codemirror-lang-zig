@@ -77,10 +77,10 @@ Statement {
   | !curlyRight labeledStatement
   | !curlyRight SwitchExpr
   //| (AssignExpr | Expr) ";"
-  | VarDeclExprStatement
+  | varDeclExprStatement
 }
 
-ComptimeStatement { blockExpr | VarDeclExprStatement }
+ComptimeStatement { blockExpr | varDeclExprStatement }
 
 IfStatement {
   !statement IfPrefix ( blockExpr (!else kw<"else"> Payload? Statement)?
@@ -108,7 +108,7 @@ BlockExprStatement { blockExpr | (AssignExpr | Expr) ";" }
 blockExpr { !curlyRight BlockLabel? !curlyRight Block }
 
 // An expression, assignment, or any destructure, as a statement.
-VarDeclExprStatement {
+varDeclExprStatement {
   VarDeclProto ("," (VarDeclProto | Expr))* "=" Expr ";"
   | Expr (AssignOp Expr | ("," (VarDeclProto | Expr))+ "=" Expr)? ";"
 }

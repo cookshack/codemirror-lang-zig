@@ -3,30 +3,30 @@
 const e = error.OutOfPie;
 
 ==>
-Program(Decl(VarDecl(const,
-                     Name,
-                     Expr(TypeExpr(error,
-                                   Identifier)))))
+Program(Decl(GlobalVarDecl(VarDeclProto(const,
+                                        Name),
+                           Expr(TypeExpr(error,
+                                         Identifier)))))
 
 # set decl
 
 const e : error{ OutOfPie, OutOfJuice };
 
 ==>
-Program(Decl(VarDecl(const,
-                     Name,
-                     TypeExpr(ErrorSetDecl(error,
-                                           Identifier,
-                                           Identifier)))))
+Program(Decl(GlobalVarDecl(VarDeclProto(const,
+                                        Name,
+                                        TypeExpr(ErrorSetDecl(error,
+                                                              Identifier,
+                                                              Identifier))))))
 
 # union type
 
 const pies : anyerror!u32 = error.OutOfPie;
 
 ==>
-Program(Decl(VarDecl(const,
-                     Name,
-                     TypeExpr(ErrorUnionExpr(Identifier,
-                                             TypeExpr(Identifier))),
-                     Expr(TypeExpr(error,
-                                   Identifier)))))
+Program(Decl(GlobalVarDecl(VarDeclProto(const,
+                                        Name,
+                                        TypeExpr(ErrorUnionExpr(Identifier,
+                                                                TypeExpr(Identifier)))),
+                           Expr(TypeExpr(error,
+                                         Identifier)))))

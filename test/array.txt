@@ -15,20 +15,20 @@ Program(Decl(FnProto(fn, Identifier,ParamDeclList,TypeExpr(Identifier)),
 var a : [10]u8 = undefined;
 
 ==>
-Program(Decl(VarDecl(var,
-                     Name,
-                     TypeExpr(PrefixTypeOp(ArrayTypeStart(Expr(TypeExpr(Integer)))),
-                              Identifier),
-                     Expr(TypeExpr(Identifier)))))
+Program(Decl(GlobalVarDecl(VarDeclProto(var,
+                                        Name,
+                                        TypeExpr(PrefixTypeOp(ArrayTypeStart(Expr(TypeExpr(Integer)))),
+                                                 Identifier)),
+                           Expr(TypeExpr(Identifier)))))
 
 # sentinel type
 
 var a : [10:0]u8 = undefined;
 
 ==>
-Program(Decl(VarDecl(var,
-                     Name,
-                     TypeExpr(PrefixTypeOp(ArrayTypeStart(Expr(TypeExpr(Integer)),
-                                                          Expr(TypeExpr(Integer)))),
-                              Identifier),
-                     Expr(TypeExpr(Identifier)))))
+Program(Decl(GlobalVarDecl(VarDeclProto(var,
+                                        Name,
+                                        TypeExpr(PrefixTypeOp(ArrayTypeStart(Expr(TypeExpr(Integer)),
+                                                                             Expr(TypeExpr(Integer)))),
+                                                 Identifier)),
+                          Expr(TypeExpr(Identifier)))))

@@ -42,26 +42,26 @@ Program(Decl(FnProto(fn,Identifier,ParamDeclList,TypeExpr(Identifier)),
 var sl: [] align(8) addrspace(something) const volatile allowzero u32;
 
 ==>
-Program(Decl(VarDecl(var,
-                     Name,
-                     TypeExpr(PrefixTypeOp(SliceTypeStart,
-                                           ByteAlign(align,
-                                                     Expr(TypeExpr(Integer))),
-                                           AddrSpace(addrspace,
-                                                     Expr(TypeExpr(Identifier))),
-                                           const,
-                                           volatile,
-                                           allowzero),
-                              Identifier))))
+Program(Decl(GlobalVarDecl(VarDeclProto(var,
+                                        Name,
+                                        TypeExpr(PrefixTypeOp(SliceTypeStart,
+                                                              ByteAlign(align,
+                                                                        Expr(TypeExpr(Integer))),
+                                                              AddrSpace(addrspace,
+                                                                        Expr(TypeExpr(Identifier))),
+                                                              const,
+                                                              volatile,
+                                                              allowzero),
+                                                Identifier)))))
 
 # type sentinel
 
 const sl: [:0]const u8 = "hi";
 
 ==>
-Program(Decl(VarDecl(const,
-                     Name,
-                     TypeExpr(PrefixTypeOp(SliceTypeStart(Expr(TypeExpr(Integer))),
-                                           const),
-                              Identifier),
-                     Expr(TypeExpr(StringLiteral)))))
+Program(Decl(GlobalVarDecl(VarDeclProto(const,
+                                        Name,
+                                        TypeExpr(PrefixTypeOp(SliceTypeStart(Expr(TypeExpr(Integer))),
+                                                              const),
+                                                 Identifier)),
+                           Expr(TypeExpr(StringLiteral)))))
