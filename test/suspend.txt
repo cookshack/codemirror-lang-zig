@@ -37,4 +37,4 @@ Program(Decl(FnProto(fn,
                      ParamDeclList,
                      TypeExpr(Identifier)),
              Block(Statement(suspend,
-                             BlockExprStatement(Expr(TypeExpr(Identifier)))))))
+                             BlockExprStatement(AssignExpr(Expr(TypeExpr(Identifier))))))))

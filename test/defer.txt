@@ -15,8 +15,8 @@ Program(Decl(FnProto(fn,
                              Expr(TypeExpr(Identifier,
                                            FnCallArgs))),
                    Statement(defer,
-                             BlockExprStatement(Expr(TypeExpr(Identifier,
-                                                              FnCallArgs)))))))
+                             BlockExprStatement(AssignExpr(Expr(TypeExpr(Identifier,
+                                                                         FnCallArgs))))))))
 
 # errdefer
 
@@ -39,14 +39,14 @@ Program(Decl(FnProto(fn,
                              Expr(TypeExpr(Identifier,
                                            FnCallArgs))),
                    Statement(defer,
-                             BlockExprStatement(Expr(TypeExpr(Identifier,
-                                                              FnCallArgs)))),
+                             BlockExprStatement(AssignExpr(Expr(TypeExpr(Identifier,
+                                                                         FnCallArgs))))),
                    Statement(errdefer,
-                             BlockExprStatement(Expr(TypeExpr(Identifier,
-                                                              FnCallArgs)))),
-                   Statement(Expr(IfExpr(IfPrefix(if,
+                             BlockExprStatement(AssignExpr(Expr(TypeExpr(Identifier,
+                                                                         FnCallArgs))))),
+                   Statement(IfStatement(IfPrefix(if,
                                                   Expr(TypeExpr(Identifier))),
-                                         Expr(return,
-                                              Expr(TypeExpr(Integer)))))),
+                                         AssignExpr(Expr(return,
+                                                         Expr(TypeExpr(Integer)))))),
                    Statement(Expr(return,
                                   Expr(TypeExpr(error, Identifier)))))))

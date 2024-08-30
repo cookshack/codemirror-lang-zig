@@ -10,11 +10,12 @@ Program(Decl(FnProto(fn,
                      Identifier,
                      ParamDeclList(ParamDecl(Identifier, ParamType(TypeExpr(Identifier)))),
                      TypeExpr(Identifier)),
-             Block(Statement(Expr(IfExpr(IfPrefix(if,
+             Block(Statement(IfStatement(IfPrefix(if,
                                                   Expr(BinaryExpr(Expr(TypeExpr(Identifier)),
                                                                   CompareOp,
                                                                   Expr(TypeExpr(Integer))))),
-                                         Expr(return, Expr(TypeExpr(Integer)))))))))
+                                         AssignExpr(Expr(return,
+                                                         Expr(TypeExpr(Integer)))))))))
 
 # then statement
 
@@ -77,4 +78,4 @@ Program(Decl(GlobalVarDecl(VarDeclProto(const,
                                                                      Expr(TypeExpr(Identifier))),
                                                             TypeExpr(Identifier),
                                                             else,
-                                                            TypeExpr(Identifier))))))
+                                                            TypeExpr(Identifier)))))))

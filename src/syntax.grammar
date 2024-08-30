@@ -98,7 +98,7 @@ ForStatement {
 
 WhileStatement {
   WhilePrefix ( blockExpr (!else kw<"else"> Payload? Statement)?
-                | Expr (";" | !else kw<"else"> Payload? Statement) )
+                | AssignExpr (";" | !else kw<"else"> Payload? Statement) )
   // tree-sitter-zig:
   //            | (AssignExpr | Expr) (";" | !else kw<"else"> Payload? Statement) )
 }

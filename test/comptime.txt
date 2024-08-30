@@ -6,9 +6,9 @@ comptime { a = 1; }
 ==>
 Program(Decl(GlobalVarDecl(VarDeclProto(var,Name,TypeExpr(Identifier)))),
         ComptimeDecl(comptime,
-                     Block(Statement(AssignExpr(Expr(TypeExpr(Identifier)),
-                                                AssignOp,
-                                                Expr(TypeExpr(Integer)))))))
+                     Block(Statement(Expr(TypeExpr(Identifier)),
+                                     AssignOp,
+                                     Expr(TypeExpr(Integer))))))
 
 # Valid
 
@@ -65,9 +65,9 @@ Program(Decl(FnProto(fn,
                      Identifier,
                      ParamDeclList,
                      TypeExpr(Identifier)),
-             Block(Statement(comptime,
-                             BlockExprStatement(AssignExpr(Expr(TypeExpr(Identifier)),
-                                                           AssignOp,
-                                                           Expr(BinaryExpr(Expr(TypeExpr(Identifier)),
-                                                                           AdditionOp,
-                                                                           Expr(TypeExpr(Integer))))))))))
+             Block(Statement(Expr(comptime,
+                                  Expr(TypeExpr(Identifier))),
+                             AssignOp,
+                             Expr(BinaryExpr(Expr(TypeExpr(Identifier)),
+                                                  AdditionOp,
+                                                  Expr(TypeExpr(Integer))))))))

@@ -28,8 +28,8 @@ Program(Decl(FnProto(fn,
              Block(Statement(SwitchExpr(switch,
                                         Expr(TypeExpr(Identifier))
                                         SwitchProng(SwitchCase(SwitchItem(Expr(TypeExpr(Integer)))),
-                                                    Expr(TypeExpr(Identifier,
-                                                                  FnCallArgs))))))))
+                                                    SingleAssignExpr(Expr(TypeExpr(Identifier,
+                                                                                   FnCallArgs)))))))))
 
 # else
 
@@ -47,8 +47,8 @@ Program(Decl(FnProto(fn,
              Block(Statement(SwitchExpr(switch,
                                         Expr(TypeExpr(Identifier))
                                         SwitchProng(SwitchCase(else),
-                                                    Expr(TypeExpr(Identifier,
-                                                                  FnCallArgs))))))))
+                                                    SingleAssignExpr(Expr(TypeExpr(Identifier,
+                                                                                   FnCallArgs)))))))))
 
 # expr
 
@@ -63,9 +63,9 @@ Program(Decl(GlobalVarDecl(VarDeclProto(const,
                            Expr(TypeExpr(SwitchExpr(switch,
                                                     Expr(TypeExpr(Identifier)),
                                                     SwitchProng(SwitchCase(SwitchItem(Expr(TypeExpr(Identifier)))),
-                                                                Expr(TypeExpr(Integer))),
+                                                                SingleAssignExpr(Expr(TypeExpr(Integer)))),
                                                     SwitchProng(SwitchCase(else),
-                                                                Expr(TypeExpr(Integer)))))))))
+                                                                SingleAssignExpr(Expr(TypeExpr(Integer))))))))))
 
 # inline
 
@@ -86,5 +86,5 @@ Program(Decl(FnProto(fn,
                                                     SwitchCase(SwitchItem(Expr(TypeExpr(Integer))),
                                                                SwitchItem(Expr(TypeExpr(Integer)))),
                                                     PtrIndexPayload(Identifier),
-                                                    Expr(TypeExpr(Identifier,
-                                                                  FnCallArgs(Expr(TypeExpr(Identifier)))))))))))
+                                                    SingleAssignExpr(Expr(TypeExpr(Identifier,
+                                                                                   FnCallArgs(Expr(TypeExpr(Identifier))))))))))))

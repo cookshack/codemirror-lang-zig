@@ -21,9 +21,9 @@ fn one() noreturn {
 
 ==>
 Program(Decl(FnProto(fn,Identifier,ParamDeclList,TypeExpr(Identifier)),
-             Block(Statement(AssignExpr(Expr(TypeExpr(Identifier)),
-                                        AssignOp,
-                                        Expr(TypeExpr(Integer)))))))
+             Block(Statement(Expr(TypeExpr(Identifier)),
+                             AssignOp,
+                             Expr(TypeExpr(Integer))))))
 
 # import
 
@@ -64,6 +64,6 @@ Program(Decl(FnProto(fn,
                      Identifier,
                      ParamDeclList,
                      TypeExpr(Identifier)),
-             Block(Statement(Expr(IfExpr(IfPrefix(if,
+             Block(Statement(IfStatement(IfPrefix(if,
                                                   Expr(TypeExpr(Integer))),
-                                         Expr(TypeExpr(unreachable))))))))
+                                         AssignExpr(Expr(TypeExpr(unreachable))))))))

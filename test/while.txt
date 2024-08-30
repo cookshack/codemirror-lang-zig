@@ -7,10 +7,12 @@ fn one() u8 {
 
 ==>
 Program(Decl(FnProto(fn,Identifier,ParamDeclList,TypeExpr(Identifier)),
-             Block(Statement(Expr(LoopExpr(WhileExpr(WhilePrefix(while, Expr(BinaryExpr(Expr(TypeExpr(Identifier)),
-                                                                                        CompareOp,
-                                                                                        Expr(TypeExpr(Integer))))),
-                                                     Expr(return, Expr(TypeExpr(Integer))))))))))
+             Block(Statement(LoopStatement(WhileStatement(WhilePrefix(while,
+                                                                      Expr(BinaryExpr(Expr(TypeExpr(Identifier)),
+                                                                                      CompareOp,
+                                                                                      Expr(TypeExpr(Integer))))),
+                                                          AssignExpr(Expr(return,
+                                                                          Expr(TypeExpr(Integer))))))))))
 
 # block
 
@@ -36,10 +38,11 @@ fn main() noreturn {
 
 ==>
 Program(Decl(FnProto(fn,Identifier,ParamDeclList,TypeExpr(Identifier)),
-             Block(Statement(LoopStatement(WhileStatement(WhilePrefix(while, Expr(TypeExpr(Identifier))),
-                                                                      AssignExpr(Expr(TypeExpr(Identifier)),
-                                                                                 AssignOp,
-                                                                                 Expr(TypeExpr(Integer)))))))))
+             Block(Statement(LoopStatement(WhileStatement(WhilePrefix(while,
+                                                                      Expr(TypeExpr(Identifier))),
+                                                          AssignExpr(Expr(TypeExpr(Identifier)),
+                                                                     AssignOp,
+                                                                     Expr(TypeExpr(Integer)))))))))
 
 # continue
 
@@ -50,12 +53,12 @@ fn main() noreturn {
 
 ==>
 Program(Decl(FnProto(fn,Identifier,ParamDeclList,TypeExpr(Identifier)),
-             Block(Statement(Expr(LoopExpr(WhileExpr(WhilePrefix(while,
-                                                                 Expr(TypeExpr(Identifier)),
-                                                                 WhileContinueExpr(Expr(TypeExpr(Identifier,
-                                                                                                 FnCallArgs)))),
-                                                     Expr(TypeExpr(Identifier,
-                                                                   FnCallArgs)))))))))
+             Block(Statement(LoopStatement(WhileStatement(WhilePrefix(while,
+                                                                      Expr(TypeExpr(Identifier)),
+                                                                      WhileContinueExpr(AssignExpr(Expr(TypeExpr(Identifier,
+                                                                                                                 FnCallArgs))))),
+                                                          AssignExpr(Expr(TypeExpr(Identifier,
+                                                                                   FnCallArgs)))))))))
 
 # continue assign
 
@@ -66,12 +69,12 @@ fn main() noreturn {
 
 ==>
 Program(Decl(FnProto(fn,Identifier,ParamDeclList,TypeExpr(Identifier)),
-             Block(Statement(Expr(LoopExpr(WhileExpr(WhilePrefix(while,
-                                                                 Expr(TypeExpr(Identifier)),
-                                                                 WhileContinueExpr(AssignExpr(Expr(TypeExpr(Identifier)),
-                                                                                              AssignOp,
-                                                                                              Expr(BinaryExpr(Expr(TypeExpr(Identifier)),
-                                                                                                              AdditionOp,
-                                                                                                              Expr(TypeExpr(Integer))))))),
-                                                     Expr(TypeExpr(Identifier,
-                                                                   FnCallArgs)))))))))
+             Block(Statement(LoopStatement(WhileStatement(WhilePrefix(while,
+                                                                      Expr(TypeExpr(Identifier)),
+                                                                      WhileContinueExpr(AssignExpr(Expr(TypeExpr(Identifier)),
+                                                                                                   AssignOp,
+                                                                                                   Expr(BinaryExpr(Expr(TypeExpr(Identifier)),
+                                                                                                                   AdditionOp,
+                                                                                                                   Expr(TypeExpr(Integer))))))),
+                                                          AssignExpr(Expr(TypeExpr(Identifier,
+                                                                                   FnCallArgs)))))))))
