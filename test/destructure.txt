@@ -1,0 +1,62 @@
+# destructure
+
+test {
+    var x: u32 = undefined;
+    x, var y: u32, const z = .{ 1, 2, 3 };
+    _ = y;
+    _ = z;
+}
+
+==>
+Program(TestDecl(test,
+                 Block(Statement(VarDeclProto(var,
+                                              Name,
+                                              TypeExpr(Identifier)),
+                                 Expr(TypeExpr(Identifier))),
+                       Statement(Expr(TypeExpr(Identifier)),
+                                 VarDeclProto(var,
+                                              Name,
+                                              TypeExpr(Identifier)),
+                                 VarDeclProto(const,
+                                              Name),
+                                 Expr(TypeExpr(InitList(Expr(TypeExpr(Integer)),
+                                                        Expr(TypeExpr(Integer)),
+                                                        Expr(TypeExpr(Integer)))))),
+                       Statement(Expr(TypeExpr(Identifier)),
+                                 AssignOp,
+                                 Expr(TypeExpr(Identifier))),
+                       Statement(Expr(TypeExpr(Identifier)),
+                                 AssignOp,
+                                 Expr(TypeExpr(Identifier))))))
+
+# destructure to lvalues as conditional body
+
+test {
+    var x: u32 = undefined;
+    var y: u32 = undefined;
+
+    if (true) x, y = .{ 1, 2 };
+    while (false) y, x = undefined;
+}
+
+==>
+Program(TestDecl(test,
+                 Block(Statement(VarDeclProto(var,
+                                              Name,
+                                              TypeExpr(Identifier)),
+                                 Expr(TypeExpr(Identifier))),
+                       Statement(VarDeclProto(var,
+                                              Name,
+                                              TypeExpr(Identifier)),
+                                 Expr(TypeExpr(Identifier))),
+                       Statement(IfStatement(IfPrefix(if,
+                                                      Expr(TypeExpr(Identifier))),
+                                             AssignExpr(Expr(TypeExpr(Identifier)),
+                                                        Expr(TypeExpr(Identifier)),
+                                                        Expr(TypeExpr(InitList(Expr(TypeExpr(Integer)),
+                                                                               Expr(TypeExpr(Integer)))))))),
+                       Statement(LoopStatement(WhileStatement(WhilePrefix(while,
+                                                                          Expr(TypeExpr(Identifier))),
+                                                              AssignExpr(Expr(TypeExpr(Identifier)),
+                                                                         Expr(TypeExpr(Identifier)),
+                                                                         Expr(TypeExpr(Identifier)))))))))

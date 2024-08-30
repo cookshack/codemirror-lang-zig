@@ -84,7 +84,7 @@ ComptimeStatement { blockExpr | varDeclExprStatement }
 
 IfStatement {
   !statement IfPrefix ( blockExpr (!else kw<"else"> Payload? Statement)?
-                        | (AssignExpr | Expr) (";" | !else kw<"else"> Payload? Statement) )
+                        | AssignExpr (";" | !else kw<"else"> Payload? Statement) )
 }
 
 labeledStatement { !curlyRight (Block | LoopStatement) }
@@ -116,7 +116,7 @@ varDeclExprStatement {
 //// Expression level.
 
 // An assignment or a destructure whose LHS are all lvalue expressions.
-AssignExpr { !assign Expr (!assign AssignOp Expr | ("," Expr)+ "=" Expr)? }
+AssignExpr { !assign Expr (!assign AssignOp Expr | (!assign "," Expr)+ !assign "=" Expr)? }
 
 SingleAssignExpr { Expr (!assign AssignOp Expr)? }
 
