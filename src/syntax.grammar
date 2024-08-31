@@ -138,19 +138,15 @@ BinaryExpr {
 PrefixExpr { !prefix PrefixOp+ !primary primaryExpr }
 
 primaryExpr {
-  IfExpr
-  | BlockLabel? LoopExpr
-  | !primary primaryExprExclIf
-}
-
-primaryExprExclIf {
   AsmExpr
+  | IfExpr
   | kw<"break"> BreakLabel? Expr?
   | !primary kw<"comptime"> Expr
   | !primary kw<"nosuspend"> Expr
   | kw<"continue"> BreakLabel?
   | kw<"resume"> Expr
   | kw<"return"> Expr?
+  | BlockLabel? LoopExpr
   | Block
   | curlySuffixExpr
 }
