@@ -170,3 +170,19 @@ Program(Decl(FnProto(fn,
                                  Expr(TypeExpr(StringLiteral))),
                      TypeExpr(Identifier)),
              Block))
+
+# callconv
+
+fn f() callconv(.Async) !u64 {
+  return 0;
+}
+
+==>
+Program(Decl(FnProto(fn,
+                     Identifier,
+                     ParamDeclList,
+                     CallConv(callconv,
+                              Expr(TypeExpr(Identifier))),
+                     TypeExpr(Identifier)),
+             Block(Statement(Expr(return,
+                                  Expr(TypeExpr(Integer)))))))
