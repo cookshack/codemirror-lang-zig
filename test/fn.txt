@@ -128,3 +128,17 @@ Program(Decl(noinline,
                      Identifier,
                      ParamDeclList,
                      TypeExpr(Identifier))))
+
+# byte align
+
+fn f() align(64) noreturn {
+}
+
+==>
+Program(Decl(FnProto(fn,
+                     Identifier,
+                     ParamDeclList,
+                     ByteAlign(align,
+                               Expr(TypeExpr(Integer))),
+                     TypeExpr(Identifier)),
+             Block))

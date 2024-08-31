@@ -53,7 +53,7 @@ Decl {
   | kw<"usingnamespace"> Expr ";"
 }
 
-FnProto { kw<"fn"> Identifier? "(" ParamDeclList ")" "!"? TypeExpr }
+FnProto { kw<"fn"> Identifier? "(" ParamDeclList ")" "!"? ByteAlign? TypeExpr }
 
 VarDeclProto { ( kw<"const"> | kw<"var"> ) Name (":" TypeExpr)? }
 
