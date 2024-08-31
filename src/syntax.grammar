@@ -53,7 +53,7 @@ Decl {
   | kw<"usingnamespace"> Expr ";"
 }
 
-FnProto { kw<"fn"> Identifier? "(" ParamDeclList ")" "!"? ByteAlign? AddrSpace? TypeExpr }
+FnProto { kw<"fn"> Identifier? "(" ParamDeclList ")" "!"? ByteAlign? AddrSpace? LinkSection? TypeExpr }
 
 VarDeclProto { ( kw<"const"> | kw<"var"> ) Name (":" TypeExpr)? }
 
@@ -249,6 +249,8 @@ BlockLabel { /*left*/ Identifier !colonLabel ":" }
 FieldInit { "." Identifier "=" Expr }
 
 WhileContinueExpr { ":" "(" (AssignExpr | Expr) ")" }
+
+LinkSection { kw<"linksection"> "(" Expr ")" }
 
 AddrSpace { kw<"addrspace"> "(" Expr ")" }
 

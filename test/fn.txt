@@ -156,3 +156,17 @@ Program(Decl(FnProto(fn,
                                Expr(TypeExpr(Identifier))),
                      TypeExpr(Identifier)),
              Block))
+
+# link section
+
+fn f() linksection(".text") noreturn {
+}
+
+==>
+Program(Decl(FnProto(fn,
+                     Identifier,
+                     ParamDeclList,
+                     LinkSection(linksection,
+                                 Expr(TypeExpr(StringLiteral))),
+                     TypeExpr(Identifier)),
+             Block))
