@@ -4,8 +4,8 @@
   curlyRight @right
   curlyLeft @left
   assign @right
-  primary
 
+  // happens first
   multiply @left
   add @left
   bitShift @left
@@ -13,10 +13,13 @@
   compare @left
   and @left
   or @left
-
-  prefix
+  // happens last
+  binary
 
   else @right
+
+  prefix
+  primary
 
   containerDecl @left
 
@@ -120,7 +123,7 @@ AssignExpr { !assign Expr (!assign AssignOp Expr | (!assign "," Expr)+ !assign "
 
 SingleAssignExpr { Expr (!assign AssignOp Expr)? }
 
-Expr { BinaryExpr | PrefixExpr | !primary primaryExpr }
+Expr { !binary BinaryExpr | !prefix PrefixExpr | !primary primaryExpr }
 
 BinaryExpr {
   Expr !or kw<"or"> Expr

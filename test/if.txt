@@ -79,3 +79,20 @@ Program(Decl(GlobalVarDecl(VarDeclProto(const,
                                                             TypeExpr(Identifier),
                                                             else,
                                                             TypeExpr(Identifier)))))))
+
+# in expr with binary op
+
+const c2 = if (c1 < 10) c1 + 7 else 99;
+
+==>
+Program(Decl(GlobalVarDecl(VarDeclProto(const,
+                                        Name),
+                           Expr(IfExpr(IfPrefix(if,
+                                                Expr(BinaryExpr(Expr(TypeExpr(Identifier)),
+                                                                CompareOp,
+                                                                Expr(TypeExpr(Integer))))),
+                                       Expr(BinaryExpr(Expr(TypeExpr(Identifier)),
+                                                       AdditionOp,
+                                                       Expr(TypeExpr(Integer)))),
+                                       else,
+                                       Expr(TypeExpr(Integer)))))))
