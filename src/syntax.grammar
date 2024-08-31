@@ -33,7 +33,7 @@ list<x> { (x ",")* x? }
 
 @top Program { ContainerDocComment? containerMembers }
 
-containerMembers { !containerDecl (ContainerField ",")* (ContainerField | containerDecl*) }
+containerMembers { containerDecl* !containerDecl (ContainerField ",")* (ContainerField | containerDecl*) }
 
 containerDecl { TestDecl | ComptimeDecl | DocComment? kw<"pub">? Decl }
 

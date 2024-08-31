@@ -66,3 +66,28 @@ Program(Decl(GlobalVarDecl(VarDeclProto(const,
                                                                                         ByteAlign(align,
                                                                                                   Expr(TypeExpr(Integer))),
                                                                                         Expr(TypeExpr(Integer))))))))))
+
+# const in struct
+
+fn Point(comptime T: type) type {
+  return struct {
+    const Self = @This();
+    x: T,
+  };
+}
+
+==>
+Program(Decl(FnProto(fn,
+                     Identifier,
+                     ParamDeclList(ParamDecl(comptime,
+                                             Identifier,
+                                             ParamType(TypeExpr(Identifier)))),
+                     TypeExpr(Identifier)),
+             Block(Statement(Expr(return,
+                                  Expr(TypeExpr(ContainerDecl(ContainerDeclAuto(ContainerDeclType(struct),
+                                                                                Decl(GlobalVarDecl(VarDeclProto(const,
+                                                                                                                Name),
+                                                                                                   Expr(TypeExpr(BuiltinIdentifier,
+                                                                                                                 FnCallArgs)))),
+                                                                                ContainerField(Identifier,
+                                                                                               TypeExpr(Identifier)))))))))))
