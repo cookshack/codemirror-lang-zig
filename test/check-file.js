@@ -10,7 +10,7 @@ if (process.argv.length < 3) {
 res = parse(process.argv[2])
 if (check(res.tree)) {
   console.log('tree.length: ' + res.tree.length)
-  console.log('tree: ' + res.tree)
-  console.log(pretty(res.tree.topNode))
+  //console.log('tree: ' + res.tree)
+  //console.log(pretty(res.tree.topNode))
   process.exitCode = 1
 }
