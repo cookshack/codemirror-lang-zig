@@ -142,3 +142,17 @@ Program(Decl(FnProto(fn,
                                Expr(TypeExpr(Integer))),
                      TypeExpr(Identifier)),
              Block))
+
+# addr space
+
+fn f() addrspace(something) noreturn {
+}
+
+==>
+Program(Decl(FnProto(fn,
+                     Identifier,
+                     ParamDeclList,
+                     AddrSpace(addrspace,
+                               Expr(TypeExpr(Identifier))),
+                     TypeExpr(Identifier)),
+             Block))
