@@ -435,7 +435,11 @@ kw<term> { @specialize[@name={term}]<identifier, term> }
 
   LineComment[isolate] { "//" ("\\" (![\n] | "\\r"? "\\n") | ![\n])* }
 
-  DocComment[isolate] { ("///" (![/\n] ![\n]* $[ \n]*|()))+ }
+  // tree-sitter-zig  misses ../test/comment.txt "field doc comment"
+  //DocComment[isolate] { ("///" (![/\n] ![\n]* $[ \n]*|()))+ }
+  // spec
+  DocComment[isolate] { ("///" ![\n]* $[ \n]* skip)+ }
+  skip { ($[ \n] | LineComment)* }
 
   containerComment { "//!" ![\n]* $[ \n]* }
 

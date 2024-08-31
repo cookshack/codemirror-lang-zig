@@ -27,3 +27,26 @@ var a;
 
 ==>
 Program(DocComment,Decl(GlobalVarDecl(VarDeclProto(var,Name))))
+
+# field doc comment
+
+const s = struct {
+  /// doc comment
+  a: u32,
+
+  /// doc comment
+  // comment
+  /// doc comment
+  b: u32,
+};
+
+==>
+Program(Decl(GlobalVarDecl(VarDeclProto(const,
+                                        Name),
+                           Expr(TypeExpr(ContainerDecl(ContainerDeclAuto(ContainerDeclType(struct),
+                                                                         ContainerField(DocComment,
+                                                                                        Identifier,
+                                                                                        TypeExpr(Identifier)),
+                                                                         ContainerField(DocComment,
+                                                                                        Identifier,
+                                                                                        TypeExpr(Identifier)))))))))
