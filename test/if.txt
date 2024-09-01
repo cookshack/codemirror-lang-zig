@@ -96,3 +96,15 @@ Program(Decl(GlobalVarDecl(VarDeclProto(const,
                                                        Expr(TypeExpr(Integer)))),
                                        else,
                                        Expr(TypeExpr(Integer)))))))
+
+# in expr with suffix op
+
+const x = if (t) Num.Two;
+
+==>
+Program(Decl(GlobalVarDecl(VarDeclProto(const,
+                                        Name),
+                           Expr(IfExpr(IfPrefix(if,
+                                                Expr(TypeExpr(Identifier))),
+                                       Expr(TypeExpr(Identifier,
+                                                     SuffixOp(FieldAccess(Identifier)))))))))

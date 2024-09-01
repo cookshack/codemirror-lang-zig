@@ -1,5 +1,6 @@
 @precedence {
   fncallargs @right
+  suffix @left
   statement @right
   curlyRight @right
   curlyLeft @left
@@ -177,8 +178,8 @@ TypeExpr { PrefixTypeOp* (ErrorUnionExpr | suffixExpr) }
 ErrorUnionExpr { suffixExpr !curlyRight "!" TypeExpr }
 
 suffixExpr {
-  kw<"async"> primaryTypeExpr SuffixOp* FnCallArgs
-  | !assign primaryTypeExpr (SuffixOp | FnCallArgs)*
+  kw<"async"> primaryTypeExpr (!suffix SuffixOp)* FnCallArgs
+  | !primary primaryTypeExpr (!suffix SuffixOp | FnCallArgs)*
 }
 
 primaryTypeExpr {
