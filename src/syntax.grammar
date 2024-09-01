@@ -60,7 +60,7 @@ Decl {
 
 FnProto { kw<"fn"> Identifier? "(" ParamDeclList ")" ByteAlign? AddrSpace? CallConv? LinkSection? "!"? TypeExpr }
 
-VarDeclProto { ( kw<"const"> | kw<"var"> ) Name (":" TypeExpr)? }
+VarDeclProto { ( kw<"const"> | kw<"var"> ) Name (":" TypeExpr)? ByteAlign? AddrSpace? LinkSection? }
 
 GlobalVarDecl { VarDeclProto ("=" Expr)? ";" }
 

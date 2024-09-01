@@ -58,3 +58,25 @@ Program(Decl(extern,
              GlobalVarDecl(VarDeclProto(var,
                                         Name,
                                         TypeExpr(Identifier)))))
+
+# specifiers
+
+var bytes align(2) addrspace(something) linksection(".text") = [_]u8{ 1, 2, 3, 4, 5, 6 };
+
+==>
+Program(Decl(GlobalVarDecl(VarDeclProto(var,
+                                        Name,
+                                        ByteAlign(align,
+                                                  Expr(TypeExpr(Integer))),
+                                        AddrSpace(addrspace,
+                                                  Expr(TypeExpr(Identifier))),
+                                        LinkSection(linksection,
+                                                    Expr(TypeExpr(StringLiteral)))),
+                           Expr(TypeExpr(PrefixTypeOp(ArrayTypeStart(Expr(TypeExpr(Identifier)))),
+                                         Identifier),
+                                InitList(Expr(TypeExpr(Integer)),
+                                         Expr(TypeExpr(Integer)),
+                                         Expr(TypeExpr(Integer)),
+                                         Expr(TypeExpr(Integer)),
+                                         Expr(TypeExpr(Integer)),
+                                         Expr(TypeExpr(Integer)))))))
