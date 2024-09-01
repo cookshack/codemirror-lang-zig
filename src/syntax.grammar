@@ -1,6 +1,7 @@
 @precedence {
   fncallargs @right
   suffix @left
+  labeledStatement
   statement @right
   curlyRight @right
   curlyLeft @left
@@ -78,7 +79,7 @@ Statement {
   | kw<"defer"> BlockExprStatement
   | kw<"errdefer"> Payload? BlockExprStatement
   | !statement IfStatement
-  | !curlyRight labeledStatement
+  | labeledStatement
   | !curlyRight SwitchExpr
   //| (AssignExpr | Expr) ";"
   | varDeclExprStatement
@@ -91,7 +92,7 @@ IfStatement {
                         | AssignExpr (";" | !else kw<"else"> Payload? Statement) )
 }
 
-labeledStatement { !curlyRight (Block | LoopStatement) }
+labeledStatement { !labeledStatement BlockLabel? (Block | LoopStatement) }
 
 LoopStatement { kw<"inline">? (ForStatement | WhileStatement) }
 

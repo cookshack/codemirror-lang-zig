@@ -14,3 +14,28 @@ Program(Decl(FnProto(fn,Identifier,ParamDeclList,TypeExpr(Identifier)),
                                                           BlockLabel(Identifier),
                                                           Block(Statement(Expr(break,
                                                                                BreakLabel(Identifier))))))))))
+
+# break outer
+
+fn testBreakOuter(array) !void {
+    outer: for (array) |_| {
+        for (array) |_| {
+            break :outer;
+        }
+    }
+}
+
+==>
+Program(Decl(FnProto(fn,
+                     Identifier,
+                     ParamDeclList(ParamDecl(ParamType(TypeExpr(Identifier)))),
+                     TypeExpr(Identifier)),
+             Block(Statement(BlockLabel(Identifier),
+                             LoopStatement(ForStatement(ForPrefix(for,
+                                                                  ForArgList(ForItem(Expr(TypeExpr(Identifier)))),
+                                                                  PtrListPayload(Identifier)),
+                                                        Block(Statement(LoopStatement(ForStatement(ForPrefix(for,
+                                                                                                             ForArgList(ForItem(Expr(TypeExpr(Identifier)))),
+                                                                                                             PtrListPayload(Identifier)),
+                                                                                                   Block(Statement(Expr(break,
+                                                                                                                        BreakLabel(Identifier))))))))))))))
