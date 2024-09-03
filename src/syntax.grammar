@@ -408,7 +408,7 @@ kw<term> { @specialize[@name={term}]<identifier, term> }
 
   @precedence { Float Integer }
 
-  multiStringLiteral { ("\\\\" ![\n]* $[ \n]*)+ }
+  multiStringLiteral { ("\\\\" ![\n]* $[ \n]* skip)+ }
 
   stringEscape {
     "\\n" | "\\r" | "\\t" | "\\\\" | "\\'" | "\\\"" | "\\x" $[0-9a-fA-F] $[0-9a-fA-F]

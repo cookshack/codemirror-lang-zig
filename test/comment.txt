@@ -50,3 +50,16 @@ Program(Decl(GlobalVarDecl(VarDeclProto(const,
                                                                          ContainerField(DocComment,
                                                                                         Identifier,
                                                                                         TypeExpr(Identifier)))))))))
+
+# multiline string with comment in middle
+
+const s1 =
+    \\one
+    //\\two)
+    \\three
+;
+
+==>
+Program(Decl(GlobalVarDecl(VarDeclProto(const,
+                                        Name),
+                           Expr(TypeExpr(StringLiteral)))))
