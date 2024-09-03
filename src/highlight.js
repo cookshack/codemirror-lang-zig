@@ -15,6 +15,7 @@ export const highlighting = styleTags({
   CompareOp: t.compareOperator,
   AssignOp: t.definitionOperator,
   UpdateOp: t.updateOperator,
+  ContainerDocComment: t.lineComment,
   DocComment: t.lineComment,
   LineComment: t.lineComment,
   Integer: t.number,
