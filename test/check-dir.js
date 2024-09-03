@@ -1,44 +1,18 @@
-import { check, parse, pretty } from './check.js'
+import { checkDir } from './check.js'
 
-import * as Fs from 'fs'
-import * as Path from 'path'
+let count, recur
 
 if (process.argv.length < 3) {
   console.error('Pass a dir as the first arg.')
   process.exit()
 }
 
-Fs.readdir(process.argv[2], {}, (err, data) => {
-  let count
+recur = 0
+if (process.argv.length > 3)
+  recur = 1
 
-  if (err) {
-    console.error(err.message)
-    process.exitCode = 1
-    return
-  }
-
-  count = 0
-  data.forEach(name => {
-    if (name.endsWith('.zig')) {
-      let res, path
-
-      path = Path.join(process.argv[2], name)
-      res = parse(path)
-      console.log(path + ' ' + res.content.length)
-      if (check(res.tree)) {
-        count++
-        console.log('  ^==== parse failed')
-        //console.log('tree.length: ' + tree.length)
-        //console.log('tree: ' + tree)
-        //console.log(pretty(tree.topNode))
-        process.exitCode = 1
-        //throw 'parse failed'
-      }
-    }
-  })
-
-  if (count)
-    console.log('\nFAILED: ' + count)
-  else
-    console.log('\nALL GOOD')
-})
+count = checkDir(process.argv[2], recur)
+if (count)
+  console.log('\nFAILED: ' + count)
+else
+  console.log('\nALL GOOD')

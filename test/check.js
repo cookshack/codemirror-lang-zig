@@ -1,12 +1,13 @@
 import { lr } from '../dist/index.js'
 
-import * as fs from 'fs'
+import * as Fs from 'fs'
+import * as Path from 'path'
 
 export
 function parse
 (file) {
   let tree, content
-  content = fs.readFileSync(file, 'utf8')
+  content = Fs.readFileSync(file, 'utf8')
   //console.log(content)
   tree = lr.parser.parse(content)
   return { tree: tree, content: content }
@@ -54,4 +55,34 @@ function check
     return 1
   }})
   return fail
+}
+
+export
+function checkDir
+(dir, recursive) {
+  let data, count
+
+  data = Fs.readdirSync(dir, { recursive: recursive ? true : false })
+
+  count = 0
+  data.forEach(name => {
+    if (name.endsWith('.zig')) {
+      let res, path
+
+      path = Path.join(process.argv[2], name)
+      res = parse(path)
+      console.log(path + ' ' + res.content.length)
+      if (check(res.tree)) {
+        count++
+        console.log('  ^==== parse failed')
+        //console.log('tree.length: ' + tree.length)
+        //console.log('tree: ' + tree)
+        //console.log(pretty(tree.topNode))
+        process.exitCode = 1
+        //throw 'parse failed'
+      }
+    }
+  })
+
+  return count
 }
