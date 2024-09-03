@@ -1,9 +1,11 @@
 import { styleTags, tags as t } from '@lezer/highlight'
 
 export const highlighting = styleTags({
-  'fn var': t.definitionKeyword,
-  'inline comptime const': t.modifier,
-  'if else switch for while case return break continue try catch': t.controlKeyword,
+  'asm enum fn struct test union var': t.definitionKeyword,
+  'async comptime const continue defer errdefer export extern inline noalias noinline nosuspend pub resume suspend': t.modifier,
+  'addrspace align allowzero anyframe anytype callconv error linksection packed threadlocal unreachable usingnamespace volatile': t.modifier,
+  'opaque': t.modifier,
+  'if else switch for while case return break continue try': t.controlKeyword,
   'BlockLabel BreakLabel': t.labelName,
   'BuiltinIdentifier Identifier': t.variableName,
   AdditionOp: t.arithmeticOperator,
