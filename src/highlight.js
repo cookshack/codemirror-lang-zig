@@ -1,15 +1,14 @@
 import { styleTags, tags as t } from '@lezer/highlight'
 
 export const highlighting = styleTags({
-  'fn Var': t.definitionKeyword,
-  'inline Comptime Const': t.modifier,
-  'If Else Switch For While Case Return Break Continue Try Catch': t.controlKeyword,
-  'Null': t.null,
+  'fn var': t.definitionKeyword,
+  'inline comptime const': t.modifier,
+  'if else switch for while case return break continue try catch': t.controlKeyword,
   'BlockLabel BreakLabel': t.labelName,
   'BuiltinIdentifier Identifier': t.variableName,
   AdditionOp: t.arithmeticOperator,
   MultiplyOp: t.arithmeticOperator,
-  'And Or': t.logicOperator,
+  'and or': t.logicOperator,
   BitwiseOp: t.bitwiseOperator,
   BitShiftOp: t.bitwiseOperator,
   CompareOp: t.compareOperator,
