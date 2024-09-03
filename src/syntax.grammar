@@ -24,10 +24,6 @@
   primary
 
   containerDecl @left
-
-  // Prevent SR due to eg: a[0..break label:]
-  colonSlice
-  colonLabel
 }
 
 //// Templates.
@@ -229,7 +225,8 @@ SwitchExpr { kw<"switch"> "(" Expr ")" "{" list<SwitchProng> "}" }
 
 //// Assembly.
 
-AsmExpr { kw<"asm"> kw<"volatile">? "(" Expr AsmOutput? ")" }
+// ambig because may also be a labeled loop expr, labeled block or labeled loop typeExpr (due to BlockLabel)
+AsmExpr { kw<"asm"> kw<"volatile">? "(" Expr (~ambigColon AsmOutput)? ")" }
 
 AsmOutput { ":" list<AsmOutputItem> AsmInput? }
 
@@ -243,9 +240,9 @@ AsmClobbers { ":" list<StringLiteral> }
 
 //// Helper grammar.
 
-BreakLabel { !colonLabel ":" Identifier }
+BreakLabel { ~ambigColon ":" Identifier }
 
-BlockLabel { /*left*/ Identifier !colonLabel ":" }
+BlockLabel { /*left*/ Identifier ~ambigColon ":" }
 
 FieldInit { "." Identifier "=" Expr }
 
@@ -322,12 +319,14 @@ PrefixTypeOp {
   "?"
   | kw<"anyframe"> "->"
   | SliceTypeStart (ByteAlign | AddrSpace | kw<"const"> | kw<"volatile"> | kw<"allowzero">)*
-  | PtrTypeStart (AddrSpace | kw<"align"> "(" Expr (":" Expr ":" Expr)? ")" | kw<"const"> | kw<"volatile"> | kw<"allowzero">)*
+  // ambig because may also be a labeled loop expr, labeled block or labeled loop typeExpr (due to BlockLabel)
+  | PtrTypeStart (AddrSpace | kw<"align"> "(" Expr (~ambigColon ":" Expr ~ambigColon ":" Expr)? ")" | kw<"const"> | kw<"volatile"> | kw<"allowzero">)*
   | ArrayTypeStart
 }
 
 ArrayAccess { "[" Expr "]" }
-Slice { "[" Expr ".." (Expr? (!colonSlice ":" Expr)?)? "]" }
+// ambig because may also be a labeled loop expr, labeled block or labeled loop typeExpr (due to BlockLabel)
+Slice { "[" Expr ".." (Expr? (~ambigColon ":" Expr)?)? "]" }
 Deref { ".*" }
 Unwrap { ".?" }
 FieldAccess { "." Identifier }
@@ -348,7 +347,7 @@ PtrTypeStart {
   | "[" "*" (@extend<identifier, "c"> | ":" Expr)? "]"
 }
 
-ArrayTypeStart { "[" Expr (":" Expr)? "]" }
+ArrayTypeStart { "[" Expr (~ambigColon ":" Expr)? "]" }
 
 //// ContainerDecl specific.
 

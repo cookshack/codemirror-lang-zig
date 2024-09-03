@@ -37,6 +37,17 @@ Program(Decl(FnProto(fn,Identifier,ParamDeclList,TypeExpr(Identifier)),
                                                                Expr(TypeExpr(Integer)),
                                                                Expr(TypeExpr(Integer)))))))))))
 
+# sentinel with _
+
+var target = [_:0]u8;
+
+==>
+Program(Decl(GlobalVarDecl(VarDeclProto(var,
+                                        Name),
+                           Expr(TypeExpr(PrefixTypeOp(ArrayTypeStart(Expr(TypeExpr(Identifier)),
+                                                                     Expr(TypeExpr(Integer)))),
+                                         Identifier)))))
+
 # type
 
 var sl: [] align(8) addrspace(something) const volatile allowzero u32;
