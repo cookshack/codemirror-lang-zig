@@ -63,3 +63,10 @@ const s1 =
 Program(Decl(GlobalVarDecl(VarDeclProto(const,
                                         Name),
                            Expr(TypeExpr(StringLiteral)))))
+
+# four slashes
+
+//// linker state
+
+==>
+Program(LineComment)

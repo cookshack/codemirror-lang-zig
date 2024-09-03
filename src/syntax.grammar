@@ -24,6 +24,9 @@
   primary
 
   containerDecl @left
+
+  // for precedence over self
+  docComment // from test grammar, only really needed if have DocComment*
 }
 
 //// Templates.
@@ -374,6 +377,10 @@ StringLiteral { stringLiteralSingle | multiStringLiteral }
 
 StringLiteralSingle { stringLiteralSingle }
 
+DocComment { (!docComment docComment)+ }
+
+LineComment { lineComment2 | lineComment4 }
+
 @skip { whitespace | LineComment }
 
 kw<term> { @specialize[@name={term}]<identifier, term> }
@@ -383,7 +390,6 @@ kw<term> { @specialize[@name={term}]<identifier, term> }
     ($[ \t\r\n] | "\r"? "\n")+
   }
 
-  //identifier: ($) => choice(/[A-Za-z_][A-Za-z0-9_]*/, seq("@", $.string_literal)),
   identifier {
     $[A-Za-z_] $[A-Za-z0-9_]*
     | "@" stringLiteralSingle
@@ -434,19 +440,25 @@ kw<term> { @specialize[@name={term}]<identifier, term> }
     "\""
   }
 
-  LineComment[isolate] { "//" ("\\" (![\n] | "\\r"? "\\n") | ![\n])* }
+  skip { ($[ \n] | lineComment2 | lineComment4)* }
 
-  // tree-sitter-zig  misses ../test/comment.txt "field doc comment"
+  lineComment4 { "////" ("\\" (![\n] | "\\r"? "\\n") | ![\n])* }
+  lineComment2 { "//" ("\\" (![\n] | "\\r"? "\\n") | ![\n])* }
+
+  // tree-sitter-zig
+  //   misses ../test/comment.txt "field doc comment"
+  //   err with ////
   //DocComment[isolate] { ("///" (![/\n] ![\n]* $[ \n]*|()))+ }
   // spec
-  DocComment[isolate] { ("///" ![\n]* $[ \n]* skip)+ }
-  skip { ($[ \n] | LineComment)* }
+  //DocComment[isolate] { ("///" ![\n]* $[ \n]* skip)+ }
+  //
+  docComment { "///" ![\n]* $[ \n]* (lineComment2 | lineComment4)* }
 
   containerComment { "//!" ![\n]* $[ \n]* }
 
   arithOp<expr> { expr }
 
-  @precedence { containerComment, DocComment, LineComment, arithOp }
+  @precedence { containerComment, lineComment4, docComment, lineComment2, arithOp }
 }
 
 @external propSource highlighting from "./highlight"

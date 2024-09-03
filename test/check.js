@@ -74,7 +74,7 @@ function checkDir
       console.log(path + ' ' + res.content.length)
       if (check(res.tree)) {
         count++
-        console.log('  ^==== parse failed')
+        console.log('  ^==== FAIL: parse error')
         //console.log('tree.length: ' + tree.length)
         //console.log('tree: ' + tree)
         //console.log(pretty(tree.topNode))
