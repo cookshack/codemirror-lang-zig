@@ -386,6 +386,7 @@ kw<term> { @specialize[@name={term}]<identifier, term> }
   //identifier: ($) => choice(/[A-Za-z_][A-Za-z0-9_]*/, seq("@", $.string_literal)),
   identifier {
     $[A-Za-z_] $[A-Za-z0-9_]*
+    | "@" stringLiteralSingle
   }
 
   builtinIdentifier { "@" $[A-Za-z_] $[A-Za-z0-9_]* }

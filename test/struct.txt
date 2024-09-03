@@ -91,3 +91,13 @@ Program(Decl(FnProto(fn,
                                                                                                                  FnCallArgs)))),
                                                                                 ContainerField(Identifier,
                                                                                                TypeExpr(Identifier)))))))))))
+
+# field with @
+
+const a = vec.@"0";
+
+==>
+Program(Decl(GlobalVarDecl(VarDeclProto(const,
+                                        Name),
+                           Expr(TypeExpr(Identifier,
+                                         SuffixOp(FieldAccess(Identifier)))))))
