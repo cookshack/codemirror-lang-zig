@@ -24,10 +24,6 @@
   },
   "types": "dist/index.d.ts",
   "sideEffects": false,
-  "bin": {
-    "chk": "./bin/chk",
-    "show": "./bin/show"
-  },
   "dependencies": {
     "@codemirror/language": "^6.0.0",
     "@lezer/highlight": "^1.0.0",
@@ -35,6 +31,7 @@
   },
   "devDependencies": {
     "@lezer/generator": "^1.0.0",
+    "lezer-utils": "file:../lezer-utils",
     "mocha": "^9.0.1",
     "rollup": "^2.60.2",
     "rollup-plugin-dts": "^4.0.1",

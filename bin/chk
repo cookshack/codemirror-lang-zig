@@ -1,4 +1,4 @@
 #!/usr/bin/env node
-import { mainChk } from '../test/check.js'
+import { mainChk } from 'lezer-utils'
 import { lr } from '../dist/index.js'
 mainChk(lr)
