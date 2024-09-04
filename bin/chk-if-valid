@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+#
+# check all valid .zig files in the given dir
+
+if [ -z "$1" ]; then
+  echo "Usage: chk-if-valid DIR"
+  exit 1
+fi
+
+ZIG=${ZIG:-zig}
+SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+DIR=$1
+
+# remove trailing slashes
+SCRIPT_DIR=$(echo "$SCRIPT_DIR" | sed 's:/*$::')
+DIR=$(echo "$DIR" | sed 's:/*$::')
+
+FILES=($DIR/*.zig)
+for FILE in "${FILES[@]}"; do
+  $ZIG fmt --stdin < "$FILE" > /dev/null 2>&1
+  zigret=$?
+	if [ "$zigret" -eq "0" ]; then
+		$SCRIPT_DIR/chk $FILE
+    checkret=$?
+    #echo checkret: $checkret
+  	if [ "$checkret" -ne "0" ]; then
+      echo ===== FAIL
+      #exit 1
+    fi
+	fi
+done
