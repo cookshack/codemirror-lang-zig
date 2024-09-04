@@ -112,3 +112,45 @@ function checkFileOrDir
     return checkFile(path)
   return checkDir(path)
 }
+
+export
+function mainShow
+() {
+  let res
+
+  if (process.argv.length < 3) {
+    console.error('Pass a file as the first arg.')
+    process.exitCode = 1
+    return
+  }
+
+  res = parse(process.argv[2])
+  console.log('tree.length: ' + res.tree.length)
+  console.log('tree:')
+  console.log(pretty(res.tree.topNode))
+}
+
+export
+function mainChk
+() {
+  let count, recur
+
+  if (process.argv.length < 3) {
+    console.error('Pass a file or dir as the first arg.')
+    process.exitCode = 1
+    return
+  }
+
+  recur = 0
+  if (process.argv.length > 3)
+    recur = 1
+
+  console.log('Checking ' + process.argv[2])
+  count = checkFileOrDir(process.argv[2], recur)
+  if (count) {
+    console.log('\nFAILED: ' + count)
+    process.exitCode = 2
+  }
+  else
+    console.log('\nALL GOOD')
+}
