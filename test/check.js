@@ -57,6 +57,7 @@ function check
   return fail
 }
 
+// returns number failed
 export
 function checkDir
 (dir, recursive) {
@@ -74,11 +75,7 @@ function checkDir
       console.log(path + ' ' + res.content.length)
       if (check(res.tree)) {
         count++
-        console.log('  ^==== FAIL: parse error')
-        //console.log('tree.length: ' + tree.length)
-        //console.log('tree: ' + tree)
-        //console.log(pretty(tree.topNode))
-        process.exitCode = 1
+        console.log(path + ': error: ' + 'failed to parse')
         //throw 'parse failed'
       }
     }
@@ -87,6 +84,7 @@ function checkDir
   return count
 }
 
+// returns number failed
 export
 function checkFile
 (path) {
@@ -94,12 +92,10 @@ function checkFile
 
   res = parse(process.argv[2])
   if (check(res.tree)) {
-    //console.log('tree.length: ' + res.tree.length)
-    //console.log('tree: ' + res.tree)
-    //console.log(pretty(res.tree.topNode))
-    return 0
+    console.log(process.argv[2] + ': error: ' + 'failed to parse')
+    return 1
   }
-  return 1
+  return 0
 }
 
 export
