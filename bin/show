@@ -1,5 +1,7 @@
+#!/usr/bin/env node
+
 import { lr } from '../dist/index.js'
-import { parse, pretty } from './check.js'
+import { parse, pretty } from '../test/check.js'
 
 import * as fs from 'fs'
 

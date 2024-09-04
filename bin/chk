@@ -1,4 +1,6 @@
-import { checkDir } from './check.js'
+#!/usr/bin/env node
+
+import { checkDir } from '../test/check.js'
 
 let count, recur
 

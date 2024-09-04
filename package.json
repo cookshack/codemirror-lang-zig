@@ -24,6 +24,10 @@
   },
   "types": "dist/index.d.ts",
   "sideEffects": false,
+  "bin": {
+    "chk": "./bin/chk",
+    "show": "./bin/show"
+  },
   "dependencies": {
     "@codemirror/language": "^6.0.0",
     "@lezer/highlight": "^1.0.0",
