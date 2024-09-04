@@ -1,3 +1,4 @@
 #!/usr/bin/env node
 import { mainChk } from '../test/check.js'
-mainChk()
+import { lr } from '../dist/index.js'
+mainChk(lr)

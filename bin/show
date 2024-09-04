@@ -1,3 +1,4 @@
 #!/usr/bin/env node
 import { mainShow } from '../test/check.js'
-mainShow()
+import { lr } from '../dist/index.js'
+mainShow(lr)

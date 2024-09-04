@@ -1,11 +1,9 @@
-import { lr } from '../dist/index.js'
-
 import * as Fs from 'fs'
 import * as Path from 'path'
 
 export
 function parse
-(file) {
+(lr, file) {
   let tree, content
   content = Fs.readFileSync(file, 'utf8')
   //console.log(content)
@@ -60,7 +58,7 @@ function check
 // returns number failed
 export
 function checkDir
-(dir, recursive) {
+(lr, dir, recursive) {
   let data, count
 
   data = Fs.readdirSync(dir, { recursive: recursive ? true : false })
@@ -71,7 +69,7 @@ function checkDir
       let res, path
 
       path = Path.join(process.argv[2], name)
-      res = parse(path)
+      res = parse(lr, path)
       console.log(path + ' ' + res.content.length)
       if (check(res.tree)) {
         count++
@@ -87,10 +85,10 @@ function checkDir
 // returns number failed
 export
 function checkFile
-(path) {
+(lr, path) {
   let res
 
-  res = parse(process.argv[2])
+  res = parse(lr, process.argv[2])
   if (check(res.tree)) {
     console.log(process.argv[2] + ': error: ' + 'failed to parse')
     return 1
@@ -100,18 +98,18 @@ function checkFile
 
 export
 function checkFileOrDir
-(path, recursive) {
+(lr, path, recursive) {
   let stats
 
   stats = Fs.statSync(path)
   if (stats.mode & (1 << 15))
-    return checkFile(path)
-  return checkDir(path)
+    return checkFile(lr, path)
+  return checkDir(lr, path)
 }
 
 export
 function mainShow
-() {
+(lr) {
   let res
 
   if (process.argv.length < 3) {
@@ -120,7 +118,7 @@ function mainShow
     return
   }
 
-  res = parse(process.argv[2])
+  res = parse(lr, process.argv[2])
   console.log('tree.length: ' + res.tree.length)
   console.log('tree:')
   console.log(pretty(res.tree.topNode))
@@ -128,7 +126,7 @@ function mainShow
 
 export
 function mainChk
-() {
+(lr) {
   let count, recur
 
   if (process.argv.length < 3) {
@@ -142,7 +140,7 @@ function mainChk
     recur = 1
 
   console.log('Checking ' + process.argv[2])
-  count = checkFileOrDir(process.argv[2], recur)
+  count = checkFileOrDir(lr, process.argv[2], recur)
   if (count) {
     console.log('\nFAILED: ' + count)
     process.exitCode = 2
