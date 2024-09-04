@@ -5,14 +5,20 @@ import { parse, pretty } from '../test/check.js'
 
 import * as fs from 'fs'
 
-let res
+function main
+() {
+  let res
 
-if (process.argv.length < 3) {
-  console.error('Pass a file as the first arg.')
-  process.exit()
+  if (process.argv.length < 3) {
+    console.error('Pass a file as the first arg.')
+    process.exitCode = 1
+    return
+  }
+
+  res = parse(process.argv[2])
+  console.log('tree.length: ' + res.tree.length)
+  console.log('tree: ' + res.tree)
+  console.log(pretty(res.tree.topNode))
 }
 
-res = parse(process.argv[2])
-console.log('tree.length: ' + res.tree.length)
-console.log('tree: ' + res.tree)
-console.log(pretty(res.tree.topNode))
+main()

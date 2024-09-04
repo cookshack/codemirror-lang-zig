@@ -86,3 +86,29 @@ function checkDir
 
   return count
 }
+
+export
+function checkFile
+(path) {
+  let res
+
+  res = parse(process.argv[2])
+  if (check(res.tree)) {
+    //console.log('tree.length: ' + res.tree.length)
+    //console.log('tree: ' + res.tree)
+    //console.log(pretty(res.tree.topNode))
+    return 0
+  }
+  return 1
+}
+
+export
+function checkFileOrDir
+(path, recursive) {
+  let stats
+
+  stats = Fs.statSync(path)
+  if (stats.mode & (1 << 15))
+    return checkFile(path)
+  return checkDir(path)
+}
