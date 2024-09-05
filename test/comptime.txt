@@ -23,7 +23,7 @@ test "comptime" {
 Program
 (TestDecl
  (test,
-  TestName,
+  TestName(StringLiteralSingle),
   Block(Statement(VarDeclProto(const,
                                Name),
                   Expr(comptime,

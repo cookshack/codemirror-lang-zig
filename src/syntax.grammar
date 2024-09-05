@@ -47,7 +47,7 @@ ContainerDocComment { containerComment+ }
 
 TestDecl { kw<"test"> TestName? Block }
 
-TestName { stringLiteralSingle | identifier }
+TestName { StringLiteralSingle | identifier }
 
 ComptimeDecl { kw<"comptime"> Block }
 

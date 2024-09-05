@@ -12,7 +12,7 @@ test "check" {
 }
 
 ==>
-Program(TestDecl(test,TestName,Block))
+Program(TestDecl(test,TestName(StringLiteralSingle),Block))
 
 # named with try
 
@@ -22,7 +22,7 @@ test "check" {
 
 ==>
 Program(TestDecl(test,
-                 TestName,
+                 TestName(StringLiteralSingle),
                  Block(Statement(Expr(PrefixExpr(PrefixOp(try),
                                                  TypeExpr(Identifier,
                                                           FnCallArgs)))))))

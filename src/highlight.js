@@ -21,6 +21,7 @@ export const highlighting = styleTags({
   LineComment: t.lineComment,
   Integer: t.number,
   StringLiteral: t.string,
+  StringLiteralSingle: t.string,
   '( )': t.paren,
   '[ ]': t.squareBracket,
   '{ }': t.brace,
