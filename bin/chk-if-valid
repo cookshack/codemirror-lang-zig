@@ -15,6 +15,7 @@ DIR=$1
 SCRIPT_DIR=$(echo "$SCRIPT_DIR" | sed 's:/*$::')
 DIR=$(echo "$DIR" | sed 's:/*$::')
 
+RC=0
 FILES=($DIR/*.zig)
 for FILE in "${FILES[@]}"; do
   $ZIG fmt --stdin < "$FILE" > /dev/null 2>&1
@@ -24,8 +25,10 @@ for FILE in "${FILES[@]}"; do
     checkret=$?
     #echo checkret: $checkret
   	if [ "$checkret" -ne "0" ]; then
-      echo ===== FAIL
-      #exit 1
+      RC=1
     fi
+    echo
 	fi
 done
+
+exit $RC
