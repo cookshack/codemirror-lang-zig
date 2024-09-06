@@ -11,6 +11,7 @@ export const highlighting = styleTags({
   'BuiltinIdentifier': t.standard(t.variableName),
   'Name': t.definition(t.variableName),
   'FnProto/Identifier': t.function(t.definition(t.variableName)),
+  'VarDeclProto/TypeExpr/Identifier FnProto/TypeExpr/Identifier ContainerField/TypeExpr/Identifier ParamType/TypeExpr/Identifier': t.typeName,
   AdditionOp: t.arithmeticOperator,
   MultiplyOp: t.arithmeticOperator,
   'and or': t.logicOperator,
