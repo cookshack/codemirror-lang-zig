@@ -1,5 +1,5 @@
 import * as Grammar from './syntax.grammar'
-import { LRLanguage, LanguageSupport, indentNodeProp, foldNodeProp, foldInside } from '@codemirror/language'
+import { LRLanguage, LanguageSupport, indentNodeProp, delimitedIndent, foldNodeProp, foldInside } from '@codemirror/language'
 
 let props, data, parser
 
@@ -17,7 +17,9 @@ function foldCDA
   return null
 }
 
-props = [ //indentNodeProp.add({ Rule: context => context.column(context.node.from) + context.unit }),
+props = [ indentNodeProp.add({ "InitList Block ErrorSetDecl SwitchExpr": delimitedIndent({ closing: '}' }),
+                               'ParamDeclList FnCallArgs': delimitedIndent({ closing: ')',
+                                                                             align: true }) }),
           foldNodeProp.add({ "InitList Block ErrorSetDecl SwitchExpr": foldInside,
                              ContainerDeclAuto: foldCDA }) ]
 

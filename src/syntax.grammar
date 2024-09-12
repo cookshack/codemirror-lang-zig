@@ -57,7 +57,7 @@ Decl {
   | kw<"usingnamespace"> Expr ";"
 }
 
-FnProto { kw<"fn"> Identifier? "(" ParamDeclList ")" ByteAlign? AddrSpace? CallConv? LinkSection? "!"? TypeExpr }
+FnProto { kw<"fn"> Identifier? ParamDeclList ByteAlign? AddrSpace? CallConv? LinkSection? "!"? TypeExpr }
 
 VarDeclProto { ( kw<"const"> | kw<"var"> ) Name (":" TypeExpr)? ByteAlign? AddrSpace? LinkSection? }
 
@@ -259,7 +259,7 @@ AddrSpace { kw<"addrspace"> "(" Expr ")" }
 
 CallConv { kw<"callconv"> "(" Expr ")" }
 
-ParamDeclList { list<ParamDecl> }
+ParamDeclList { "(" list<ParamDecl> ")" }
 
 ParamDecl {
   DocComment? (kw<"noalias"> | kw<"comptime">)? (Identifier ":")? ParamType
