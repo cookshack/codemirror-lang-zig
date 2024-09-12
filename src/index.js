@@ -3,8 +3,23 @@ import { LRLanguage, LanguageSupport, indentNodeProp, foldNodeProp, foldInside }
 
 let props, data, parser
 
+function foldCDA
+(tree) {
+  let two, last
+
+  two = tree.firstChild?.nextSibling
+  last = tree.lastChild
+  if (two == last)
+    return null
+  if (two && (two.to < last.from))
+    return { from: two.to,
+             to: last.type.isError ? tree.to : last.from }
+  return null
+}
+
 props = [ //indentNodeProp.add({ Rule: context => context.column(context.node.from) + context.unit }),
-          foldNodeProp.add({ "InitList Block ErrorSetDecl SwitchExpr ContainerDeclAuto": foldInside }) ]
+          foldNodeProp.add({ "InitList Block ErrorSetDecl SwitchExpr": foldInside,
+                             ContainerDeclAuto: foldCDA }) ]
 
 data = {} // commentTokens: { line: "//" },
 
