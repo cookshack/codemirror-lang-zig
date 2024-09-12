@@ -459,6 +459,9 @@ kw<term> { @specialize[@name={term}]<identifier, term> }
   arithOp<expr> { expr }
 
   @precedence { containerComment, lineComment4, docComment, lineComment2, arithOp }
+
+  // literal tokens
+  "{" "}"
 }
 
 @external propSource highlighting from "./highlight"

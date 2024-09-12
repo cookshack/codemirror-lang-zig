@@ -4,8 +4,7 @@ import { LRLanguage, LanguageSupport, indentNodeProp, foldNodeProp, foldInside }
 let props, data, parser
 
 props = [ //indentNodeProp.add({ Rule: context => context.column(context.node.from) + context.unit }),
-          foldNodeProp.add({ Rule: foldInside }),
-        ]
+          foldNodeProp.add({ "InitList Block ErrorSetDecl SwitchExpr ContainerDeclAuto": foldInside }) ]
 
 data = {} // commentTokens: { line: "//" },
 
