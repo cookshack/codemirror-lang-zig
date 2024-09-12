@@ -21,7 +21,7 @@ props = [ //indentNodeProp.add({ Rule: context => context.column(context.node.fr
           foldNodeProp.add({ "InitList Block ErrorSetDecl SwitchExpr": foldInside,
                              ContainerDeclAuto: foldCDA }) ]
 
-data = {} // commentTokens: { line: "//" },
+data = { commentTokens: { line: "//" } }
 
 parser = Grammar.parser.configure({ props: props })
 
