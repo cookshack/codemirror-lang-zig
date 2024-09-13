@@ -3,25 +3,10 @@ import { LRLanguage, LanguageSupport, indentNodeProp, delimitedIndent, foldNodeP
 
 let props, data, parser
 
-function foldCDA
-(tree) {
-  let two, last
-
-  two = tree.firstChild?.nextSibling
-  last = tree.lastChild
-  if (two == last)
-    return null
-  if (two && (two.to < last.from))
-    return { from: two.to,
-             to: last.type.isError ? tree.to : last.from }
-  return null
-}
-
 props = [ indentNodeProp.add({ "InitList Block ErrorSetDecl SwitchExpr ContainerBlock": delimitedIndent({ closing: '}' }),
                                'ParamDeclList FnCallArgs': delimitedIndent({ closing: ')',
                                                                              align: true }) }),
-          foldNodeProp.add({ "InitList Block ErrorSetDecl SwitchExpr": foldInside,
-                             ContainerDeclAuto: foldCDA }) ]
+          foldNodeProp.add({ "InitList Block ErrorSetDecl SwitchExpr ContainerBlock": foldInside }) ]
 
 data = { commentTokens: { line: "//" },
          closeBrackets: { brackets: ['(', '[', '{', "'", '"' ]}}
