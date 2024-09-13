@@ -54,18 +54,18 @@ const Point = packed struct (u32) {
 Program(Decl(GlobalVarDecl(VarDeclProto(const,
                                         Name),
                            Expr(TypeExpr(ContainerDecl(packed,
-                                                       ContainerDeclAuto(ContainerDeclType(struct,
-                                                                                           Expr(TypeExpr(Identifier))),
-                                                                         ContainerDocComment,
-                                                                         LineComment,
-                                                                         ContainerField(Identifier,
-                                                                                        TypeExpr(Identifier)),
-                                                                         ContainerField(DocComment,
-                                                                                        Identifier,
-                                                                                        TypeExpr(Identifier),
-                                                                                        ByteAlign(align,
-                                                                                                  Expr(TypeExpr(Integer))),
-                                                                                        Expr(TypeExpr(Integer))))))))))
+                                                       ContainerDeclType(struct,
+                                                                         Expr(TypeExpr(Identifier))),
+                                                       ContainerBlock(ContainerDocComment,
+                                                                      LineComment,
+                                                                      ContainerField(Identifier,
+                                                                                     TypeExpr(Identifier)),
+                                                                      ContainerField(DocComment,
+                                                                                     Identifier,
+                                                                                     TypeExpr(Identifier),
+                                                                                     ByteAlign(align,
+                                                                                               Expr(TypeExpr(Integer))),
+                                                                                     Expr(TypeExpr(Integer))))))))))
 
 # const in struct
 
@@ -84,13 +84,13 @@ Program(Decl(FnProto(fn,
                                              ParamType(TypeExpr(Identifier)))),
                      TypeExpr(Identifier)),
              Block(Statement(Expr(return,
-                                  Expr(TypeExpr(ContainerDecl(ContainerDeclAuto(ContainerDeclType(struct),
-                                                                                Decl(GlobalVarDecl(VarDeclProto(const,
-                                                                                                                Name),
-                                                                                                   Expr(TypeExpr(BuiltinIdentifier,
-                                                                                                                 FnCallArgs)))),
-                                                                                ContainerField(Identifier,
-                                                                                               TypeExpr(Identifier)))))))))))
+                                  Expr(TypeExpr(ContainerDecl(ContainerDeclType(struct),
+                                                              ContainerBlock(Decl(GlobalVarDecl(VarDeclProto(const,
+                                                                                                             Name),
+                                                                                                Expr(TypeExpr(BuiltinIdentifier,
+                                                                                                              FnCallArgs)))),
+                                                                             ContainerField(Identifier,
+                                                                                            TypeExpr(Identifier)))))))))))
 
 # field with @
 

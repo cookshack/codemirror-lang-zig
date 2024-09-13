@@ -204,7 +204,7 @@ primaryTypeExpr {
   | SwitchExpr
 }
 
-ContainerDecl { ( kw<"extern"> | kw<"packed"> )? ContainerDeclAuto }
+ContainerDecl { ( kw<"extern"> | kw<"packed"> )? containerDeclAuto }
 
 ErrorSetDecl { kw<"error"> "{" list<DocComment? Identifier> "}" }
 
@@ -354,7 +354,9 @@ ArrayTypeStart { "[" Expr (~ambigColon ":" Expr)? "]" }
 
 //// ContainerDecl specific.
 
-ContainerDeclAuto { ContainerDeclType "{" ContainerDocComment? containerMembers "}" }
+containerDeclAuto { ContainerDeclType ContainerBlock }
+
+ContainerBlock { "{" ContainerDocComment? containerMembers "}" }
 
 ContainerDeclType {
   kw<"struct"> ("(" Expr ")")?

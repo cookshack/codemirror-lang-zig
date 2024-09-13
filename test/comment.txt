@@ -43,13 +43,13 @@ const s = struct {
 ==>
 Program(Decl(GlobalVarDecl(VarDeclProto(const,
                                         Name),
-                           Expr(TypeExpr(ContainerDecl(ContainerDeclAuto(ContainerDeclType(struct),
-                                                                         ContainerField(DocComment,
-                                                                                        Identifier,
-                                                                                        TypeExpr(Identifier)),
-                                                                         ContainerField(DocComment,
-                                                                                        Identifier,
-                                                                                        TypeExpr(Identifier)))))))))
+                           Expr(TypeExpr(ContainerDecl(ContainerDeclType(struct),
+                                                       ContainerBlock(ContainerField(DocComment,
+                                                                                     Identifier,
+                                                                                     TypeExpr(Identifier)),
+                                                                      ContainerField(DocComment,
+                                                                                     Identifier,
+                                                                                     TypeExpr(Identifier)))))))))
 
 # multiline string with comment in middle
 

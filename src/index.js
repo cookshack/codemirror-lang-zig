@@ -17,7 +17,7 @@ function foldCDA
   return null
 }
 
-props = [ indentNodeProp.add({ "InitList Block ErrorSetDecl SwitchExpr": delimitedIndent({ closing: '}' }),
+props = [ indentNodeProp.add({ "InitList Block ErrorSetDecl SwitchExpr ContainerBlock": delimitedIndent({ closing: '}' }),
                                'ParamDeclList FnCallArgs': delimitedIndent({ closing: ')',
                                                                              align: true }) }),
           foldNodeProp.add({ "InitList Block ErrorSetDecl SwitchExpr": foldInside,
