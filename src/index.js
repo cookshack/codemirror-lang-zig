@@ -6,7 +6,7 @@ let props, data, parser
 props = [ indentNodeProp.add({ "InitList Block ErrorSetDecl SwitchExpr ContainerBlock": delimitedIndent({ closing: '}' }),
                                'ParamDeclList FnCallArgs': delimitedIndent({ closing: ')',
                                                                              align: true }) }),
-          foldNodeProp.add({ "InitList Block ErrorSetDecl SwitchExpr ContainerBlock": foldInside }) ]
+          foldNodeProp.add({ "InitList Block ErrorSetDecl SwitchExpr ContainerBlock ParamDeclList FnCallArgs": foldInside }) ]
 
 data = { commentTokens: { line: "//" },
          closeBrackets: { brackets: ['(', '[', '{', "'", '"' ]}}
