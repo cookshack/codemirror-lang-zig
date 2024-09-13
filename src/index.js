@@ -1,11 +1,12 @@
 import * as Grammar from './syntax.grammar'
-import { LRLanguage, LanguageSupport, indentNodeProp, delimitedIndent, foldNodeProp, foldInside } from '@codemirror/language'
+import { LRLanguage, LanguageSupport, indentNodeProp, continuedIndent, delimitedIndent, foldNodeProp, foldInside } from '@codemirror/language'
 
 let props, data, parser
 
 props = [ indentNodeProp.add({ "InitList Block ErrorSetDecl SwitchExpr ContainerBlock": delimitedIndent({ closing: '}' }),
                                'ParamDeclList FnCallArgs': delimitedIndent({ closing: ')',
-                                                                             align: true }) }),
+                                                                             align: true }),
+                               IfStatement: continuedIndent({ except: /^\s*({|else\b)/ }) }),
           foldNodeProp.add({ "InitList Block ErrorSetDecl SwitchExpr ContainerBlock ParamDeclList FnCallArgs": foldInside }) ]
 
 data = { commentTokens: { line: "//" },
