@@ -16,8 +16,8 @@ const e : error{ OutOfPie, OutOfJuice };
 Program(Decl(GlobalVarDecl(VarDeclProto(const,
                                         Name,
                                         TypeExpr(ErrorSetDecl(error,
-                                                              Identifier,
-                                                              Identifier))))))
+                                                              ErrBlock(Identifier,
+                                                                       Identifier)))))))
 
 # union type
 

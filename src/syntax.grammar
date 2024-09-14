@@ -206,7 +206,9 @@ primaryTypeExpr {
 
 ContainerDecl { ( kw<"extern"> | kw<"packed"> )? containerDeclAuto }
 
-ErrorSetDecl { kw<"error"> "{" list<DocComment? Identifier> "}" }
+ErrorSetDecl { kw<"error"> ErrBlock }
+
+ErrBlock { "{" list<DocComment? Identifier> "}" }
 
 GroupedExpr { "(" Expr ")" }
 

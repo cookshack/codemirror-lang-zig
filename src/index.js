@@ -3,13 +3,14 @@ import { LRLanguage, LanguageSupport, indentNodeProp, continuedIndent, delimited
 
 let props, data, parser
 
-props = [ indentNodeProp.add({ "InitList Block ErrorSetDecl SwitchBlock ContainerBlock": delimitedIndent({ closing: '}' }),
+props = [ indentNodeProp.add({ "InitList Block ErrBlock SwitchBlock ContainerBlock": delimitedIndent({ closing: '}' }),
                                'ParamDeclList FnCallArgs': delimitedIndent({ closing: ')',
                                                                              align: true }),
                                SwitchProng: context => context.baseIndent + context.unit,
                                IfStatement: continuedIndent({ except: /^\s*({|else\b)/ }),
+                               MultiStringLiteral: continuedIndent(),
                                WhileStatement: continuedIndent() }),
-          foldNodeProp.add({ "InitList Block ErrorSetDecl SwitchBlock ContainerBlock ParamDeclList FnCallArgs": foldInside }) ]
+          foldNodeProp.add({ "InitList Block ErrBlock SwitchBlock ContainerBlock ParamDeclList FnCallArgs": foldInside }) ]
 
 data = { commentTokens: { line: "//" },
          closeBrackets: { brackets: ['(', '[', '{', "'", '"' ]}}
