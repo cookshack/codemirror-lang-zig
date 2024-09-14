@@ -10,7 +10,8 @@ Program(Decl(FnProto(fn,
                      ParamDeclList,
                      TypeExpr(Identifier)),
              Block(Statement(SwitchExpr(switch,
-                                        Expr(TypeExpr(Identifier)))))))
+                                        Expr(TypeExpr(Identifier)),
+                                        SwitchBlock)))))
 
 # prong
 
@@ -27,9 +28,9 @@ Program(Decl(FnProto(fn,
                      TypeExpr(Identifier)),
              Block(Statement(SwitchExpr(switch,
                                         Expr(TypeExpr(Identifier))
-                                        SwitchProng(SwitchCase(SwitchItem(Expr(TypeExpr(Integer)))),
-                                                    SingleAssignExpr(Expr(TypeExpr(Identifier,
-                                                                                   FnCallArgs)))))))))
+                                        SwitchBlock(SwitchProng(SwitchCase(SwitchItem(Expr(TypeExpr(Integer)))),
+                                                                SingleAssignExpr(Expr(TypeExpr(Identifier,
+                                                                                               FnCallArgs))))))))))
 
 # else
 
@@ -46,9 +47,9 @@ Program(Decl(FnProto(fn,
                      TypeExpr(Identifier)),
              Block(Statement(SwitchExpr(switch,
                                         Expr(TypeExpr(Identifier))
-                                        SwitchProng(SwitchCase(else),
-                                                    SingleAssignExpr(Expr(TypeExpr(Identifier,
-                                                                                   FnCallArgs)))))))))
+                                        SwitchBlock(SwitchProng(SwitchCase(else),
+                                                                SingleAssignExpr(Expr(TypeExpr(Identifier,
+                                                                                               FnCallArgs))))))))))
 
 # expr
 
@@ -62,10 +63,10 @@ Program(Decl(GlobalVarDecl(VarDeclProto(const,
                                         Name),
                            Expr(TypeExpr(SwitchExpr(switch,
                                                     Expr(TypeExpr(Identifier)),
-                                                    SwitchProng(SwitchCase(SwitchItem(Expr(TypeExpr(Identifier)))),
-                                                                SingleAssignExpr(Expr(TypeExpr(Integer)))),
-                                                    SwitchProng(SwitchCase(else),
-                                                                SingleAssignExpr(Expr(TypeExpr(Integer))))))))))
+                                                    SwitchBlock(SwitchProng(SwitchCase(SwitchItem(Expr(TypeExpr(Identifier)))),
+                                                                            SingleAssignExpr(Expr(TypeExpr(Integer)))),
+                                                                SwitchProng(SwitchCase(else),
+                                                                            SingleAssignExpr(Expr(TypeExpr(Integer)))))))))))
 
 # inline
 
@@ -82,9 +83,9 @@ Program(Decl(FnProto(fn,
                      TypeExpr(Identifier)),
              Block(Statement(SwitchExpr(switch,
                                         Expr(TypeExpr(Identifier)),
-                                        SwitchProng(inline,
-                                                    SwitchCase(SwitchItem(Expr(TypeExpr(Integer))),
-                                                               SwitchItem(Expr(TypeExpr(Integer)))),
-                                                    PtrIndexPayload(Identifier),
-                                                    SingleAssignExpr(Expr(TypeExpr(Identifier,
-                                                                                   FnCallArgs(Expr(TypeExpr(Identifier))))))))))))
+                                        SwitchBlock(SwitchProng(inline,
+                                                                SwitchCase(SwitchItem(Expr(TypeExpr(Integer))),
+                                                                           SwitchItem(Expr(TypeExpr(Integer)))),
+                                                                PtrIndexPayload(Identifier),
+                                                                SingleAssignExpr(Expr(TypeExpr(Identifier,
+                                                                                               FnCallArgs(Expr(TypeExpr(Identifier)))))))))))))
