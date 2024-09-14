@@ -9,7 +9,7 @@ props = [ indentNodeProp.add({ "InitList Block ErrorSetDecl SwitchBlock Containe
                                SwitchProng: context => context.baseIndent + context.unit,
                                IfStatement: continuedIndent({ except: /^\s*({|else\b)/ }),
                                WhileStatement: continuedIndent() }),
-          foldNodeProp.add({ "InitList Block ErrorSetDecl SwitchExpr ContainerBlock ParamDeclList FnCallArgs": foldInside }) ]
+          foldNodeProp.add({ "InitList Block ErrorSetDecl SwitchBlock ContainerBlock ParamDeclList FnCallArgs": foldInside }) ]
 
 data = { commentTokens: { line: "//" },
          closeBrackets: { brackets: ['(', '[', '{', "'", '"' ]}}
