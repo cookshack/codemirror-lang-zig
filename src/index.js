@@ -16,7 +16,8 @@ props = [ indentNodeProp.add({ "InitList Block ErrBlock SwitchBlock ContainerBlo
           foldNodeProp.add({ "InitList Block ErrBlock SwitchBlock ContainerBlock ParamDeclList FnCallArgs AsmParams": foldInside }) ]
 
 data = { commentTokens: { line: "//" },
-         closeBrackets: { brackets: ['(', '[', '{', "'", '"' ]}}
+         closeBrackets: { brackets: ['(', '[', '{', "'", '"' ]},
+         indentOnInput: /^\s*(?:\{|\})$/ }
 
 parser = Grammar.parser.configure({ props: props })
 
