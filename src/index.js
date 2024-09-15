@@ -11,20 +11,20 @@ keywords = [ 'addrspace', 'align', 'allowzero', 'and', 'anyframe', 'anytype', 'a
 
 completionSource = completeFromList(keywords.map(kw => ({ label: kw, type: 'keyword' })))
 
-props = [ indentNodeProp.add({ "InitList Block ErrBlock SwitchBlock ContainerBlock": delimitedIndent({ closing: '}' }),
+props = [ indentNodeProp.add({ 'InitList Block ErrBlock SwitchBlock ContainerBlock': delimitedIndent({ closing: '}' }),
                                'ParamDeclList FnCallArgs': delimitedIndent({ closing: ')',
                                                                              align: true }),
                                AsmParams: delimitedIndent({ closing: ')',
                                                             align: false }),
-                               "AsmOutList AsmInList AsmClobList": context => context.baseIndent + 2, // ': '
+                               'AsmOutList AsmInList AsmClobList': context => context.baseIndent + 2, // ': '
                                SwitchProng: context => context.baseIndent + context.unit,
                                IfStatement: continuedIndent({ except: /^\s*({|else\b)/ }),
                                MultiStringLiteral: continuedIndent(),
                                WhileStatement: continuedIndent() }),
-          foldNodeProp.add({ "InitList Block ErrBlock SwitchBlock ContainerBlock ParamDeclList FnCallArgs AsmParams": foldInside }) ]
+          foldNodeProp.add({ 'InitList Block ErrBlock SwitchBlock ContainerBlock ParamDeclList FnCallArgs AsmParams': foldInside }) ]
 
-data = { commentTokens: { line: "//" },
-         closeBrackets: { brackets: ['(', '[', '{', "'", '"' ]},
+data = { commentTokens: { line: '//' },
+         closeBrackets: { brackets: [ '(', '[', '{', "'", '"' ] },
          indentOnInput: /^\s*(?:\{|\})$/ }
 
 parser = Grammar.parser.configure({ props: props })
