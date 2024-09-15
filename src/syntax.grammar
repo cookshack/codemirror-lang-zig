@@ -233,17 +233,25 @@ SwitchBlock { "{" list<SwitchProng> "}" }
 //// Assembly.
 
 // ambig because may also be a labeled loop expr, labeled block or labeled loop typeExpr (due to BlockLabel)
-AsmExpr { kw<"asm"> kw<"volatile">? "(" Expr (~ambigColon AsmOutput)? ")" }
+AsmExpr { kw<"asm"> kw<"volatile">? AsmParams }
 
-AsmOutput { ":" list<AsmOutputItem> AsmInput? }
+AsmParams { "(" Expr (~ambigColon AsmOutput)? ")" }
+
+AsmOutput { ":" AsmOutList AsmInput? }
+
+AsmOutList { list<AsmOutputItem> }
 
 AsmOutputItem { "[" Identifier "]" StringLiteral "(" (("->" TypeExpr) | Identifier) ")" }
 
-AsmInput { ":" list<AsmInputItem> AsmClobbers? }
+AsmInput { ":" AsmInList AsmClobbers? }
+
+AsmInList { list<AsmInputItem> }
 
 AsmInputItem { "[" Identifier "]" StringLiteral "(" Expr ")" }
 
-AsmClobbers { ":" list<StringLiteral> }
+AsmClobbers { ":" AsmClobList }
+
+AsmClobList { list<StringLiteral> }
 
 //// Helper grammar.
 
