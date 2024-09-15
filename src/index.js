@@ -1,7 +1,15 @@
 import * as Grammar from './syntax.grammar'
 import { LRLanguage, LanguageSupport, indentNodeProp, continuedIndent, delimitedIndent, foldNodeProp, foldInside } from '@codemirror/language'
+import { completeFromList } from '@codemirror/autocomplete'
 
-let props, data, parser
+let props, data, parser, keywords, completionSource
+
+keywords = [ 'addrspace', 'align', 'allowzero', 'and', 'anyframe', 'anytype', 'asm', 'async', 'await', 'break', 'c', 'callconv', 'catch',
+             'comptime', 'const', 'continue', 'defer', 'else', 'enum', 'errdefer', 'error', 'export', 'extern', 'fn', 'for', 'if', 'inline',
+             'linksection', 'noalias', 'noinline', 'nosuspend', 'opaque', 'or', 'orelse', 'packed', 'pub', 'resume', 'return', 'struct',
+             'suspend', 'switch', 'test', 'threadlocal', 'try', 'union', 'unreachable', 'usingnamespace', 'var', 'volatile', 'while' ]
+
+completionSource = completeFromList(keywords.map(kw => ({ label: kw, type: 'keyword' })))
 
 props = [ indentNodeProp.add({ "InitList Block ErrBlock SwitchBlock ContainerBlock": delimitedIndent({ closing: '}' }),
                                'ParamDeclList FnCallArgs': delimitedIndent({ closing: ')',
@@ -32,5 +40,6 @@ const lr = LRLanguage.define({ name: 'zig',
 export
 function language
 () {
-  return new LanguageSupport(lr)
+  return new LanguageSupport(lr,
+                             [ lr.data.of({ autocomplete: completionSource }) ])
 }
