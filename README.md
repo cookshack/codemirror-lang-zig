@@ -11,3 +11,11 @@ and the [Zig language spec](https://github.com/ziglang/zig-spec).
 $ npm i # only needed first time
 $ npm run prepare && npm test
 ```
+
+## Check parser
+
+Test the parser against all files in a dir, recursively:
+
+```sh
+./bin/chk -e zig -r ~/src/zig/src
+```
