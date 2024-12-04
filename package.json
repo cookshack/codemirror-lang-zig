@@ -31,7 +31,7 @@
     "@lezer/generator": "^1.0.0",
     "lezer-utils": "^0.2.0",
     "mocha": "^10.7.3",
-    "rollup": "^4.21.3",
+    "rollup": "^4.28.0",
     "rollup-plugin-dts": "^6.1.1"
   },
   "license": "MIT"
