@@ -1,6 +1,6 @@
 {
   "name": "@cookshack/codemirror-lang-zig",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Zig language support for CodeMirror 6",
   "homepage": "https://git.sr.ht/~mattmundell/codemirror-lang-zig",
   "scripts": {
